@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Sep 2020 pada 13.23
+-- Waktu pembuatan: 16 Sep 2020 pada 21.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `simarwah`
+-- Database: `simarwahfix`
 --
 
 -- --------------------------------------------------------
@@ -68,7 +68,8 @@ CREATE TABLE `fakultas` (
 INSERT INTO `fakultas` (`kode_fakultas`, `nama_fakultas`, `deskripsi`, `visi`, `misi`, `parent_univ`) VALUES
 ('contohfakultas', 'contoh fakultas', 'di uin', 'keren', 'gabut', NULL),
 ('SAINTEK', 'Sains dan TEKNOLOGI', 'Deskripsi Saintek', 'Visi Saintek', 'Misi Saintek', NULL),
-('SYARKUM', 'Syariah dan Hukum', '', '', '', NULL);
+('SYARKUM', 'Syariah dan Hukum', '', '', '', NULL),
+('Tarbiyah', 'Tarbiyah dan Keguruan', 'Mulai ada sejak awal IAIN dibentuk', 'visinya ini', 'misinya ini', NULL);
 
 -- --------------------------------------------------------
 
@@ -97,8 +98,8 @@ INSERT INTO `jurusan` (`kode_himpunan`, `nama_himpunan`, `desc_himpunan`, `visi`
 ('DEMAU', 'DEMAU', 'Dewan Mahasiswa Universitas', '', '', '0', 'a213b91829a3ee60d95e2b53f76003e2.jpg', NULL),
 ('HIMASAKI', 'HIMASAKI', 'Himpunan Mahasiswa Kimia', 'Pinter Ngoding Pisan', '', '0', 'eddd22847be566f592b58be2c2350c7e.png', 'SAINTEK'),
 ('HIMATIF', 'HIMATIF', 'Himpunan Mahasiswa Teknik Informatika', 'Visi Himatif Update ', 'Misi Himatif Update ', '0', '9b5d664b92465eb5265038ba65331334.PNG', 'SAINTEK'),
-('HIMATIKA', 'HIMATIKA', 'Himpunan Mahasiswa Matematika', '', '', '0', '081bccdb8ded8f3484e314979d320f7e.jpg', 'SAINTEK'),
 ('ILHUM', 'ILHUM', 'Ilmu Hukum', '', '', '0', '49192782891da543567e070a77e9ca62.jpg', 'SYARKUM'),
+('PAI', 'Pendidikan Agama Islam', '', '', '', '', '920fefe1c9eb746c76bba2a6ad95b95e.jpg', 'Tarbiyah'),
 ('SEMAU', 'SEMAU', 'Senat Mahasiswa Universitas', 'xxxx', 'Test', '0', '5580f7bbef60dc1f86cd0e3ab7a9e372.PNG', NULL);
 
 -- --------------------------------------------------------
@@ -149,13 +150,33 @@ CREATE TABLE `tb_dana` (
 --
 
 CREATE TABLE `tb_detailuser` (
-  `id` int(11) NOT NULL,
+  `id_dana` int(11) NOT NULL,
   `kd_jrsn` varchar(255) CHARACTER SET latin1 NOT NULL,
   `kd_fklts` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `nPengajuan` int(4) NOT NULL,
   `tahunakademik` year(4) NOT NULL,
   `danaawal` bigint(20) NOT NULL,
-  `danasisa` bigint(20) NOT NULL
+  `danasisa` bigint(20) NOT NULL,
+  `namaKegiatan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `suratpengajuan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `rinciankegiatan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `rkakl` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `tor` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `statususer` int(4) NOT NULL,
+  `laporankegiatan` varchar(255) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_detailuser`
+--
+
+INSERT INTO `tb_detailuser` (`id_dana`, `kd_jrsn`, `kd_fklts`, `nPengajuan`, `tahunakademik`, `danaawal`, `danasisa`, `namaKegiatan`, `suratpengajuan`, `rinciankegiatan`, `rkakl`, `tor`, `statususer`, `laporankegiatan`) VALUES
+(6, 'PAI', 'Tarbiyah', 1, 2021, 15000000, 15000000, '', '', '', '', '', 0, ''),
+(7, 'Contoh', 'SAINTEK', 0, 0000, 0, 0, '', '', '', '', '', 0, ''),
+(8, 'DEMAFSAINTEK', 'SAINTEK', 0, 0000, 0, 0, '', '', '', '', '', 0, ''),
+(10, 'HIMASAKI', 'SAINTEK', 0, 0000, 0, 0, '', '', '', '', '', 0, ''),
+(11, 'HIMATIF', 'SAINTEK', 0, 0000, 0, 0, '', '', '', '', '', 0, ''),
+(13, 'ILHUM', 'SYARKUM', 0, 0000, 0, 0, '', '', '', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -187,7 +208,7 @@ INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `password`, `role`, 
 (13, 'nisvy', 'nisvysyabana@gmail.com', 'nisvy', 'cabaa1823f3f04eed79c753a6f5f4845', 0, 'HIMATIF', 1, 0, '0000-00-00 00:00:00', '2020-09-08 10:23:10'),
 (17, 'admin aljamiah', 'admin@gmail.com', 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 1, 'Contoh', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (22, 'admin2', 'email@gmail.com', 'admin2', 'c84258e9c39059a89ab77d846ddab909', 1, '', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(25, 'Himpunan Teknik Informatika', 'Himatif@uinsgd.ac.id', 'molly', 'ed6658e6f22583ed66fb5e5e735b9e63', 0, 'HIMATIF', 1, 0, '2020-09-15 17:36:11', '2020-09-15 17:36:11');
+(26, 'pai', 'pai@gmail.com', 'paitarbiyah', '844302dc926f0af749081c6d64553489', 0, 'PAI', 1, 0, '0000-00-00 00:00:00', '2020-09-16 17:23:51');
 
 --
 -- Indexes for dumped tables
@@ -232,9 +253,9 @@ ALTER TABLE `tb_dana`
 -- Indeks untuk tabel `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jurusan` (`kd_jrsn`),
-  ADD KEY `fakultas` (`kd_fklts`);
+  ADD PRIMARY KEY (`id_dana`),
+  ADD KEY `kd_fklts` (`kd_fklts`),
+  ADD KEY `kd_jrsn_1` (`kd_jrsn`);
 
 --
 -- Indeks untuk tabel `user`
@@ -257,13 +278,13 @@ ALTER TABLE `tb_dana`
 -- AUTO_INCREMENT untuk tabel `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -298,8 +319,8 @@ ALTER TABLE `tb_dana`
 -- Ketidakleluasaan untuk tabel `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
-  ADD CONSTRAINT `fakultas` FOREIGN KEY (`kd_fklts`) REFERENCES `fakultas` (`kode_fakultas`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `jurusan` FOREIGN KEY (`kd_jrsn`) REFERENCES `jurusan` (`kode_himpunan`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `kd_fklts` FOREIGN KEY (`kd_fklts`) REFERENCES `fakultas` (`kode_fakultas`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kd_jrsn_1` FOREIGN KEY (`kd_jrsn`) REFERENCES `jurusan` (`kode_himpunan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

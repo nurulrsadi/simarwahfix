@@ -8,7 +8,18 @@
 	<header class="main">
 		<!-- <h1>Pagu Keuangan</h1> -->
 	</header>
-
+  <?php
+                    foreach($dana->result_array() as $i):
+                        $kd_jrsn=$i['kd_jrsn'];
+                        $danaawal=$i['danaawal'];
+                        $danasisa=$i['danasisa'];
+                        $namaKegiatan=$i['namaKegiatan'];
+                        $suratpengajuan=$i['suratpengajuan'];
+                        $rinciankegiatan=$i['rinciankegiatan'];
+                        $rkakl=$i['rkakl'];
+                        $tor=$i['tor'];
+                        $nPengajuan=$i['nPengajuan'];
+                                    ?>
 	<div class="features">
 
 		<article>
@@ -20,7 +31,7 @@
 		<article>
 			<div class="content">
 				<p class="customtext">Pagu Anggaran Keuangan yang Organisasi Anda Miliki sebesar
-					<br>Rp. <?= $user['dana_sisa'];?></br>
+					<br>Rp. <?php echo $danasisa?></br>
 			</div>
 		</article>
 	</div>
@@ -42,8 +53,8 @@
 			</div>
 			<br>
 			<div class="col-4 col-12-xsmall">
-				<input type="text" name="nPengajuan" id="nPengajuan" value=" " readonly /><br>
-				<input type="text" name="namaKegiatan" id="namaKegiatan" value="" placeholder="contoh : PBAK, AUDIENSI" /><br>
+				<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly /><br>
+				<input type="text" name="namaKegiatan" id="namaKegiatan" value="<?php echo $namaKegiatan;?>" placeholder="contoh : PBAK, AUDIENSI" /><br>
 			</div>
 		</div>
 		<!-- <div class="form-group row">
@@ -76,7 +87,7 @@
 					<td>Surat Pengajuan</td>
 					<td>
 						<div class="file-upload-custom">
-							<input class="form-control file-upload__input-custom" type="file" name="suratpengajuan"
+							<input class="file-upload__input-custom" type="file" name="suratpengajuan"
 								id="suratpengajuan" accept="application/pdf" required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
@@ -89,7 +100,7 @@
 					<td>Rincian Kegiatan</td>
 					<td>
 						<div class="file-upload-custom">
-							<input class="file-upload__input-custom" type="file" value="<?php echo set_value('rinciankegiatan');?>"
+							<input class="file-upload__input-custom" type="file" value=""
 								name="rinciankegiatan" id="rinciankegiatan" accept="application/pdf" required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
@@ -138,7 +149,7 @@
 			</div>
 			<div class="col-2 col-12-medium">
 				<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
-				<p><button type="submit" value="upload" class="btn btn-primary" ">Kirim</button></p>
+				<p><button type="submit" class="btn btn-success">Kirim</button></p>
                                 <!-- </a> -->
                             </div>
                         </div>
@@ -148,3 +159,4 @@
                 </section>
             </div>
         </div>
+        <?php endforeach;?>

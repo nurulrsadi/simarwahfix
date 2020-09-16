@@ -26,6 +26,7 @@
 							<th>Aksi</th>
 						</tr>
 					</thead>
+          <?php $j=1; ?>
 					<?php 
                   foreach($userdana->result_array() as $i):
                     $kd_jrsn=$i['kd_jrsn'];
@@ -33,14 +34,14 @@
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
+                    $nPengajuan=$i['nPengajuan'];
                     // $fakultas=$i['parent_fakultas'];
                     ?>
 					<tbody>
 						<tr>
-							<?php $i=1; ?>
-							<td><?= $i++; ?></td>
+							<td><?= $j++; ?></td>
 							<td><?= $kd_jrsn; ?></td>
-							<td><?= $kd_fklts; ?></td>
+							<td> <?= $kd_fklts; ?></td>
 							<td><?= $tahunakademik; ?></td>
 							<td>Rp. <?= $danaawal; ?></td>
 							<td>Rp. <?= $danasisa; ?></td>
@@ -56,16 +57,18 @@
 					<?php endforeach; ?>
 				</table>
 
-				<!-- <?php foreach($getdanaormawa as $x):
-                $id_user=$x->id_user;
-                $nama=$x->nama;
-                $fakultas=$x->fakultas;
-                $dana_awal=$x->dana_awal;
-                $dana_sisa=$x->dana_sisa;
-                $tahunakademik=$x->tahunakademik;
-                $statususer=$x->statususer;
-                ?> -->
-				<!-- <div class="modal fade" id="editanggaran<?= $id_user;?>" tabindex="-1" role="dialog"
+        <?php 
+                  foreach($userdana->result_array() as $i):
+                    // $id_dana=$i['id_dana'];
+                    $kd_jrsn=$i['kd_jrsn'];
+                    $kd_fklts=$i['kd_fklts'];
+                    $tahunakademik=$i['tahunakademik'];
+                    $danaawal=$i['danaawal'];
+                    $danasisa=$i['danasisa'];
+                    $nPengajuan=$i['nPengajuan'];
+                    // $fakultas=$i['parent_fakultas'];
+                    ?>
+				<div class="modal fade" id="editanggaran<?= $kd_jrsn;?>" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -79,8 +82,8 @@
 								<form class="form-horizontal" action="<?php echo base_url('c_admin/update_dana_awal')?>" method="post"
 									enctype="multipart/form-data" role="form">
 									<div class="form-group ">
-										<input type="hidden" name="id_user" value="<?php echo $id_user;?>">
-										<input type="hidden" name="statususer" value="<?php echo $statususer;?>">
+										<input type="hidden" name="kd_jrsn" value="<?php echo $kd_jrsn;?>">
+										<input type="hidden" name="nPengajuan" value="<?php echo $nPengajuan;?>">
 										<label">Tahun Akademik</label>
 											<input type="text" name="tahunakademik" value="<?php echo $tahunakademik;?>" id="tahunakademik"
 												class="form-control" required>
@@ -90,19 +93,19 @@
 											Fakultas </t></label>
 											</t>
 											<input type="text" name="fakultas" readonly class="form-control" id="fakultas"
-												value="<?php echo $fakultas;?>">
+												value="<?php echo $kd_fklts;?>">
 									</div>
 									<div class="form-group ">
 										<label">
 											Nama Ormawa </t></label>
 											</t>
-											<input type="text" name="namaormawa" readonly class="form-control" value="<?php echo $nama;?>">
+											<input type="text" name="namaormawa" readonly class="form-control" value="<?php echo $kd_jrsn;?>">
 									</div>
 									<div class="form-group">
 										<label">
 											Pagu Anggaran <small class="text-decoration" style="color:red">contoh : 2000000</small>
 											</label>
-											<input type="number" min="0" name="dana_awal" id="dana_awal" value="<?php echo $dana_awal;?>"
+											<input type="number" min="0" name="danaawal" id="dana_awal" value="<?php echo $danaawal;?>"
 												class="form-control" required>
 									</div>
 							</div>
@@ -113,8 +116,7 @@
 						</div>
 						</form>
 					</div>
-				</div> -->
-				<!-- <?php endforeach; ?> -->
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

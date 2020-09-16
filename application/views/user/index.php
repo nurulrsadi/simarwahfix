@@ -1,6 +1,7 @@
+  <link href="<?php echo base_url().'assets/css/bootstrap.css'?>" rel="stylesheet">
+	<link href="<?php echo base_url(). 'assets/css/all.min.css' ?>" rel="stylesheet" type="text/css">
 </header>
 
-<body>
 	<section>
 		<header class="main">
 		</header>

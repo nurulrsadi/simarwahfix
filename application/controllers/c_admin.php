@@ -200,15 +200,13 @@ class c_admin extends CI_Controller
     //     return $this->db->count_all('tb_surat');
     // }
     public function update_dana_awal(){
-      // $id_user = $this->input->post('id_user');
-      // $data=array(
-        $id_user = $this->input->post('id_user');
+        $kd_jrsn = $this->input->post('kd_jrsn');
         $tahunakademik = $this->input->post('tahunakademik',true);
-        $dana_awal = $this->input->post('dana_awal', true);
-        $statususer = 0;
-        $dana_sisa = $this->input->post('dana_awal', true);
-      // );
-      $uangawal = $this->M_dana->update_dana_awal($id_user,$tahunakademik,$dana_awal,$dana_sisa,$statususer);
+        $danaawal = $this->input->post('danaawal', true);
+        $nPengajuan = 0;
+        $danasisa = $this->input->post('danaawal', true);
+
+      $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan);
       redirect('c_admin/Edit_Pagu');
       // $tahunakademik = $this->input->post('tahunakademik');
       // $dana_awal=$this->input->post('tahunakademik');
@@ -330,7 +328,8 @@ class c_admin extends CI_Controller
           'kd_fklts' => $parent_fakultas,
           'tahunakademik' => 0,
           'danaawal' => 0,
-          'danasisa' =>0
+          'danasisa' =>0,
+          'nPengajuan' =>0
       );
        }else{
            $data =  array(
@@ -348,7 +347,8 @@ class c_admin extends CI_Controller
         'kd_fklts' => $parent_fakultas,
         'tahunakademik' => 0,
         'danaawal' => 0,
-        'danasisa' =>0
+        'danasisa' =>0,
+        'nPengajuan' =>0
     );
        }
       $this->M_dana->tambah_datauser($datadana);

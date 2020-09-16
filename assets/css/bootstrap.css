@@ -6754,4 +6754,66 @@ button.close {
     display: none !important;
   }
 }
+* button upload versi 2*/
+.file-upload-custom {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.file-upload__input-custom {
+  display: none;
+}
+
+.file-upload__button-custom {
+  -webkit-appearance: none;
+  /* background: #009879;
+  border: 2px solid #00745d;
+  border-radius: 4px; */
+  /* outline: none;
+  padding: 0.5em 0.8em;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 0.8em;
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+  font-weight: bold;
+  cursor: pointer; */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  background-color: transparent;
+  border-radius: 0.375em;
+  border: 0;
+  box-shadow: inset 0 0 0 2px #84c441;
+  color: #84c441 !important;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Roboto Slab", serif;
+  font-size: 0.8em;
+  font-weight: 700;
+  height: 3.5em;
+  letter-spacing: 0.075em;
+  line-height: 3.5em;
+  padding: 0 2.25em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.file-upload__button-custom:active {
+  background: #ccaf3c;
+}
+
+.file-upload__label-custom {
+  /* max-width: 250px;
+  font-size: 0.95em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Roboto Slab", serif; */
+  margin: 13px !important;
+  font-family: sans-serif;
+  color: #aaa;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -20,8 +20,12 @@ class M_dana extends CI_Model{
       return TRUE;
     }
     function tampil_list_user_dana(){
-      $query =  $this->db->query('SELECT * FROM tb_detailuser');
+      $query =  $this->db->query('SELECT * FROM tb_detailuser ORDER BY kd_fklts ASC');
       return $query;
+    }
+    function tampil_data_dana_login($jurusan){
+      $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
+		return $query;
     }
     public function tampil_danaormawa()
     {
@@ -119,8 +123,8 @@ class M_dana extends CI_Model{
       $query_upload_pengajuan = $this->db->query("UPDATE user SET suratpengajuan_file = '$dataspj', rinciankegiatan_file = '$datarkg', rkakl_file = '$datarkakl', tor_file = '$datator', statususer = '$statususer', nPengajuan = '$nPengajuan' WHERE id_user = '$id_user'");
       return $query_upload_pengajuan;
     }
-    function update_dana_awal($id_user,$tahunakademik,$dana_awal,$dana_sisa,$statususer){
-      $query_update_dana_awal =$this->db->query("UPDATE user SET tahunakademik = '$tahunakademik', dana_awal = '$dana_awal', dana_sisa = '$dana_sisa', statususer = '$statususer' WHERE id_user ='$id_user'");
+    function update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan){
+      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
   	// var_dump($kode_bidang);
   	// exit();
     return $query_update_dana_awal;

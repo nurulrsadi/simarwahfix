@@ -49,17 +49,21 @@ public function index()
         redirect(base_url("c_home/login"));
     }
         else{
-            // $uid = get_userdata("id_user");
-            // $this->load->model('M_data');
-            // $usr =$this->M_data->tampil_data($uid);
-            // $session = $this->session->userdata('id_user');
-            // $loginsession = $this->session->userdata('username');
+          $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+          $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+          if($cek -> num_rows() == 1){
+          $sess_data['data_himpunan'] = "true";
+          $this->session->set_userdata($sess_data);
+          }else{
+          $sess_data['data_himpunan'] = "false";
+          $this->session->set_userdata($sess_data);
+          }
+      
+          $ceksess = $this->session->userdata('data_himpunan');
+          // $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
             $data = array(
                 'title' =>'Pagu Anggaran',
-                // 'user' => $usr,
-                'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(),
-                // 'datauser' =>  $this->M_data->tampil_user($loginsession),
-                // 'user' => $this->db->get_where('user', ['id_user' => $session])->row_array(),
+                'dana' => $this->M_dana->tampil_data_dana_login($kode_himp_sess),
             );
             $this->load->view('templates/header', $data);
             $this->load->view('user/pengajuanuang', $data);
