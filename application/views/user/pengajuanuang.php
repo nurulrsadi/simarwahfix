@@ -42,9 +42,8 @@
 			</div>
 			<br>
 			<div class="col-4 col-12-xsmall">
-				<input type="text" name="nPengajuan" id="nPengajuan" value="<?= $user['nPengajuan']; ?>" readonly /><br>
-				<input type="text" name="namaKegiatan" id="namaKegiatan" value="<?= $user['namaKegiatan']; ?>"
-					placeholder="contoh : PBAK, AUDIENSI" /><br>
+				<input type="text" name="nPengajuan" id="nPengajuan" value=" " readonly /><br>
+				<input type="text" name="namaKegiatan" id="namaKegiatan" value="" placeholder="contoh : PBAK, AUDIENSI" /><br>
 			</div>
 		</div>
 		<!-- <div class="form-group row">
