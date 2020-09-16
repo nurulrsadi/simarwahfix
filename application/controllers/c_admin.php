@@ -9,6 +9,7 @@ class c_admin extends CI_Controller
         $this->load->model('M_data');
         if($this->session->userdata('status') != "login"){
           redirect(base_url("c_home/login"));
+          
         }
 	}
     public function index()
