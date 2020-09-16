@@ -14,6 +14,15 @@ class M_dana extends CI_Model{
       $query = $this->db->get ();
       return $query->result ();
     }
+    function tambah_datauser($datadana){
+      $this->db->insert('tb_detailuser',$datadana);
+      // $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
+      return TRUE;
+    }
+    function tampil_list_user_dana(){
+      $query =  $this->db->query('SELECT * FROM tb_detailuser');
+      return $query;
+    }
     public function tampil_danaormawa()
     {
       // $this->db->select('*');

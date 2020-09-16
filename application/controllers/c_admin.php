@@ -29,8 +29,11 @@ class c_admin extends CI_Controller
         $session = $this->session->userdata('id');
         $data = array(
             'title' => 'Edit Pagu Anggaran',
-            'getuser'=>$this->M_dana->tampil_getuser(),
-            'getfakultas' =>$this->M_dana->tampil_getfakultas(),
+            // 'getuser'=>$this->M_dana->tampil_getuser(),
+            // 'getfakultas' =>$this->M_dana->tampil_getfakultas(),
+            'userdana'=> $this->M_dana->tampil_list_user_dana(),
+            'fak' => $this->Model_View->tampil_list_fakultas(),
+            // $data['fak'] = $this->Model_View->tampil_list_fakultas();
         );
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
@@ -299,6 +302,7 @@ class c_admin extends CI_Controller
       $parent_fakultas = $this->input->post('parent_fakultas');
       $image = $this->input->post('image');
 
+
       if ($image=''){} else{
       $config['upload_path']='./assets/img/jurusan';
       $config['allowed_types']='jpg|gif|png|jpeg';
@@ -318,7 +322,15 @@ class c_admin extends CI_Controller
           'desc_himpunan' => $deskripsi,
           'visi' => $visi,
           'misi' => $misi,
-          'image' => $image
+          'image' => $image,
+      );
+      $datadana = array(
+          // 'kd_jrsn' => $kode_himpunan,
+          'kd_jrsn'=> $kode_himpunan,
+          'kd_fklts' => $parent_fakultas,
+          'tahunakademik' => 0,
+          'danaawal' => 0,
+          'danasisa' =>0
       );
        }else{
            $data =  array(
@@ -330,8 +342,16 @@ class c_admin extends CI_Controller
           'parent_fakultas' => $parent_fakultas,
           'image' => $image
       );
+      $datadana = array(
+        // 'kd_jrsn' => $kode_himpunan,
+        'kd_jrsn'=> $kode_himpunan,
+        'kd_fklts' => $parent_fakultas,
+        'tahunakademik' => 0,
+        'danaawal' => 0,
+        'danasisa' =>0
+    );
        }
-  
+      $this->M_dana->tambah_datauser($datadana);
       $this->Model_View->tambah_himpunan($data);
       redirect('c_admin/data_himpunan');
   }
@@ -346,7 +366,7 @@ public function edit_data_himpunan(){
       $parent_fakultas = $this->input->post('parent_fakultas');
       $image = $this->input->post('image');
       $imageold = $this->input->post('imageold');  
- 
+
       if ($image=''){}else{
       $config['upload_path']='./assets/img/jurusan';
       $config['allowed_types']='jpg|gif|png|jpeg';
@@ -358,7 +378,6 @@ public function edit_data_himpunan(){
       }else{
           $image=$this->upload->data('file_name');
       }
-  
       $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image);
       redirect('c_admin/data_himpunan');
   }

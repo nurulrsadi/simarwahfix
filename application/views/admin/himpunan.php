@@ -108,7 +108,7 @@
     						<select class="form-control" name="parent_fakultas">
     							<option value="">No Selected</option>
     							<?php foreach ($fak->result_array() as $i): $fak=$i['kode_fakultas'];?>
-    							<option value="<?php echo $fak;?>"><?php echo $fak;?></option>
+    							<option value="<?php echo $fak;?>"><?php echo $fak=$i['nama_fakultas'];?></option>
     							<?php endforeach ?>
     						</select>
     					</div>

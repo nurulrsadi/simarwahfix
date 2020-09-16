@@ -26,20 +26,28 @@
 							<th>Aksi</th>
 						</tr>
 					</thead>
+					<?php 
+                  foreach($userdana->result_array() as $i):
+                    $kd_jrsn=$i['kd_jrsn'];
+                    $kd_fklts=$i['kd_fklts'];
+                    $tahunakademik=$i['tahunakademik'];
+                    $danaawal=$i['danaawal'];
+                    $danasisa=$i['danasisa'];
+                    // $fakultas=$i['parent_fakultas'];
+                    ?>
 					<tbody>
 						<tr>
 							<?php $i=1; ?>
-							<?php foreach($getdanaormawa as $x):  ?>
 							<td><?= $i++; ?></td>
-							<td><?= $x->nama_fakultas; ?></td>
-							<td><?= $x->nama; ?></td>
-							<td><?= $x->tahunakademik; ?></td>
-							<td>Rp. <?= $x->danaawal; ?></td>
-							<td>Rp. <?= $x->danasisa; ?></td>
+							<td><?= $kd_jrsn; ?></td>
+							<td><?= $kd_fklts; ?></td>
+							<td><?= $tahunakademik; ?></td>
+							<td>Rp. <?= $danaawal; ?></td>
+							<td>Rp. <?= $danasisa; ?></td>
 							<td class="align-self-auto">
 								<!-- Button trigger modal -->
 								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"
-									data-target="#editanggaran<?= $x->id_user?>"><i class="fa fa-pen"></i>
+									data-target="#editanggaran<?= $kd_jrsn?>"><i class="fa fa-pen"></i>
 									Edit Anggaran
 								</a>
 							</td>
@@ -48,7 +56,7 @@
 					<?php endforeach; ?>
 				</table>
 
-				<?php foreach($getdanaormawa as $x):
+				<!-- <?php foreach($getdanaormawa as $x):
                 $id_user=$x->id_user;
                 $nama=$x->nama;
                 $fakultas=$x->fakultas;
@@ -56,8 +64,8 @@
                 $dana_sisa=$x->dana_sisa;
                 $tahunakademik=$x->tahunakademik;
                 $statususer=$x->statususer;
-                ?>
-				<div class="modal fade" id="editanggaran<?= $id_user;?>" tabindex="-1" role="dialog"
+                ?> -->
+				<!-- <div class="modal fade" id="editanggaran<?= $id_user;?>" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -74,8 +82,6 @@
 										<input type="hidden" name="id_user" value="<?php echo $id_user;?>">
 										<input type="hidden" name="statususer" value="<?php echo $statususer;?>">
 										<label">Tahun Akademik</label>
-											<!-- <input type="hidden" id="id_user" name="id_user"> -->
-											<!-- <input type="hidden" id="statususer" name="statususer"> -->
 											<input type="text" name="tahunakademik" value="<?php echo $tahunakademik;?>" id="tahunakademik"
 												class="form-control" required>
 									</div>
@@ -107,8 +113,8 @@
 						</div>
 						</form>
 					</div>
-				</div>
-				<?php endforeach; ?>
+				</div> -->
+				<!-- <?php endforeach; ?> -->
 			</div>
 		</div>
 	</div>
