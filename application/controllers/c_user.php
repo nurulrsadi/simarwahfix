@@ -15,40 +15,31 @@ function __construct(){
 }
 
 public function index()
-{
-    if($this->session->userdata('status') != "login")
     {
+    if($this->session->userdata('status') != "login"){
     redirect(base_url("c_home/login"));
-}
-else{
-    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-    $cek = $this->M_data->cek_datahimp($kode_himp_sess);
-    if($cek -> num_rows() == 1){
-        // print_r("masuk");
-        // exit();
-        $sess_data['data_himpunan'] = "true";
-        $this->session->set_userdata($sess_data);
     }else{
-        // print_r("exit");
-        // exit();
-        $sess_data['data_himpunan'] = "false";
-        $this->session->set_userdata($sess_data);
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+    if($cek -> num_rows() == 1){
+    $sess_data['data_himpunan'] = "true";
+    $this->session->set_userdata($sess_data);
+    }else{
+    $sess_data['data_himpunan'] = "false";
+    $this->session->set_userdata($sess_data);
     }
 
     $ceksess = $this->session->userdata('data_himpunan');
-    // print_r($ceksess);
-    // exit();
+    $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
+    $data['datahimpunan'] = $this->Model_View->tampil_himpunan($kode_himp_sess);
+    $data['bidangbidang'] = $this->Model_View->tampil_bidang($kode_himp_sess);
 
-    $data['anggota'] = $this->M_data->tampil_anggota($kode_himp_sess)->result();
-    $data['bidang'] = $this->M_data->tampil_bidang($kode_himp_sess)->result();
-    $data['himpunan'] = $this->M_data->tampil_himpunan($kode_himp_sess)->result();
-            // $this->load->view('daftaradmin',$data);
     $data['title'] = 'Edit Profile';
     $this->load->view('templates/header', $data);
     $this->load->view('user/index',$data);
     $this->load->view('templates/sidebaruser');
     $this->load->view('templates/footer');
-}
+    }
 
 }
     public function Pagu_Anggaran()

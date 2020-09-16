@@ -5,11 +5,14 @@ class c_admin extends CI_Controller
 {
     function __construct(){
         parent::__construct();	
-            $this->load->model('Model_View');
-            $this->load->model('M_data');
+        $this->load->model('Model_View');
+        $this->load->model('M_data');
+        if($this->session->userdata('status') != "login"){
+          redirect(base_url("c_home/login"));
+        }
 	}
     public function index()
-    {        
+    {       
             $data['title'] = 'Dashboard';
             
             $this->load->view('templates/headeradm', $data);
