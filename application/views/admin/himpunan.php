@@ -194,7 +194,7 @@
     <!-- Modal Delete -->
     <?php
         foreach($himpunan->result_array() as $i):
-          $kode_himpunan=$i['kode_himpunan'];
+                    $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
                     $deskripsi=$i['desc_himpunan'];
                     $visi=$i['visi'];

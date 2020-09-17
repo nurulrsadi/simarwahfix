@@ -8,7 +8,7 @@
 	<header class="main">
 		<!-- <h1>Pagu Keuangan</h1> -->
 	</header>
-  <?php
+	<?php
                     foreach($dana->result_array() as $i):
                         $kd_jrsn=$i['kd_jrsn'];
                         $danaawal=$i['danaawal'];
@@ -19,6 +19,7 @@
                         $rkakl=$i['rkakl'];
                         $tor=$i['tor'];
                         $nPengajuan=$i['nPengajuan'];
+                        $statususer=$i['statususer'];
                                     ?>
 	<div class="features">
 
@@ -40,12 +41,11 @@
 	<h2>Pengajuan Uang Untuk Kegiatan</h2>
 	<p>Silahkan melengkapi data dibawah ini untuk dapat melakukan pengajuan pencairan dana. Anda dapat melakukan pengajuan
 		sebanyak 3 (tiga) kali</p>
-	<!-- <form action="<?= site_url('dana/_uploadpengajuan')?>" method="post" enctype="multipart/form-data"> -->
-	<!--  -->
-	<!-- <?= form_open('dana/do_pengajuan')?> -->
-
 	<form class="form-horizontal" action="<?php echo base_url().'dana/do_pengajuan';?>" enctype="multipart/form-data"
 		method="post">
+		<input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>" />
+		<!-- <input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>" /> -->
+		<input type="hidden" name="statususer" value="<?= $statususer?>" />
 		<div class="row ">
 			<div class="col-2 col-12-small">
 				<label for="nPengajuan">Pengajuan ke</label><br>
@@ -54,25 +54,11 @@
 			<br>
 			<div class="col-4 col-12-xsmall">
 				<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly /><br>
-				<input type="text" name="namaKegiatan" id="namaKegiatan" value="<?php echo $namaKegiatan;?>" placeholder="contoh : PBAK, AUDIENSI" /><br>
+				<input type="text" name="namaKegiatan" id="namaKegiatan" value="<?php echo $namaKegiatan;?>"
+					placeholder="contoh : PBAK, AUDIENSI" /><br>
 			</div>
 		</div>
-		<!-- <div class="form-group row">
-                        <label for="nama" class="col-sm-2 col-form-label"> Pengajuan ke : </tr/tr></label>
-                        <div class="col-sm-2">
-                            <input type="text" readonly class="form-control-plaintext" id="nPengajuan" name="nPengajuan" value="<?= $user['nPengajuan']; ?>">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group row">
-                        <label for="nama" class="col-sm-2 col-form-label"> Pengaju :</tr/tr></label>
-                        <div class="col-sm-2">
-                            <input type="text" readonly class="form-control-plaintext" id="nama" name="nama" value="<?= $user['nama']; ?>">
-                        </div>
-                    </div> -->
-		<!-- <?= $error; ?> -->
-		<!-- <p>Pengajuan ke- <?= $user['nPengajuan'];?> </p>
-                    <p>Pengaju : <?= $user['nama']; ?></p> -->
+		<!-- tabel -->
 		<table class="content-table">
 			<thead>
 				<tr>
@@ -87,8 +73,8 @@
 					<td>Surat Pengajuan</td>
 					<td>
 						<div class="file-upload-custom">
-							<input class="file-upload__input-custom" type="file" name="suratpengajuan"
-								id="suratpengajuan" accept="application/pdf" required>
+							<input class="file-upload__input-custom" type="file" name="suratpengajuan" id="suratpengajuan"
+								accept="application/pdf" required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
 							<span class="file-upload__label-custom"></span>
@@ -100,8 +86,8 @@
 					<td>Rincian Kegiatan</td>
 					<td>
 						<div class="file-upload-custom">
-							<input class="file-upload__input-custom" type="file" value=""
-								name="rinciankegiatan" id="rinciankegiatan" accept="application/pdf" required>
+							<input class="file-upload__input-custom" type="file" value="" name="rinciankegiatan" id="rinciankegiatan"
+								accept="application/pdf" required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
 							<span class="file-upload__label-custom"></span>
@@ -136,6 +122,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<!-- end tabel -->
+		<!-- kirim -->
 		<div class="row gtr-200">
 			<div class="col-2 col-12-medium">
 			</div>
@@ -150,13 +138,14 @@
 			<div class="col-2 col-12-medium">
 				<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
 				<p><button type="submit" class="btn btn-success">Kirim</button></p>
-                                <!-- </a> -->
-                            </div>
-                        </div>
-                    <!--  -->
-                    </form>
+				<!-- </a> -->
+			</div>
+		</div>
+		<!--  -->
+	</form>
 
-                </section>
-            </div>
-        </div>
-        <?php endforeach;?>
+</section>
+</div>
+</div>
+<?php endforeach;?>
+<!-- end kirim -->

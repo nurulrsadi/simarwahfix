@@ -20,8 +20,14 @@ class M_dana extends CI_Model{
       return TRUE;
     }
     function tampil_list_user_dana(){
-      $query =  $this->db->query('SELECT * FROM tb_detailuser ORDER BY kd_fklts ASC');
+      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas ORDER BY kd_fklts");
       return $query;
+      // $this->db->query($query)->result();
+      // $this->db->order_by('kd_fklts', 'ASC');
+      // return $this->db->from('tb_detailuser')
+      //     ->join('fakultas', 'fakultas.kode_fakultas=tb_detailuser.kd_fklts')
+      //     ->get()
+      //     ->result();
     }
     function tampil_data_dana_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
@@ -29,54 +35,8 @@ class M_dana extends CI_Model{
     }
     public function tampil_danaormawa()
     {
-      // $this->db->select('*');
-      // $this->db->from('jurusan');
-      // $this->db->join('user', 'user.kode_himp= jurusan.kode_himpunan', 'left');
-      // $this->db->join('fakultas', 'fakultas.kode_fakultas= jurusan.parent_fakultas', 'left');
-      // $this->db->where('role', 0);
-
-
       
-
-      // $query = $this->db->get ();
-      // return $query->result ();
-      // $query=$this->db->query("select");
-      
-      // $this->db->select('*');
-      // $this->db->from('jurusan');
-      // $this->db->join('user', 'user.kode_himp= jurusan.kode_himpunan', 'left');
-      // $this->db->join('fakultas', 'fakultas.kode_fakultas= jurusan.parent_fakultas', 'left');
-      // $this->db->where('role', 0 );
-      // $this->db->set('kd_jrsn', $kode_himp);
-      // $this->db->set('kd_fklts', $parent_fakultas);
-      // $this->db->set('tahunakademik', 0);
-      // $this->db->set('danaawal', 0);
-      // $this->db->set('danasisa', 0);
-      // $data = array(
-      //   'kd_jrsn' =>  $kode_himp,
-      //   'kd_fklts'  => $parent_fakultas,
-      //   'tahunakademik'  => 0,
-      //   'danaawal'  => 0,
-      //   'danasisa'  => 0,
-      // );
-
-      // $this->db->replace('tb_detailuser', $data);
-      // $this->db->insert('tb_detailuser');
-      // return $query_insert = ("UPDATE tb_detailuser SET kd_jrsn = '$kode_himp',kd_fklts = '$parent_fakultas', danaawal = '', danaawal = '0' WHERE kondisi");
-      // $query = $this->db->get ();
-      // return $query->result ();
-    
-      
-
-      // $this->db->order_by('kode_himp', 'ASC');
-
-      // return $this->db->from('user')
-      //     ->join('jurusan', 'jurusan.kode_himpunan=user.kode_himp')
-      //     ->join('fakultas', 'fakultas.kode_fakultas = jurusan.kode_himp' )
-      //     ->get()
-      //     ->result();
-    }
-    
+    }             
     function edit_pengajuan($where,$table){		
       return $this->db->get_where($table,$where);
     }
@@ -129,19 +89,10 @@ class M_dana extends CI_Model{
   	// exit();
     return $query_update_dana_awal;
     }
-    
-    // public function kirimPengajuan()
-    // {
-    //     $data = array(
-    //         'nama' => $this->input->post('nama', true),
-    //         'fakultas' => $this->input->post('ht', true),
-            
-    //         'keterangan' => $this->input->post('keterangan', true),
-    //         'status' => 0,
-    //     );
-    //     $this->db->insert('tb_pengajuandana', $data);
-    //     $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible">
-    //     <button type="button" class="close" data-dismiss="alert">&times;</button>Surat Berhasil Dikirim</div>');
-    //     redirect('surat');
-    // }
+    // untuk user
+    function update_pengajuan($kd_jrsn,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan6,$namaKegiatan,$statususer1){
+      $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan = '$namaKegiatan', statususer='$statususer1', nPengajuan='$nPengajuan6' WHERE kd_jrsn ='$kd_jrsn'");
+      return $query_update_surat_pengajuan;
+    }
+
 }
