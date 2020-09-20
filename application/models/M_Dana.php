@@ -19,19 +19,47 @@ class M_dana extends CI_Model{
       // $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
       return TRUE;
     }
+    function delete_datauser($kode_himpunan)
+    {
+      $this->db->delete('tb_detailuser', array('kd_jrsn' => $kode_himpunan));
+    }
+    function edit_datauser($kode_himpunan,$parent_fakultas){
+      $query_update_himpunan = $this->db->query("UPDATE tb_detailuser SET kd_fklts = '$parent_fakultas' WHERE kd_jrsn = '$kode_himpunan'");
+  	 return $query_update_himpunan;
+    }
+    // untuk tabel nama fakultas
+    function edit_namafakultas($kode_fakultas, $nama_fakultas){
+      return $query_update_fakultas = $this->db->query("UPDATE tb_namafakultas SET nama_fakultas = '$nama_fakultas' WHERE kode_namafakultas = '$kode_fakultas'");
+    }
+    function delete_namafakultas($kode_himpunan){
+      $this->db->delete('fakultas', array('kode_fakultas' => $kode_fakultas));
+    }
+    
+
+    
     function tampil_list_user_dana(){
       $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas ORDER BY kd_fklts");
       return $query;
-      // $this->db->query($query)->result();
-      // $this->db->order_by('kd_fklts', 'ASC');
-      // return $this->db->from('tb_detailuser')
-      //     ->join('fakultas', 'fakultas.kode_fakultas=tb_detailuser.kd_fklts')
-      //     ->get()
-      //     ->result();
     }
+
+
+    function tampil_list_user_pengaju(){
+      $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE statususer = "2"');
+		  return $query;
+      
+
+      // // $this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas ORDER BY kd_fklts");
+      // // $query = $this->db->query("SELECT * FROM tb_detailuser WHERE statususer=2 ");
+      // // return $query;
+      // return $this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE ('tb_detailuser.kd_fklts = fakultas.kode_fakultas' AND 'statususer = 2' )ORDER BY kd_fklts");
+      // // $this->db->select('*');
+      // $query = $this->db->get('tb_detailuser, fakultas');    
+      // return $query;
+    }
+    
     function tampil_data_dana_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
-		return $query;
+		  return $query;
     }
     public function tampil_danaormawa()
     {
@@ -89,10 +117,18 @@ class M_dana extends CI_Model{
   	// exit();
     return $query_update_dana_awal;
     }
+    function edit_accpengajuan($where,$table){		
+      return $this->db->get_where($table,$where);
+    }
+
+
+
+    
     // untuk user
-    function update_pengajuan($kd_jrsn,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan6,$namaKegiatan,$statususer1){
-      $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan = '$namaKegiatan', statususer='$statususer1', nPengajuan='$nPengajuan6' WHERE kd_jrsn ='$kd_jrsn'");
+    function update_pengajuan($kd_jrsn,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan,$namaKegiatan,$statususer6){
+      $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan = '$namaKegiatan', statususer='$statususer6', nPengajuan='$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
       return $query_update_surat_pengajuan;
     }
+
 
 }

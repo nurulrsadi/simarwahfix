@@ -57,10 +57,10 @@ class c_admin extends CI_Controller
     public function Cek_Pagu()
     {
         $data=array(
-          'tittle' => 'Cek Pengajuan',
-          'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
+          'title' => 'Cek Pengajuan',
+          'datapengaju' => $this->M_dana->tampil_list_user_pengaju(),
+          // 'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
         );
-        $data['title'] = 'Cek Pengajuan';
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -178,14 +178,19 @@ class c_admin extends CI_Controller
         $this->load->view('admin/editpass', $data);
         $this->load->view('templates/footeradm');
     }
-    public function Cek_Data_Pengajuan(){
-        $data['title'] = 'Cek Data';
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/cekdatapagu', $data);
-        $this->load->view('templates/footeradm');
+    function Cek_Data_Pengajuan($kd_jrsn){
+      $where = array('kd_jrsn' => $kd_jrsn);
+      $data['dataacc'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
+      // $this->load->view('v_edit',$data);
+      $data['title'] = 'Cek Data';
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/cekdatapagu', $data);
+      $this->load->view('templates/footeradm');
     }
+    // public function Cek_Data_Pengajuan($kd_jrsn){
+    
 
     // private function _fakultas()
     // {
@@ -203,7 +208,7 @@ class c_admin extends CI_Controller
         $kd_jrsn = $this->input->post('kd_jrsn');
         $tahunakademik = $this->input->post('tahunakademik',true);
         $danaawal = $this->input->post('danaawal', true);
-        $nPengajuan = 0;
+        $nPengajuan = 1;
         $danasisa = $this->input->post('danaawal', true);
 
       $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan);
@@ -267,8 +272,12 @@ class c_admin extends CI_Controller
           'visi' => $visi,
           'misi' => $misi
       );
+      $datafakultas=array(
+        'kode_namafakultas' => $kode_fakultas,
+        'nama_fakultas'=> $nama_fakultas
+      );
 
-      $this->Model_View->tambah_fakultas($data);
+      $this->Model_View->tambah_fakultas($data,$datafakultas);
       redirect('c_admin/data_fakultas');
   }
 
@@ -278,6 +287,7 @@ class c_admin extends CI_Controller
       $deskripsi = $this->input->post('deskripsi');
       $visi = $this->input->post('visi');
       $misi = $this->input->post('misi');
+      $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
       $this->Model_View->update_fakultas($kode_fakultas,$nama_fakultas,$deskripsi,$visi,$misi);
       redirect('c_admin/data_fakultas');
   }
@@ -286,6 +296,7 @@ class c_admin extends CI_Controller
   public function delete_data_fakultas(){
   $kode_fakultas = $this->uri->segment(3);
   $this->Model_View->delete_fakultas($kode_fakultas);
+  $this->M_dana->delete_namafakultas($kode_himpunan);
   $this->session->set_flashdata('msg','<div class="alert alert-success">Anggota Himpunan Dihapus</div>');
   redirect('c_admin/data_fakultas');
   }
@@ -325,13 +336,14 @@ class c_admin extends CI_Controller
       $datadana = array(
           // 'kd_jrsn' => $kode_himpunan,
           'kd_jrsn'=> $kode_himpunan,
-          'kd_fklts' => $parent_fakultas,
-          'tahunakademik' => 0,
-          'danaawal' => 0,
-          'danasisa' =>0,
-          'nPengajuan' =>0
+          // // 'kd_fklts' => $parent_fakultas,
+          // 'tahunakademik' => 0,
+          // 'danaawal' => 0,
+          // 'danasisa' =>0,
+          // 'nPengajuan' =>0
       );
-       }else{
+      }
+       else{
            $data =  array(
           'kode_himpunan' => $kode_himpunan,
           'nama_himpunan'=> $nama_himpunan,
@@ -345,14 +357,14 @@ class c_admin extends CI_Controller
         // 'kd_jrsn' => $kode_himpunan,
         'kd_jrsn'=> $kode_himpunan,
         'kd_fklts' => $parent_fakultas,
-        'tahunakademik' => 0,
-        'danaawal' => 0,
-        'danasisa' =>0,
-        'nPengajuan' =>0
+        // 'tahunakademik' => 0,
+        // 'danaawal' => 0,
+        // 'danasisa' =>0,
+        // 'nPengajuan' =>0
     );
        }
-      $this->M_dana->tambah_datauser($datadana);
-      $this->Model_View->tambah_himpunan($data);
+      // $this->M_dana->tambah_datauser($datadana);
+      $this->Model_View->tambah_himpunan($data,$datadana);
       redirect('c_admin/data_himpunan');
   }
 }
@@ -378,6 +390,7 @@ public function edit_data_himpunan(){
       }else{
           $image=$this->upload->data('file_name');
       }
+      $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
       $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image);
       redirect('c_admin/data_himpunan');
   }
@@ -386,6 +399,7 @@ public function edit_data_himpunan(){
  public function delete_data_himpunan(){
   $kode_himpunan = $this->uri->segment(3);
   $this->Model_View->delete_himpunan($kode_himpunan);
+  $this->M_dana->delete_datauser($kode_himpunan);
   $this->session->set_flashdata('msg','<div class="alert alert-success">Data Himpunan Dihapus</div>');
   redirect('c_admin/data_himpunan');
   }
@@ -397,6 +411,7 @@ public function edit_data_himpunan(){
       $password = $this->input->post('password');
       $role = 0;
       $is_active = 1;
+      $statususer=1;
       $kd_himp = $this->input->post('kode_himp');
       
 
@@ -409,6 +424,7 @@ public function edit_data_himpunan(){
           'kode_himp' => $kd_himp,
           'is_active' => $is_active,
           'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
       );
       $this->Model_View->tambah_user_himpunan($data);
       redirect('c_admin/data_user_himpunan');

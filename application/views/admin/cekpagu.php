@@ -29,19 +29,28 @@
 					</thead>
 					<tbody>
 						<tr>
-							<?php $i=1; ?>
-							<?php foreach($getpengajuandana as $j):  ?>
-							<td><?= $i++; ?></td>
-							<td><?= $j->fakultas; ?></td>
-							<td><?= $j->username; ?></td>
-							<td><?= $j->dana_sisa; ?></td>
-							<td class="text-center"><?= $j->nPengajuan; ?></td>
+							<?php $j=1; ?>
+							<?php 
+                  foreach($datapengaju->result_array() as $i):
+                    $kd_jrsn=$i['kd_jrsn'];
+                    // $nama_fakultas=$i['nama_fakultas'];
+                    $tahunakademik=$i['tahunakademik'];
+                    $danaawal=$i['danaawal'];
+                    $danasisa=$i['danasisa'];
+                    $nPengajuan=$i['nPengajuan'];
+                    // $fakultas=$i['parent_fakultas'];
+                    ?>
+							<td><?= $j++; ?></td>
+							<td><?= $danaawal; ?></td>
+							<td><?= $kd_jrsn; ?></td>
+							<td><?= $danaawal; ?></td>
+							<td class="text-center"><?= $nPengajuan; ?></td>
 							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>
 								<span class="btn btn-sm btn-danger">Belum disetujui</span>
 							</td>
 							<td class="text-center">
-								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan')?>"
+								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan/'.$kd_jrsn)?>"
 									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search"></i> Cek
 									File</a>
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->

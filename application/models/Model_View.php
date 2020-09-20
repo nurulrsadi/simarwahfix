@@ -132,9 +132,10 @@
   	 $this->db->delete('nama_bidang', array('kode_bidang' => $kd_bidang));	
   }
 
-  function tambah_fakultas($data){
+  function tambah_fakultas($data,$datafakultas){
   	$this->db->insert('fakultas',$data);
-  	$this->session->set_flashdata('Sukses',"Data Fakultas Berhasil Ditambahkan");
+    $this->session->set_flashdata('Sukses',"Data Fakultas Berhasil Ditambahkan");
+    $this->db->insert('tb_namafakultas',$datafakultas);
     return TRUE;
   }
 
@@ -148,9 +149,10 @@
   }
 
 
-  function tambah_himpunan($data){
-  	$this->db->insert('jurusan',$data);
-  	$this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
+  function tambah_himpunan($data,$datadana){
+    $this->db->insert('jurusan',$data);
+    $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
+    $this->db->insert('tb_detailuser',$datadana);
     return TRUE;
   }
 
