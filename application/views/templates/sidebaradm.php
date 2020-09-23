@@ -38,6 +38,7 @@
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pagu') ?>">Cek Pengajuan</a>
 				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Data_Pagu') ?>">Data Anggaran</a> -->
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan') ?>">Cek Laporan Kegiatan</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan') ?>">Data Pengajuan </a>
 			</div>
 		</div>
 	</li>

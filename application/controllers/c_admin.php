@@ -58,7 +58,7 @@ class c_admin extends CI_Controller
     {
         $data=array(
           'title' => 'Cek Pengajuan',
-          'datapengaju' => $this->M_dana->tampil_list_user_pengaju(),
+          'datapengaju' => $this->M_dana->tampil_list_user_pengajuan(),
           // 'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
         );
         $this->load->view('templates/headeradm', $data);
@@ -77,6 +77,18 @@ class c_admin extends CI_Controller
         $this->load->view('admin/laporan', $data);
         $this->load->view('templates/footeradm');
     }
+    public function List_Pengajuan(){
+      $data['title'] = 'List Pengajuan Berhasil';
+      $data['datapengaju'] = $this->M_dana->tampil_list_user_pengaju();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/pengajuanberhasil', $data);
+        $this->load->view('templates/footeradm');
+    }
+    // function Cek_Data_Pengajuan/Tidak_ACC(){
+
+    // }
     public function Cek_Surat()
     {
          
@@ -179,8 +191,10 @@ class c_admin extends CI_Controller
         $this->load->view('templates/footeradm');
     }
     function Cek_Data_Pengajuan($kd_jrsn){
-      $where = array('kd_jrsn' => $kd_jrsn);
-      $data['dataacc'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
+      // $cek = $this->Model_View->cek_datahimp($kd_jrsn);
+      // $where = array('kd_jrsn' => $kd_jrsn);
+      // $data['datadana'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
+      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuan($kd_jrsn);
       // $this->load->view('v_edit',$data);
       $data['title'] = 'Cek Data';
       $this->load->view('templates/headeradm', $data);
@@ -189,6 +203,17 @@ class c_admin extends CI_Controller
       $this->load->view('admin/cekdatapagu', $data);
       $this->load->view('templates/footeradm');
     }
+    //     function Tidak_ACC($kd_jrsn){
+    //       $where = array('kd_jrsn' => $kd_jrsn);
+    //     $data['dataacc'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
+    //     // $this->load->view('v_edit',$data);
+    //     $data['title'] = 'Cek Data';
+    //     $this->load->view('templates/headeradm', $data);
+    //     $this->load->view('templates/sidebaradm', $data);
+    //     $this->load->view('templates/topbar', $data);
+    //     $this->load->view('admin/tidakacc', $data);
+    //     $this->load->view('templates/footeradm');
+    // }
     // public function Cek_Data_Pengajuan($kd_jrsn){
     
 
@@ -209,9 +234,11 @@ class c_admin extends CI_Controller
         $tahunakademik = $this->input->post('tahunakademik',true);
         $danaawal = $this->input->post('danaawal', true);
         $nPengajuan = 1;
+        $statususer = 1;
         $danasisa = $this->input->post('danaawal', true);
 
-      $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan);
+      $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
+      $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
       redirect('c_admin/Edit_Pagu');
       // $tahunakademik = $this->input->post('tahunakademik');
       // $dana_awal=$this->input->post('tahunakademik');

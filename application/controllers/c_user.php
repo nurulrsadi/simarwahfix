@@ -21,6 +21,7 @@ public function index()
     redirect(base_url("c_home/login"));
     }else{
     $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    // $statususer = $this->session->userdata('statususer');
     $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
     if($cek -> num_rows() == 1){
     $sess_data['data_himpunan'] = "true";
@@ -31,14 +32,16 @@ public function index()
     }
 
     $ceksess = $this->session->userdata('data_himpunan');
+    $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
     $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
     $data['datahimpunan'] = $this->Model_View->tampil_himpunan($kode_himp_sess);
     $data['bidangbidang'] = $this->Model_View->tampil_bidang($kode_himp_sess);
 
+    
     $data['title'] = 'Edit Profile';
     $this->load->view('templates/header', $data);
     $this->load->view('user/index',$data);
-    $this->load->view('templates/sidebaruser');
+    $this->load->view('templates/sidebaruser',$data);
     $this->load->view('templates/footer');
     }
 
@@ -58,57 +61,144 @@ public function index()
           $sess_data['data_himpunan'] = "false";
           $this->session->set_userdata($sess_data);
           }
-      
+          
           $ceksess = $this->session->userdata('data_himpunan');
           // $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
             $data = array(
                 'title' =>'Pagu Anggaran',
                 'dana' => $this->M_dana->tampil_data_dana_login($kode_himp_sess),
+                'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
             );
             $this->load->view('templates/header', $data);
             $this->load->view('user/pengajuanuang', $data);
             $this->load->view('templates/sidebaruser', $data);
             $this->load->view('templates/footer', $data);
+
+                     
+          
         }
     }
     public function Verifikasi_Data()
     {
+      if($this->session->userdata('status') != "login"){
+        redirect(base_url("c_home/login"));
+        }else{
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+        if($cek -> num_rows() == 1){
+        $sess_data['data_himpunan'] = "true";
+        $this->session->set_userdata($sess_data);
+        }else{
+        $sess_data['data_himpunan'] = "false";
+        $this->session->set_userdata($sess_data);
+        }
+    
+        $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Verifikasi Pencairan Dana',
             'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+            'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/dicekadmindulu');
-        $this->load->view('templates/sidebaruser');
+        $this->load->view('templates/sidebaruser',$data);
         $this->load->view('templates/footer');
     }
+  }
     public function Pinjam_Aula()
-    {
-        $data=array(
-            'title' => 'Peminjaman Aula SC',
-            'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+    {if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      if($cek -> num_rows() == 1){
+      $sess_data['data_himpunan'] = "true";
+      $this->session->set_userdata($sess_data);
+      }else{
+      $sess_data['data_himpunan'] = "false";
+      $this->session->set_userdata($sess_data);
+      }
+  
+      $ceksess = $this->session->userdata('data_himpunan');
+      $data=array(
+        'title' => 'Peminjaman Aula SC',
+        'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+        'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/pinjamaula');
-        $this->load->view('templates/sidebaruser');
+        $this->load->view('templates/sidebaruser',$data);
         $this->load->view('templates/footer');
+      }
+    }
+    public function Laporan_Kegiatan(){
+      if($this->session->userdata('status') != "login"){
+        redirect(base_url("c_home/login"));
+        }else{
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+        if($cek -> num_rows() == 1){
+        $sess_data['data_himpunan'] = "true";
+        $this->session->set_userdata($sess_data);
+        }else{
+        $sess_data['data_himpunan'] = "false";
+        $this->session->set_userdata($sess_data);
+        }
+    
+        $ceksess = $this->session->userdata('data_himpunan');
+        $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+      $this->load->view('templates/header');
+        $this->load->view('user/laporankegiatan');
+        $this->load->view('templates/sidebaruser',$data);
+        $this->load->view('templates/footer');
+      }
     }
     public function Guide_HMJ()
     {
+      if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      if($cek -> num_rows() == 1){
+      $sess_data['data_himpunan'] = "true";
+      $this->session->set_userdata($sess_data);
+      }else{
+      $sess_data['data_himpunan'] = "false";
+      $this->session->set_userdata($sess_data);
+      }
+  
+      $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Cara menggunakan Website SIMARWAH',
             'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+            'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/userguide', $data);
         $this->load->view('templates/sidebaruser', $data);
         $this->load->view('templates/footer');
     }
+  }
     public function Keluhan()
-    {
+    {     if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      if($cek -> num_rows() == 1){
+      $sess_data['data_himpunan'] = "true";
+      $this->session->set_userdata($sess_data);
+      }else{
+      $sess_data['data_himpunan'] = "false";
+      $this->session->set_userdata($sess_data);
+      }
+  
+      $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Keluhan',
-            'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+            'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(),
+            'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess), 
         );
         $data['title'] = 'Keluhan';
         $this->load->view('templates/header', $data);
@@ -116,6 +206,7 @@ public function index()
         $this->load->view('templates/sidebaruser', $data);
         $this->load->view('templates/footer', $data);
     }
+  }
 
     public function simpan_data_anggota(){
       $nim=$this->input->post('nim');
@@ -127,6 +218,8 @@ public function index()
       $jabatan=$this->input->post('jabatan');
       $parent_himpunan=$this->input->post('parent_himpunan');
       $parent_bidang=$this->input->post('parent_bidang');
+      $statususer=2;
+      $datastatus = $this->Model_View->tambah_statususer($parent_himpunan,$statususer);
       $databarang = $this->Model_View->simpan_anggota_baru($nim,$nama,$jenis_kelamin,$alamat,$kontak,$email,$jabatan,$parent_himpunan,$parent_bidang);
    if($databarang){ // Jika sukses
     echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";

@@ -14,6 +14,15 @@ class M_dana extends CI_Model{
       $query = $this->db->get ();
       return $query->result ();
     }
+    function update_user_awal($kd_jrsn, $statususer){
+      $query_update_user_awal =$this->db->query("UPDATE user SET statususer = '$statususer' WHERE kode_himp ='$kd_jrsn'");
+    }
+    function cek_datadana($where){
+      $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$where.'"');
+      // print_r($query);
+      // exit();
+      return $query;
+    } 
     function tambah_datauser($datadana){
       $this->db->insert('tb_detailuser',$datadana);
       // $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
@@ -44,7 +53,7 @@ class M_dana extends CI_Model{
 
 
     function tampil_list_user_pengaju(){
-      $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE statususer = "2"');
+      $query =  $this->db->query('SELECT * FROM tb_detailuser');
 		  return $query;
       
 
@@ -56,9 +65,17 @@ class M_dana extends CI_Model{
       // $query = $this->db->get('tb_detailuser, fakultas');    
       // return $query;
     }
+    function tampil_list_user_pengajuan(){
+      $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE statususer=2');
+      return $query;
+    }
     
     function tampil_data_dana_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
+		  return $query;
+    }
+    function tampil_data_dana_maupengajuan($jurusan){
+      $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$jurusan.'"');
 		  return $query;
     }
     public function tampil_danaormawa()
@@ -111,8 +128,8 @@ class M_dana extends CI_Model{
       $query_upload_pengajuan = $this->db->query("UPDATE user SET suratpengajuan_file = '$dataspj', rinciankegiatan_file = '$datarkg', rkakl_file = '$datarkakl', tor_file = '$datator', statususer = '$statususer', nPengajuan = '$nPengajuan' WHERE id_user = '$id_user'");
       return $query_upload_pengajuan;
     }
-    function update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan){
-      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
+    function update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
+      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_jrsn ='$kd_jrsn'");
   	// var_dump($kode_bidang);
   	// exit();
     return $query_update_dana_awal;
@@ -120,15 +137,61 @@ class M_dana extends CI_Model{
     function edit_accpengajuan($where,$table){		
       return $this->db->get_where($table,$where);
     }
+    function getDataByID($kd_jrsn){
+      return $this->db->get_where('tb_detailuser', array('kd_jrsn'=>$kd_jrsn));
+    }
+    function update_accpengajuan($kd_jrsn,$statususer6){
+      var_dump($kd_jrsn,$statususer6);
+      die();
+      $query_accpengajuan=$this->db->query("UPDATE tb_detailuser SET statususer='$statususer6' WHERE kd_jrsn='$kd_jrsn");
+      return $query_accpengajuan;
+    }
+    
+    function update_hapuspengajuan($kd_jrsn,$statususer6){
+      // var_dump($kd_jrsn,$statususer6,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya);
+      // die();
+      $query_hapusfilepengajuan =$this->db->query("UPDATE tb_detailuser SET statususer = '$statususer6' WHERE kd_jrsn ='$kd_jrsn'");
+      return $query_hapusfilepengajuan;
+    }
+    function updatgagaleacc($where,$dataupdatedana,$table){
+      $this->db->where($where);
+      $this->db->update($table,$dataupdatedana);
+  }
+    function updateacc($where,$dataupdatedana,$table){
+      var_dump($dataupdatedana);
+      die();
+      $this->db->where($where);
+      $this->db->update($table,$dataupdatedana);
+    }
 
+    function pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6){
+      // var_dump($kd_jrsn, $statususer6, $x, $nPengajuan6);
+      // die();
+      // $query = "INSERT INTO users(username, password,name,surname,email,role)VALUES('$username', '$password','$name','$lastname','$email','$role')";
+      // var_
+      $query_update_pengajuannya=$this->db->query("UPDATE tb_pengajuan SET statususer='$statususer6', nPengajuan='$nPengajuan6', danasisa='$x' WHERE kd_jrsn ='$kd_jrsn' ");
+      return $query_update_pengajuannya;
+    }
 
+    function pengajuandiaccupdatedb($kd_jrsn, $statususer6, $danaupdate, $nPengajuan6){
+      return $query=$this->db->query("UPDATE tb_detailuser SET statususer='$statususer6', nPengajuan='$nPengajuan6', danasisa='$danaupdate' WHERE kd_jrsn ='$kd_jrsn' ");
+
+    }
 
     
     // untuk user
-    function update_pengajuan($kd_jrsn,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan,$namaKegiatan,$statususer6){
-      $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan = '$namaKegiatan', statususer='$statususer6', nPengajuan='$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
+    function update_pengajuan($kd_jrsn, $statususer6,$nPengajuan){
+      $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET statususer='$statususer6', nPengajuan='$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
       return $query_update_surat_pengajuan;
     }
 
+    function insert_pengajuan($kd_jrsn,$kd_fklts,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan, $namaKegiatan, $statususer6, $danasisa, $akhirkegiatan){
+      $query_insert_surat_pengajuan =$this->db->query("INSERT INTO tb_pengajuan SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan='$namaKegiatan' , statususer='$statususer6', nPengajuan='$nPengajuan', kd_fakultas='$kd_fklts', kd_jrsn ='$kd_jrsn', akhirkegiatan='$akhirkegiatan', danasisa='$danasisa' ");
+      return $query_insert_surat_pengajuan;
+    }
 
+    function tambah_pengajuan($datadana1){
+      $this->db->insert('tb_pengajuan',$datadana1);
+      return TRUE;
+    }
 }

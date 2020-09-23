@@ -35,16 +35,15 @@
                     $kd_jrsn=$i['kd_jrsn'];
                     // $nama_fakultas=$i['nama_fakultas'];
                     $tahunakademik=$i['tahunakademik'];
+                    $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
-                    $danaawal=$i['danasisa'];
                     $nPengajuan=$i['nPengajuan'];
-                    $kd_fklts=$i['kd_fklts'];
                     // $fakultas=$i['parent_fakultas'];
                     ?>
 							<td><?= $j++; ?></td>
-							<td><?= $kd_fklts; ?></td>
+							<td><?= $danaawal; ?></td>
 							<td><?= $kd_jrsn; ?></td>
-							<td>Rp. <?= number_format($danasisa,0,',','.'); ?></td>
+							<td><?= $danaawal; ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
 							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>

@@ -43,8 +43,8 @@
     							<td><?php echo $nama_fakultas ?></td>
     							<td><?php echo $kd_jrsn ?></td>
     							<td><?php echo $tahunakademik ?></td>
-    							<td><?php echo $danaawal ?></td>
-    							<td><?php echo $danasisa ?></td>
+    							<td>Rp. <?php echo number_format($danaawal,0,',','.') ?></td>
+    							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
     							<td class="align-self-auto">
     								<!-- Button trigger modal -->
     								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"

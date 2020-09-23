@@ -71,7 +71,18 @@
 		$query = $this->db->get();
 		// $query =  $this->db->query('SELECT * FROM anggota_himpunan WHERE jabatan = "KETUA BIDANG" AND parent_himpunan = "'.$jurusan.'"');
 		return $query;
-	}
+  }
+  // nuy tambah
+  function tampil_statususer($jurusan){
+		$query =  $this->db->query('SELECT * FROM user WHERE kode_himp = "'.$jurusan.'"');
+		return $query;
+  }
+  
+  function tambah_statususer($parent_himpunan,$statususer){
+    return $query = $this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp=
+    '$parent_himpunan' ");
+  }
+  // end nuy 
 
 	function tampil_bidang($jurusan){
 		$query =  $this->db->query('SELECT * FROM nama_bidang WHERE parent_himpunan = "'.$jurusan.'"');

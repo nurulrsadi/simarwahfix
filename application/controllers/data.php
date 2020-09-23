@@ -28,7 +28,8 @@ class data extends CI_Controller{
 				$sess_data['username'] = $session->username;
 				$sess_data['role'] = $session->role;
 				$sess_data['kode_himp_sess'] = $session->kode_himp;
-				$sess_data['status'] = "login";
+        $sess_data['status'] = "login";
+        $sess_data['statususer']=$session->statususer;
 				$this->session->set_userdata($sess_data);
 			}
 			if($sess_data['username']){
