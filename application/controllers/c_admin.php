@@ -531,5 +531,5 @@ public function edit_data_himpunan(){
     $this->M_dana->update_danayangdiaccdetail($kd_jrsn,$x);
     redirect('c_admin/List_Pengajuan');
   }
-  
+
 }

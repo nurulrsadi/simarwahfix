@@ -104,33 +104,11 @@ class dana extends CI_Controller{
       $kd_fklts	= $this->input->post('kd_fklts',true);
       $namaKegiatan = $this->input->post('namaKegiatan',true);
       $nPengajuan = $this->input->post('nPengajuan',true);
-      $statususer = $this->input->post('statususer',true);
+      $statususer = 3;
       $danasisa = $this->input->post('danasisa',true);
       $danaawal = $this->input->post('danaawal',true);
       $tahunakademik = $this->input->post('tahunakademik',true);
-      $akhirkegiatan=date('d F Y', strtotime($this->input->post('akhirkegiatan')));
-      $data['a'] = 1;
-
-      if($data['statususer'] = 1 )
-      {
-        $statususer1 = $data['statususer']+$data['a'];
-        $statususer6 = $statususer1; 
-      } else if ($data['statususer'] =2 )
-      {
-        $statususer2 = $data['statususer']+$data['a'];
-        $statususer6 = $statususer2; 
-      } else if ($data['statususer'] = 3 )
-      {
-        $statususer3 = $data['statususer']+$data['a'];
-        $statususer6 = $statususer3; 
-      } else if ($data['statususer'] = 4 )
-      {
-        $statususer4 = $data['statususer']+$data['a'];
-        $statususer6 = $statususer4; 
-      }
-        // $status1= $data['statususer'] + $data['a'];
-        // $statususer1 =$status1;
-
+      $akhirkegiatan=date('Y-m-d', strtotime($this->input->post('akhirkegiatan')));
       $suratpengajuannya = $spj;
       $rinciankegiatannya = $rkg;
       $rkaklnya = $rkakl;
@@ -139,11 +117,11 @@ class dana extends CI_Controller{
       // $waktuupload = date('l jS \of F Y \a\t h:i:s A', timestamp);
       // $nPengajuannya = $nPengajuan6;
 
-      $datadana = $this->M_dana->update_pengajuan($kd_jrsn, $statususer6,$nPengajuan);
+      // $datadana = $this->M_dana->update_pengajuan($kd_jrsn, $statususer6,$nPengajuan);
       $datadana1=array(
         'kd_jrsn' =>$kd_jrsn, 
         'kd_fakultas'=>$kd_fklts,
-        'statususer' =>$statususer6,
+        'statususer' =>3,
         'akhirkegiatan'=>$akhirkegiatan,
         'danasisa'=>$danasisa,
         'danaawal' =>$danaawal,
@@ -156,6 +134,8 @@ class dana extends CI_Controller{
         'tahunakademik'=>$tahunakademik
       );
       // $datadana1 = $this->M_dana->insert_pengajuan($kd_jrsn,$kd_fklts,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan,$namaKegiatan,$statususer6,$akhirkegiatan,$danasisa);
+        $databerhasil=$this->M_dana->pengajuanfile($kd_jrsn,$statususer);
+        $databerhasil1=$this->M_dana->pengajuanfileuser($kd_jrsn,$statususer);
       $this->M_dana->tambah_pengajuan($datadana1);
       if($datadana1){ // Jika sukses
         redirect('c_user/Verifikasi_Data');
@@ -317,5 +297,34 @@ class dana extends CI_Controller{
       $this->M_dana->update_laporandetail($kd_jrsn, $statususer);
       $this->M_dana->update_laporanuser($kd_jrsn, $statususer);
       redirect('c_user/Verifikasi_Laporan');
+    }
+    function updatedanhapus($kd_jrsn){
+      // $kd_jrsn=$this->input->post('kd_jrsn');
+      $nPengajuan=$this->input->post('nPengajuan',true);
+      $x=$nPengajuan;
+      $y=1;
+      $newnPengajuan = $x+$y;
+      $statususer=1;
+      $this->M_dana->update_nPengajuan($statususer,$newnPengajuan,$kd_jrsn);
+      $this->M_dana->update_nPengajuanuser($statususer,$kd_jrsn);
+
+      $data=$this->M_dana->getDataByID($kd_jrsn)->row();
+      $hapusspj='./assets/uploads/suratpengajuan/'.$data->suratpengajuan;
+      $hapusrkg='./assets/uploads/rinciankegiatan/'.$data->rinciankegiatan;
+      $hapusrkakl='./assets/uploads/rkakl/'.$data->rkakl;
+      $hapustor='./assets/uploads/tor/'.$data->tor;
+      $hapuslpj='./assets/uploads/laporankegiatan/'.$data->laporankegiatan;
+      $hapusrby='./assets/uploads/laporanrincianbiaya/'.$data->laporanrincianbiaya;
+      var_dump($hapusspj,$hapusrkg,$hapustor,$hapusrkakl,$hapuslpj,$hapusrby);
+      die();
+
+
+      if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj,$hapusrkg,$hapustor,$hapusrkakl,$hapuslpj,$hapusrby)){
+        $delete=$this->M_dana->hapusFile($kd_jrsn);
+        redirect(base_url('c_admin/Laporan_Kegiatan'));
+      }
+      else{
+        echo "ulangi";
+      }
     }
 }

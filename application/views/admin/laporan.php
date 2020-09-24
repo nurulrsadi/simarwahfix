@@ -59,8 +59,8 @@
 									<?=$laporanrincianbiaya?>
 							</td>
 							<td class="text-center">
-								<button type="submit" class="d-none d-lg-inline-block btn btn-sm btn-primary shadow-lg"
-									onclick="return confirm('Anda Yakin Menerima Laporan Tersebut? ');"><i class="fa fa-check"></i>Terima
+								<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm"
+									data-toggle="modal" data-target="#modalACClaporan<?= $kd_jrsn; ?>"><i class="fa fa-check"></i>Terima
 									Laporan</button>
 							</td>
 						</tr>
@@ -71,3 +71,38 @@
 	</div>
 </div>
 <?php endforeach; ?>
+<?php 
+    foreach($lpjjrsn->result_array() as $i):
+      $kd_jrsn=$i['kd_jrsn'];
+      $nPengajuan=$i['nPengajuan'];
+      $suratpengajuan=$i['suratpengajuan'];
+      $rinciankegiatan=$i['rinciankegiatan'];
+      $rkakl=$i['rkakl'];
+      $tor=$i['tor'];
+      $laporankegiatan=$i['laporankegiatan'];
+      $laporanrincianbiaya=$i['laporanrincianbiaya'];
+      // $fakultas=$i['parent_fakultas'];
+      ?>
+<div class="modal fade" id="modalACClaporan<?= $kd_jrsn; ?>" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form method="post" action="" enctype="multipart/form-data">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Terima Laporan</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Anda yakin akan terima laporan kegiatan dari <?= $kd_jrsn; ?> ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+					<a href="<?php echo base_url('dana/updatedanhapus/'.$kd_jrsn)?>" class="btn btn-primary">Terima Laporan</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<?php endforeach;?>

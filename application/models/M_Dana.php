@@ -69,7 +69,7 @@ class M_dana extends CI_Model{
 
     //kalau udah diacc tapi belum ngirim laporan
     function tampil_list_user_laporanbelumdikirim(){
-      return $query1 = $this->db->query("SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND statususer=4 ORDER BY kd_fakultas"  );
+      return $query1 = $this->db->query("SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND statususer = 4 ORDER BY kd_fakultas"  );
 
       return $query =$this->db->query("SELECT DISTINCT DATE_FORMAT(akhirkegiatan, '%d %M %Y') AS akhirkegiatan FROM $query1 ORDER BY akhirkegiatan ASC ");
       // return $query;
@@ -159,9 +159,6 @@ class M_dana extends CI_Model{
     function edit_accpengajuan($where,$table){		
       return $this->db->get_where($table,$where);
     }
-    function getDataByID($kd_jrsn){
-      return $this->db->get_where('tb_detailuser', array('kd_jrsn'=>$kd_jrsn));
-    }
     function update_accpengajuan($kd_jrsn,$statususer6){
       var_dump($kd_jrsn,$statususer6);
       die();
@@ -186,9 +183,10 @@ class M_dana extends CI_Model{
       $this->db->update($table,$dataupdatedana);
     }
     //pengajuan diacc admin. melakukan update untuk di tabel pengajuan, detail user sama tabel user 
-    function pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6){
+    function pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c){
       // $query = "INSERT INTO users(username, password,name,surname,email,role)VALUES('$username', '$password','$name','$lastname','$email','$role')";
       // var_
+
       $query_update_pengajuannya=$this->db->query("UPDATE tb_pengajuan SET statususer='$statususer6', nPengajuan='$nPengajuan6', danasisa='$x', danaacc='$c' WHERE kd_jrsn ='$kd_jrsn' ");
       return $query_update_pengajuannya;
     }
@@ -209,7 +207,7 @@ class M_dana extends CI_Model{
       var_dump($query); die();
     }
     
-
+    
     // untuk user
     function update_pengajuan($kd_jrsn, $statususer6,$nPengajuan){
       $query_update_surat_pengajuan =$this->db->query("UPDATE tb_detailuser SET statususer='$statususer6', nPengajuan='$nPengajuan' WHERE kd_jrsn ='$kd_jrsn'");
@@ -220,10 +218,16 @@ class M_dana extends CI_Model{
       $query_insert_surat_pengajuan =$this->db->query("INSERT INTO tb_pengajuan SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan='$namaKegiatan' , statususer='$statususer6', nPengajuan='$nPengajuan', kd_fakultas='$kd_fklts', kd_jrsn ='$kd_jrsn', akhirkegiatan='$akhirkegiatan', danasisa='$danasisa' danaawal='$danaawal' ");
       return $query_insert_surat_pengajuan;
     }
-
+    // berhasil upload file untuk pengajuan
     function tambah_pengajuan($datadana1){
       $this->db->insert('tb_pengajuan',$datadana1);
       return TRUE;
+    }
+    function pengajuanfile($kd_jrsn,$statususer){
+      return $query=$this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
+    }
+    function pengajuanfileuser($kd_jrsn,$statususer){
+      return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
     }
     // upload laporan
     function update_laporan($kd_jrsn, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
@@ -232,7 +236,7 @@ class M_dana extends CI_Model{
   }
   function update_laporandetail($kd_jrsn, $statususer){
     return $query= $this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
-    }
+  }
     function update_laporanuser($kd_jrsn, $statususer){
       return $query = $this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
     }
@@ -243,4 +247,21 @@ class M_dana extends CI_Model{
       return $query;
     }
 
+    // untuk hapus satu baru tb_pengajuan
+    function getDataByID($kd_jrsn){
+      return $this->db->get_where('tb_pengajuan', array('kd_jrsn'=>$kd_jrsn));
+    }
+    // update jumlah pengajuan saat laporan diterima
+    function update_nPengajuan($statususer,$newnPengajuan,$kd_jrsn){
+      return $query=$this->db->query("UPDATE tb_detailuser set statususer='$statususer', nPengajuan='$newnPengajuan' WHERE kd_jrsn='$kd_jrsn' ");
+    }
+    function update_nPengajuanuser($statususer,$kd_jrsn){
+      return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn' ");
+    }
+    // untuk hapus semua file di tb_pengajuan
+    public function hapusFile($kd_jrsn){
+      $this->db->delete('tb_pengajuan', array('kd_jrsn' => $kd_jrsn));
+      // $this->db->where('kd_jrsn', $kd_jrsn);
+      // return $this->db->delete('tb_detailpengajuan');
+  }
 }

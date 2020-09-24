@@ -35,7 +35,7 @@
 		<article>
 			<div class="content">
 				<p class="customtext">Pagu Anggaran Keuangan yang Organisasi Anda Miliki sebesar
-					<br>Rp. <?php echo $danasisa?></br>
+					<br>Rp. <?php echo number_format($danasisa,0,',','.')?></br>
 			</div>
 		</article>
 	</div>
