@@ -106,27 +106,10 @@ class dana extends CI_Controller{
       $nPengajuan = $this->input->post('nPengajuan',true);
       $statususer = $this->input->post('statususer',true);
       $danasisa = $this->input->post('danasisa',true);
+      $danaawal = $this->input->post('danaawal',true);
       $tahunakademik = $this->input->post('tahunakademik',true);
-      $akhirkegiatan=date('Y-m-d 00:00:00', strtotime($this->input->post('akhirkegiatan')));
+      $akhirkegiatan=date('d F Y', strtotime($this->input->post('akhirkegiatan')));
       $data['a'] = 1;
-      // buat kalau udah di acc
-      // if($data['nPengajuan'] = 1 )
-      // {
-      //   $pengajuan1 = $data['nPengajuan']+$data['a'];
-      //   $nPengajuan6 = $pengajuan1; 
-      // } else if ($data['nPengajuan'] = 2 )
-      // {
-      //   $pengajuan2 = $data['nPengajuan']+$data['a'];
-      //   $nPengajuan6 = $pengajuan2; 
-      // } else if ($data['nPengajuan'] = 3 )
-      // {
-      //   $pengajuan3 = $data['nPengajuan']+$data['a'];
-      //   $nPengajuan6 = $pengajuan3; 
-      // } else if ($data['nPengajuan'] = 4 )
-      // {
-      //   $pengajuan4 = $data['nPengajuan']+$data['a'];
-      //   $nPengajuan6 = $pengajuan4; 
-      // }
 
       if($data['statususer'] = 1 )
       {
@@ -163,6 +146,7 @@ class dana extends CI_Controller{
         'statususer' =>$statususer6,
         'akhirkegiatan'=>$akhirkegiatan,
         'danasisa'=>$danasisa,
+        'danaawal' =>$danaawal,
         'nPengajuan'=>$nPengajuan,
         'namaKegiatan'=>$namaKegiatan,
         'suratpengajuan'=>$suratpengajuannya,
@@ -189,22 +173,18 @@ class dana extends CI_Controller{
         $danaminus =$this->input->post('danaminus', true);
         $pesangagal =$this->input->post('pesangagal', true);
         $nPengajuan =$this->input->post('nPengajuan', true);
-        // $suratpengajuan =$this->input->post('suratpengajuan', true);
-        // $rinciankegiatan =$this->input->post('rinciankegiatan', true);
-        // $rkakl =$this->input->post('rkakl', true);
-        // $tor =$this->input->post('tor', true);
         $statususer = $this->input->post('statususer');
-        $data['a'] = 1;
+        $uangsisaacc = $this->input->post('uangsisaacc');
+        $sup = 1;
 
         // kalau diacc
-        if($danaminus!=''){ 
-          $statususer6 = number_format($statususer+1);
-          // $statususer6 = $statususer2;
+        if($danaminus!=''){
+          $statususer6 = 4;
           $kd_jrsn = $this->input->post('kd_jrsn', true);
-          // $danabaru = $data['danasisa']+$data['danaminus'];
-          // $danaupdate = $danabaru;
-          $b=1000;
-          $x = number_format($danasisa-$danaminus); 
+          $b = $danasisa;
+          $c = $danaminus;
+          $x = $b-$c;
+
 
           // setlocale(LC_MONETARY,"de_DE");
           // $x = $data['danaminus'];
@@ -234,66 +214,108 @@ class dana extends CI_Controller{
               $nPengajuan6 = $pengajuan4;
             }
 
-            $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c);
             $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            redirect('c_admin/Cek_Pagu');
         }
         else{
-          $pesangagal =$this->input->post('pesangagal');
-          // $kurangdana = $data['danasisa'] - $data['danaminus'];
-          // $danasisanya = $kurangdana;
-          // $suratpengajuannya = './assets/uploads/suratpengajuan/'.$getdatadana->suratpengajuan;
-          // $rinciankegiatannya = '.assets/uploads/rinciankegiatan/'.$getdatadana->rinciankegiatan;
-          // $rkaklnya = '.assets/uploads/rkakl/'.$getdatadana->rkakl;
-          // $tornya = '.assets/uploads/tor/'.$getdatadana->tor;
+          redirect('c_admin/tolak_pengajuan');
+          // $statususer7 = 2;
+          // $kd_jrsn = $this->input->post('kd_jrsn', true);
+          // if($data['nPengajuan'] = 1 )
+          // {
+          //   $pengajuan1 = $data['nPengajuan'];
+          //   $nPengajuan7 = $pengajuan1; 
+          // } else if ($data['nPengajuan'] = 2 )
+          // {
+          //   $pengajuan2 = $data['nPengajuan']-$data['a'];
+          //   $nPengajuan7 = $pengajuan2; 
+          // } else if ($data['nPengajuan'] = 3 )
+          // {
+          //   $pengajuan3 = $data['nPengajuan']-$data['a'];
+          //   $nPengajuan7 = $pengajuan3; 
+          // } else {
+          //   $data['b'] = 1;
+          //   $pengajuan4 = $data['b'];
+          //   $nPengajuan7 = $pengajuan4;
+          // }
 
-        //   $suratpengajuannya = './assets/uploads/suratpengajuan/'.$u->suratpengajuan;
-        //   $rinciankegiatannya = './assets/uploads/rinciankegiatan/'.$u->rinciankegiatan;
-        //   $rkaklnya = './assets/uploads/rkakl/'.$u->rkakl;
-        //   $tornya = './assets/uploads/tor/'.$u->tor;
-        // unlink($suratpengajuannya&&$rinciankegiatannya&&$rkaklnya&&$tornya);
-
-
-
-
-
-          
-        //   $statususer2 = $data['statususer']-$data['a'];
-        //   $statususer6 = $statususer2;
-        //   if($data['nPengajuan'] = 1 )
-        //     {
-        //       $pengajuan1 = $data['nPengajuan']+$data['a'];
-        //       $nPengajuan6 = $pengajuan1; 
-        //     } else if ($data['nPengajuan'] = 2 )
-        //     {
-        //       $pengajuan2 = $data['nPengajuan']+$data['a'];
-        //       $nPengajuan6 = $pengajuan2; 
-        //     } else if ($data['nPengajuan'] = 3 )
-        //     {
-        //       $pengajuan3 = $data['nPengajuan']+$data['a'];
-        //       $nPengajuan6 = $pengajuan3; 
-        //     } else {
-        //       $data['b'] = 1;
-        //       $pengajuan4 = $data['b'];
-        //       $nPengajuan6 = $pengajuan4;
-        //     }
-        //     $dataupdatedana=array(
-        //       'statususer' => $statususer6,
-        //       'suratpengajuan' => $suratpengajuannya,
-        //       'rinciankegiatan' => $rinciankegiatannya,
-        //       'rkakl' => $rkaklnya,
-        //       'tor' =>$tornya,
-        //       'nPengajuan'=>$nPengajuan6
-        //     );
-        //     $where=array('kd_jrsn'=>$kd_jrsn);
-        //     $this->M_dana->updateacc($where,$dataupdatedana,'tb_detailuser');
-        //     redirect('c_admin/Cek_Pagu');
-          // $datadana=$this->M_dana->update_accpengajuan($kd_jrsn,$statususer6);
+          //   $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
+          //   $this->M_dana->pengajuantidakdiaccdetil($kd_jrsn,$statususer7, $danasisa,$nPengajuan7,$pesangagal);
+            
+            
+            
+            
+          //   // $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer7, $nPengajuan6);
+          //   redirect('c_admin/Cek_Pagu');
         }
-        redirect('c_admin/Cek_Pagu');
         // if()
       }
-      function admin_gagal_acc_pengajuan(){
+      function do_laporan(){
+      $this->form_validation->set_rules('laporankegiatan', 'laporanrincianbiaya', 'rkakl', 'tor', 'required');
+      $kode= date('ymd') . '-' . substr(md5(rand()), 0, 10);
 
+      // $config = array();
+      $config['upload_path'] = './assets/uploads/laporankegiatan/';//path folder
+      $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
+      $config['file_name'] = 'LPJ-'.$kode;
+      $config['max_width'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload', $config, 'lpjupload');
+      $this->lpjupload->initialize($config);
+
+      $config['upload_path'] = './assets/uploads/laporanrincianbiaya/';//path folder
+      $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
+      $config['file_name'] = 'RBY-'.$kode;
+      $config['max_width'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload',$config, 'rbyupload');
+      $this->rbyupload->initialize($config);
+
+        if(!empty($_FILES['laporankegiatan']['name']))
+        {
+            if(!$this->lpjupload->do_upload('laporankegiatan'))
+            {
+                $this->lpjupload->display_errors();
+            }  
+            else
+            {
+                $upload_data = $this->lpjupload->data();
+                $lpj = $upload_data['file_name'];
+            }
+        }
+      if(!empty($_FILES['laporanrincianbiaya']['name']))
+      {
+          if(!$this->rbyupload->do_upload('laporanrincianbiaya'))
+          {
+              $this->rbyupload->display_errors();
+          }  
+          else
+          {
+              $upload_data = $this->rbyupload->data();
+              $rby = $upload_data['file_name'];
+          }
       }
-
+      $kd_jrsn=$this->input->post('kd_jrsn', true);
+      $laporankegiatannya=$lpj;
+      $rincianbiayanya=$rby;
+      $akhirkegiatan= date("Y-m-d",strtotime($this->input->post('akhirkegiatan')));
+      $tgluploadlpj=date("Y-m-d",strtotime($this->input->post('tgluploadlpj')));
+      $tglmakslaporan= date('Y-m-d',strtotime('+7 day',strtotime($akhirkegiatan))); 
+      $statususer=5;
+      $data=array(
+        'kd_jrsn' => $kd_jrsn,
+        'statususer' => $statususer,
+        'akhirkegiatan' => $akhirkegiatan,
+        'tgluploadlpj' => $tgluploadlpj,
+        'tglmakslaporan' => $tglmakslaporan,
+        'laporankegiatan' => $laporankegiatannya,
+        'rincianbiaya' => $rincianbiayanya,
+      );
+      $this->M_dana->update_laporan($kd_jrsn, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya);
+      $this->M_dana->update_laporandetail($kd_jrsn, $statususer);
+      $this->M_dana->update_laporanuser($kd_jrsn, $statususer);
+      redirect('c_user/Verifikasi_Laporan');
+    }
 }

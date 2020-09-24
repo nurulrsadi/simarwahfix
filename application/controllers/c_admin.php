@@ -25,7 +25,6 @@ class c_admin extends CI_Controller
     }
     public function Edit_Pagu()
     {
-        
         $session = $this->session->userdata('id');
         $data = array(
             'title' => 'Edit Pagu Anggaran',
@@ -40,7 +39,22 @@ class c_admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/editpagu', $data);
         $this->load->view('templates/footeradm');
-    }
+      }
+      public function Edit_Pagu_Tingkat_Univ(){
+        $data = array(
+          'title' => 'Edit Pagu Anggaran',
+          // 'getuser'=>$this->M_dana->tampil_getuser(),
+          // 'getfakultas' =>$this->M_dana->tampil_getfakultas(),
+          'userdanauniv'=> $this->M_dana->tampil_list_user_danauniv(),
+          'fak' => $this->Model_View->tampil_list_fakultas(),
+          // $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      );
+            $this->load->view('templates/headeradm', $data);
+            $this->load->view('templates/sidebaradm', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/editpaguuniv', $data);
+            $this->load->view('templates/footeradm');
+          }
     public function Data_Pagu()
     {
         $session = $this->session->userdata('id');
@@ -67,19 +81,34 @@ class c_admin extends CI_Controller
         $this->load->view('admin/cekpagu', $data);
         $this->load->view('templates/footeradm');
     }
+    public function Cek_Pagu_Tingkat_UNIV()
+    {
+        $data=array(
+          'title' => 'Cek Pengajuan',
+          'datapengaju_univ' => $this->M_dana->tampil_list_user_pengajuan_univ(),
+          // 'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
+        );
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/cekpaguuniv', $data);
+        $this->load->view('templates/footeradm');
+    }
     public function Laporan_Kegiatan()
     {
          
         $data['title'] = 'Cek Laporan Kegiatan';
+        $data['lpjjrsn'] = $this->M_dana->tampil_list_lpjjrsn();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/laporan', $data);
         $this->load->view('templates/footeradm');
     }
+
     public function List_Pengajuan(){
       $data['title'] = 'List Pengajuan Berhasil';
-      $data['datapengaju'] = $this->M_dana->tampil_list_user_pengaju();
+      $data['datauserbelum'] = $this->M_dana->tampil_list_user_laporanbelumdikirim();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -203,32 +232,7 @@ class c_admin extends CI_Controller
       $this->load->view('admin/cekdatapagu', $data);
       $this->load->view('templates/footeradm');
     }
-    //     function Tidak_ACC($kd_jrsn){
-    //       $where = array('kd_jrsn' => $kd_jrsn);
-    //     $data['dataacc'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
-    //     // $this->load->view('v_edit',$data);
-    //     $data['title'] = 'Cek Data';
-    //     $this->load->view('templates/headeradm', $data);
-    //     $this->load->view('templates/sidebaradm', $data);
-    //     $this->load->view('templates/topbar', $data);
-    //     $this->load->view('admin/tidakacc', $data);
-    //     $this->load->view('templates/footeradm');
-    // }
-    // public function Cek_Data_Pengajuan($kd_jrsn){
-    
 
-    // private function _fakultas()
-    // {
-    //     return $this->db->get('tb_fakultas')->result();
-    // }
-    // private function _role()
-    // {
-    //     return $this->db->get('tb_role')->result();
-    // }
-    // public function _jumlah_surat()
-    // {
-    //     return $this->db->count_all('tb_surat');
-    // }
     public function update_dana_awal(){
         $kd_jrsn = $this->input->post('kd_jrsn');
         $tahunakademik = $this->input->post('tahunakademik',true);
@@ -240,10 +244,19 @@ class c_admin extends CI_Controller
       $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
       $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
       redirect('c_admin/Edit_Pagu');
-      // $tahunakademik = $this->input->post('tahunakademik');
-      // $dana_awal=$this->input->post('tahunakademik');
-      // $statususer=$this->input->post('statususer');
     }
+    public function update_dana_awal_univ(){
+      $kd_jrsn = $this->input->post('kd_jrsn');
+      $tahunakademik = $this->input->post('tahunakademik',true);
+      $danaawal = $this->input->post('danaawal', true);
+      $nPengajuan = 1;
+      $statususer = 1;
+      $danasisa = $this->input->post('danaawal', true);
+
+    $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
+    $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
+    redirect('c_admin/Edit_Pagu_Tingkat_Univ');
+  }
     
     // function edit_data_pengajuan($id_user){
 		// 	$where = array('id_user' => $id_user);
@@ -477,4 +490,46 @@ public function edit_data_himpunan(){
       $this->Model_View->edit_user_himpunan($id_user,$nama,$email,$username,md5($password));
       redirect('c_admin/data_user_himpunan');
   }
+  // 
+  public function tolak_pengajuan(){
+    $kd_jrsn=$this->input->post('kd_jrsn');
+    $pesangagal=$this->input->post('pesangagal');
+    $statususer7=2;
+    $nPengajuan=$this->input->post('nPengajuan');
+    $danasisa =$this->input->post('danasisa', true);
+    if($data['nPengajuan'] = 1 )
+    {
+      $pengajuan1 = $data['nPengajuan'];
+      $nPengajuan7 = $pengajuan1; 
+    } else if ($data['nPengajuan'] = 2 )
+    {
+      $pengajuan2 = $data['nPengajuan']-$data['a'];
+      $nPengajuan7 = $pengajuan2; 
+    } else if ($data['nPengajuan'] = 3 )
+    {
+      $pengajuan3 = $data['nPengajuan']-$data['a'];
+      $nPengajuan7 = $pengajuan3; 
+    } else {
+      $data['b'] = 1;
+      $pengajuan4 = $data['b'];
+      $nPengajuan7 = $pengajuan4;
+    }
+    $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
+    $this->M_dana->pengajuantidakdiaccdetil($kd_jrsn,$statususer7, $danasisa,$nPengajuan7,$pesangagal);
+    redirect('c_admin/Cek_Pagu');
+  }
+
+  function update_danaacc(){
+    $kd_jrsn=$this->input->post('kd_jrsn');
+    $danaawal=$this->input->post('danaawal');
+    $danasisa=$this->input->post('danasisa');
+    $a=$danaawal;
+    $b=$danasisa;
+    $x=$a-$b;
+    $danaacc=$b;
+    $this->M_dana->update_danayangdiacc($kd_jrsn,$x,$danaacc);
+    $this->M_dana->update_danayangdiaccdetail($kd_jrsn,$x);
+    redirect('c_admin/List_Pengajuan');
+  }
+  
 }

@@ -18,12 +18,13 @@
 					<thead>
 						<tr>
 						<tr>
-							<th>Id</th>
+							<th>No</th>
 							<th>Nama Fakultas</th>
 							<th>Nama Ormawa</th>
 							<th>Sisa Anggaran Pagu</th>
-							<th>Pengajuan ke- </th>
-							<th>keterangan</th>
+							<th>Tanggal Akhir Acara</th>
+							<th>Pengajuan ke</th>
+							<th>Keterangan</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -31,28 +32,32 @@
 						<tr>
 							<?php $j=1; ?>
 							<?php 
-                  foreach($datapengaju->result_array() as $i):
+                  foreach($datauserbelum->result_array() as $i):
                     $kd_jrsn=$i['kd_jrsn'];
-                    // $nama_fakultas=$i['nama_fakultas'];
+                    $nama_fakultas=$i['nama_fakultas'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
+                    $danaacc=$i['danaacc'];
                     $nPengajuan=$i['nPengajuan'];
-                    // $fakultas=$i['parent_fakultas'];
+                    $akhirkegiatan=$i['akhirkegiatan'];
                     ?>
+
 							<td><?= $j++; ?></td>
-							<td><?= $danaawal; ?></td>
+							<td><?= $nama_fakultas; ?></td>
 							<td><?= $kd_jrsn; ?></td>
-							<td><?= $danaawal; ?></td>
+							<td>Rp. <?=  number_format($danasisa,0,',','.'); ?></td>
+							<td><?= date("D M Y",strtotime($akhirkegiatan)); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
 							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>
-								<span class="btn btn-sm btn-danger">Belum disetujui</span>
+								<span class="btn btn-sm btn-danger">Laporan Belum Dikirim</span>
 							</td>
 							<td class="text-center">
-								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan/'.$kd_jrsn)?>"
-									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search"></i> Cek
-									File</a>
+								<center>
+									<button class="btn btn-primary" data-toggle="modal"
+										data-target="#modaleditDanaAcc<?php echo $kd_jrsn;?>"><i class="fas fa-search"></i> Edit</button>
+								</center>
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->
 							</td>
 						</tr>
@@ -63,3 +68,69 @@
 		</div>
 	</div>
 </div>
+<?php 
+    foreach($datauserbelum->result_array() as $i):
+      $kd_jrsn=$i['kd_jrsn'];
+      $nama_fakultas=$i['nama_fakultas'];
+      $tahunakademik=$i['tahunakademik'];
+      $danaawal=$i['danaawal'];
+      $danasisa=$i['danasisa'];
+      $danaacc=$i['danaacc'];
+      $nPengajuan=$i['nPengajuan'];
+      $akhirkegiatan=$i['akhirkegiatan'];
+      ?>
+<div class="modal fade" id="modaleditDanaAcc<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h6 class="modal-title" id="exampleModalLabel">Update Dana ACC Pagu Anggaran</h6>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" action="<?php echo base_url().'c_admin/update_danaacc'?>" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Tahun Akademik</t></label>
+						</t><input type="text" name="tahunakademik" class="form-control" value="<?php echo $tahunakademik;?>"
+							required readonly>
+					</div>
+					<div class="form-group ">
+						<label>Nama Himpunan</t></label>
+						</t><input type="text" name="kd_jrsn" class="form-control" value="<?php echo $kd_jrsn;?>" required readonly>
+					</div>
+					<div class="form-group ">
+						<label>
+							Nama Fakultas</t></label>
+						</t><input type="text" name="nama_fakultas" class="form-control" value="<?php echo $nama_fakultas;?>"
+							readonly>
+					</div>
+					<div class="form-group ">
+						<label>Dana Sisa</t></label>
+						</t><input type="text" name="danaawal" class="form-control"
+							value="Rp <?php echo number_format($danaawal,0,',','.');?>" readonly>
+						<input type="hidden" name="danaawal" value="<?= $danaawal?>">
+					</div>
+					<div class="form-group ">
+						<label>Dana yang di ACC sebelumnya</t></label>
+						</t><input type="text" name="danaacc" class="form-control"
+							value="Rp <?php echo number_format($danaacc,0,',','.');?>" readonly>
+						<input type="hidden" name="danaacc" value="<?= $danaacc?>">
+					</div>
+					<div class="form-group ">
+						<label>Update Dana yang di ACC <small class="text-decoration" style="color:red">contoh : 2000000</small>
+							</t>
+						</label>
+						</t><input type="number" name="danasisa" min="1" value="" class="form-control" required>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>

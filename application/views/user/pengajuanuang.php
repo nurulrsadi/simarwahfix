@@ -10,15 +10,15 @@
 		<!-- <h1>Pagu Keuangan</h1> -->
 	</header>
 	<?php
-                    foreach($dana->result_array() as $i):
-                        $kd_jrsn=$i['kd_jrsn'];
-                        $kd_fklts=$i['kd_fklts'];
-                        $danaawal=$i['danaawal'];
-                        $danasisa=$i['danasisa'];
-                        $nPengajuan=$i['nPengajuan'];
-                        $statususer=$i['statususer'];
-                        $tahunakademik=$i['tahunakademik'];
-                        $jurusan=$i['jurusan'];
+      foreach($dana->result_array() as $i):
+          $kd_jrsn=$i['kd_jrsn'];
+          $kd_fklts=$i['kd_fklts'];
+          $danaawal=$i['danaawal'];
+          $danasisa=$i['danasisa'];
+          $nPengajuan=$i['nPengajuan'];
+          $statususer=$i['statususer'];
+          $tahunakademik=$i['tahunakademik'];
+          $jurusan=$i['jurusan'];
   ?>
 
 	<div class="features">
@@ -49,6 +49,7 @@
 	<input type="hidden" name="statususer" value="<?= $statususer?>">
 	<input type="hidden" name="kd_fklts" value="<?= $kd_fklts?>">
 	<input type="hidden" name="danasisa" value="<?= $danasisa?>">
+	<input type="hidden" name="danaawal" value="<?= $danaawal?>">
 	<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 	<input type="hidden" name="jurusan" value="<?= $jurusan?>">
 
@@ -143,7 +144,7 @@
 		</div>
 		<div class="col-2 col-12-medium">
 			<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
-			<p><button type="submit" class="btn btn-success">Kirim</button></p>
+			<p><button type="submit" class="btn-succes">Kirim</button></p>
 			<!-- </a> -->
 		</div>
 	</div>

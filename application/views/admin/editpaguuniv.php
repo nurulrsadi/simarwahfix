@@ -4,8 +4,6 @@
     	<!-- Page Heading -->
     	<div class="d-sm-flex align-items-center justify-content-between mb-4">
     		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-    		<a href="<?= base_url().'c_admin/Edit_Pagu_Tingkat_Univ';?>"
-    			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Edit Dana DEMAU SEMAU</a>
     	</div>
 
     	<!-- DataTales Example -->
@@ -19,7 +17,6 @@
     					<thead>
     						<tr>
     							<th>No</th>
-    							<th>Nama Fakultas</th>
     							<th>Nama Ormawa</th>
     							<th>Tahun Akademik</th>
     							<th>Pegu Anggaran</th>
@@ -29,9 +26,8 @@
     					</thead>
     					<?php $j=1; ?>
     					<?php 
-                  foreach($userdana->result_array() as $i):
+                  foreach($userdanauniv->result_array() as $i):
                     $kd_jrsn=$i['kd_jrsn'];
-                    $nama_fakultas=$i['nama_fakultas'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
@@ -42,7 +38,6 @@
     						<tr>
     							<td><?=$j++;?></td>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $nama_fakultas ?></td>
     							<td><?php echo $kd_jrsn ?></td>
     							<td><?php echo $tahunakademik ?></td>
     							<td>Rp. <?php echo number_format($danaawal,0,',','.') ?></td>
@@ -66,9 +61,8 @@
     <!-- Modal Tambah Fakultas -->
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->
-    <?php foreach($userdana->result_array() as $i):
+    <?php foreach($userdanauniv->result_array() as $i):
           $kd_jrsn=$i['kd_jrsn'];
-          $nama_fakultas=$i['nama_fakultas'];
           $tahunakademik=$i['tahunakademik'];
           $danaawal=$i['danaawal'];
           $danasisa=$i['danasisa'];
@@ -85,7 +79,7 @@
     				</button>
     			</div>
     			<div class="modal-body">
-    				<form method="post" action="<?php echo base_url().'c_admin/update_dana_awal'?>"
+    				<form method="post" action="<?php echo base_url().'c_admin/update_dana_awal_univ'?>"
     					enctype="multipart/form-data">
     					<div class="form-group">
     						<label>Tahun Akademik</t></label>
@@ -95,12 +89,6 @@
     					<div class="form-group ">
     						<label>Nama Himpunan</t></label>
     						</t><input type="text" name="kd_jrsn" class="form-control" value="<?php echo $kd_jrsn;?>" required
-    							readonly>
-    					</div>
-    					<div class="form-group ">
-    						<label>
-    							Nama Fakultas</t></label>
-    						</t><input type="text" name="nama_fakultas" class="form-control" value="<?php echo $nama_fakultas;?>"
     							readonly>
     					</div>
     					<div class="form-group ">

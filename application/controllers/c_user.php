@@ -72,9 +72,7 @@ public function index()
             $this->load->view('templates/header', $data);
             $this->load->view('user/pengajuanuang', $data);
             $this->load->view('templates/sidebaruser', $data);
-            $this->load->view('templates/footer', $data);
-
-                     
+            $this->load->view('templates/footer', $data); 
           
         }
     }
@@ -105,6 +103,55 @@ public function index()
         $this->load->view('templates/footer');
     }
   }
+  public function Laporan_Kegiatan(){
+    if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      if($cek -> num_rows() == 1){
+      $sess_data['data_himpunan'] = "true";
+      $this->session->set_userdata($sess_data);
+      }else{
+      $sess_data['data_himpunan'] = "false";
+      $this->session->set_userdata($sess_data);
+      }
+  
+      $ceksess = $this->session->userdata('data_himpunan');
+      $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+      $data['title'] = 'Laporan Kegiatan';
+      $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
+      $this->load->view('templates/header',$data);
+      $this->load->view('user/laporankegiatan',$data);
+      $this->load->view('templates/sidebaruser',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+  public function Verifikasi_Laporan(){
+    if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      if($cek -> num_rows() == 1){
+      $sess_data['data_himpunan'] = "true";
+      $this->session->set_userdata($sess_data);
+      }else{
+      $sess_data['data_himpunan'] = "false";
+      $this->session->set_userdata($sess_data);
+      }
+  
+      $ceksess = $this->session->userdata('data_himpunan');
+      $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+      $data['title'] = 'Verifikasi Laporan Kegiatan';
+      $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
+      $this->load->view('templates/header',$data);
+      $this->load->view('user/diceklaporandulu',$data);
+      $this->load->view('templates/sidebaruser',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+  
     public function Pinjam_Aula()
     {if($this->session->userdata('status') != "login"){
       redirect(base_url("c_home/login"));
@@ -127,28 +174,6 @@ public function index()
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/pinjamaula');
-        $this->load->view('templates/sidebaruser',$data);
-        $this->load->view('templates/footer');
-      }
-    }
-    public function Laporan_Kegiatan(){
-      if($this->session->userdata('status') != "login"){
-        redirect(base_url("c_home/login"));
-        }else{
-        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-        $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-        if($cek -> num_rows() == 1){
-        $sess_data['data_himpunan'] = "true";
-        $this->session->set_userdata($sess_data);
-        }else{
-        $sess_data['data_himpunan'] = "false";
-        $this->session->set_userdata($sess_data);
-        }
-    
-        $ceksess = $this->session->userdata('data_himpunan');
-        $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
-      $this->load->view('templates/header');
-        $this->load->view('user/laporankegiatan');
         $this->load->view('templates/sidebaruser',$data);
         $this->load->view('templates/footer');
       }
