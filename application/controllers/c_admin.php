@@ -7,6 +7,7 @@ class c_admin extends CI_Controller
         parent::__construct();	
         $this->load->model('Model_View');
         $this->load->model('M_data');
+        // $this->load->model('M_data');
         if($this->session->userdata('status') != "login"){
           redirect(base_url("c_home/login"));
           
@@ -115,6 +116,15 @@ class c_admin extends CI_Controller
         $this->load->view('admin/pengajuanberhasil', $data);
         $this->load->view('templates/footeradm');
     }
+    public function List_Pengajuan_Tingkat_UNIV(){
+      $data['title'] = 'List Pengajuan Berhasil';
+      $data['datauserbelumuniv'] = $this->M_dana->tampil_list_user_laporanbelumdikirimuniv();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/pengajuanberhasiluniv', $data);
+        $this->load->view('templates/footeradm');
+    }
     // function Cek_Data_Pengajuan/Tidak_ACC(){
 
     // }
@@ -184,6 +194,7 @@ class c_admin extends CI_Controller
     public function Keluhan()
     {
         $data['title'] = 'Keluhan';
+        $data['userkeluhan']=$this->M_ormawa->tampil_keluhan();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);

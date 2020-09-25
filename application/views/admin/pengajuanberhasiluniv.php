@@ -5,8 +5,6 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-		<a href="<?= base_url().'c_admin/List_Pengajuan_Tingkat_UNIV';?>"
-			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Cek Pengajuan Dana DEMAU SEMAU</a>
 	</div>
 
 	<!-- DataTales Example -->
@@ -21,7 +19,6 @@
 						<tr>
 						<tr>
 							<th>No</th>
-							<th>Nama Fakultas</th>
 							<th>Nama Ormawa</th>
 							<th>Sisa Anggaran Pagu</th>
 							<th>Tanggal Akhir Acara</th>
@@ -34,9 +31,8 @@
 						<tr>
 							<?php $j=1; ?>
 							<?php 
-                  foreach($datauserbelum->result_array() as $i):
+                  foreach($datauserbelumuniv->result_array() as $i):
                     $kd_jrsn=$i['kd_jrsn'];
-                    $nama_fakultas=$i['nama_fakultas'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
@@ -46,7 +42,6 @@
                     ?>
 
 							<td><?= $j++; ?></td>
-							<td><?= $nama_fakultas; ?></td>
 							<td><?= $kd_jrsn; ?></td>
 							<td>Rp. <?=  number_format($danasisa,0,',','.'); ?></td>
 							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
@@ -71,7 +66,7 @@
 	</div>
 </div>
 <?php 
-    foreach($datauserbelum->result_array() as $i):
+    foreach($datauserbelumuniv->result_array() as $i):
       $kd_jrsn=$i['kd_jrsn'];
       $nama_fakultas=$i['nama_fakultas'];
       $tahunakademik=$i['tahunakademik'];

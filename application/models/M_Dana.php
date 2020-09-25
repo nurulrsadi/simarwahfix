@@ -70,9 +70,11 @@ class M_dana extends CI_Model{
     //kalau udah diacc tapi belum ngirim laporan
     function tampil_list_user_laporanbelumdikirim(){
       return $query1 = $this->db->query("SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND statususer = 4 ORDER BY kd_fakultas"  );
-
       return $query =$this->db->query("SELECT DISTINCT DATE_FORMAT(akhirkegiatan, '%d %M %Y') AS akhirkegiatan FROM $query1 ORDER BY akhirkegiatan ASC ");
       // return $query;
+    }
+    function tampil_list_user_laporanbelumdikirimuniv(){
+      return $query=$this->db->query("SELECT * FROM tb_pengajuan WHERE statususer=4 AND kd_fakultas is null ORDER BY kd_jrsn");
     }
 
     function update_danayangdiacc($kd_jrsn,$x,$danaacc){
@@ -160,8 +162,6 @@ class M_dana extends CI_Model{
       return $this->db->get_where($table,$where);
     }
     function update_accpengajuan($kd_jrsn,$statususer6){
-      var_dump($kd_jrsn,$statususer6);
-      die();
       $query_accpengajuan=$this->db->query("UPDATE tb_detailuser SET statususer='$statususer6' WHERE kd_jrsn='$kd_jrsn");
       return $query_accpengajuan;
     }
@@ -177,8 +177,6 @@ class M_dana extends CI_Model{
       $this->db->update($table,$dataupdatedana);
   }
     function updateacc($where,$dataupdatedana,$table){
-      var_dump($dataupdatedana);
-      die();
       $this->db->where($where);
       $this->db->update($table,$dataupdatedana);
     }
@@ -204,7 +202,6 @@ class M_dana extends CI_Model{
     }
     function pengajuantidakdiaccdetil($kd_jrsn, $statususer7, $danasisa, $nPengajuan7,$pesangagal){
       return $query=$this->db->query("UPDATE tb_detailuser SET statususer='$statususer7', nPengajuan='$nPengajuan7', pesangagal='$pesangagal', danasisa='$danasisa' WHERE kd_jrsn ='$kd_jrsn' ");
-      var_dump($query); die();
     }
     
     

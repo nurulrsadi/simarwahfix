@@ -11,31 +11,49 @@
   		<hr />
 
   		<div class="box-body">
-
-  			<div class="form-group">
-  				<label for="name" class="col-sm-2 col-form-label">Username</label>
-  				<div class="col-sm-10">
-  					<input type="text" name="username" class="form-control" value="himatif">
+  			<?php
+      foreach($ormawa->result_array() as $i):
+          $kd_jrsn=$i['kd_jrsn'];
+          $kd_fklts=$i['kd_fklts'];
+  ?>
+  			<form class="form-horizontal" action="<?php echo base_url().'ormawa/do_keluhan';?>"
+  				enctype="multipart/form-data" method="post">
+  				<input type="hidden" name="tanggal" value="<?= date('Y-m-d');?>">
+  				<input type="hidden" name="kd_fklts" value="<?= $kd_fklts;?>">
+  				<div class="form-group">
+  					<label for="namaormawa" class="col-sm-2 col-form-label">Nama ORMAWA</label>
+  					<div class="col-sm-10">
+  						<input type="text" id="namaormawa" name="kd_jrsn" class="form-control" value="<?= $kd_jrsn; ?>" readonly>
+  					</div>
   				</div>
-  			</div>
-  			<br>
-  			<div class="form-group">
-  				<label for="name" class="col-sm-2 col-form-label">Nama</label>
-  				<div class="col-sm-10">
-  					<input type="text" name="nama" class="form-control" value="Himpunan Mahasiswa Teknik Informatika">
+  				<div class=" form-group">
+  					<label for="isikeluhan" class="col-sm-2 col-form-label">Isi Keluhan</label>
+  					<div class="col-sm-10">
+  						<input type="text" name="isikeluhan" id="isikeluhan" class="form-control" required>
+  					</div>
   				</div>
-  			</div>
-  			<br>
-  			<div class=" form-group">
-  				<label for="name" class="col-sm-2 col-form-label">Isi Keluhan</label>
-  				<div class="col-sm-10">
-  					<input type="text" name="keluhan" class="form-control">
-  				</div>
-  			</div>
-  			<br>
-  			<p><button type="button" class="btn btn-primary" ">Kirim</button></p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+  				<br>
+  				<div class="row gtr-200">
+  					<div class="col-2 col-12-medium">
+  					</div>
+  					<div class="col-2 col-12-medium">
+  					</div>
+  					<div class="col-2 col-12-medium">
+  					</div>
+  					<div class="col-2 col-12-medium">
+  					</div>
+  					<div class="col-2 col-12-medium">
+  					</div>
+  					<div class="col-2 col-12-medium">
+  						<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
+  						<p><button type="submit" class="btn-succes">Kirim</button></p>
+  						<!-- </a> -->
+  					</div>
+  					<!-- <p>< button type="submit" class="btn btn-succes" ">Kirim</button></p> -->
+  			</form>
+  		</div>
+  	</div>
+  </section>
+  </div>
+  </div>
+  <?php endforeach;?>

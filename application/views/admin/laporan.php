@@ -1,10 +1,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-		<h8 data-toggle="tooltip" data-placement="top" title="Hari ini"><?= date('d F Y');?> </h8>
+		<a href="<?= base_url().'c_admin/Cek_Pagu_Tingkat_Univ';?>"
+			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Cek Pengajuan Dana DEMAU SEMAU</a>
 	</div>
 
 	<!-- DataTales Example -->
@@ -17,6 +19,7 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
+						<tr>
 							<th>No</th>
 							<th>Nama Fakultas</th>
 							<th>Nama Ormawa</th>
@@ -28,23 +31,22 @@
 							<th>Aksi</th>
 						</tr>
 					</thead>
-					<?php $j=1; ?>
-					<?php 
-                  foreach($lpjjrsn->result_array() as $i):
-                    $kd_jrsn=$i['kd_jrsn'];
-                    $nama_fakultas=$i['nama_fakultas'];
-                    $tahunakademik=$i['tahunakademik'];
-                    $danaawal=$i['danaawal'];
-                    $danasisa=$i['danasisa'];
-                    $nPengajuan=$i['nPengajuan'];
-                    $akhirkegiatan=$i['akhirkegiatan'];
-                    $tglmakslaporan=$i['tglmakslaporan'];
-                    $laporankegiatan=$i['laporankegiatan'];
-                    $laporanrincianbiaya=$i['laporanrincianbiaya'];
-                    // $fakultas=$i['parent_fakultas'];
-                    ?>
 					<tbody>
 						<tr>
+							<?php $j=1; ?>
+							<?php 
+            foreach($lpjjrsn->result_array() as $i):
+              $kd_jrsn=$i['kd_jrsn'];
+              $nama_fakultas=$i['nama_fakultas'];
+              $tahunakademik=$i['tahunakademik'];
+              $danaawal=$i['danaawal'];
+              $danasisa=$i['danasisa'];
+              $nPengajuan=$i['nPengajuan'];
+              $akhirkegiatan=$i['akhirkegiatan'];
+              $tglmakslaporan=$i['tglmakslaporan'];
+              $laporankegiatan=$i['laporankegiatan'];
+              $laporanrincianbiaya=$i['laporanrincianbiaya'];
+              ?>
 							<td><?= $j++; ?></td>
 							<td><?= $nama_fakultas; ?></td>
 							<td><?= $kd_jrsn; ?></td>
@@ -65,12 +67,12 @@
 							</td>
 						</tr>
 					</tbody>
+					<?php endforeach; ?>
 				</table>
 			</div>
 		</div>
 	</div>
 </div>
-<?php endforeach; ?>
 <?php 
     foreach($lpjjrsn->result_array() as $i):
       $kd_jrsn=$i['kd_jrsn'];

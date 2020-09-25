@@ -7,6 +7,7 @@ function __construct(){
     parent::__construct();
     $this->load->model('M_data');
     $this->load->model('Model_View');
+    $this->load->model('M_ormawa');
     if($this->session->userdata('status') != "login"){
         redirect(base_url("c_home/login"));
     }
@@ -222,7 +223,7 @@ public function index()
       $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Keluhan',
-            'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(),
+            'ormawa' => $this->M_ormawa->tampil_data_ormawa_login($kode_himp_sess),
             'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess), 
         );
         $data['title'] = 'Keluhan';

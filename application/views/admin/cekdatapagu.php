@@ -168,8 +168,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							placeholder="Data kurang lengkap, silahkan perbaiki dahulu!" required>
 					</div>
 					<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Update changes</button>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Update changes</button>
+					</div>
 				</form>
 			</div>
 		</div>

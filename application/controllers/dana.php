@@ -304,7 +304,7 @@ class dana extends CI_Controller{
       $x=$nPengajuan;
       $y=1;
       $newnPengajuan = $x+$y;
-      $statususer=1;
+      $statususer=2;
       $this->M_dana->update_nPengajuan($statususer,$newnPengajuan,$kd_jrsn);
       $this->M_dana->update_nPengajuanuser($statususer,$kd_jrsn);
 
@@ -315,11 +315,9 @@ class dana extends CI_Controller{
       $hapustor='./assets/uploads/tor/'.$data->tor;
       $hapuslpj='./assets/uploads/laporankegiatan/'.$data->laporankegiatan;
       $hapusrby='./assets/uploads/laporanrincianbiaya/'.$data->laporanrincianbiaya;
-      var_dump($hapusspj,$hapusrkg,$hapustor,$hapusrkakl,$hapuslpj,$hapusrby);
-      die();
 
 
-      if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj,$hapusrkg,$hapustor,$hapusrkakl,$hapuslpj,$hapusrby)){
+      if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&($hapusrkakl)&&($hapuslpj)&&($hapusrby)){
         $delete=$this->M_dana->hapusFile($kd_jrsn);
         redirect(base_url('c_admin/Laporan_Kegiatan'));
       }
