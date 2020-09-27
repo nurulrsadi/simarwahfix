@@ -193,10 +193,11 @@ class dana extends CI_Controller{
               $pengajuan4 = $data['b'];
               $nPengajuan6 = $pengajuan4;
             }
-
+            
             $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c);
             $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
             $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            $this->session->set_flashdata('flashpengajuan','Pengajuan Ormawa telah diterima');
             redirect('c_admin/Cek_Pagu');
         }
         else{

@@ -87,24 +87,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="form-group row">
 						<label for="rinciankegiatan" class="col-sm-2 col-form-label">Rincian Kegiatan</label>
 						<div class="col-sm-10">
-							<a href="<?=site_url().'assets/uploads/rinciankegiatan/'.$rinciankegiatan;'.pdf' ?>" target=_blank
-								name="rinciankegiatan" id="rinciankegiatan">
-								<?=$rinciankegiatan?> </a>
+							<a href="<?=site_url().'assets/uploads/rinciankegiatan/'.$rinciankegiatan;'.pdf' ?>"
+								onclick="basicPopup(this.href); return false"><?=$rinciankegiatan?> </a>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="rkakl" class="col-sm-2 col-form-label">Surat RKA-KL</label>
 						<div class="col-sm-10">
-							<a href="<?=base_url().'assets/uploads/rkakl/'.$rkakl;'.pdf' ?>" target=_blank name="rkakl">
-								<?=$rkakl?> </a>
+							<a href="<?=site_url().'assets/uploads/rkakl/'.$rkakl;'.pdf' ?>"
+								onclick="basicPopup(this.href); return false"><?=$rkakl?> </a>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="tor" class="col-sm-2 col-form-label">Surat RKA-KL</label>
+						<label for="tor" class="col-sm-2 col-form-label">Surat TOR</label>
 						<div class="col-sm-10">
-
-							<a href="<?=site_url().'assets/uploads/tor/'.$tor; '.pdf'?>" target=_blank>
-								<?=$tor?> </a>
+							<a href="<?=site_url().'assets/uploads/tor/'.$tor;'.pdf' ?>"
+								onclick="basicPopup(this.href); return false"><?=$tor?> </a>
+							<!-- <embed src="<?=base_url().'assets/uploads/tor/'.$tor; ?>" type="application/pdf" width="100%"
+								height="700px">
+							<?=$tor?> </embed> -->
 						</div>
 					</div>
 					<div class="form-group row">
@@ -130,8 +131,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<button type=button class="d-none d-lg-inline-block btn btn-sm btn-danger shadow-lg" data-toggle="modal"
 						data-target="#modalalasan<?php echo $kd_jrsn;?>">
 						Tidak Acc</button>
-					<button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
-						onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</button>
+					<button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm tombol-yakin">
+						<i class="fa fa-check"></i> Setuju</button>
 				</div>
 	</div>
 	</form>

@@ -15,6 +15,9 @@
 			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
 		</div>
 		<div class="card-body">
+			<div class="flash-data-pengajuan" data-flashdata="<?= $this->session->flashdata('flashpengajuan');  ?>"></div>
+			<?php if($this->session->flashdata('flashpengajuan')): ?>
+			<?php endif; ?>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>

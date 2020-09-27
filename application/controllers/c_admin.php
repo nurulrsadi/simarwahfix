@@ -254,6 +254,7 @@ class c_admin extends CI_Controller
 
       $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
       $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
+      $this->session->set_flashdata('flashdana', 'Dana Ormawa berhasil diupdate');
       redirect('c_admin/Edit_Pagu');
     }
     public function update_dana_awal_univ(){
@@ -540,6 +541,7 @@ public function edit_data_himpunan(){
     $danaacc=$b;
     $this->M_dana->update_danayangdiacc($kd_jrsn,$x,$danaacc);
     $this->M_dana->update_danayangdiaccdetail($kd_jrsn,$x);
+    $this->session->set_flashdata('flashdana','Dana ACC Ormawa telah diperbaharui');
     redirect('c_admin/List_Pengajuan');
   }
 
