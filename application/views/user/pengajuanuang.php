@@ -42,8 +42,11 @@
 
 	<!-- SYARAT CAIR UANG -->
 	<h2>Pengajuan Uang Untuk Kegiatan</h2>
-	<p>Silahkan melengkapi data dibawah ini untuk dapat melakukan pengajuan pencairan dana. Anda dapat melakukan pengajuan
-		sebanyak 3 (tiga) kali</p>
+	<p>
+		<h4>Silahkan melengkapi data dibawah ini untuk dapat melakukan pengajuan pencairan dana. Anda dapat melakukan
+			pengajuan
+			sebanyak 3 (tiga) kali</h4>
+	</p><br>
 	<input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>">
 	<!-- <input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>" /> -->
 	<input type="hidden" name="statususer" value="<?= $statususer?>">
@@ -53,19 +56,26 @@
 	<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 	<input type="hidden" name="jurusan" value="<?= $jurusan?>">
 
-	<div class="row ">
-		<div class="col-2 col-12-small">
-			<label for="nPengajuan">Pengajuan ke</label><br>
-			<label for="namaKegiatan">Nama Kegiatan</label><br>
-			<label for="akhirkegiatan">Akhir Tanggal Kegiatan</label>
-		</div>
-		<br>
-		<div class="col-4 col-12-xsmall">
-			<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly /><br>
-			<input type="text" name="namaKegiatan" id="namaKegiatan" placeholder=" contoh : PBAK, AUDIENSI" required /> <br>
-			<input type="date" name="akhirkegiatan" id="akhirkegiatan" required /> <br>
+
+	<div class="form-group row">
+		<label for="nPengajuan" class="col-sm-2 col-form-label">Pengajuan ke</label>
+		<div class="col-sm-3">
+			<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly />
 		</div>
 	</div>
+	<div class="form-group row">
+		<label for="namaKegiatan" class="col-sm-2 col-form-label">Nama Kegiatan</label>
+		<div class="col-sm-3">
+			<input type="text" name="namaKegiatan" id="namaKegiatan" placeholder=" contoh : PBAK, AUDIENSI" required />
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="akhirkegiatan" class="col-sm-2 col-form-label">Akhir Tanggal Kegiatan</label>
+		<div class="col-sm-3">
+			<input type="date" name="akhirkegiatan" id="akhirkegiatan" required />
+		</div>
+	</div>
+
 	<!-- tabel -->
 	<table class="content-table">
 		<thead>

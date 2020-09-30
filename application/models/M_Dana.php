@@ -37,9 +37,9 @@ class M_dana extends CI_Model{
   	 return $query_update_himpunan;
     }
     // untuk tabel nama fakultas
-    function edit_namafakultas($kode_fakultas, $nama_fakultas){
-      return $query_update_fakultas = $this->db->query("UPDATE tb_namafakultas SET nama_fakultas = '$nama_fakultas' WHERE kode_namafakultas = '$kode_fakultas'");
-    }
+    // function edit_namafakultas($kode_fakultas, $nama_fakultas){
+    //   return $query_update_fakultas = $this->db->query("UPDATE tb_namafakultas SET nama_fakultas = '$nama_fakultas' WHERE kode_namafakultas = '$kode_fakultas'");
+    // }
     function delete_namafakultas($kode_himpunan){
       $this->db->delete('fakultas', array('kode_fakultas' => $kode_fakultas));
     }

@@ -131,8 +131,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<button type=button class="d-none d-lg-inline-block btn btn-sm btn-danger shadow-lg" data-toggle="modal"
 						data-target="#modalalasan<?php echo $kd_jrsn;?>">
 						Tidak Acc</button>
-					<button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm tombol-yakin">
-						<i class="fa fa-check"></i> Setuju</button>
+					<a href="/simarwahfix/dana/admin_acc_pengajuan/<?= $kd_jrsn?>"
+						class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm tombol-yakin">
+						<i class="fa fa-check"></i> Setuju</a>
 				</div>
 	</div>
 	</form>
@@ -180,17 +181,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 <?php endforeach;?>
 <!-- endmodal -->
-
-<? 
-$pathfile = 'assets/uploads/suratpengajuan/'.$suratpengajuan; 
-// Header content type 
-header('Content-type: application/pdf'); 
-header('Content-Disposition: inline; filename="' . $pathfile . '"'); 
-header('Content-Transfer-Encoding: binary'); 
-header('Accept-Ranges: bytes'); 
-// Read the file 
-@readfile($pathfile); 
-?>
 
 <script>
 	// javascript for open file

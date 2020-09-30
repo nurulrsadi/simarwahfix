@@ -53,12 +53,10 @@
 							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
 							<td><?= date("d M Y",strtotime($tglmakslaporan)); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
-							<td><a href="<?=site_url().'assets/uploads/laporankegiatan/'.$laporankegiatan;'.pdf' ?>" target=_blank
-									name="laporankegiatan" id="laporankegiatan">
-									<?=$laporankegiatan?></td>
+							<td><a href="<?=site_url().'assets/uploads/laporankegiatan/'.$laporankegiatan;'.pdf' ?>"
+									onclick="basicPopup(this.href); return false"><?=$laporankegiatan?> </a></td>
 							<td><a href="<?=site_url().'assets/uploads/laporanrincianbiaya/'.$laporanrincianbiaya;'.pdf' ?>"
-									target=_blank name="laporanrincianbiaya" id="laporanrincianbiaya">
-									<?=$laporanrincianbiaya?>
+									onclick="basicPopup(this.href); return false"><?=$laporanrincianbiaya?> </a>
 							</td>
 							<td class="text-center">
 								<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm"
@@ -108,3 +106,47 @@
 	</div>
 </div>
 <?php endforeach;?>
+
+<!-- pdf -->
+<script>
+	function renderPDF(url, canvasContainer, options) {
+
+		options = options || {
+			scale: 1
+		};
+
+		function renderPage(page) {
+			var viewport = page.getViewport(options.scale);
+			var wrapper = document.createElement("div");
+			wrapper.className = "canvas-wrapper";
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext('2d');
+			var renderContext = {
+				canvasContext: ctx,
+				viewport: viewport
+			};
+
+			canvas.height = viewport.height;
+			canvas.width = viewport.width;
+			wrapper.appendChild(canvas)
+			canvasContainer.appendChild(wrapper);
+
+			page.render(renderContext);
+		}
+
+		function renderPages(pdfDoc) {
+			for (var num = 1; num <= pdfDoc.numPages; num++)
+				pdfDoc.getPage(num).then(renderPage);
+		}
+
+		PDFJS.disableWorker = true;
+		PDFJS.getDocument(url).then(renderPages);
+
+	}
+
+
+	renderPDF('<?=site_url().'
+		assets / uploads / suratpengajuan / '.$suratpengajuan;'.pdf '?>', document.getElementById('<?=$suratpengajuan ?>')
+	); <
+
+</script>

@@ -16,7 +16,7 @@ class c_admin extends CI_Controller
     public function index()
     {       
             $data['title'] = 'Dashboard';
-            
+            $data['totalFklts'] = $this->M_ormawa->getTotalAnggotafak();
             $this->load->view('templates/headeradm', $data);
             $this->load->view('templates/sidebaradm', $data);
             $this->load->view('templates/topbar', $data);
@@ -267,6 +267,7 @@ class c_admin extends CI_Controller
 
     $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
     $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
+    $this->session->set_flashdata('flashdana', 'Dana Ormawa berhasil diupdate');
     redirect('c_admin/Edit_Pagu_Tingkat_Univ');
   }
     
@@ -328,8 +329,14 @@ class c_admin extends CI_Controller
         'kode_namafakultas' => $kode_fakultas,
         'nama_fakultas'=> $nama_fakultas
       );
+      $fakultasdata=array(
+        'kd_fakultas' => $kode_fakultas,
+        'nama_fakultas' => $nama_fakultas
+      );
 
       $this->Model_View->tambah_fakultas($data,$datafakultas);
+      $this->M_ormawa->tambah_fakultas($fakultasdata);
+      $this->session->set_flashdata('flashormawa','Data Ormawa berhasil ditambahkan!');
       redirect('c_admin/data_fakultas');
   }
 
@@ -339,8 +346,10 @@ class c_admin extends CI_Controller
       $deskripsi = $this->input->post('deskripsi');
       $visi = $this->input->post('visi');
       $misi = $this->input->post('misi');
-      $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
+      // $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
+      $this->M_ormawa->update_fakultas($kode_fakultas, $nama_fakultas);
       $this->Model_View->update_fakultas($kode_fakultas,$nama_fakultas,$deskripsi,$visi,$misi);
+      $this->session->set_flashdata('flashormawa','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_fakultas');
   }
 
@@ -348,7 +357,8 @@ class c_admin extends CI_Controller
   public function delete_data_fakultas(){
   $kode_fakultas = $this->uri->segment(3);
   $this->Model_View->delete_fakultas($kode_fakultas);
-  $this->M_dana->delete_namafakultas($kode_himpunan);
+  // $this->M_dana->delete_namafakultas($kode_himpunan);
+  $this->M_ormawa->delete_fakultas($kode_fakultas);
   $this->session->set_flashdata('msg','<div class="alert alert-success">Anggota Himpunan Dihapus</div>');
   redirect('c_admin/data_fakultas');
   }
@@ -417,6 +427,7 @@ class c_admin extends CI_Controller
        }
       // $this->M_dana->tambah_datauser($datadana);
       $this->Model_View->tambah_himpunan($data,$datadana);
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
       redirect('c_admin/data_himpunan');
   }
 }
@@ -442,8 +453,9 @@ public function edit_data_himpunan(){
       }else{
           $image=$this->upload->data('file_name');
       }
-      $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
+      // $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
       $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image);
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_himpunan');
   }
 }

@@ -144,7 +144,7 @@ class dana extends CI_Controller{
         }
       }
 
-      public function admin_acc_pengajuan(){
+      public function admin_acc_pengajuan($kd_jrsn){
         $kd_jrsn = $this->input->post('kd_jrsn');
         $where = array('kd_jrsn' => $kd_jrsn);
         $u = $this->M_dana->getDataByID($kd_jrsn)->row();
@@ -197,8 +197,8 @@ class dana extends CI_Controller{
             $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c);
             $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
             $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer6, $x, $nPengajuan6);
-            $this->session->set_flashdata('flashpengajuan','Pengajuan Ormawa telah diterima');
             redirect('c_admin/Cek_Pagu');
+            $this->session->set_flashdata('flashpengajuan','Pengajuan Ormawa telah diterima');
         }
         else{
           redirect('c_admin/tolak_pengajuan');

@@ -146,7 +146,6 @@
   function tambah_fakultas($data,$datafakultas){
   	$this->db->insert('fakultas',$data);
     $this->session->set_flashdata('Sukses',"Data Fakultas Berhasil Ditambahkan");
-    $this->db->insert('tb_namafakultas',$datafakultas);
     return TRUE;
   }
 

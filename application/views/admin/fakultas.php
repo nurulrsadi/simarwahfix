@@ -12,6 +12,9 @@
     	<div class="card shadow mb-4">
     		<div class="card-header py-3">
     			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
+    			<div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashormawa');  ?>"></div>
+    			<?php if($this->session->flashdata('flashormawa')): ?>
+    			<?php endif; ?>
     		</div>
     		<div class="card-body">
     			<div class="table-responsive">
@@ -93,12 +96,15 @@
     						<label>Misi</t></label>
     						</t><input type="text" name="misi" class="form-control" value="">
     					</div>
-    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    					<button type="submit" class="btn btn-primary">Save changes</button>
-    				</form>
     			</div>
+    			<div class="modal-footer">
+    				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    				<button type="submit" class="btn btn-primary">Save changes</button>
+    			</div>
+    			</form>
     		</div>
     	</div>
+    </div>
     </div>
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->

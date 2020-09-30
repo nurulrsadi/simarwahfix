@@ -7,6 +7,9 @@
 
   	<div class="features">
   		<article>
+  			<div class="flash-user-update" data-flashdata="<?= $this->session->flashdata('flashdatauser');  ?>"></div>
+  			<?php if($this->session->flashdata('flashdatauser')): ?>
+  			<?php endif; ?>
   			<div class="content">
   				<h2>HI, <?php echo strtoupper($this->session->userdata('username')) ?> !</h2>
   				<p>Anda diharuskan Update Profile terlebih dahulu agar dapat melakukan akses ke menu lainnya.</p>

@@ -367,6 +367,7 @@ public function index()
 
   $data = $this->Model_View->update_visimisi($visi,$misi,$kode_himp_sess);
   $this->session->set_flashdata('msg','<div class="alert alert-success">Visi Misi Berhasil Diupdate</div>');
+  // $this->session->set_flashdata('flashdatauser','Visi Misi anda berhasil diperbaharui!');
   redirect('c_user');
   }
     }

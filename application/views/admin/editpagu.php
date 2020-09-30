@@ -123,6 +123,6 @@
     </div>
     <?php endforeach;?>
     <!-- Akhir Modal Edit -->
-
+    </div>
     <!-- Modal Delete -->
     <!-- Akhir Modal Delete -->
