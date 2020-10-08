@@ -14,9 +14,22 @@
  	function tampil_list_fakultas(){
 		$query =  $this->db->query('SELECT * FROM fakultas');
 		return $query;
-	}
+  }
+  function tampil_list_fakultaskecuali(){
+    $this->db->select("*");
+    $this->db->from("fakultas");
+    $this->db->where('kode_fakultas !=', 'UKM');
+    $this->db->where('kode_fakultas !=', 'UKK');
+    $query = $this->db->get();
+		return $query;
+  }
 	function tampil_list_alljurusan(){
-		$query =  $this->db->query('SELECT * FROM jurusan');
+    $notin = array('UKM', 'UKK');
+    $this->db->select("*");
+    $this->db->from("jurusan");
+    $this->db->where_not_in('parent_fakultas', $notin);
+    $this->db->order_by('parent_fakultas', 'ASC');
+    $query = $this->db->get();
 		return $query;
 	}
 	function tampil_list_jurusan($fakultas){
@@ -192,7 +205,21 @@
   function edit_user_himpunan($id_user,$nama,$email,$username,$password){
   	$query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
   	return $query_update_user;
-
   }
+
+  //untuk ukm dan ukk
+  function tampil_list_ukmukk(){
+		$query =  $this->db->query('SELECT * FROM tb_parentukmukk');
+		return $query;
+	}
+  function update_parentukmukk($kode_parentukmukk,$deskripsi)
+  {
+    return $query_update_pukmukk = $this->db->query("UPDATE tb_parentukmukk SET deskripsi = '$deskripsi' WHERE kode_parentukmukk = '$kode_parentukmukk'");
+  }
+
+  function detail_tampil_list_ukmukk(){
+    return $query = $this->db->query('SELECT * FROM tb_ukmukk');
+  }
+
  }
 ?>

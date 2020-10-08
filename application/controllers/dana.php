@@ -144,7 +144,7 @@ class dana extends CI_Controller{
         }
       }
 
-      public function admin_acc_pengajuan($kd_jrsn){
+      public function admin_acc_pengajuan(){
         $kd_jrsn = $this->input->post('kd_jrsn');
         $where = array('kd_jrsn' => $kd_jrsn);
         $u = $this->M_dana->getDataByID($kd_jrsn)->row();

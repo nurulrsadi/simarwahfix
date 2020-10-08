@@ -168,7 +168,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 
 				<div class="row" style="margin-bottom: 30px;">
-					<?php $id=1; foreach($fakultas as $fak){ ?>
+					<?php $id=1; foreach($fakultas_new as $fak){ ?>
 					<div class="col-md-4 col-sm-12 col-xs-12">
 						<div class="service-item">
 							<div class="kotakb">

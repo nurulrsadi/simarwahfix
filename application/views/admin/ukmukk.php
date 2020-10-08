@@ -33,9 +33,10 @@
               </thead>
               
     					<?php 
-                  foreach($himpunan->result_array() as $i):
+                  foreach($ukmukk->result_array() as $i):
                     $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
+                    $nama_fakultas=$i['nama_fakultas'];
                     $deskripsi=$i['desc_himpunan'];
                     $visi=$i['visi'];
                     $misi=$i['misi'];
@@ -45,7 +46,7 @@
     					<tbody>
     						<tr>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $fakultas ?></td>
+    							<td><?php echo $nama_fakultas ?></td>
     							<td><?php echo $kode_himpunan ?></td>
     							<td><?php echo $nama_himpunan ?></td>
     							<td><?php echo $deskripsi ?></td>
@@ -130,7 +131,7 @@
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->
     <?php
-        foreach($himpunan->result_array() as $i):
+        foreach($ukmukk->result_array() as $i):
             $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
                     $deskripsi=$i['desc_himpunan'];
@@ -197,7 +198,7 @@
 
     <!-- Modal Delete -->
     <?php
-        foreach($himpunan->result_array() as $i):
+        foreach($ukmukk->result_array() as $i):
                     $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
                     $deskripsi=$i['desc_himpunan'];

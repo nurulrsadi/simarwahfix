@@ -47,12 +47,28 @@ class M_dana extends CI_Model{
 
     // UNTUK EDIT DANA PAGU
     function tampil_list_user_dana(){
-      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas ORDER BY kd_fklts");
+      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas AND kd_fklts != 'UKM' and kd_fklts!='UKK' ORDER BY kd_fklts");
       return $query;
     }
     function tampil_list_user_danauniv(){
       $query =$this->db->query("SELECT * FROM tb_detailuser WHERE kd_fklts is NULL ORDER BY kd_jrsn");
       return $query;
+    }
+    function tampil_list_user_dana_ormawa(){
+      $kdjrsnnya=array('UKM', 'UKK');
+      $this->db->select('*');
+      $this->db->from('tb_detailuser');
+      $this->db->join('fakultas', 'fakultas.kode_fakultas = tb_detailuser.kd_fklts');
+      $this->db->where_in('kd_fklts', $kdjrsnnya );
+      return $query = $this->db->get();
+    }
+    function tampil_list_user_ukm_ormawa(){
+      $kdjrsnnya=array('UKM', 'UKK');
+      $this->db->select('*');
+      $this->db->from('jurusan');
+      $this->db->join('fakultas', 'fakultas.kode_fakultas = jurusan.parent_fakultas');
+      $this->db->where_in('kode_fakultas', $kdjrsnnya );
+      return $query = $this->db->get();
     }
     // END EDIT DANA PAGU
     

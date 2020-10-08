@@ -34,7 +34,8 @@
 		<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Menu Pagu :</h6>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu') ?>">Edit Pagu Ormawa</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_Fakultas') ?>">Edit Pagu Per Fakultas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_UKMUKK') ?>">Edit Pagu Per UKMUKK</a>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pagu') ?>">Cek Pengajuan</a>
 				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Data_Pagu') ?>">Data Anggaran</a> -->
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan') ?>">Cek Laporan Kegiatan</a>
@@ -60,8 +61,10 @@
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Menu Ormawa :</h6>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">List Fakultas UKM UKK</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data per universitas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Ormawa per fakultas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/data_ormawa_ukmukk') ?>">Data Ormawa per UKMUKK</a>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
 			</div>
 		</div>

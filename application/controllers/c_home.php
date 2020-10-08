@@ -10,7 +10,8 @@ class c_home extends CI_Controller
 	}
 	public function index()
 	{
-		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+    $data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+    $data['fakultas_new'] = $this->Model_View->tampil_list_fakultaskecuali()->result();
 		// $data['jurusan'] = $this->Model_View->tampil_list_jurusan()->result();
 		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();
 		$this->load->view('home',$data);
@@ -25,7 +26,15 @@ class c_home extends CI_Controller
 		$data['jurusan'] = $this->Model_View->tampil_list_jurusan($kode_fakultas);
 		$data['fakultas'] = $this->Model_View->tampil_detail_fakultas($kode_fakultas);
 		$this->load->view('fakultas',$data);
-	}
+  }
+  
+  public function fakultas_new()
+  {
+    $kode_fakultas = $this->uri->segment(3);
+		$data['jurusan'] = $this->Model_View->tampil_list_jurusan($kode_fakultas);
+    $data['fakultas_new'] = $this->Model_View->tampil_list_fakultaskecuali()->result();
+		$this->load->view('fakultas',$data);
+  }
 	public function himpunan()
 	{
 		$kode_jurusan = $this->uri->segment(3);

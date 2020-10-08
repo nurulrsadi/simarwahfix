@@ -1,5 +1,5 @@
-// untuk update
-const flashData = $(".flash-data-update").data("flashdata");
+// jika berhasil
+const flashData = $(".flash-user-update").data("flashdata");
 if (flashData) {
 	Swal.fire({
 		title: "BERHASIL",
@@ -7,10 +7,3 @@ if (flashData) {
 		icon: "success",
 	});
 }
-
-// pengajuan diacc
-
-
-
-
-

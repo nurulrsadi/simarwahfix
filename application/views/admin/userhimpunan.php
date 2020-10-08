@@ -17,7 +17,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                              <tr>
-                                <th>Id User</th>
+                                <th>No</th>
                                 <th>Nama User</th>
                                 <th>Username</th>
                                 <th>Password</th>
@@ -26,6 +26,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <?php $j=1; ?>
                         <?php 
                   foreach($users->result_array() as $i):
                     $id_user=$i['id_user'];
@@ -38,7 +39,7 @@
                     <tbody>
                         <tr>
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
-                          <td><?php echo $id_user ?></td>
+                          <td><?php echo $j++; ?></td>
                           <td><?php echo $nama ?></td>
                           <td><?php echo $username ?></td>
                           <td><?php echo $password ?></td>

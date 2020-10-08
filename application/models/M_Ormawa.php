@@ -19,10 +19,10 @@ class M_ormawa extends CI_Model{
   function hapuskeluhannya($kd_ormawa){
     $this->db->delete('tb_keluhan', array('kd_ormawa' => $kd_ormawa));
   }
-  function tambah_fakultas($fakultasdata){
-    $this->db->insert('tb_sumtotalanggotafak',$fakultasdata);
-    return TRUE;
-  }
+  // function tambah_fakultas($fakultasdata){
+  //   $this->db->insert('tb_sumtotalanggotafak',$fakultasdata);
+  //   return TRUE;
+  // }
 
   function update_fakultas($kode_fakultas,$nama_fakultas){
   	$query_update_fakultas =$this->db->query("UPDATE tb_sumtotalanggotafak SET nama_fakultas = '$nama_fakultas' WHERE kd_faklutas ='$kode_fakultas'");

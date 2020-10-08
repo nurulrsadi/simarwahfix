@@ -27,12 +27,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
           $statususer=$u['statususer'];
           $nama_fakultas=$u['nama_fakultas'];
           ?>
-		<form action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post">
-			<input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>">
-			<input type="hidden" name="statususer" value="<?= $statususer?>">
-			<input type="hidden" name="kd_fakultas" value="<?= $kd_fakultas?>">
-			<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
-			<input type="hidden" name="jurusan" value="<?= $jurusan?>">
+		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post" id="formpengajuan">
+			<input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>">
+			<input type="hidden" id="statususer" name="statususer" value="<?= $statususer?>">
+			<input type="hidden" id="kd_fakultas" name="kd_fakultas" value="<?= $kd_fakultas?>">
+			<input type="hidden" id="tahunakademik" name="tahunakademik" value="<?= $tahunakademik?>">
+			<input type="hidden" id="jurusan"name="jurusan" value="<?= $jurusan?>">
 			<input type="hidden" name="suratpengajuan" value="'./assets/uploads/suratpengajuan/'.<?= $suratpengajuan?>">
 			<input type="hidden" name="rinciankegiatan" value="'./assets/uploads/rinciankegiatan/'.<?= $rinciankegiatan?>">
 			<input type="hidden" name="rkakl" value="'./assets/uploads/rkakl/'.<?= $rkakl?>">
@@ -113,7 +113,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="danasisanya" id="danasisa"
 								value="Rp <?= number_format($danasisa,0,',','.') ?>">
-							<input type="hidden" name=danasisa value="<?= $danasisa?>">
+							<input type="hidden" name=danasisa id="danasisa" value="<?= $danasisa?>">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -131,9 +131,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<button type=button class="d-none d-lg-inline-block btn btn-sm btn-danger shadow-lg" data-toggle="modal"
 						data-target="#modalalasan<?php echo $kd_jrsn;?>">
 						Tidak Acc</button>
-					<a href="/simarwahfix/dana/admin_acc_pengajuan/<?= $kd_jrsn?>"
-						class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm tombol-yakin">
-						<i class="fa fa-check"></i> Setuju</a>
+					<button type="submit"  id="btn-submit"
+						class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm tombol-yakin">  Acc</butto>
 				</div>
 	</div>
 	</form>
@@ -233,4 +232,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		assets / uploads / suratpengajuan / '.$suratpengajuan;'.pdf '?>', document.getElementById('<?=$suratpengajuan ?>')
 	); <
 
+</script>
+
+<script type="text/javascript">
+$('.tombol-yakin').on('click',function(e){
+  var kd_jrsn = $('#kd_jrsn').val()
+  var statususer = $('#statususer').val()
+  var kd_fakultas = $('#kd_fakultas').val()
+  var tahunakademik = $('#tahunakademik').val()
+  var jurusan = $('#jurusan').val()
+  var danaminus = $('#danaminus').val()
+  var danasisa = $('#danasisa').val()
+
+
+  e.preventDefault();
+  var form = "dana/admin_acc_pengajuan.php"
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(cekdata => {
+    if (cekdata) {
+      // if CONFIRMED => go to delete url
+      $.ajax({
+        type: "POST",
+        url : "<?= base_url('dana/admin_acc_pengajuan'); ?>"
+        data :{
+          kd_jrsn : kd_jrsn,
+          statususer : statususer,
+          kd_fakultas : kd_fakultas,
+          tahunakademik : tahunakademik,
+          jurusan : jurusan,
+          danaminus : danaminus,
+          danasisa: danasisa
+        }
+      })
+    }
+  });
+});
 </script>

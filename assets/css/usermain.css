@@ -3477,6 +3477,7 @@ button:disabled,
 	top: 0;
 	width: 6em;
 	z-index: 10000;
+	-o-transition: left 0.5s ease;
 }
 
 #sidebar .toggle:before {
@@ -7875,20 +7876,20 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .btn-primary {
-	color: #fff;
+	color: #fff !important;
 	background-color: #337ab7;
 	border-color: #2e6da4;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-	color: #fff;
+	color: #fff !important;
 	background-color: #286090;
 	border-color: #122b40;
 }
 
 .btn-primary:hover {
-	color: #fff;
+	color: #fff !important;
 	background-color: #286090;
 	border-color: #204d74;
 }
