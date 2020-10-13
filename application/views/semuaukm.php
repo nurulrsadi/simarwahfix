@@ -45,15 +45,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-              <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
-              <li class=""><a href="#">Peminjaman Aula SC</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>
+              <?php if($this->session->userdata('status') == "login"){?>
+                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+                <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
+                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+              <?php } else {?>
+              <?php } ?>
+
+              <?php if($this->session->userdata('status') == "login"){?>
+              
+              <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
+            <?php } else {?>  
+              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
+            <?php } ?>
+
+              
             </ul>
           </div>
-        </div>
       </nav>
     </div>
     <!--/ HEADER-->

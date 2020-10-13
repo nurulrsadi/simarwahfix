@@ -31,8 +31,8 @@
     					<?php $j=1; ?>
     					<?php 
                   foreach($userdanaukmukk->result_array() as $i):
-                    $kd_jrsn=$i['kd_jrsn'];
-                    $nama_fakultas=$i['nama_fakultas'];
+                    $kode_ukmukk=$i['kode_ukmukk'];
+                    $nama_ukmkk=$i['nama_ukmkk'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
@@ -43,15 +43,15 @@
     						<tr>
     							<td><?=$j++;?></td>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $nama_fakultas ?></td>
-    							<td><?php echo $kd_jrsn ?></td>
+    							<td><?php echo $kode_ukmukk ?></td>
+    							<td><?php echo $nama_ukmkk ?></td>
     							<td><?php echo $tahunakademik ?></td>
     							<td>Rp. <?php echo number_format($danaawal,0,',','.') ?></td>
     							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
     							<td class="align-self-auto">
     								<!-- Button trigger modal -->
     								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"
-    									data-target="#modaleditanggaran<?php echo $kd_jrsn;?>"><i class="fa fa-pen"></i>
+    									data-target="#modaleditanggaran<?php echo $kd_ukmukk;?>"><i class="fa fa-pen"></i>
     									Edit Anggaran
     								</a>
     							</td>
@@ -67,15 +67,17 @@
     <!-- Modal Tambah Fakultas -->
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->
-    <?php foreach($userdanaukmukk->result_array() as $i):
-          $kd_jrsn=$i['kd_jrsn'];
-          $nama_fakultas=$i['nama_fakultas'];
+    <?php 
+        foreach($userdanaukmukk->result_array() as $i):
+          $kode_ukmukk=$i['kode_ukmukk'];
+          $nama_ukmkk=$i['nama_ukmkk'];
           $tahunakademik=$i['tahunakademik'];
           $danaawal=$i['danaawal'];
           $danasisa=$i['danasisa'];
           $nPengajuan=$i['nPengajuan'];
+          // $fakultas=$i['parent_fakultas'];
           ?>
-    <div class="modal fade" id="modaleditanggaran<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
+    <div class="modal fade" id="modaleditanggaran<?php echo $kd_ukmukk;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">
@@ -95,7 +97,7 @@
     					</div>
     					<div class="form-group ">
     						<label>Nama ORMAWA</t></label>
-    						</t><input type="text" name="kd_jrsn" class="form-control" value="<?php echo $kd_jrsn;?>" required
+    						</t><input type="text" name="kd_ukmukk" class="form-control" value="<?php echo $kd_ukmukk;?>" required
     							readonly>
     					</div>
     					<div class="form-group ">

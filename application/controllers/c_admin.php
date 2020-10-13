@@ -17,6 +17,8 @@ class c_admin extends CI_Controller
     {       
             $data['title'] = 'Dashboard';
             $data['totalFklts'] = $this->M_ormawa->getTotalAnggotafak();
+            $data['sumAktifFklts'] = $this->M_ormawa->getAnggotaAktiffak();
+            $data['sumAktifukmukk'] = $this->M_ormawa->getAnggotaAktifUKMUKK();
             $this->load->view('templates/headeradm', $data);
             $this->load->view('templates/sidebaradm', $data);
             $this->load->view('templates/topbar', $data);
@@ -166,46 +168,33 @@ class c_admin extends CI_Controller
         $this->load->view('admin/datapinjam', $data);
         $this->load->view('templates/footeradm');
     }
-    public function Data_Ormawa()
-    {
-        $session = $this->session->userdata('id');
-        $data = array(
-            'title' => 'Tambah Pengguna',
-            'getalluser'=>$this->M_data->tampil_ormawa()->result()
-        );
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/dataormawa', $data);
-        $this->load->view('templates/footeradm');
-    }
     
-    public function tambahUser(){
-        $session = $this->session->userdata('id');
-        $data = array(
-            'title' => 'Tambah ORMAWA',
-            'subtitle' => 'Tambah ORMAWA',
-            // 'fakultas' => $this-> _fakultas(),
-            // 'role' => $this-> _role(),
-            'getalluser'=>$this->M_data->tampil_ormawa()->result()
-            // 'jumlah_surat' => $this->_jumlah_surat()
-        );
-        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        $this->form_validation->set_rules('fakultas', 'Fakultas', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-        $this->form_validation->set_rules('role', 'Role', 'required|trim|numeric');
-    if ($this->form_validation->run() == false) {
-    $this->load->view('templates/headeradm', $data);
-    $this->load->view('templates/sidebaradm', $data);
-    $this->load->view('templates/topbar', $data);
-    $this->load->view('admin/tambahOrmawa', $data);
-    $this->load->view('templates/footeradm');
-    }
-    else
-    $this->c_admin->tambahUser();
-    }
+    // public function tambahUser(){
+    //     $session = $this->session->userdata('id');
+    //     $data = array(
+    //         'title' => 'Tambah ORMAWA',
+    //         'subtitle' => 'Tambah ORMAWA',
+    //         // 'fakultas' => $this-> _fakultas(),
+    //         // 'role' => $this-> _role(),
+    //         'getalluser'=>$this->M_data->tampil_ormawa()->result()
+    //         // 'jumlah_surat' => $this->_jumlah_surat()
+    //     );
+    //     $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+    //     $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
+    //     $this->form_validation->set_rules('password', 'Password', 'required|trim');
+    //     $this->form_validation->set_rules('fakultas', 'Fakultas', 'required|trim');
+    //     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+    //     $this->form_validation->set_rules('role', 'Role', 'required|trim|numeric');
+    // if ($this->form_validation->run() == false) {
+    // $this->load->view('templates/headeradm', $data);
+    // $this->load->view('templates/sidebaradm', $data);
+    // $this->load->view('templates/topbar', $data);
+    // $this->load->view('admin/tambahOrmawa', $data);
+    // $this->load->view('templates/footeradm');
+    // }
+    // else
+    // $this->c_admin->tambahUser();
+    // }
     
     
 
@@ -289,15 +278,15 @@ class c_admin extends CI_Controller
     redirect('c_admin/Edit_Pagu_Tingkat_Univ');
   }
     public function update_dana_awal_ormawa(){
-      $kd_jrsn = $this->input->post('kd_jrsn');
+      $kd_ukmukk = $this->input->post('kd_ukmukk');
       $tahunakademik = $this->input->post('tahunakademik',true);
       $danaawal = $this->input->post('danaawal', true);
       $nPengajuan = 1;
       $statususer = 1;
       $danasisa = $this->input->post('danaawal', true);
 
-    $uangawal = $this->M_dana->update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
-    $updateusernya = $this->M_dana->update_user_awal($kd_jrsn, $statususer);
+    $uangawal = $this->M_dana->update_dana_awal1($kd_ukmukk,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer);
+    $updateusernya = $this->M_dana->update_user_awal1($kd_ukmukk, $statususer);
     $this->session->set_flashdata('flashdana', 'Dana Ormawa berhasil diupdate');
     redirect('c_admin/Edit_Pagu_UKMUKK');
   }
@@ -311,16 +300,16 @@ class c_admin extends CI_Controller
         
       }
       public function data_fakultas(){
-      $data['title'] = 'Data Fakultas';
-      $data['fakultas'] = $this->Model_View->tampil_list_fakultas();
-      $this->load->view('templates/headeradm', $data);
-      $this->load->view('templates/sidebaradm', $data);
-      $this->load->view('templates/topbar', $data);
-      $this->load->view('admin/fakultas', $data);
-      $this->load->view('templates/footeradm');
-  }
+        $data['title'] = 'Data Fakultas';
+        $data['fakultas'] = $this->Model_View->tampil_list_fakultas();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/fakultas', $data);
+        $this->load->view('templates/footeradm');
+    }
 
-  public function data_himpunan(){
+    public function data_himpunan(){
       $data['title'] = 'Data Himpunan';
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
       $data['fak'] = $this->Model_View->tampil_list_fakultas();
@@ -331,34 +320,8 @@ class c_admin extends CI_Controller
       $this->load->view('templates/footeradm');
   }
 
-  public function data_ukmukk(){
-    $data=array(
-      'title' => 'Data UKM UKK',
-      'ukmukk' => $this->Model_View->tampil_list_ukmukk(),
-      // 'p_ukmukk' => $this->Model_View->detail_tampil_list_ukmukk(),
-    );
-      $this->load->view('templates/headeradm', $data);
-      $this->load->view('templates/sidebaradm', $data);
-      $this->load->view('templates/topbar', $data);
-      $this->load->view('admin/p_ukmukk', $data);
-      $this->load->view('templates/footeradm');
-  }
 
-  public function data_ormawa_ukmukk(){
-    $data=array(
-      'title' => 'Data ORMAWA UKM UKK',
-      'ukmukk' => $this->M_dana->tampil_list_user_ukm_ormawa(),
-      'fak' => $this->Model_View->tampil_list_fakultas(),
-    );
-      $this->load->view('templates/headeradm', $data);
-      $this->load->view('templates/sidebaradm', $data);
-      $this->load->view('templates/topbar', $data);
-      $this->load->view('admin/ukmukk', $data);
-      $this->load->view('templates/footeradm');
-  }
-
-
-   public function data_user_himpunan(){
+    public function data_user_himpunan(){
       $data['title'] = 'Data User Himpunan';
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
       // $data['fak'] = $this->Model_View->tampil_list_fakultas();
@@ -448,7 +411,7 @@ class c_admin extends CI_Controller
       }
 
       if($parent_fakultas == ''){
-           $data =  array(
+          $data =  array(
           'kode_himpunan' => $kode_himpunan,
           'nama_himpunan'=> $nama_himpunan,
           'desc_himpunan' => $deskripsi,
@@ -457,17 +420,11 @@ class c_admin extends CI_Controller
           'image' => $image,
       );
       $datadana = array(
-          // 'kd_jrsn' => $kode_himpunan,
           'kd_jrsn'=> $kode_himpunan,
-          // // 'kd_fklts' => $parent_fakultas,
-          // 'tahunakademik' => 0,
-          // 'danaawal' => 0,
-          // 'danasisa' =>0,
-          // 'nPengajuan' =>0
       );
       }
-       else{
-           $data =  array(
+      else{
+          $data =  array(
           'kode_himpunan' => $kode_himpunan,
           'nama_himpunan'=> $nama_himpunan,
           'desc_himpunan' => $deskripsi,
@@ -477,13 +434,8 @@ class c_admin extends CI_Controller
           'image' => $image
       );
       $datadana = array(
-        // 'kd_jrsn' => $kode_himpunan,
         'kd_jrsn'=> $kode_himpunan,
         'kd_fklts' => $parent_fakultas,
-        // 'tahunakademik' => 0,
-        // 'danaawal' => 0,
-        // 'danasisa' =>0,
-        // 'nPengajuan' =>0
     );
        }
       // $this->M_dana->tambah_datauser($datadana);
@@ -619,78 +571,78 @@ public function edit_data_himpunan(){
   }
 
   //UKM UKK
-  function edit_data_parentukmukk(){
-      $kode_parentukmukk = $this->input->post('kode_parentukmukk');
-      $nama = $this->input->post('nama');
-      $deskripsi = $this->input->post('deskripsi');
-      // $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
-      // $this->M_ormawa->update_fakultas($kode_fakultas, $nama_fakultas);
-      $this->Model_View->update_parentukmukk($kode_parentukmukk,$deskripsi);
-      $this->session->set_flashdata('flashormawa','Data Ormawa berhasil diperbaharui!');
-      redirect('c_admin/data_ukmukk');
-  }
+//   function edit_data_parentukmukk(){
+//       $kode_parentukmukk = $this->input->post('kode_parentukmukk');
+//       $nama = $this->input->post('nama');
+//       $deskripsi = $this->input->post('deskripsi');
+//       // $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
+//       // $this->M_ormawa->update_fakultas($kode_fakultas, $nama_fakultas);
+//       $this->Model_View->update_parentukmukk($kode_parentukmukk,$deskripsi);
+//       $this->session->set_flashdata('flashormawa','Data Ormawa berhasil diperbaharui!');
+//       redirect('c_admin/data_ukmukk');
+//   }
 
-  function tambah_data_ukmukk()
-  {
-      $kode_ukmukk = $this->input->post('kode_himpunan');
-      $nama_himpunan = $this->input->post('nama_himpunan');
-      $deskripsi = $this->input->post('deskripsi');
-      $visi = $this->input->post('visi');
-      $misi = $this->input->post('misi');
-      $parent_fakultas = $this->input->post('parent_fakultas');
-      $image = $this->input->post('image');
+//   function tambah_data_ukmukk()
+//   {
+//       $kode_ukmukk = $this->input->post('kode_himpunan');
+//       $nama_himpunan = $this->input->post('nama_himpunan');
+//       $deskripsi = $this->input->post('deskripsi');
+//       $visi = $this->input->post('visi');
+//       $misi = $this->input->post('misi');
+//       $parent_fakultas = $this->input->post('parent_fakultas');
+//       $image = $this->input->post('image');
 
 
-      if ($image=''){} else{
-      $config['upload_path']='./assets/img/jurusan';
-      $config['allowed_types']='jpg|gif|png|jpeg';
-      $config['encrypt_name'] = TRUE;
+//       if ($image=''){} else{
+//       $config['upload_path']='./assets/img/jurusan';
+//       $config['allowed_types']='jpg|gif|png|jpeg';
+//       $config['encrypt_name'] = TRUE;
 
-      $this->load->library('upload',$config);
-      if(!$this->upload->do_upload('image')){
-          echo "Gagal Menambahkan Himpunan"; die();
-      }else{
-          $image=$this->upload->data('file_name');
-      }
+//       $this->load->library('upload',$config);
+//       if(!$this->upload->do_upload('image')){
+//           echo "Gagal Menambahkan Himpunan"; die();
+//       }else{
+//           $image=$this->upload->data('file_name');
+//       }
 
-      if($parent_fakultas == ''){
-           $data =  array(
-          'kode_himpunan' => $kode_himpunan,
-          'nama_himpunan'=> $nama_himpunan,
-          'desc_himpunan' => $deskripsi,
-          'visi' => $visi,
-          'misi' => $misi,
-          'image' => $image,
-      );
-      $datadana = array(
-          // 'kd_jrsn' => $kode_himpunan,
-          'kd_jrsn'=> $kode_himpunan,
-          // // 'kd_fklts' => $parent_fakultas,
-          // 'tahunakademik' => 0,
-          // 'danaawal' => 0,
-          // 'danasisa' =>0,
-          // 'nPengajuan' =>0
-      );
-      }
-       else{
-           $data =  array(
-          'kode_himpunan' => $kode_himpunan,
-          'nama_himpunan'=> $nama_himpunan,
-          'desc_himpunan' => $deskripsi,
-          'visi' => $visi,
-          'misi' => $misi,
-          'parent_fakultas' => $parent_fakultas,
-          'image' => $image
-      );
-      $datadana = array(
-        'kd_jrsn'=> $kode_himpunan,
-        'kd_fklts' => $parent_fakultas,
-    );
-       }
-      // $this->M_dana->tambah_datauser($datadana);
-      $this->Model_View->tambah_himpunan($data,$datadana);
-      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
-      redirect('c_admin/data_himpunan');
-  }
-}
+//       if($parent_fakultas == ''){
+//            $data =  array(
+//           'kode_himpunan' => $kode_himpunan,
+//           'nama_himpunan'=> $nama_himpunan,
+//           'desc_himpunan' => $deskripsi,
+//           'visi' => $visi,
+//           'misi' => $misi,
+//           'image' => $image,
+//       );
+//       $datadana = array(
+//           // 'kd_jrsn' => $kode_himpunan,
+//           'kd_jrsn'=> $kode_himpunan,
+//           // // 'kd_fklts' => $parent_fakultas,
+//           // 'tahunakademik' => 0,
+//           // 'danaawal' => 0,
+//           // 'danasisa' =>0,
+//           // 'nPengajuan' =>0
+//       );
+//       }
+//        else{
+//            $data =  array(
+//           'kode_himpunan' => $kode_himpunan,
+//           'nama_himpunan'=> $nama_himpunan,
+//           'desc_himpunan' => $deskripsi,
+//           'visi' => $visi,
+//           'misi' => $misi,
+//           'parent_fakultas' => $parent_fakultas,
+//           'image' => $image
+//       );
+//       $datadana = array(
+//         'kd_jrsn'=> $kode_himpunan,
+//         'kd_fklts' => $parent_fakultas,
+//     );
+//        }
+//       // $this->M_dana->tambah_datauser($datadana);
+//       $this->Model_View->tambah_himpunan($data,$datadana);
+//       $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
+//       redirect('c_admin/data_himpunan');
+//   }
+// }
 }

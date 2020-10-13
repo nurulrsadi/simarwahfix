@@ -9,8 +9,8 @@ function __construct(){
     $this->load->model('Model_View');
     $this->load->model('M_ormawa');
     if($this->session->userdata('status') != "login"){
-        redirect(base_url("c_home/login"));
-    }
+      redirect(base_url("login"));
+  }
         // if($this->session->userdata('status') != "login"){
         //     redirect(base_url("login"));
         // }
@@ -23,21 +23,23 @@ public function index()
     }else{
     $kode_himp_sess = $this->session->userdata('kode_himp_sess');
     // $statususer = $this->session->userdata('statususer');
-    $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-    if($cek -> num_rows() == 1){
-    $sess_data['data_himpunan'] = "true";
-    $this->session->set_userdata($sess_data);
-    }else{
-    $sess_data['data_himpunan'] = "false";
-    $this->session->set_userdata($sess_data);
-    }
+    // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+    // if($cek -> num_rows() == 1){
+    // $sess_data['data_himpunan'] = "true";
+    // $this->session->set_userdata($sess_data);
+    // }else{
+    // $sess_data['data_himpunan'] = "false";
+    // $this->session->set_userdata($sess_data);
+    // }
 
-    $ceksess = $this->session->userdata('data_himpunan');
+    // $ceksess = $this->session->userdata('data_himpunan');
     $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
     $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
     $data['datahimpunan'] = $this->Model_View->tampil_himpunan($kode_himp_sess);
     $data['bidangbidang'] = $this->Model_View->tampil_bidang($kode_himp_sess);
-
+    $data['dataukmukk'] = $this->Model_View->tampil_ukmukk($kode_himp_sess);
+    $data['bidang_ukmukk'] = $this->Model_View->tampil_bidang_ukmukk($kode_himp_sess);
+    $data['anggota_ukmukk'] = $this->Model_View->tampil_anggota_ukmukk($kode_himp_sess);
     
     $data['title'] = 'Edit Profile';
     $this->load->view('templates/header', $data);
@@ -54,16 +56,16 @@ public function index()
     }
         else{
           $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-          $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-          if($cek -> num_rows() == 1){
-          $sess_data['data_himpunan'] = "true";
-          $this->session->set_userdata($sess_data);
-          }else{
-          $sess_data['data_himpunan'] = "false";
-          $this->session->set_userdata($sess_data);
-          }
+          // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+          // if($cek -> num_rows() == 1){
+          // $sess_data['data_himpunan'] = "true";
+          // $this->session->set_userdata($sess_data);
+          // }else{
+          // $sess_data['data_himpunan'] = "false";
+          // $this->session->set_userdata($sess_data);
+          // }
           
-          $ceksess = $this->session->userdata('data_himpunan');
+          // $ceksess = $this->session->userdata('data_himpunan');
           // $data['anggota'] = $this->Model_View->tampil_all_anggota($kode_himp_sess);
             $data = array(
                 'title' =>'Pagu Anggaran',
@@ -83,16 +85,16 @@ public function index()
         redirect(base_url("c_home/login"));
         }else{
         $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-        $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-        if($cek -> num_rows() == 1){
-        $sess_data['data_himpunan'] = "true";
-        $this->session->set_userdata($sess_data);
-        }else{
-        $sess_data['data_himpunan'] = "false";
-        $this->session->set_userdata($sess_data);
-        }
+        // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+        // if($cek -> num_rows() == 1){
+        // $sess_data['data_himpunan'] = "true";
+        // $this->session->set_userdata($sess_data);
+        // }else{
+        // $sess_data['data_himpunan'] = "false";
+        // $this->session->set_userdata($sess_data);
+        // }
     
-        $ceksess = $this->session->userdata('data_himpunan');
+        // $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Verifikasi Pencairan Dana',
             'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
@@ -109,16 +111,16 @@ public function index()
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-      if($cek -> num_rows() == 1){
-      $sess_data['data_himpunan'] = "true";
-      $this->session->set_userdata($sess_data);
-      }else{
-      $sess_data['data_himpunan'] = "false";
-      $this->session->set_userdata($sess_data);
-      }
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
   
-      $ceksess = $this->session->userdata('data_himpunan');
+      // $ceksess = $this->session->userdata('data_himpunan');
       $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
       $data['title'] = 'Laporan Kegiatan';
       $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
@@ -133,16 +135,16 @@ public function index()
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-      if($cek -> num_rows() == 1){
-      $sess_data['data_himpunan'] = "true";
-      $this->session->set_userdata($sess_data);
-      }else{
-      $sess_data['data_himpunan'] = "false";
-      $this->session->set_userdata($sess_data);
-      }
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
   
-      $ceksess = $this->session->userdata('data_himpunan');
+      // $ceksess = $this->session->userdata('data_himpunan');
       $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
       $data['title'] = 'Verifikasi Laporan Kegiatan';
       $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
@@ -152,22 +154,37 @@ public function index()
       $this->load->view('templates/footer');
     }
   }
-  
+  public function Program_Kerja()
+  {
+    if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+      }else{
+  $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+  $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+  $data['title'] = 'Daftar Kegiatan';
+  $data['proker'] = $this->Model_View->tampil_kegiatan($kode_himp_sess);
+  $data['uproker'] = $this->Model_View->tampil_kegiatan_ukmukk($kode_himp_sess);
+  $this->load->view('templates/header', $data);
+  $this->load->view('user/programkerja', $data);
+  $this->load->view('templates/sidebaruser', $data);
+  $this->load->view('templates/footer');
+  }
+  }
     public function Pinjam_Aula()
     {if($this->session->userdata('status') != "login"){
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-      if($cek -> num_rows() == 1){
-      $sess_data['data_himpunan'] = "true";
-      $this->session->set_userdata($sess_data);
-      }else{
-      $sess_data['data_himpunan'] = "false";
-      $this->session->set_userdata($sess_data);
-      }
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
   
-      $ceksess = $this->session->userdata('data_himpunan');
+      // $ceksess = $this->session->userdata('data_himpunan');
       $data=array(
         'title' => 'Peminjaman Aula SC',
         'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
@@ -185,16 +202,16 @@ public function index()
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-      if($cek -> num_rows() == 1){
-      $sess_data['data_himpunan'] = "true";
-      $this->session->set_userdata($sess_data);
-      }else{
-      $sess_data['data_himpunan'] = "false";
-      $this->session->set_userdata($sess_data);
-      }
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
   
-      $ceksess = $this->session->userdata('data_himpunan');
+      // $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Cara menggunakan Website SIMARWAH',
             'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
@@ -207,20 +224,21 @@ public function index()
     }
   }
     public function Keluhan()
-    {     if($this->session->userdata('status') != "login"){
+    {
+      if($this->session->userdata('status') != "login"){
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-      $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
-      if($cek -> num_rows() == 1){
-      $sess_data['data_himpunan'] = "true";
-      $this->session->set_userdata($sess_data);
-      }else{
-      $sess_data['data_himpunan'] = "false";
-      $this->session->set_userdata($sess_data);
-      }
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
   
-      $ceksess = $this->session->userdata('data_himpunan');
+      // $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Keluhan',
             'ormawa' => $this->M_ormawa->tampil_data_ormawa_login($kode_himp_sess),
@@ -313,15 +331,6 @@ public function index()
       //     }
   }
   }
-
-  // public function update_jml_mhsaktif(){
-  //     $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-  //     $jml_mhsaktif=$this->input->post('jml_mhsaktif');
-  //     $data = $this->Model_View->update_jml_mhsaktif($jml_mhsaktif,$kode_himp_sess);
-  //     $this->session->set_flashdata('msg','<div class="alert alert-success">Jumlah Mahasiswa Aktif Berhasil Diupdate</div>');
-  //     redirect('c_user');
-  // }
-
   public function update_data_bidang(){
   $kode_bidang = $this->input->post('kode_bidang');
   $label_bidang = $this->input->post('label_bidang');
@@ -370,4 +379,238 @@ public function index()
   // $this->session->set_flashdata('flashdatauser','Visi Misi anda berhasil diperbaharui!');
   redirect('c_user');
   }
+
+  // tambah jumlah mhs aktif dan ukmukk
+  public function simpan_jml_mhsaktif(){
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $jml_mhsaktif=$this->input->post('jml_mhsaktif');
+    // var_dump($kode_himp_sess);
+    // var_dump($jml_mhsaktif);
+    // exit();
+    $datamhs = $this->Model_View->update_jml_mhsaktif($jml_mhsaktif,$kode_himp_sess);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Jumlah Mahasiswa Aktif Berhasil Diupdate</div>');
+    if($datamhs){ // Jika sukses
+    echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
+    }else{ // Jika gagal
+    echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
     }
+  }
+
+    public function add_kegiatan(){
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $nama_kegiatan = $this->input->post('nama_kegiatan');
+      $start_date = $this->input->post('start_date');
+      $end_date = $this->input->post('end_date');
+      
+
+
+      $data =  array(
+          'Parent_himpunan' => $kode_himp_sess,
+          'nama_kegiatan'=> $nama_kegiatan,
+          'start_date' => $start_date,
+          'end_date' => $end_date
+      );
+
+      $this->Model_View->tambah_kegiatan($data);
+       if($datakegiatan){ // Jika sukses
+               echo "<script>alert('Data berhasil ditambah');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
+        }else{ // Jika gagal
+              echo "<script>alert('Data gagal ditambahkan');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
+      }    
+  }
+
+  public function delete_kegiatan(){
+    $id_kegiatan = $this->uri->segment(3);
+    $this->Model_View->delete_kegiatan($id_kegiatan);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Kegiatan Berhasil Dihapus</div>');
+    redirect('c_user/Program_Kerja');
+    }
+
+    public function simpan_visimisi_ukmukk(){
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $visi_ukmukk=$this->input->post('visi_ukmukk');
+    $misi_ukmukk=$this->input->post('misi_ukmukk');
+
+    $data = $this->Model_View->update_visimisi_ukmukk($visi_ukmukk,$misi_ukmukk,$kode_himp_sess);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Visi Misi Berhasil Diupdate</div>');
+    redirect('c_user');
+    }
+
+    public function tambah_bidang_ukmukk()
+    {
+    $kode_ubidang = $this->input->post('kode_ubidang');
+    $label_ubidang = $this->input->post('label_ubidang');
+    $desc_ubidang = $this->input->post('desc_ubidang');
+    $parent_ukmukk = $this->input->post('parent_ukmukk');
+    $image = $this->input->post('image');
+    // var_dump($image);
+    // exit();
+    if ($image=''){} else{
+        $config['upload_path']='./assets/img/bidang';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload',$config);
+        if(!$this->upload->do_upload('image')){
+            echo "Gagal Menambahkan Bidang"; die();
+        }else{
+            $image=$this->upload->data('file_name');
+        }
+
+        $data =  array(
+            'kode_ubidang' => $kode_ubidang,
+            'label_ubidang'=> $label_ubidang,
+            'desc_ubidang' => $desc_ubidang,
+            'parent_ukmukk' => $parent_ukmukk,
+            'image' => $image
+        );
+        // var_dump($data);
+        // exit();
+        $this->Model_View->tambah_ubidang($data);
+        redirect('c_user');
+    }
+    }
+
+    public function update_bidang_ukmukk(){
+    $kode_ubidang = $this->input->post('kode_ubidang');
+    $label_ubidang = $this->input->post('label_ubidang');
+    $desc_ubidang = $this->input->post('desc_ubidang');
+    $parent_ukmukk = $this->input->post('parent_ukmukk');
+    $image = $this->input->post('image'); 
+    $imageold = $this->input->post('imageold'); 
+
+        if ($image=''){} else{
+        $config['upload_path']='./assets/img/bidang';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload',$config);
+        if(!$this->upload->do_upload('image')){
+            $image = $imageold;
+        }else{
+            $image=$this->upload->data('file_name');
+        }
+        $databidang = $this->Model_View->update_ukmbidang($label_ubidang,$desc_ubidang,$kode_ubidang,$parent_ukmukk,$image);
+        $this->session->set_flashdata('msg','<div class="alert alert-success">Data Bidang Berhasil Diupdate</div>');
+        redirect('c_user');
+        }
+    }
+
+    public function simpan_anggota_ukmukk(){
+        $u_nim=$this->input->post('u_nim');
+        $u_nama=$this->input->post('u_nama');
+        $u_jeniskelamin=$this->input->post('u_jeniskelamin');
+        $u_alamat=$this->input->post('u_alamat');
+        $u_kontak=$this->input->post('u_kontak');
+        $u_email=$this->input->post('u_email');
+        $u_jabatan=$this->input->post('u_jabatan');
+        $parent_ukmukk=$this->input->post('parent_ukmukk');
+        $parent_ubidang=$this->input->post('parent_ubidang');
+
+        $databarang = $this->Model_View->simpan_ukmanggota($u_nim,$u_nama,$u_jeniskelamin,$u_alamat,$u_kontak,$u_email,$u_jabatan,$parent_ukmukk,$parent_ubidang);
+     if($databarang){ // Jika sukses
+      echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
+     }else{ // Jika gagal
+        echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
+    }
+    }
+
+    public function add_kegiatan_ukmukk(){
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        $nama_ukegiatan = $this->input->post('nama_ukegiatan');
+        $ustart_date = $this->input->post('ustart_date');
+        $uend_date = $this->input->post('uend_date');
+        
+
+
+        $data =  array(
+            'parent_ukmukk' => $kode_himp_sess,
+            'nama_ukegiatan'=> $nama_ukegiatan,
+            'ustart_date' => $ustart_date,
+            'uend_date' => $uend_date
+        );
+
+        $this->Model_View->tambah_kegiatan_ukmukk($data);
+        redirect('c_user/Program_Kerja');
+        if($data){ // Jika sukses
+                 echo "<script>alert('Data berhasil diupdate');window.location = '".base_url('c_user/index')."';</script>";
+        }else{ // Jika gagal
+                echo "<script>alert('Data gagal diupdate');window.location = '".base_url('c_user/index')."';</script>";
+    }
+    }
+
+    public function update_anggota_ukmukk(){
+        $u_nim=$this->input->post('u_nim');
+        $u_nama=$this->input->post('u_nama');
+        $u_jeniskelamin=$this->input->post('u_jeniskelamin');
+        $u_alamat=$this->input->post('u_alamat');
+        $u_kontak=$this->input->post('u_kontak');
+        $u_email=$this->input->post('u_email');
+        $u_jabatan=$this->input->post('u_jabatan');
+        $parent_ukmukk=$this->input->post('parent_ukmukk');
+        $parent_ubidang=$this->input->post('parent_ubidang');
+
+          $databarang = $this->Model_View->update_ukmanggota($u_nim,$u_nama,$u_jeniskelamin,$u_alamat,$u_kontak,$u_email,$u_jabatan,$parent_ukmukk,$parent_ubidang);
+         if($databarang){ // Jika sukses
+                 echo "<script>alert('Data berhasil diupdate');window.location = '".base_url('c_user/index')."';</script>";
+          }else{ // Jika gagal
+                echo "<script>alert('Data gagal diupdate');window.location = '".base_url('c_user/index')."';</script>";
+    }
+
+    }
+
+    public function delete_bidang_ukmukk(){
+    $kode_ubidang = $this->uri->segment(3);
+    $this->Model_View->delete_ukmbidang($kode_ubidang);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Anggota Himpunan Dihapus</div>');
+    redirect('c_user');
+    }
+
+    public function delete_anggota_ukmukk(){
+    $u_nim = $this->uri->segment(3);
+    $this->Model_View->delete_ukmanggota($u_nim);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Anggota Himpunan Dihapus</div>');
+    redirect('c_user');
+    }
+
+    public function update_kegiatan_ukmukk(){
+        $parent_ukmukk = $this->session->userdata('parent_ukmukk');
+        $ustart_date = $this->input->post('ustart_date');
+        $uend_date = $this->input->post('uend_date');
+        $nama_ukegiatan = $this->input->post('nama_ukegiatan');
+        $id_ukegiatan = $this->input->post('id_ukegiatan');
+
+        $data = $this->Model_View->update_ukegiatan($ustart_date,$uend_date,$nama_ukegiatan,$parent_ukmukk,$id_ukegiatan);
+         if($data){ // Jika sukses
+                 echo "<script>alert('Data berhasil diupdate');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
+          }else{ // Jika gagal
+                echo "<script>alert('Data gagal diupdate');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
+        }    
+    }
+
+    public function delete_kegiatan_ukmukk(){
+    $id_ukegiatan = $this->uri->segment(3);
+    $this->Model_View->delete_ukegiatan($id_ukegiatan);
+    $this->session->set_flashdata('msg','<div class="alert alert-success">Kegiatan Berhasil Dihapus</div>');
+    redirect('c_user/Program_Kerja');
+    }
+
+    public function simpan_jml_umhsaktif(){
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        $jml_umhsaktif=$this->input->post('jml_umhsaktif');
+        // var_dump($kode_himp_sess);
+        // var_dump($jml_mhsaktif);
+        // exit();
+        $datamhs = $this->Model_View->update_jml_umhsaktif($jml_umhsaktif,$kode_himp_sess);
+        $this->session->set_flashdata('msg','<div class="alert alert-success">Jumlah Mahasiswa Aktif Berhasil Diupdate</div>');
+        if($datamhs){ // Jika sukses
+        echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
+        }else{ // Jika gagal
+        echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
+        }
+    }
+}
+
+
+
+

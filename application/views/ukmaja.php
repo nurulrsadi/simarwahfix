@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>simarwa</title>
+  <title>SIMARWAH</title>
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords"
     content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
@@ -36,18 +36,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">SI<span class="logo-dec">MARWA</span></a>
+            <a class="navbar-brand">SI<span class="logo-dec">MARWAH</span></a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
-              <li class=""><a href="#">Peminjaman Aula SC</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>
+              <?php if($this->session->userdata('status') == "login"){?>
+                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
+                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+              <?php } else {?>
+              <?php } ?>
+
+              <?php if($this->session->userdata('status') == "login"){?>
+              
+              <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
+            <?php } else {?>  
+              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
+            <?php } ?>
+
+              
             </ul>
-          </div>
+          </div>  
         </div>
       </nav>
     </div>
@@ -61,9 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="col-md-12 text-center" style="margin-bottom: 0px;">
             <div>
               <div class="service-item">
-                <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 45px">PRAMUKA</h2>
+                <?php foreach($ukm_ukk as $uk){ ?>
+                <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 45px"><?php echo $uk->nama_ukmukk;  ?></h2>
                 <hr class="bottom-line">
-                <p>Didirikan pada...</p>
+                <p><?php echo $uk->desc_ukmukk; ?> </p>
 
                 <br>
               </div>
@@ -72,11 +84,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
           <div class="row" style="margin-bottom: 40px; text-align: center;">
+            <?php $id=1; foreach($ukm_ukk as $uk){ ?>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="kotakc" style="margin-left: 10px;">
                 <div class="service-item">
                   <h3><span>VISI</span></h3>
-                  <p>SEMA-U adalah Senat Mahasiswa Universitas</p>
+                  <p><?php echo $uk->u_visi; ?></p>
                 </div>
               </div>
             </div>
@@ -86,114 +99,83 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="kotakc" style="margin-right: 10px;">
                 <div class="service-item">
                   <h3><span>MISI</span></h3>
-                  <p>SEMA-U adalah Senat Mahasiswa Universitas</p>
+                  <p><?php echo $uk->u_misi; ?></p>
                 </div>
               </div>
             </div>
+            <?php } ?> 
           </div>
 
           <div>
             <div class="row">
+              <?php $id=1; foreach($uketua as $uk){ ?>
               <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <div class="kotakb" style="width: 50%; border-color: white; margin:auto; margin-bottom: 20px;">
                   <div class="service-item">
-                    <h3><span>KETUA UMUM</span></h3>
-                    <p>1177050000</p>
-                    <p>Muhammad</p>
+                    <h3><span><?php echo $uk->u_jabatan ?></span></h3>
+                      <p><?php echo $uk->u_nim ?></p>
+                      <p><?php echo $uk->u_nama?></p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="service-item">
-                  <div class="kotakb" style="border-color: white; margin: auto;">
-                    <h3><span style="font-size: 35px;">SEKERTARIS UMUM</span></h3>
-                    <p>11770500</p>
-                    <p>Nama Mahasiswa</p>
+            <div class="row">
+              <?php $id=1; foreach($usekben as $uk){ ?>
+               <?php if($uk->u_jabatan == 'SEKRETARIS' || $uk->u_jabatan == 'BENDAHARA')
+               {?>
+                <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+                    <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
+                      <div class="service-item">
+                      <h3><span style="font-size: 35px;"><?php echo $uk->u_jabatan ?></span></h3>
+                      <p><?php echo $uk->u_nim ?></p>
+                      <p><?php echo $uk->u_nama?></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="service-item">
-                  <div class="kotakb" style="border-color: white;  margin: auto;">
-                    <h3><span style="font-size: 35px;">BENDAHARA UMUM</span>1</h3>
-                    <p>11770500</p>
-                    <p>Nama Mahasiswa</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="service-item">
-                  <div class="kotakb" style="border-color: white;  margin: auto;">
-                    <h3><span style="font-size: 35px;">BENDAHARA UMUM</span>2</h3>
-                    <p>11770500</p>
-                    <p>Nama Mahasiswa</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <?php } else {?>
+                <p></p>
+              <?php } ?>
+            <?php } ?>          
           </div>
 
-          <div class="row" style="margin-bottom: 30px;">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="kotakb" style="border-color: white;">
-                <div class="service-item">
-                  <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; margin: 10px;">
-                  <h3><span>PAO</span></h3>
-                  <p>Pengembangan Aparatur Organisasi</p>
-                  <p>Ketua Bidang</p>
-                  <p>Sekertaris Bidang</p>
-                  <p>Bendahara Bidang</p>
+          <div class = "row" style="margin-bottom: 15px; margin-top: 15px;">
+            <?php $id=1; foreach($ubidang as $uk){ ?>
+              <?php if($uk->desc_ubidang != 'EX OFFICIO'){?>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="kotakb" style="border-color: white;">
+                  <div class="service-item">
+                    <!-- <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; padding: 10px;"> -->
+                    <img width="200" height="200" src="<?php echo base_url('assets/img/bidang/').$uk->image?>" >
+                    <h3><span><?php echo $uk->label_ubidang?></span></h3>
+                    <p><?php echo $uk->desc_ubidang?></p>
+                    <h4>Ketua Bidang</h4>
+                    <?php foreach($uketuabidang as $agt){?>
+                      <?php if($uk->kode_ubidang == $agt->parent_ubidang)
+                      {?>
+                        <p><?php echo $agt->u_nama?></p>
+                      <?php } else {?>
+                        <p></p>
+                      <?php } ?>
+                    <?php } ?>  
+                    <h4>Anggota</h4>
+                    <?php foreach($uanggota as $agt){?>
+                      <?php if($uk->kode_ubidang == $agt->parent_ubidang)
+                      {?>
+                        <p><?php echo $agt->u_nama?></p>
+                      <?php } else {?>
+                        <p></p>
+                      <?php } ?>
+                    <?php } ?>  
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="kotakb" style="border-color: white;">
-                <div class="service-item">
-                  <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; margin: 10px;">
-                  <h3><span>PAO</span></h3>
-                  <p>Pengembangan Aparatur Organisasi</p>
-                  <p>Ketua Bidang</p>
-                  <p>Sekertaris Bidang</p>
-                  <p>Bendahara Bidang</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="kotakb" style="border-color: white;">
-                <div class="service-item">
-                  <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; margin: 10px;">
-                  <h3><span>PAO</span></h3>
-                  <p>Pengembangan Aparatur Organisasi</p>
-                  <p>Ketua Bidang</p>
-                  <p>Sekertaris Bidang</p>
-                  <p>Bendahara Bidang</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="kotakb" style="border-color: white;">
-                <div class="service-item">
-                  <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; margin: 10px;">
-                  <h3><span>PAO</span></h3>
-                  <p>Pengembangan Aparatur Organisasi</p>
-                  <p>Ketua Bidang</p>
-                  <p>Sekertaris Bidang</p>
-                  <p>Bendahara Bidang</p>
-                </div>
-              </div>
-            </div>
+              <?php } else {?>
+              <div></div>
+              <?php } ?>
+              
+            <?php } ?>     
           </div>
-
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-md-12 col-sm-12 text-center">

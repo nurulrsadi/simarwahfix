@@ -206,6 +206,10 @@ HEADER
 
 .bg-color {
   background-color: rgba(0, 0, 0, 0.5);
+  /*background-color: red;*/
+  /*background: rgba(214,215,2,0.5);*/
+  /*opacity: 0.4;*/
+  /*background: linear-gradient(135deg, rgba(48,140,0,0.55) 20%,rgba(189,187,0,0.75) 10%);*/
   min-height: 550px;
 }
 
@@ -1009,7 +1013,8 @@ cta
 .footer p {
   color: white;
   font-weight: lighter;
-  font-size: 
+  /* change */
+  font-size: 10px;
 }
 
 .footer a:hover {
@@ -1029,7 +1034,7 @@ cta
   box-shadow: 0 1px 0 #B4B3B3;
 }
 
-}
+
 .footer a {
   color: #78828D
 }

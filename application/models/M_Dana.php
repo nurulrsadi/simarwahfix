@@ -17,6 +17,9 @@ class M_dana extends CI_Model{
     function update_user_awal($kd_jrsn, $statususer){
       $query_update_user_awal =$this->db->query("UPDATE user SET statususer = '$statususer' WHERE kode_himp ='$kd_jrsn'");
     }
+    function update_user_awal1($kd_ukmukk, $statususer){
+      $query_update_user_awal =$this->db->query("UPDATE user SET statususer = '$statususer' WHERE kode_himp ='$kd_ukmukk'");
+    }
     function cek_datadana($where){
       $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$where.'"');
       // print_r($query);
@@ -55,11 +58,11 @@ class M_dana extends CI_Model{
       return $query;
     }
     function tampil_list_user_dana_ormawa(){
-      $kdjrsnnya=array('UKM', 'UKK');
+      // $kdjrsnnya=array('UKM', 'UKK');
       $this->db->select('*');
-      $this->db->from('tb_detailuser');
-      $this->db->join('fakultas', 'fakultas.kode_fakultas = tb_detailuser.kd_fklts');
-      $this->db->where_in('kd_fklts', $kdjrsnnya );
+      $this->db->from('tb_detailuserukmukk');
+      // $this->db->join('fakultas', 'fakultas.kode_fakultas = tb_detailuser.kd_fklts');
+      // $this->db->where_in('kd_fklts', $kdjrsnnya );
       return $query = $this->db->get();
     }
     function tampil_list_user_ukm_ormawa(){
@@ -170,6 +173,12 @@ class M_dana extends CI_Model{
     }
     function update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
       $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_jrsn ='$kd_jrsn'");
+  	// var_dump($kode_bidang);
+  	// exit();
+    return $query_update_dana_awal;
+    }
+    function update_dana_awal1($kd_ukmukk,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
+      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuserukmukk SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_jrsn ='$kd_ukmukk'");
   	// var_dump($kode_bidang);
   	// exit();
     return $query_update_dana_awal;

@@ -45,4 +45,26 @@ class M_ormawa extends CI_Model{
     ->get()
     ->result();
   }
+
+  function getAnggotaAktiffak(){
+    $this->db->select('*');
+    $this->db->select('SUM(jml_mhsaktif) as total_amount');
+    $this->db->from('jurusan');
+    $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
+    $this->db->group_by('parent_fakultas');
+    $res = $this->db->get();
+    if($res->num_rows() > 0)
+    {
+        return $res->result();
+    }else{
+        return false;
+    }
+  }
+  
+  function getAnggotaAktifUKMUKK(){
+    $this->db->select('*');
+    return $this->db->from('UKM_UKK')
+    ->get()
+    ->result();
+  }
 }

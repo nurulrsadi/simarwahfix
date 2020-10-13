@@ -39,15 +39,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <a class="navbar-brand">SI<span class="logo-dec">MARWAH</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-            <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-            <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-            <li class=""><a href="#">Daftar Kegiatan</a></li>
-            <li class=""><a href="#">Peminjaman Aula SC</a></li>
-            <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>
-          </ul>
-        </div>
+                <ul class="nav navbar-nav navbar-right">
+              <?php if($this->session->userdata('status') == "login"){?>
+                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
+                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+              <?php } else {?>
+              <?php } ?>
+
+              <?php if($this->session->userdata('status') == "login"){?>
+              
+              <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
+              <?php } else {?> 
+              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
+              <li class=""><a href="#">Daftar Kegiatan</a></li>
+              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
+              <?php } ?>              
+                </ul>
+              </div>
       </div>
     </nav>
   </div>
@@ -59,6 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach ($fakultas->result_array() as $i):
         $deskripsi = $i['deskripsi'];
         $nama_fakultas = $i['nama_fakultas'];
+        $visi = $i['visi'];
+        $misi = $i['misi'];
       ?>
       <div class="row" style="margin-bottom: 30px; margin: 100px; margin-top: 50px;">
         <div class="col-md-12 text-center">
@@ -74,16 +90,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
            </div>
           </div>
         </div>
-      <?php endforeach ?>
-
-
-
         <div class="row" style="margin-bottom: 40px; text-align: center;">
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="" style="margin-left: 10px;">
               <div class="service-item">
                 <h3><span>VISI</span></h3>
-                <p>SEMA-U adalah Senat Mahasiswa Universitas</p>
+                <p><?php echo $visi; ?></p>
               </div>
             </div>
           </div>
@@ -92,11 +104,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="" style="margin-right: 10px;">
               <div class="service-item">
                 <h3><span>MISI</span></h3>
-                <p>SEMA-U adalah Senat Mahasiswa Universitas</p>
+                <p><?php echo $misi; ?></p>
               </div>
             </div>
           </div>
         </div>
+      <?php endforeach ?>
+
+
+
+     
 
         <!-- dema sema saintek -->
         <div class="row" style="margin-bottom: 30px;">

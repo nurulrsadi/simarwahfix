@@ -44,6 +44,8 @@
 		</div>
 	</li>
 
+
+
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('c_admin/Data_Pinjam') ?>">
@@ -52,23 +54,22 @@
 	</li>
 
 	<!-- Nav Item - Ormawa -->
-	<li class="nav-item">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-			aria-controls="collapseTwo">
-			<i class="far fa-fw fa-address-book"></i>
-			<span>Data Ormawa</span>
-		</a>
-		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Menu Ormawa :</h6>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">List Fakultas UKM UKK</a>
-        <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data per universitas</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Ormawa per fakultas</a>
-        <a class="collapse-item" href="<?php echo base_url('c_admin/data_ormawa_ukmukk') ?>">Data Ormawa per UKMUKK</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
-			</div>
-		</div>
-	</li>
+  <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="far fa-fw fa-address-book"></i>
+            <span>Data Ormawa</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu Ormawa :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
+            </div>
+        </div>
+    </li>
+  
+    
 
 	<!-- Nav Item - Keluhan -->
 	<li class="nav-item">
