@@ -47,13 +47,13 @@
         			<ul>
         				<li><a href="<?php echo base_url() . 'c_user/index'; ?>"><i class="fas fa-user fa-2x "></i></t> Edit
         						Profil</a></li>
+                <li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x "></i> Program Kerja</a></li>
         				<?php foreach($usernya as $m) : ?>
 
         				<li><a href="<?=base_url($m['url']); ?>"><i class="<?= $m['icon']; ?>"></i>
         						<?= $m['title']; ?></a></li>
         				<?php endforeach;?>
                 <?php endforeach;?>
-                <li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x "></i> Program Kerja</a></li>
         				<li><a href="<?php echo base_url() . 'c_user/Guide_HMJ'; ?>"><i class="fas fa-book-reader fa-2x "></i>
         						Panduan SIMARWAH</a></li>
         				<li><a href="<?php echo base_url() . 'c_home/index'; ?>"><i class="fas fa-sign-out-alt fa-2x"></i> Log

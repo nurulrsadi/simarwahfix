@@ -4,8 +4,6 @@
     	<!-- Page Heading -->
     	<div class="d-sm-flex align-items-center justify-content-between mb-4">
     		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-    		<a href="<?= base_url().'c_admin/Edit_Pagu_Tingkat_Univ';?>"
-    			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Edit Dana DEMAU SEMAU</a>
     	</div>
 
     	<!-- DataTales Example -->
@@ -136,9 +134,4 @@
     <?php endforeach;?>
     <!-- Akhir Modal Edit -->
 
-    <!-- Modal Delete -->
-    <!-- Akhir Modal Delete -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/sp-1.2.0/datatables.min.css"/> -->
- 
- <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/sp-1.2.0/datatables.min.js"></script> -->
 

@@ -22,8 +22,6 @@ class M_dana extends CI_Model{
     }
     function cek_datadana($where){
       $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$where.'"');
-      // print_r($query);
-      // exit();
       return $query;
     } 
     function tambah_datauser($datadana){
@@ -34,6 +32,9 @@ class M_dana extends CI_Model{
     function delete_datauser($kode_himpunan)
     {
       $this->db->delete('tb_detailuser', array('kd_jrsn' => $kode_himpunan));
+    }
+    function delete_datauserukmukk($kode_ukmukk){
+      $this->db->delete('tb_detailuserukmukk', array('kd_ukmukk' => $kode_ukmukk));
     }
     function edit_datauser($kode_himpunan,$parent_fakultas){
       $query_update_himpunan = $this->db->query("UPDATE tb_detailuser SET kd_fklts = '$parent_fakultas' WHERE kd_jrsn = '$kode_himpunan'");
@@ -50,7 +51,7 @@ class M_dana extends CI_Model{
 
     // UNTUK EDIT DANA PAGU
     function tampil_list_user_dana(){
-      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas AND kd_fklts != 'UKM' and kd_fklts!='UKK' ORDER BY kd_fklts");
+      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas ORDER BY kd_fklts");
       return $query;
     }
     function tampil_list_user_danauniv(){
@@ -58,11 +59,9 @@ class M_dana extends CI_Model{
       return $query;
     }
     function tampil_list_user_dana_ormawa(){
-      // $kdjrsnnya=array('UKM', 'UKK');
       $this->db->select('*');
       $this->db->from('tb_detailuserukmukk');
-      // $this->db->join('fakultas', 'fakultas.kode_fakultas = tb_detailuser.kd_fklts');
-      // $this->db->where_in('kd_fklts', $kdjrsnnya );
+      $this->db->join('ukm_ukk', 'ukm_ukk.kode_ukmukk = tb_detailuserukmukk.kd_ukmukk');
       return $query = $this->db->get();
     }
     function tampil_list_user_ukm_ormawa(){
@@ -80,8 +79,11 @@ class M_dana extends CI_Model{
       $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas AND statususer=3 ORDER BY kd_fklts");
       return $query;
     }
+    function tampil_list_user_pengajuanukm(){
+      return $query=$this->db->query("SELECT * FROM tb_detailuserukmukk WHERE statususer=3 ORDER BY kd_ukumkk");
+    }
     function tampil_list_user_pengajuan_univ(){
-      $query =$this->db->query("SELECT * FROM tb_detailuser WHERE statususer=3 AND kd_fklts is NULL ORDER BY kd_fklts");
+      $query =$this->db->query("SELECT * FROM tb_detailuser WHERE statususer=3 AND kd_fklts is NULL ORDER BY kd_jrsn");
       return $query;
     }
     // END CEK KALAU ADA YANG MAU NGAJUIN DANA
@@ -95,36 +97,57 @@ class M_dana extends CI_Model{
     function tampil_list_user_laporanbelumdikirimuniv(){
       return $query=$this->db->query("SELECT * FROM tb_pengajuan WHERE statususer=4 AND kd_fakultas is null ORDER BY kd_jrsn");
     }
+    function tampil_list_user_laporanbelumdikirim_ukmukk(){
+      return $query=$this->db->query("SELECT * FROM tb_pengajuan_ukmukk WHERE statususer=4 ORDER BY kd_ukmkk");
+      return $query =$this->db->query("SELECT DISTINCT DATE_FORMAT(akhirkegiatan, '%d %M %Y') AS akhirkegiatan FROM $query1 ORDER BY akhirkegiatan ASC ");
+    }
 
     function update_danayangdiacc($kd_jrsn,$x,$danaacc){
       $query_acc = $this->db->query("UPDATE tb_pengajuan SET danasisa = '$x', danaacc = '$danaacc' WHERE kd_jrsn = '$kd_jrsn'");
+      return $query_acc;
+    }
+    function update_danayangdiacc_ukmukk($kd_ukmukk,$x,$danaacc){
+      $query_acc = $this->db->query("UPDATE tb_pengajuan_ukmukk SET danasisa = '$x', danaacc = '$danaacc' WHERE kd_ukmkk = '$kd_ukmukk'");
       return $query_acc;
     }
     function update_danayangdiaccdetail($kd_jrsn,$x){
       $query_acc = $this->db->query("UPDATE tb_detailuser SET danasisa = '$x' WHERE kd_jrsn = '$kd_jrsn'");
       return $query_acc;
     }
+    function update_danayangdiaccdetail_ukmukk($kd_ukmukk,$x){
+      $query_acc = $this->db->query("UPDATE tb_detailuserukmukk SET danasisa = '$x' WHERE kd_ukmukk = '$kd_ukmukk'");
+      return $query_acc;
+    }
     // end acc belum ngirim laporan
 
-    // ngambil data untuk pengajuan 
+    // ngambil data untuk pengajuan jurusan
     function tampil_data_dana_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
 		  return $query;
     }
     function tampil_data_dana_maupengajuan($jurusan){
       $query =$this->db->query('SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND kd_jrsn = "'.$jurusan.'" ');
-      // $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$jurusan.'" ');
+		  return $query;
+    }
+    function tampil_data_dana_maupengajuanukmukk($kd_ukmukk){
+      $query =$this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE kd_ukmkk = "'.$kd_ukmukkk.'" ');
 		  return $query;
     }
     function tampil_data_laporan_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE kd_jrsn = "'.$jurusan.'"');
 		  return $query;
     }
+    function tampil_data_laporan_login_ukmukk($kd_ukmukk){
+      $query =  $this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE kd_ukmkk = "'.$kd_ukmukk.'"');
+		  return $query;
+    }
+    // ngambil data untuk pengajuan ukmukk
+    function tampil_data_dana_loginukm($kode_ukmukk){
+      $query =  $this->db->query('SELECT * FROM tb_detailuserukmukk WHERE kd_ukmukk = "'.$kode_ukmukk.'" ');
+		  return $query;
+    }    
+    
 
-    public function tampil_danaormawa()
-    {
-      
-    }             
     function edit_pengajuan($where,$table){		
       return $this->db->get_where($table,$where);
     }
@@ -177,6 +200,12 @@ class M_dana extends CI_Model{
   	// exit();
     return $query_update_dana_awal;
     }
+    function update_dana_awal_ukmukk($kd_ukmukk,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer)
+    {
+      return $query_update_dana_awal =$this->db->query("UPDATE tb_detailuserukmukk SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_ukmukk ='$kd_ukmukk'");
+    }
+
+    
     function update_dana_awal1($kd_ukmukk,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
       $query_update_dana_awal =$this->db->query("UPDATE tb_detailuserukmukk SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_jrsn ='$kd_ukmukk'");
   	// var_dump($kode_bidang);
@@ -245,30 +274,57 @@ class M_dana extends CI_Model{
       $this->db->insert('tb_pengajuan',$datadana1);
       return TRUE;
     }
+    function tambah_pengajuan_ukmukk($datadana1){
+      $this->db->insert('tb_pengajuan_ukmukk',$datadana1);
+      return TRUE;
+    }
     function pengajuanfile($kd_jrsn,$statususer){
       return $query=$this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
     }
     function pengajuanfileuser($kd_jrsn,$statususer){
       return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
     }
+    function pengajuanfile_ukmukk($kd_ukmukk,$statususer){
+      return $query=$this->db->query("UPDATE tb_detailuserukmukk set statususer='$statususer' WHERE kd_ukmukk='$kd_ukmukk'");
+    }
+    function pengajuanfileuser_ukmukk($kd_ukmukk,$statususer){
+      return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_ukmukk'");
+    }
     // upload laporan
     function update_laporan($kd_jrsn, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
-    $query = $this->db->query("UPDATE tb_pengajuan set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE kd_jrsn='$kd_jrsn'");
-    return $query;
-  }
-  function update_laporandetail($kd_jrsn, $statususer){
-    return $query= $this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
-  }
+      $query = $this->db->query("UPDATE tb_pengajuan set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE kd_jrsn='$kd_jrsn'");
+      return $query;
+    }
+    function update_laporandetail($kd_jrsn, $statususer){
+      return $query= $this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
+    }
     function update_laporanuser($kd_jrsn, $statususer){
       return $query = $this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
     }
+    function update_laporan_ukmukk($kd_ukmkk, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
+      $query = $this->db->query("UPDATE tb_pengajuan_ukmukk set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE kd_ukmkk='$kd_ukmkk'");
+      return $query;
+    }
+    function update_laporandetail_ukmukk($kd_ukmkk, $statususer){
+      return $query= $this->db->query("UPDATE tb_detailuserukmukk set statususer='$statususer' WHERE kd_ukmukk='$kd_ukmkk'");
+    }
+    function update_laporanuser_ukmukk($kd_ukmkk, $statususer){
+      return $query = $this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_ukmkk'");
+    }
     // end upload laporan
     // cek laporan kegiatan
+    function tampil_list_lpjuniv(){
+      $query =$this->db->query("SELECT * FROM tb_pengajuan WHERE kd_fakultas is null AND statususer=5 ORDER BY kd_jrsn");
+      return $query;
+    }
     function tampil_list_lpjjrsn(){
       $query =$this->db->query("SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND statususer=5 ORDER BY kd_fakultas");
       return $query;
     }
-
+    function tampil_list_lpjukmukk(){
+      $query =$this->db->query("SELECT * FROM tb_pengajuan_ukmukk WHERE statususer=5 ORDER BY kd_ukmkk");
+      return $query;
+    }
     // untuk hapus satu baru tb_pengajuan
     function getDataByID($kd_jrsn){
       return $this->db->get_where('tb_pengajuan', array('kd_jrsn'=>$kd_jrsn));
@@ -277,13 +333,60 @@ class M_dana extends CI_Model{
     function update_nPengajuan($statususer,$newnPengajuan,$kd_jrsn){
       return $query=$this->db->query("UPDATE tb_detailuser set statususer='$statususer', nPengajuan='$newnPengajuan' WHERE kd_jrsn='$kd_jrsn' ");
     }
+    function update_nPengajuan_ukmukk($statususer,$newnPengajuan,$kd_ukmkk){
+      return $query=$this->db->query("UPDATE tb_detailuser_ukmukk set statususer='$statususer', nPengajuan='$newnPengajuan' WHERE kd_ukmukk='$kd_ukmkk' ");
+    }
     function update_nPengajuanuser($statususer,$kd_jrsn){
       return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn' ");
     }
     // untuk hapus semua file di tb_pengajuan
     public function hapusFile($kd_jrsn){
       $this->db->delete('tb_pengajuan', array('kd_jrsn' => $kd_jrsn));
-      // $this->db->where('kd_jrsn', $kd_jrsn);
-      // return $this->db->delete('tb_detailpengajuan');
-  }
+    }
+    public function hapusFile_ukmukk($kd_ukmkk){
+      $this->db->delete('tb_pengajuan_ukmukk', array('kd_ukmkk' => $kd_ukmkk));
+    }
+
+    // UNTUK NOTIFIKASI
+    // CEK PENGAJUAN (tb_detailuser, tb_detailuserukmukk)
+      // P. UNIV
+        // 
+        function count_puniv(){
+          $this->db->count_all('tb_detailuser');
+          $this->db->where('parent_fakultas NULL', NULL, TRUE);
+          $res = $this->db->get();
+          if($res->num_rows() > 0)
+          {
+              return $res->result();
+          }else{
+              return false;
+          }
+        }
+      // P. FKLTS
+        function count_pfklts(){
+            $this->db->count_all('tb_detailuser');
+            $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
+            $res = $this->db->get();
+            if($res->num_rows() > 0)
+            {
+                return $res->result();
+            }else{
+                return false;
+            }
+          }
+      // P. UKMUKK
+        function count_pukmukk(){
+          $this->db->count_all('tb_detailuserukmukk');
+          $res = $this->db->get();
+          if($res->num_rows() > 0)
+          {
+              return $res->result();
+          }else{
+              return false;
+          }
+        }
+    // CEK LAPORAN (tb_penajuan, tb_pengajuan_ukmukk, kd_jrsn dan kd_ukmkk)
+      // L. UNIV
+      // L. FKLTS
+      // L. UKMUKK
 }

@@ -316,6 +316,48 @@
     return $query;
  }
 
+  function tampil_list_ukmukk(){
+    $query =  $this->db->query('SELECT * FROM ukm_ukk');
+    return $query;
+  }
+  function tampil_user_ukmukk(){
+    $query_tampil_user_ukmukk = $this->db->query("SELECT * FROM user WHERE role=2");
+    return $query_tampil_user_ukmukk;
+  }
+  function tambah_ukmukk($data,$datadana){
+    $this->db->insert('ukm_ukk',$data);
+    $this->session->set_flashdata('Sukses',"Data Fakultas Berhasil Ditambahkan");
+    $this->db->insert('tb_detailuserukmukk',$datadana);
+    return TRUE;
+  }
+  function update($kode_fakultas,$nama_fakultas,$deskripsi,$visi,$misi){
+    $query_update_fakultas =$this->db->query("UPDATE fakultas SET nama_fakultas = '$nama_fakultas', deskripsi = '$deskripsi', visi = '$visi', misi = '$misi' WHERE kode_fakultas ='$kode_fakultas'");
+    return $query_update_fakultas;
+  }
+  function tambah_userukmukk($data){
+    $this->db->insert('user',$data);
+    $this->session->set_flashdata('Sukses',"Data User Berhasil Ditambahkan");
+    return TRUE;
+  }
+  function edit_ukmuser($id_user,$nama,$email,$username,$password){
+    $query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
+    return $query_update_user;
+
+  }
+  function update_ukmukk($kode_ukmukk,$nama_ukmukk,$desc_ukmukk,$visi_ukmukk,$misi_ukmukk,$image){
+     $query_update_ukmukk = $this->db->query("UPDATE ukm_ukk SET nama_ukmukk = '$nama_ukmukk',desc_ukmukk = '$desc_ukmukk',visi_ukmukk = '$visi_ukmukk',misi_ukmukk = '$misi_ukmukk', image = '$image' WHERE kode_ukmukk = '$kode_ukmukk'");
+     return $query_update_ukmukk;
+  }
+
+   function delete_ukmukk($kode_ukmukk){
+      $this->db->delete('ukm_ukk', array('kode_ukmukk' => $kode_ukmukk));
+  }
+  function delete_user_ukmukk($id_user){
+     $this->db->delete('user', array('id_user' => $id_user));
+  }
+
+
+
 //tambah_nuy
  function tampil_statususer($jurusan){
   $query =  $this->db->query('SELECT * FROM user WHERE kode_himp = "'.$jurusan.'"');

@@ -68,7 +68,6 @@
 <?php 
     foreach($datauserbelumuniv->result_array() as $i):
       $kd_jrsn=$i['kd_jrsn'];
-      $nama_fakultas=$i['nama_fakultas'];
       $tahunakademik=$i['tahunakademik'];
       $danaawal=$i['danaawal'];
       $danasisa=$i['danasisa'];
@@ -87,7 +86,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="<?php echo base_url().'c_admin/update_danaacc'?>" enctype="multipart/form-data">
+				<form method="post" action="<?php echo base_url().'c_admin/update_danaacc_univ'?>" enctype="multipart/form-data">
 					<div class="form-group">
 						<label>Tahun Akademik</t></label>
 						</t><input type="text" name="tahunakademik" class="form-control" value="<?php echo $tahunakademik;?>"

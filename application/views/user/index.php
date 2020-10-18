@@ -108,7 +108,7 @@
                     <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_add_new" >Tambah Data Anggota</a>
                                         
                     <?php elseif($this->session->userdata('role') == 2):?>
-                    <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_add_visimisi_ukmukk" >Update Visi Misi UKK</a>
+                    <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_add_visimisi_ukmukk" >Update Visi Misi UKM UKK</a>
                     <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_add_bidang_ukmukk" >Tambah Bidang</a>
                     <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_add_anggota_ukmukk" >Tambah Data Anggota</a>
                                             
@@ -119,7 +119,8 @@
                     
                     <?php if($this->session->userdata('role') == 0):?>
                     <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_update_mhsaktif" >Update Jumlah Mahasiswa Aktif</a>
-                    <a class="btn btn-success" href="<?php echo base_url('c_home/himpunan/'.$kode_himpunan); ?>" target="_blank" data-toggle="" data-target="" >Lihat Profil <?php echo $kode_himpunan;?> </a>     
+                    <a class="btn btn-success" href="<?php echo base_url('c_home/himpunan/'.$kode_himpunan); ?>" target="_blank" data-toggle="" data-target="" >Lihat Profil <?php echo $kode_himpunan;?> </a>    
+                     
 
                     <?php elseif($this->session->userdata('role') == 2):?>
                         <a class="btn btn-success" href="" data-toggle="modal" data-target="#modal_update_umhsaktif" >Update Jumlah Mahasiswa Aktif</a>

@@ -20,7 +20,7 @@
     					<thead>
     						<tr>
     							<th>No</th>
-    							<th>Nama Jenis UKM UKK</th>
+    							<th>Kode</th>
     							<th>Nama Ormawa</th>
     							<th>Tahun Akademik</th>
     							<th>Pegu Anggaran</th>
@@ -31,20 +31,19 @@
     					<?php $j=1; ?>
     					<?php 
                   foreach($userdanaukmukk->result_array() as $i):
-                    $kode_ukmukk=$i['kode_ukmukk'];
-                    $nama_ukmkk=$i['nama_ukmkk'];
+                    $kd_ukmukk=$i['kd_ukmukk'];
+                    $nama_ukmukk=$i['nama_ukmukk'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
                     $danasisa=$i['danasisa'];
                     $nPengajuan=$i['nPengajuan'];
-                    // $fakultas=$i['parent_fakultas'];
                     ?>
     					<tbody>
     						<tr>
     							<td><?=$j++;?></td>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $kode_ukmukk ?></td>
-    							<td><?php echo $nama_ukmkk ?></td>
+    							<td><?php echo $kd_ukmukk ?></td>
+    							<td><?php echo $nama_ukmukk ?></td>
     							<td><?php echo $tahunakademik ?></td>
     							<td>Rp. <?php echo number_format($danaawal,0,',','.') ?></td>
     							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
@@ -69,8 +68,8 @@
     <!-- Edit Modal Fakultas -->
     <?php 
         foreach($userdanaukmukk->result_array() as $i):
-          $kode_ukmukk=$i['kode_ukmukk'];
-          $nama_ukmkk=$i['nama_ukmkk'];
+          $kd_ukmukk=$i['kd_ukmukk'];
+          $nama_ukmukk=$i['nama_ukmukk'];
           $tahunakademik=$i['tahunakademik'];
           $danaawal=$i['danaawal'];
           $danasisa=$i['danasisa'];
@@ -101,12 +100,6 @@
     							readonly>
     					</div>
     					<div class="form-group ">
-    						<label>
-    							Jenis Ormawa</t></label>
-    						</t><input type="text" name="nama_fakultas" class="form-control" value="<?php echo $nama_fakultas;?>"
-    							readonly>
-    					</div>
-    					<div class="form-group ">
     						<label>Pagu Anggaran <small class="text-decoration" style="color:red">contoh : 2000000</small></t>
     						</label>
     						</t><input type="number" name="danaawal" min="0" name="danaawal" id="danaawal"
@@ -123,6 +116,6 @@
     </div>
     <?php endforeach;?>
     <!-- Akhir Modal Edit -->
-    </div>
+        </div>
     <!-- Modal Delete -->
     <!-- Akhir Modal Delete -->

@@ -7,7 +7,7 @@
 	<header class="main">
 
 	</header>
-
+  <?php if( $this->session->userdata('statususer') ==3 ):?>
 	<div class="features">
 
 		<article>
@@ -22,10 +22,12 @@
 				<p class="customtextcheckdana">Persyaratan untuk mencairkan dana anda sedang kami cek,
 					<br>silahkan
 					tunggu verifikasi agar dapat ke gedung aljamiah untuk melakukan pencairan.</p>
-
 			</div>
 		</article>
 	</div>
+<?php else: ?>
+<?php endif;?>
+
 </section>
 </div>
 </div>

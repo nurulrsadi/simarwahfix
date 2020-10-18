@@ -26,26 +26,74 @@
 
 	<!-- Nav Item - Utilities Collapse Menu -->
 	<li class="nav-item">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_editdana" aria-expanded="true"
 			aria-controls="collapseUtilities">
 			<i class="fas fa-fw fa-dollar-sign"></i>
 			<span>Pagu Anggaran</span>
 		</a>
-		<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+		<div id="collapse_editdana" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Menu Pagu :</h6>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_Universitas') ?>">Edit Pagu Universitas</a>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_Fakultas') ?>">Edit Pagu Per Fakultas</a>
         <a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_UKMUKK') ?>">Edit Pagu Per UKMUKK</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pagu') ?>">Cek Pengajuan</a>
+				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pagu') ?>">Cek Pengajuan</a> -->
 				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Data_Pagu') ?>">Data Anggaran</a> -->
-				<a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan') ?>">Cek Laporan Kegiatan</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan') ?>">Data Pengajuan </a>
+				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan') ?>">Cek Laporan Kegiatan</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan') ?>">Data Pengajuan </a> -->
+			</div>
+		</div>
+	</li>
+  <!-- CEK PENGAJUAN -->
+  <li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_pengajuan" aria-expanded="true"
+			aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-file-invoice-dollar"></i>
+			<span>Cek Pengajuan</span>
+		</a>
+		<div id="collapse_pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Menu Pengajuan :</h6>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_Universitas') ?>">Pengajuan Universitas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_Fakultas') ?>">Pengajuan per Fakultas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_UKMUKK') ?>">Pengajuan per UKM UKK</a>
+			</div>
+		</div>
+	</li>
+  <!-- CEK LAPORAN -->
+  <li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_Laporan" aria-expanded="true"
+			aria-controls="collapseUtilities">
+			<i class="fas fa-fw fa-paste"></i>
+			<span>Cek Laporan</span>
+		</a>
+		<div id="collapse_Laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Menu Laporan :</h6>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan_Universitas') ?>">Laporan Universitas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan_Fakultas') ?>">Laporan per Fakultas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan_UKMUKK') ?>">Laporan per UKM UKK</a>
 			</div>
 		</div>
 	</li>
 
-
-
+  <!-- MENU REVISI DANA -->
+  <li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_RevisiDana" aria-expanded="true"
+			aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-money-check-alt"></i>
+			<!-- <i class="fas fa-fw fa-dollar-sign"></i> -->
+			<span>Revisi Dana ACC</span>
+		</a>
+		<div id="collapse_RevisiDana" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Menu Laporan :</h6>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan_Universitas') ?>">Dana ACC Universitas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan_Fakultas') ?>">Dana ACC Fakultas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan_UKMUKK') ?>">Dana ACC UKM UKK</a>
+			</div>
+		</div>
+	</li>
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('c_admin/Data_Pinjam') ?>">
@@ -54,7 +102,7 @@
 	</li>
 
 	<!-- Nav Item - Ormawa -->
-  <li class="nav-item">
+  	<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="far fa-fw fa-address-book"></i>
             <span>Data Ormawa</span>
@@ -68,8 +116,21 @@
             </div>
         </div>
     </li>
-  
-    
+
+    <!-- Collapse Menu UKM UKK -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUKMUKK" aria-expanded="true" aria-controls="collapseUKMUKK">
+            <i class="far fa-fw fa-address-book"></i>
+            <span>Data UKM/UKK</span>
+        </a>
+        <div id="collapseUKMUKK" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu UKM/UKK :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_ukmukk') ?>">Data UKM/UKK</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_userukmukk') ?>">Data User UKM/UKK</a>
+            </div>
+        </div>
+    </li>
 
 	<!-- Nav Item - Keluhan -->
 	<li class="nav-item">

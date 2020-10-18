@@ -30,7 +30,8 @@ class data extends CI_Controller{
 		if($cek -> num_rows() == 1){
 			foreach ($cek->result() as $session) {
 				$sess_data['username'] = $session->username;
-				$sess_data['role'] = $session->role;
+        $sess_data['role'] = $session->role;
+        $sess_data['statususer'] = $session->statususer;
 				$sess_data['kode_himp_sess'] = $session->kode_himp;
 				$sess_data['status'] = "login";
 				$this->session->set_userdata($sess_data);
@@ -40,12 +41,14 @@ class data extends CI_Controller{
 			// var_dump($sess_data['role']);
 			// exit();
 			if($sess_data['username']){
-				// cek role
-				if($sess_data['role'] == 1){
-					redirect('c_admin/index');
-				}else{
-					redirect('c_user/index');
-				}
+        // cek role
+        if($sess_data['statususer']){
+          if($sess_data['role'] == 1){
+            redirect('c_admin/index');
+          }else{
+            redirect('c_user/index');
+          }
+        }
 			}
 	}else
 		if($cek)
