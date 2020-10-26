@@ -5,8 +5,8 @@ username ifsakti
 password ifsakti
 
 bisa juga
-username : kimiasains
-password : kimia
+username : admin_psm
+password : admin_psm
 ## admin : 
 username admin1
 password admin1
