@@ -1,12 +1,7 @@
 # test login
 Database yang digunakan : simarwahfix.sql
 ## ormawa : 
-username ifsakti
-password ifsakti
-
-bisa juga
-username : admin_psm
-password : admin_psm
+you can add manual from admin, thank you:)
 ## admin : 
 username admin1
 password admin1
