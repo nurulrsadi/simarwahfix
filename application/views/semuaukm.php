@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>simarwa</title>
+  <title>SIMARWAH</title>
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords"
     content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
@@ -73,66 +73,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
           <div class="col-md-12 text-center">
             <h2 class="service-title pad-bt15">UKM & UKK</h2>
-            <p class="sub-title pad-bt15">Unit Kegiatan Mahasiswa</p>
+            <p class="sub-title pad-bt15">Unit Kegiatan Mahasiswa & Unit Kegiatan Khusus</p>
             <hr class="bottom-line">
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+          <?php foreach ($semua_ukmukk->result_array() as $u):
+            $kode_ukmukk = $u['kode_ukmukk'];
+            $nama_ukmukk = $u['nama_ukmukk'];
+            $desc_ukmukk = $u['desc_ukmukk'];
+            $image = $u['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
             <figure>
-              <a href="<?php echo base_url().'c_home/ukmaja';?>">
-                <img src="<?php echo base_url('assets/img/pramuka.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
+              <a href="<?php echo base_url().'c_home/ukmaja/'.$kode_ukmukk;?>">
+                <img src="<?php echo base_url('assets/img/jurusan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
                 <figcaption>
-                  <h2>PRAMUKA</h2>
-                  <p>Pramuka UIN Sunan Gunung Djati Bandung</p>
+                  <h2><?php echo $nama_ukmukk ?></h2>
+                  <p><?php echo $desc_ukmukk ?></p>
                 </figcaption>
               </a>
             </figure>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/PSM.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>PSM</h2>
-                <p>Paduan Suara Mahasiswa</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/fabbis.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>FABBIS</h2>
-                <p>Family of Basketball UIN SGD BDG</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/liga.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>LIMA</h2>
-                <p>Liga Mahasiswa</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/LDM.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>LDM</h2>
-                <p>Lembaga Dakwah Masjid</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/port06.jpg')?>" class="img-responsive">
-              <figcaption>
-                <h2>Project For Everyone</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
-              </figcaption>
-            </figure>
-          </div>
+          <?php endforeach ?>
+
+          
+          
 
         </div>
     </section>

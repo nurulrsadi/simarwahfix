@@ -12,7 +12,8 @@ class c_home extends CI_Controller
 	{
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		// $data['jurusan'] = $this->Model_View->tampil_list_jurusan()->result();
-		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();
+		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();	
+		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
 		$this->load->view('home',$data);
 	}
 	public function demau()
@@ -56,17 +57,20 @@ class c_home extends CI_Controller
 	}
 	public function semuaukm()
 	{
-		$this->load->view('semuaukm');
+		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$this->load->view('semuaukm', $data);
 	}
 	public function ukmaja()
 	{
-		$kode_jurusan = $this->uri->segment(3);
+		$kode_ubidang = $this->uri->segment(3);
 		$data['usekben'] = $this->Model_View->tampil_usekben($kode_ubidang)->result();
 		$data['uketua'] = $this->Model_View->tampil_uketua($kode_ubidang)->result();
 		$data['uketuabidang'] = $this->Model_View->tampil_ukabid($kode_ubidang)->result();
 		$data['uanggota'] = $this->Model_View->tampil_uanggota($kode_ubidang)->result();
 		$data['ukm_ukk'] = $this->Model_View->tampil_ukmukk($kode_ubidang)->result();
 		$data['ubidang'] = $this->Model_View->tampil_ubidang($kode_ubidang)->result();
+		$data['kegiatan_ukmukk'] = $this->Model_View->tampil_ukegiatan($kode_ubidang);
+		$this->load->view('ukmaja',$data);
 
 		// $data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
 	}

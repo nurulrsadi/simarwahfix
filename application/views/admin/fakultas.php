@@ -47,10 +47,10 @@
     							<td><?php echo $misi ?></td>
     							<td>
     								<center>
-    									<a class="btn btn-warning" data-toggle="modal"
-    										data-target="#modaleditfakultas<?php echo $kode_fakultas;?>">Edit</a>
-    									<a class="btn btn-danger" data-toggle="modal"
-    										data-target="#modal_delete<?php echo $kode_fakultas;?>">Delete</a>
+    									<button class="btn btn-warning" data-toggle="modal"
+    										data-target="#modaleditfakultas<?php echo $kode_fakultas;?>">Edit</button>
+    									<button class="btn btn-danger" data-toggle="modal"
+    										data-target="#modal_delete<?php echo $kode_fakultas;?>">Delete</button>
     								</center>
     							</td>
     						</tr>
@@ -175,11 +175,11 @@
     	<div class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
-    				<h3 class="modal-title" id="myModalLabel">Delete Data Fakultas</h3>
+    				<h5 class="modal-title" id="myModalLabel">Delete Data Fakultas</h5>
     			</div>
     			<div class="modal-body">
-    				<h4>Kode Fakultas : <?php echo $kode_fakultas;?></h4>
-    				<h4>Nama Fakultas : <?php echo $nama_fakultas;?></h4>
+    				<h6>Kode Fakultas : <?php echo $kode_fakultas;?></h6>
+    				<h6>Nama Fakultas : <?php echo $nama_fakultas;?></h6><br>
     				<center>
     					<a class="btn btn-danger"
     						href="<?php echo base_url('c_admin/delete_data_fakultas/'.$kode_fakultas); ?>">Lanjutkan</a>

@@ -22,7 +22,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/suratpengajuan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'SPJ-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'spjupload');
       $this->spjupload->initialize($config);
@@ -30,7 +30,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/rinciankegiatan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RKG-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload',$config, 'rkgupload');
       $this->rkgupload->initialize($config);
@@ -38,7 +38,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/rkakl/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RKA_KL-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'rkaklupload');
       $this->rkaklupload->initialize($config);        
@@ -46,7 +46,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/tor/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'TOR-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'torupload');
       $this->torupload->initialize($config);
@@ -130,7 +130,7 @@ class dana extends CI_Controller{
         'suratpengajuan'=>$suratpengajuannya,
         'rinciankegiatan'=>$rinciankegiatannya,
         'rkakl'=>$rkaklnya,
-        'tor' =>$tor,
+        'tor' =>$tornya,
         'tahunakademik'=>$tahunakademik
       );
       // $datadana1 = $this->M_dana->insert_pengajuan($kd_jrsn,$kd_fklts,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan,$namaKegiatan,$statususer6,$akhirkegiatan,$danasisa);
@@ -164,18 +164,6 @@ class dana extends CI_Controller{
           $b = $danasisa;
           $c = $danaminus;
           $x = $b-$c;
-
-
-          // setlocale(LC_MONETARY,"de_DE");
-          // $x = $data['danaminus'];
-          // $y = $data['danaminus'];
-          // $danaupdate = $x-$y;
-          // $data['danasisa']-$data['danaminus'];
-          // $danaupdate = $dana2;
-          // $data['danasisanya'] = $this->input->post('update');
-          // $danaupdate=$danasisanya;
-
-          // $statususer6 = $statususer2;
           if($data['nPengajuan'] = 1 )
             {
               $pengajuan1 = $data['nPengajuan']+$data['a'];
@@ -241,7 +229,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/laporankegiatan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'LPJ-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'lpjupload');
       $this->lpjupload->initialize($config);
@@ -249,7 +237,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/laporanrincianbiaya/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RBY-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload',$config, 'rbyupload');
       $this->rbyupload->initialize($config);
@@ -318,7 +306,7 @@ class dana extends CI_Controller{
       $hapusrby='./assets/uploads/laporanrincianbiaya/'.$data->laporanrincianbiaya;
 
 
-      if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&($hapusrkakl)&&($hapuslpj)&&($hapusrby)){
+      if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&unlink($hapusrkakl)&&unlink($hapuslpj)&&unlink($hapusrby)){
         $delete=$this->M_dana->hapusFile($kd_jrsn);
         redirect(base_url('c_admin/Laporan_Kegiatan_Universitas'));
       }
@@ -363,7 +351,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/suratpengajuan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'SPJ-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'spjupload');
       $this->spjupload->initialize($config);
@@ -371,7 +359,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/rinciankegiatan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RKG-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload',$config, 'rkgupload');
       $this->rkgupload->initialize($config);
@@ -379,7 +367,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/rkakl/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RKA_KL-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'rkaklupload');
       $this->rkaklupload->initialize($config);        
@@ -387,7 +375,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/tor/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'TOR-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'torupload');
       $this->torupload->initialize($config);
@@ -514,7 +502,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/laporankegiatan/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'LPJ-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload', $config, 'lpjupload');
       $this->lpjupload->initialize($config);
@@ -522,7 +510,7 @@ class dana extends CI_Controller{
       $config['upload_path'] = './assets/uploads/laporanrincianbiaya/';//path folder
       $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
       $config['file_name'] = 'RBY-'.$kode;
-      $config['max_width'] = '2048';
+      $config['max_size'] = '2048';
       $config['remove_spaces'] = true;
       $this->load->library('upload',$config, 'rbyupload');
       $this->rbyupload->initialize($config);

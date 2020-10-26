@@ -60,7 +60,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="jurusan" id="jurusan"
-								value="<?= $jurusan ?>">
+								value="<?= $kd_jrsn ?>">
 						</div>
 					</div>
 					<div class="form-group row">

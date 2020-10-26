@@ -64,26 +64,29 @@ class M_dana extends CI_Model{
       $this->db->join('ukm_ukk', 'ukm_ukk.kode_ukmukk = tb_detailuserukmukk.kd_ukmukk');
       return $query = $this->db->get();
     }
-    function tampil_list_user_ukm_ormawa(){
-      $kdjrsnnya=array('UKM', 'UKK');
+    function tampil_list_user_anggota(){
       $this->db->select('*');
-      $this->db->from('jurusan');
-      $this->db->join('fakultas', 'fakultas.kode_fakultas = jurusan.parent_fakultas');
-      $this->db->where_in('kode_fakultas', $kdjrsnnya );
-      return $query = $this->db->get();
+      $this->db->from('tb_detailuser');
+      $this->db->join('anggota_himpunan', 'anggota_himpunan.parent_himpunan=tb_detailuser.kd_jrsn');
+      $this->db->group_by('kd_jrsn');
+      $this->db->select('kd_jrsn');
+      $this->db->order_by('kd_fklts');
+      return $this->db->select("count(*) as count_ahimp")
+      ->get()
+      ->result();
     }
     // END EDIT DANA PAGU
     
     // UNTUK CEK KALAU ADA YANG MAU NGAJUIN DANA
     function tampil_list_user_pengajuan(){
-      $query =$this->db->query("SELECT * FROM tb_detailuser, fakultas WHERE tb_detailuser.kd_fklts = fakultas.kode_fakultas AND statususer=3 ORDER BY kd_fklts");
+      $query =$this->db->query("SELECT * FROM tb_pengajuan, fakultas WHERE tb_pengajuan.kd_fakultas = fakultas.kode_fakultas AND statususer=3 ORDER BY kd_fakultas");
       return $query;
     }
     function tampil_list_user_pengajuanukm(){
-      return $query=$this->db->query("SELECT * FROM tb_detailuserukmukk WHERE statususer=3 ORDER BY kd_ukumkk");
+      return $query=$this->db->query("SELECT * FROM tb_pengajuan_ukmukk WHERE statususer=3 ORDER BY kd_ukmkk");
     }
     function tampil_list_user_pengajuan_univ(){
-      $query =$this->db->query("SELECT * FROM tb_detailuser WHERE statususer=3 AND kd_fklts is NULL ORDER BY kd_jrsn");
+      $query =$this->db->query("SELECT * FROM tb_pengajuan WHERE statususer=3 AND kd_fakultas is NULL ORDER BY kd_jrsn");
       return $query;
     }
     // END CEK KALAU ADA YANG MAU NGAJUIN DANA
@@ -352,41 +355,55 @@ class M_dana extends CI_Model{
       // P. UNIV
         // 
         function count_puniv(){
-          $this->db->count_all('tb_detailuser');
-          $this->db->where('parent_fakultas NULL', NULL, TRUE);
-          $res = $this->db->get();
-          if($res->num_rows() > 0)
-          {
-              return $res->result();
-          }else{
-              return false;
-          }
+          $where="statususer='3'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan');
+          $this->db->where('kd_fakultas is NULL', NULL, TRUE);
+          $this->db->where($where);
+          $query=$this->db->count_all_results();
         }
       // P. FKLTS
         function count_pfklts(){
-            $this->db->count_all('tb_detailuser');
-            $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
-            $res = $this->db->get();
-            if($res->num_rows() > 0)
-            {
-                return $res->result();
-            }else{
-                return false;
-            }
+          $where="statususer='3'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan');
+          $this->db->where($where);
+          $this->db->where('kd_fakultas is not NULL', NULL, FALSE);
+          $query=$this->db->count_all_results();
           }
       // P. UKMUKK
         function count_pukmukk(){
-          $this->db->count_all('tb_detailuserukmukk');
-          $res = $this->db->get();
-          if($res->num_rows() > 0)
-          {
-              return $res->result();
-          }else{
-              return false;
-          }
+          $where="statususer='3'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan_ukmukk');
+          $this->db->where($where);
+          $query=$this->db->count_all_results();
         }
-    // CEK LAPORAN (tb_penajuan, tb_pengajuan_ukmukk, kd_jrsn dan kd_ukmkk)
+    // CEK LAPORAN (tb_pengajuan, tb_pengajuan_ukmukk, kd_jrsn dan kd_ukmkk)
       // L. UNIV
+        function count_luniv(){
+          $where="statususer='5'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan');
+          $this->db->where('kd_fakultas is NULL', NULL, TRUE);
+          $this->db->where($where);
+          $query=$this->db->count_all_results();
+        }
       // L. FKLTS
+        function count_lfklts(){
+          $where="statususer='5'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan');
+          $this->db->where('kd_fakultas is not NULL', NULL, FALSE);
+          $this->db->where($where);
+          $query=$this->db->count_all_results();
+        }
       // L. UKMUKK
+        function count_lukmukk(){
+          $where="statususer='5'";
+          $this->db->select('*');
+          $this->db->from('tb_pengajuan_ukmukk');
+          $this->db->where($where);
+          $query=$this->db->count_all_results();
+        } 
 }

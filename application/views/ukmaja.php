@@ -36,29 +36,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">SI<span class="logo-dec">MARWAH</span></a>
+            <a class="navbar-brand">SI<span class="logo-dec">MARWA</span></a>
           </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
+           <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
               <?php if($this->session->userdata('status') == "login"){?>
-                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
               <?php } else {?>
               <?php } ?>
 
               <?php if($this->session->userdata('status') == "login"){?>
-              
+              <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
-            <?php } else {?>  
-              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
-            <?php } ?>
-
+              <?php } else {?> 
+              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
               
-            </ul>
-          </div>  
+              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
+              <?php } ?>              
+                </ul>
+              </div>
         </div>
       </nav>
     </div>
@@ -70,13 +73,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row" style="margin-bottom: 30px; margin: 100px; margin-top: 50px;">
 
           <div class="col-md-12 text-center" style="margin-bottom: 0px;">
-            <div>
+            <div class="kotakb" style="border-style: none; width: 100%;">
               <div class="service-item">
-                <?php foreach($ukm_ukk as $uk){ ?>
-                <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 45px"><?php echo $uk->nama_ukmukk;  ?></h2>
+                <?php foreach($ukm_ukk as $u){ ?>
+                
                 <hr class="bottom-line">
-                <p><?php echo $uk->desc_ukmukk; ?> </p>
-
+                  <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $u->nama_ukmukk ?></h2>
+                  <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $u->desc_ukmukk ?></h2>
+                <?php } ?>                 
                 <br>
               </div>
             </div>
@@ -84,52 +88,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
           <div class="row" style="margin-bottom: 40px; text-align: center;">
-            <?php $id=1; foreach($ukm_ukk as $uk){ ?>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="kotakc" style="margin-left: 10px;">
-                <div class="service-item">
-                  <h3><span>VISI</span></h3>
-                  <p><?php echo $uk->u_visi; ?></p>
+            <?php foreach($ukm_ukk as $u){ ?>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="kotakc" style="margin-left: 10px; border-color: transparent;">
+                  <div class="service-item">
+                    <h3><span>VISI</span></h3>
+                    <p><?php echo $u->visi_ukmukk ?></p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <br>
-            <br>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="kotakc" style="margin-right: 10px;">
-                <div class="service-item">
-                  <h3><span>MISI</span></h3>
-                  <p><?php echo $uk->u_misi; ?></p>
+              <br>
+              <br>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="kotakc" style="margin-right: 10px; border-color: transparent;">
+                  <div class="service-item">
+                    <h3><span>MISI</span></h3>
+                    <p><?php echo $u->misi_ukmukk ?></p>
+                  </div>
                 </div>
               </div>
-            </div>
             <?php } ?> 
           </div>
 
           <div>
             <div class="row">
-              <?php $id=1; foreach($uketua as $uk){ ?>
-              <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <div class="kotakb" style="width: 50%; border-color: white; margin:auto; margin-bottom: 20px;">
-                  <div class="service-item">
-                    <h3><span><?php echo $uk->u_jabatan ?></span></h3>
-                      <p><?php echo $uk->u_nim ?></p>
-                      <p><?php echo $uk->u_nama?></p>
+              <?php foreach($uketua as $u){ ?>
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                  <div class="kotakb" style="width: 50%; border-color: white; margin:auto; margin-bottom: 20px;">
+                    <div class="service-item">
+                      <h3><span><?php echo $u->u_jabatan ?></span></h3>
+                      <p><?php echo $u->u_nim ?></p>
+                      <p><?php echo $u->u_nama?></p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              <?php } ?> 
             </div>
 
             <div class="row">
-              <?php $id=1; foreach($usekben as $uk){ ?>
-               <?php if($uk->u_jabatan == 'SEKRETARIS' || $uk->u_jabatan == 'BENDAHARA')
+              <?php $id=1; foreach($usekben as $u){ ?>
+               <?php if($u->u_jabatan == 'SEKRETARIS' || $u->u_jabatan == 'BENDAHARA')
                {?>
                 <div class="col-md-4 col-sm-12 col-xs-12 text-center">
                     <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
                       <div class="service-item">
-                      <h3><span style="font-size: 35px;"><?php echo $uk->u_jabatan ?></span></h3>
-                      <p><?php echo $uk->u_nim ?></p>
-                      <p><?php echo $uk->u_nama?></p>
+                      <h3><span style="font-size: 35px;"><?php echo $u->u_jabatan ?></span></h3>
+                      <p><?php echo $u->u_nim ?></p>
+                      <p><?php echo $u->u_nama?></p>
                     </div>
                   </div>
                 </div>
@@ -139,19 +144,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php } ?>          
           </div>
 
+          </div>
+           <center>
+           <div>
+            <h3>Bidang - Bidang</h3>
+            <hr>
+          </div>    
+          </center>
+        
           <div class = "row" style="margin-bottom: 15px; margin-top: 15px;">
-            <?php $id=1; foreach($ubidang as $uk){ ?>
-              <?php if($uk->desc_ubidang != 'EX OFFICIO'){?>
+            <?php foreach($ubidang as $u){ ?>
+              <?php if($u->desc_ubidang != 'EX OFFICIO'){?>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="kotakb" style="border-color: white;">
                   <div class="service-item">
                     <!-- <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; padding: 10px;"> -->
-                    <img width="200" height="200" src="<?php echo base_url('assets/img/bidang/').$uk->image?>" >
-                    <h3><span><?php echo $uk->label_ubidang?></span></h3>
-                    <p><?php echo $uk->desc_ubidang?></p>
+                    <img width="200" height="200" src="<?php echo base_url('assets/img/bidang/').$u->image?>" >
+                    <h3><span><?php echo $u->label_ubidang?></span></h3>
+                    <p><?php echo $u->desc_ubidang?></p>
                     <h4>Ketua Bidang</h4>
                     <?php foreach($uketuabidang as $agt){?>
-                      <?php if($uk->kode_ubidang == $agt->parent_ubidang)
+                      <?php if($u->kode_ubidang == $agt->parent_ubidang)
                       {?>
                         <p><?php echo $agt->u_nama?></p>
                       <?php } else {?>
@@ -160,7 +173,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php } ?>  
                     <h4>Anggota</h4>
                     <?php foreach($uanggota as $agt){?>
-                      <?php if($uk->kode_ubidang == $agt->parent_ubidang)
+                      <?php if($u->kode_ubidang == $agt->parent_ubidang)
                       {?>
                         <p><?php echo $agt->u_nama?></p>
                       <?php } else {?>
@@ -177,7 +190,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php } ?>     
           </div>
 
-      <div class="row">
+        </div>
+      </div>
+
+      <!-- <div class="row">
         <div class="col-md-12 col-sm-12 text-center">
           <h2 class="service-title pad-bt15">Data Anggota</h2>
           <hr class="bottom-line">
@@ -187,15 +203,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <br>
           <br>
         </div>
-      </div>
+      </div> -->
     </section>
     <!---->
-    <section id="aulasc" class="section-padding wow fadeInUp delay-05s" style="background-color: #f3f3f3;">
+   <!--  <section id="aulasc" class="section-padding wow fadeInUp delay-05s" style="background-color: #f3f3f3;">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
             <h2 class="service-title pad-bt15">Kegiatan</h2>
-            <!-- <p class="sub-title pad-bt15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore magna aliqua.</p> -->
+
             <hr class="bottom-line">
           </div>
 
@@ -264,83 +280,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section id="service" class="section-padding wow fadeInUp delay-05s">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <h2 class="service-title pad-bt15">Program Kerja</h2>
-            <hr class="bottom-line">
-          </div>
-          <div class="col-md-12 text-center">
-            <table class="fixed-th">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Waktu Acara</th>
-                  <th>Nama Acara</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Agustur - September 2019</td>
-                  <td>PBAK 2019</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-
-                <tr>
-                  <td>7</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>September - November 2019</td>
-                  <td>MONITOR 2019</td>
-                </tr>
-              </tbody>
-            </table>
-            <br />
-            <br>
-            <br>
-          </div>
+       <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="service-title pad-bt15">Program Kerja</h2>
+          <hr class="bottom-line">
         </div>
+        <div class="col-md-12 text-center">
+          <table class="fixed-th" >
+            <thead>
+              <tr>
+                <th width="300">Waktu Acara</th>
+
+                <th width="800">Nama Kegiatan</th>
+                
+              </tr>
+            </thead>
+            <?php
+                  foreach($kegiatan_ukmukk->result_array() as $i):
+                    $start_date=$i['ustart_date'];
+                    $end_date=$i['uend_date'];
+                    $nama_kegiatan=$i['nama_ukegiatan'];
+                      
+                      ?>
+            <tbody>
+              <tr>
+                            <td width="300"><?php echo $start_date ?> s/d <?php echo $end_date ?> </td>
+                            <td width="800"><?php echo $nama_kegiatan ?></td>
+                            
+                            
+              </tr>   
+            </tbody>
+            <?php endforeach;?>
+
+          </table>
+          <br />
+          <br>
+          <br>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -351,11 +332,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container">
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <img src="<?php echo base_url('assets/img/uinlogo.png')?>" style="width:110px;height:160px; margin: auto;">
+              <img src="<?php echo base_url('assets/img/uinlogo.png')?>" style="width:150px;height:150px; margin: 10px;">
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWA</span></h3>
+              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
               <ul>
                 <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
                 <li>

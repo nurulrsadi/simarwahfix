@@ -14,9 +14,127 @@
 
 			<!-- Topbar Navbar -->
 			<ul class="navbar-nav ml-auto">
+      <?php if($count_puniv||$count_pfklts||$count_pukmukk||$count_luniv||$count_lfklts||$count_lukmukk ==0 ):?>
+      <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter"></span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Notifikasi
+                </h6>
+                <a class="dropdown-item d-flex align-items-center">
+                  <div class="mr-3">
+                    Tidak ada notifikasi baru
+                  </div>
+                </a>
+              </div>
+      </li>
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <?php elseif($count_puniv||$count_pfklts||$count_pukmukk||$count_luniv||$count_lfklts||$count_lukmukk >0 ):?>
+      <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">!</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Notifikasi
+                </h6>
+                <!-- NOTIF PENGAJUAN UNIV-->
+                <?php elseif($count_puniv!=0):?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Cek_Pengajuan_Universitas') ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
 
-
-				<div class="topbar-divider d-none d-sm-block"></div>
+                  <div>
+                    <div class="small text-gray-500"></div>
+                    Ada Pengajuan baru dari ORMAWA Tingkat Universitas
+                  </div>
+                </a>
+                <!-- NOTIF PENGAJUAN FAKULTAS -->
+                <?php elseif($count_pfklts!=0):?>
+                  <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Cek_Pengajuan_Fakultas') ?>">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-donate text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500"></div>
+                      Ada Pengajuan baru dari ORMAWA tingkat Fakultas
+                    </div>
+                  </a>
+                <!-- NOTIF PENGAJUAN UKM UKK -->
+                <?php elseif($count_pukmukk!=0):?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Cek_Pengajuan_UKMUKK') ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"></div>
+                    Ada Pengajuan baru dari ORMAWA tingkat UKM UKK
+                  </div>
+                </a>
+                <!-- NOTIF LAPORAN UNIV -->
+                <?php elseif($count_luniv!=0):?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Laporan_Kegiatan_Universitas') ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"></div>
+                    Ada Laporan Kegiatan baru dari ORMAWA Tingkat Universitas
+                  </div>
+                </a>
+                <!-- NOTIF LAPORAN FAKULTAS -->
+                <?php elseif($count_lfklts!=0):?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Laporan_Kegiatan_Fakultas') ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"></div>
+                    Ada Laporan Kegiatan baru dari ORMAWA Tingkat Fakultas
+                  </div>
+                </a>
+                <!-- NOTIF LAPORAN UKM UKK -->
+                <?php elseif($count_lukmukk!=0):?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url('c_admin/Laporan_Kegiatan_UKMUKK') ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500"></div>
+                    Ada Laporan Kegiatan baru dari ORMAWA Tingkat UKM UKK
+                  </div>
+                </a>
+              </div>
+            </li>
+            
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <?php else:?>
+            <?php endif;?>
 
 				<!-- Nav Item - User Information -->
 				<li class="nav-item dropdown no-arrow">

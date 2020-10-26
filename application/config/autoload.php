@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file', 'security','form', 'date', 'simarwah');
+$autoload['helper'] = array('url', 'file', 'security','form', 'date', 'simarwah', 'date');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('M_data', 'M_dana', 'M_ormawa');
+$autoload['model'] = array('M_data', 'M_dana', 'M_ormawa', 'Model_View');

@@ -60,7 +60,7 @@
     		</div>
     	</div>
     </div>
-
+                  <!-- </div> -->
     <!-- Modal Tambah Fakultas -->
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->

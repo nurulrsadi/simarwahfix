@@ -11,6 +11,9 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
+                <div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashormawahimp');  ?>"></div>
+                <?php if($this->session->flashdata('flashormawahimp')): ?>
+                <?php endif; ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -19,10 +22,12 @@
                              <tr>
                                 <th>No</th>
                                 <th>Nama User</th>
+                                <th>No HP</th>
                                 <th>Username</th>
+                                
                                 <th>Password</th>
-                                <th>Role</th>
-                                <th>Kode Himpunan</th>
+                               <!--  <th>Role</th> -->
+                                <th>Jurusan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -31,6 +36,8 @@
                   foreach($users->result_array() as $i):
                     $id_user=$i['id_user'];
                     $nama=$i['nama'];
+                    // $email=$i['email'];
+                    $telp=$i['telp'];
                     $username=$i['username'];
                     $password=$i['password'];
                     $role=$i['role'];
@@ -41,13 +48,15 @@
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                           <td><?php echo $j++; ?></td>
                           <td><?php echo $nama ?></td>
+                         <!--  <td><?php echo $email ?></td> -->
+                          <td><?php echo $telp ?></td>
                           <td><?php echo $username ?></td>
                           <td><?php echo $password ?></td>
-                          <td><?php echo $role ?></td>
+                         <!--  <td><?php echo $role ?></td> -->
                           <td><?php echo $kd_himp ?></td>
                           <td><center>
-                            <a class="btn btn-warning" data-toggle="modal" data-target="#modaledituser<?php echo $id_user;?>">Edit</a>
-                            <a class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>">Delete</a>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser<?php echo $id_user;?>">Edit</button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>">Delete</button>
                         </center>
                     </td>
                 </tr>
@@ -73,20 +82,20 @@
                    <form method="post" action="<?php echo base_url().'c_admin/tambah_data_user'?>" enctype="multipart/form-data">
                                             <div class="form-group">
                                             <label>Nama User</t></label>
-                                            </t><input type="text" name="nama" class="form-control" value="" required>
+                                            </t><input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
-                                            <label>Email</t></label>
-                                                </t><input type="text" name="email" class="form-control" value="" required>
+                                            <label>Telp</t></label>
+                                                </t><input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
                                             <label>
                                                 Username</t></label>
-                                                </t><input type="text" name="username" class="form-control" value="">
+                                                </t><input type="email" name="username" class="form-control" autocomplete="off" value="">
                                             </div>  
                                             <div class="form-group " >
                                             <label>Password</t></label>
-                                                </t><input type="password" name="password" class="form-control" value="">
+                                                </t><input type="password" name="password" class="form-control" autocomplete="off" value="">
                                             </div>                                                    
                                             <div class="form-group ">
                                             <label>Kode Himpunan</label>
@@ -119,45 +128,43 @@
                     $password=$i['password'];
                     $role=$i['role'];
                     $kd_himp=$i['kode_himp'];
+                    $telp=$i['telp'];
                     ?>
  <div class="modal fade" id="modaledituser<?php echo $id_user;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel">Input User Himpunan</h6>
+                    <h6 class="modal-title" id="exampleModalLabel">Edit User Himpunan</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                    <form method="post" action="<?php echo base_url().'c_admin/edit_user_himpunan'?>" enctype="multipart/form-data">
-                                            <div class="form-group">
-                                            <label>Id User</t></label>
-                                            </t><input type="text" name="id_user" class="form-control" value="<?php echo $id_user;?>" required readonly>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Nama</t></label>
-                                                </t><input type="text" name="nama" class="form-control" value="<?php echo $nama;?>" required>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Email</t></label>
-                                                </t><input type="text" name="email" class="form-control" value="<?php echo $email;?>" required>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>
-                                                Username</t></label>
-                                                </t><input type="text" name="username" class="form-control" value="<?php echo $username;?>">
-                                            </div>  
-                                            <div class="form-group " >
-                                            <label>Password</t></label>
-                                                </t><input type="password" name="password" class="form-control" value="<?php echo $password;?>">
-                                            </div>  
-                                            <div class="form-group " >
-                                            <label>Kode Himpunan</t></label>
-                                                </t><input type="text" name="kd_himp" class="form-control" value="<?php echo $kd_himp;?>" required readonly>
-                                            </div>                                                   
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                    <input type="hidden" id="id_user" name="id_user" value="<?= $id_user?>">
+                    <div class="form-group " >
+                    <label>Nama</t></label>
+                        </t><input type="text" name="nama" class="form-control" value="<?php echo $nama;?>" required>
+                    </div> 
+                    <div class="form-group " >
+                    <label>No HP</t></label>
+                        </t><input type="text" name="telp" class="form-control" value="<?php echo $telp;?>" required>
+                    </div> 
+                    <div class="form-group " >
+                    <label>
+                        Username</t></label>
+                        </t><input type="text" name="username" class="form-control" value="<?php echo $username;?>">
+                    </div>  
+                    <div class="form-group " >
+                    <label>Password</t></label>
+                        </t><input type="password" name="password" class="form-control" value="<?php echo $password;?>">
+                    </div>  
+                    <div class="form-group " >
+                    <label>Kode Himpunan</t></label>
+                        </t><input type="text" name="kd_himp" class="form-control" value="<?php echo $kd_himp;?>" required readonly>
+                    </div>                                                   
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
                     </div>
                 </div>
@@ -180,11 +187,11 @@
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="myModalLabel">Delete Data User Himpunan</h3>
+                <h5 class="modal-title" id="myModalLabel">Delete Data User Himpunan</h5>
             </div>
                 <div class="modal-body">
-                    <h4>Id User : <?php echo $id_user;?></h4>
-                    <h4>Nama    : <?php echo $nama;?></h4>
+                    <h6>Id User : <?php echo $id_user;?></h6>
+                    <h6>Nama    : <?php echo $nama;?></h6>
                     <center>
                      <a class="btn btn-danger" href="<?php echo base_url('c_admin/delete_data_user/'.$id_user); ?>">Lanjutkan</a>
                     </center>

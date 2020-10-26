@@ -5,45 +5,63 @@ class c_admin extends CI_Controller
 {
     function __construct(){
         parent::__construct();	
-        $this->load->model('Model_View');
-        $this->load->model('M_data');
-        // $this->load->model('M_data');
-        if($this->session->userdata('status') != "login"){
+        if($this->session->userdata('status') != "login" && $this->session->userdata('role')!=1 ){
           redirect(base_url("c_home/login"));
-          
         }
 	}
     public function index()
     {       
-            $data['title'] = 'Dashboard';
-            $data['totalFklts'] = $this->M_ormawa->getTotalAnggotafak();
-            $data['sumAktifFklts'] = $this->M_ormawa->getAnggotaAktiffak();
-            $data['sumAktifukmukk'] = $this->M_ormawa->getAnggotaAktifUKMUKK();
-            
-            $data['count_puniv']= $this->M_dana->count_puniv();
-            $data['count_pfklst']= $this->M_dana->count_pfklts();
-            $data['count_pukmukk']= $this->M_dana->count_pukmukk();
-            // $data['count_puniv']= $this->M_dana->count_puniv();
-            // $data['count_puniv']= $this->M_dana->count_puniv();
-            // $data['count_puniv']= $this->M_dana->count_puniv();
-            $this->load->view('templates/headeradm', $data);
-            $this->load->view('templates/sidebaradm', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/index', $data);
-            $this->load->view('templates/footeradm',$data);
+      $data['title'] = 'Dashboard';
+      $data['totalFklts'] = $this->M_ormawa->getTotalAnggotafak();
+      $data['sumAktifFklts'] = $this->M_ormawa->getAnggotaAktiffak();
+      $data['sumAktifukmukk'] = $this->M_ormawa->getAnggotaAktifUKMUKK();
+      
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/index', $data);
+      $this->load->view('templates/footeradm',$data);
         
+    }
+    public function Edit_Pagu_Universitas(){
+      $data = array(
+        'title' => 'Edit Pagu Anggaran',
+        'userdanauniv'=> $this->M_dana->tampil_list_user_danauniv(),
+        'fak' => $this->Model_View->tampil_list_fakultas(),
+    );
+    $data['count_puniv']= $this->M_dana->count_puniv();
+    $data['count_pfklts']= $this->M_dana->count_pfklts();
+    $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+    $data['count_luniv']= $this->M_dana->count_luniv();
+    $data['count_lfklts']= $this->M_dana->count_lfklts();
+    $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/editpaguuniv', $data);
+    $this->load->view('templates/footeradm');
     }
     public function Edit_Pagu_Fakultas()
     {
         $session = $this->session->userdata('id');
         $data = array(
             'title' => 'Edit Pagu Anggaran',
-            // 'getuser'=>$this->M_dana->tampil_getuser(),
-            // 'getfakultas' =>$this->M_dana->tampil_getfakultas(),
             'userdana'=> $this->M_dana->tampil_list_user_dana(),
+            'usercekagt'=>$this->M_dana->tampil_list_user_anggota(),
             'fak' => $this->Model_View->tampil_list_fakultas(),
-            // $data['fak'] = $this->Model_View->tampil_list_fakultas();
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -58,27 +76,18 @@ class c_admin extends CI_Controller
             'title' => 'Edit Pagu Anggaran UKM UKK',
             'userdanaukmukk'=> $this->M_dana->tampil_list_user_dana_ormawa(),
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/editpaguukmukk', $data);
         $this->load->view('templates/footeradm');
       }
-      public function Edit_Pagu_Universitas(){
-        $data = array(
-          'title' => 'Edit Pagu Anggaran',
-          // 'getuser'=>$this->M_dana->tampil_getuser(),
-          // 'getfakultas' =>$this->M_dana->tampil_getfakultas(),
-          'userdanauniv'=> $this->M_dana->tampil_list_user_danauniv(),
-          'fak' => $this->Model_View->tampil_list_fakultas(),
-          // $data['fak'] = $this->Model_View->tampil_list_fakultas();
-      );
-            $this->load->view('templates/headeradm', $data);
-            $this->load->view('templates/sidebaradm', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/editpaguuniv', $data);
-            $this->load->view('templates/footeradm');
-          }
     public function Data_Pagu()
     {
         $session = $this->session->userdata('id');
@@ -86,6 +95,12 @@ class c_admin extends CI_Controller
             'title' => 'Data Pagu Anggaran',
             'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -97,8 +112,13 @@ class c_admin extends CI_Controller
         $data=array(
           'title' => 'Cek Pengajuan ORMAWA Tingkat Universitas',
           'datapengaju_univ' => $this->M_dana->tampil_list_user_pengajuan_univ(),
-          // 'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -111,6 +131,12 @@ class c_admin extends CI_Controller
           'title' => 'Cek Pengajuan ORMAWA Tingkat Fakultas',
           'datapengaju' => $this->M_dana->tampil_list_user_pengajuan(),
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -123,6 +149,12 @@ class c_admin extends CI_Controller
           'title' => 'Cek Pengajuan ORMAWA Tingkat UKM UKK',
           'datapengajuukm' => $this->M_dana->tampil_list_user_pengajuanukm(),
         );
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -132,8 +164,14 @@ class c_admin extends CI_Controller
     public function Laporan_Kegiatan_Universitas()
     {
          
-        $data['title'] = 'Cek Laporan Kegiatan';
+        $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat Universitas';
         $data['lpjuniv'] = $this->M_dana->tampil_list_lpjuniv();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -142,9 +180,14 @@ class c_admin extends CI_Controller
     }
     public function Laporan_Kegiatan_Fakultas()
     {
-         
-        $data['title'] = 'Cek Laporan Kegiatan';
+        $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat Fakultas';
         $data['lpjjrsn'] = $this->M_dana->tampil_list_lpjjrsn();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -154,8 +197,14 @@ class c_admin extends CI_Controller
     public function Laporan_Kegiatan_UKMUKK()
     {
          
-        $data['title'] = 'Cek Laporan Kegiatan';
+        $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat UKM UKK';
         $data['lpjukmukk'] = $this->M_dana->tampil_list_lpjukmukk();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -165,37 +214,60 @@ class c_admin extends CI_Controller
     public function List_Pengajuan_Universitas(){
       $data['title'] = 'List Pengajuan Berhasil';
       $data['datauserbelumuniv'] = $this->M_dana->tampil_list_user_laporanbelumdikirimuniv();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/pengajuanberhasiluniv', $data);
-        $this->load->view('templates/footeradm');
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/pengajuanberhasiluniv', $data);
+      $this->load->view('templates/footeradm');
     }
     public function List_Pengajuan_Fakultas(){
       $data['title'] = 'List Pengajuan Berhasil';
       $data['datauserbelum'] = $this->M_dana->tampil_list_user_laporanbelumdikirim();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/pengajuanberhasil', $data);
-        $this->load->view('templates/footeradm');
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/pengajuanberhasil', $data);
+      $this->load->view('templates/footeradm');
     }
     public function List_Pengajuan_UKMUKK(){
       $data['title'] = 'List Pengajuan Berhasil';
       $data['datauserbelum_ukmukk'] = $this->M_dana->tampil_list_user_laporanbelumdikirim_ukmukk();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/pengajuanberhasil', $data);
-        $this->load->view('templates/footeradm');
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/pengajuanberhasilukmukk', $data);
+      $this->load->view('templates/footeradm');
     }
     // function Cek_Data_Pengajuan/Tidak_ACC(){
 
     // }
     public function Cek_Surat()
     {
-         
         $data['title'] = 'Cek Surat Izin';
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -204,8 +276,14 @@ class c_admin extends CI_Controller
     }
     public function Data_Pinjam()
     {
-         
         $data['title'] = 'Data Peminjaman';
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+        $data['aula_notyet']=$this->M_ormawa->get_belum_tanggalnya();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -218,6 +296,12 @@ class c_admin extends CI_Controller
     {
         $data['title'] = 'Keluhan';
         $data['userkeluhan']=$this->M_ormawa->tampil_keluhan();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -227,6 +311,12 @@ class c_admin extends CI_Controller
     public function Edit_Profil()
     {
         $data['title'] = 'Edit Profil';
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -235,8 +325,13 @@ class c_admin extends CI_Controller
     }
     public function Profil()
     {
-    
         $data['title'] = 'Profil Admin';
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -245,8 +340,13 @@ class c_admin extends CI_Controller
     }
     public function Password()
     {
-        
         $data['title'] = 'Edit Password';
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -254,12 +354,14 @@ class c_admin extends CI_Controller
         $this->load->view('templates/footeradm');
     }
     function Cek_Data_Pengajuan($kd_jrsn){
-      // $cek = $this->Model_View->cek_datahimp($kd_jrsn);
-      // $where = array('kd_jrsn' => $kd_jrsn);
-      // $data['datadana'] = $this->M_dana->edit_accpengajuan($where,'tb_detailuser')->result();
-      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuan($kd_jrsn);
-      // $this->load->view('v_edit',$data);
       $data['title'] = 'Cek Data';
+      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuan($kd_jrsn);
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -267,8 +369,14 @@ class c_admin extends CI_Controller
       $this->load->view('templates/footeradm');
     }
     function Cek_Data_Pengajuan_UKMUKK($kd_ukmukk){
-      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
       $data['title'] = 'Cek Data';
+      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -315,9 +423,31 @@ class c_admin extends CI_Controller
     $this->session->set_flashdata('flashdana', 'Dana Ormawa berhasil diupdate');
     redirect('c_admin/Edit_Pagu_UKMUKK');
   }
+    public function data_universitas(){
+      $data['title'] = 'Data Universitas';
+      $data['univ'] = $this->Model_View->tampil_list_universitas();
+      $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/universitas', $data);
+      $this->load->view('templates/footeradm');
+    }
     public function data_fakultas(){
         $data['title'] = 'Data Fakultas';
         $data['fakultas'] = $this->Model_View->tampil_list_fakultas();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -329,6 +459,12 @@ class c_admin extends CI_Controller
       $data['title'] = 'Data Himpunan';
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
       $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -339,9 +475,14 @@ class c_admin extends CI_Controller
 
     public function data_user_himpunan(){
       $data['title'] = 'Data User Himpunan';
-      $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
-      // $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      $data['himpunan'] = $this->Model_View->tampil_list_alljurusan1();
       $data['users'] = $this->Model_View->tampil_user_himpunan();
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -387,7 +528,7 @@ class c_admin extends CI_Controller
       $visi = $this->input->post('visi');
       $misi = $this->input->post('misi');
       // $this->M_dana->edit_namafakultas($kode_fakultas, $nama_fakultas);
-      $this->M_ormawa->update_fakultas($kode_fakultas, $nama_fakultas);
+      // $this->M_ormawa->update_fakultas($kode_fakultas, $nama_fakultas);
       $this->Model_View->update_fakultas($kode_fakultas,$nama_fakultas,$deskripsi,$visi,$misi);
       $this->session->set_flashdata('flashormawa','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_fakultas');
@@ -407,9 +548,7 @@ class c_admin extends CI_Controller
   public function tambah_data_himpunan(){
       $kode_himpunan = $this->input->post('kode_himpunan');
       $nama_himpunan = $this->input->post('nama_himpunan');
-      $deskripsi = $this->input->post('deskripsi');
-      $visi = $this->input->post('visi');
-      $misi = $this->input->post('misi');
+      $deskripsi = $this->input->post('desc_himpunan');
       $parent_fakultas = $this->input->post('parent_fakultas');
       $image = $this->input->post('image');
 
@@ -431,8 +570,6 @@ class c_admin extends CI_Controller
           'kode_himpunan' => $kode_himpunan,
           'nama_himpunan'=> $nama_himpunan,
           'desc_himpunan' => $deskripsi,
-          'visi' => $visi,
-          'misi' => $misi,
           'image' => $image,
       );
       $datadana = array(
@@ -444,8 +581,6 @@ class c_admin extends CI_Controller
           'kode_himpunan' => $kode_himpunan,
           'nama_himpunan'=> $nama_himpunan,
           'desc_himpunan' => $deskripsi,
-          'visi' => $visi,
-          'misi' => $misi,
           'parent_fakultas' => $parent_fakultas,
           'image' => $image
       );
@@ -499,18 +634,17 @@ public function edit_data_himpunan(){
 
   public function tambah_data_user() {
       $nama = $this->input->post('nama');
-      $email = $this->input->post('email');
       $username = $this->input->post('username');
       $password = $this->input->post('password');
       $role = 0;
       $is_active = 1;
       $statususer=1;
       $kd_himp = $this->input->post('kode_himp');
+      $telp=$this->input->post('telp');
       
 
       $data = array(
           'nama' => $nama,
-          'email' => $email,
           'username' => $username,
           'password' => md5($password),
           'role' => $role,
@@ -518,15 +652,18 @@ public function edit_data_himpunan(){
           'is_active' => $is_active,
           'insert_date' => date('Y-m-d H:i:s'),
           'statususer' => $statususer,
+          'telp' =>$telp,
       );
       $this->Model_View->tambah_user_himpunan($data);
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
       redirect('c_admin/data_user_himpunan');
   }
 
   public function delete_data_user(){
       $id_user = $this->uri->segment(3);
       $this->Model_View->delete_user_himpunan($id_user);
-      $this->session->set_flashdata('msg','<div class="alert alert-success">Data User Himpunan Dihapus</div>');
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
+      // $this->session->set_flashdata('msg','<div class="alert alert-success">Data User Himpunan Dihapus</div>');
       redirect('c_admin/data_user_himpunan');
   }
 
@@ -539,8 +676,10 @@ public function edit_data_himpunan(){
       $role = 0;
       $is_active = 1;
       $kd_himp = $this->input->post('kode_himp');
+      $telp=$this->input->post('telp');
 
-      $this->Model_View->edit_user_himpunan($id_user,$nama,$email,$username,md5($password));
+      $this->Model_View->edit_user_himpunan($id_user,$nama,$email,$telp,$username,md5($password));
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_user_himpunan');
   }
   // 
@@ -613,6 +752,12 @@ public function edit_data_himpunan(){
   public function data_ukmukk(){
         $data['title'] = 'Data UKM/UKK';
         $data['ukmukk'] = $this->Model_View->tampil_list_ukmukk();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -623,6 +768,12 @@ public function edit_data_himpunan(){
         $data['title'] = 'Data User UKM/UKK';
         $data['ukmukk'] = $this->Model_View->tampil_list_ukmukk();
         $data['userukmukk'] = $this->Model_View->tampil_user_ukmukk();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -633,8 +784,8 @@ public function edit_data_himpunan(){
         $kode_ukmukk = $this->input->post('kode_ukmukk');
         $nama_ukmukk = $this->input->post('nama_ukmukk');
         $desc_ukmukk = $this->input->post('desc_ukmukk');
-        $visi_ukmukk = $this->input->post('visi_ukmukk');
-        $misi_ukmukk = $this->input->post('misi_ukmukk');
+        // $visi_ukmukk = $this->input->post('visi_ukmukk');
+        // $misi_ukmukk = $this->input->post('misi_ukmukk');
         $image = $this->input->post('image');
 
         if ($image=''){} else{
@@ -653,8 +804,8 @@ public function edit_data_himpunan(){
             'kode_ukmukk' => $kode_ukmukk,
             'nama_ukmukk'=> $nama_ukmukk,
             'desc_ukmukk' => $desc_ukmukk,
-            'visi_ukmukk' => $visi_ukmukk,
-            'misi_ukmukk' => $misi_ukmukk,
+            // 'visi_ukmukk' => $visi_ukmukk,
+            // 'misi_ukmukk' => $misi_ukmukk,
             'image' => $image
         );
         $datadana=array(
@@ -662,6 +813,7 @@ public function edit_data_himpunan(){
           'nama_ukmukk' => $nama_ukmukk
         );
         $this->Model_View->tambah_ukmukk($data,$datadana);
+        $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
         redirect('c_admin/data_ukmukk');
     }
     }
@@ -674,6 +826,7 @@ public function edit_data_himpunan(){
         $misi_ukmukk = $this->input->post('misi_ukmukk');
         $image = $this->input->post('image');
         $this->Model_View->update_ukmukk($kode_ukmukk,$nama_ukmukk,$desc_ukmukk,$visi_ukmukk,$misi_ukmukk,$image);
+        $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
         redirect('c_admin/data_ukmukk');
     }
 
@@ -681,22 +834,23 @@ public function edit_data_himpunan(){
     $kode_ukmukk = $this->uri->segment(3);
     $this->Model_View->delete_ukmukk($kode_ukmukk);
     $this->M_dana->delete_datauserukmukk($kode_ukmukk);
-    $this->session->set_flashdata('msg','<div class="alert alert-success">Data Himpunan Dihapus</div>');
+    $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
+    // $this->session->set_flashdata('msg','<div class="alert alert-success">Data Himpunan Dihapus</div>');
     redirect('c_admin/data_ukmukk');
     }
 
     public function tambah_user_ukmukk() {
         $nama = $this->input->post('nama');
-        $email = $this->input->post('email');
+        // $email = $this->input->post('email');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $kode_himp=$this->input->post('kode_himp');
+        $telp=$this->input->post('telp');
         $role = 2;
         $is_active = 1;
         $statususer=1;
         $data = array(
             'nama' => $nama,
-            'email' => $email,
             'username' => $username,
             'password' => md5($password),
             'role' => $role,
@@ -704,8 +858,10 @@ public function edit_data_himpunan(){
             'is_active' => $is_active,
             'statususer' =>$statususer,
             'insert_date' => date('Y-m-d H:i:s'),
+            'telp' => $telp,
         );
         $this->Model_View->tambah_userukmukk($data);
+        $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
         redirect('c_admin/data_userukmukk');
     }
     public function edit_user_ukmukk(){
@@ -717,20 +873,85 @@ public function edit_data_himpunan(){
       $role = 0;
       $is_active = 1;
       $kd_himp = $this->input->post('kode_himp');
+      $telp=$this->input->post('telp');
 
-      $this->Model_View->edit_ukmuser($id_user,$nama,$email,$username,md5($password));
+      $this->Model_View->edit_ukmuser($telp,$id_user,$nama,$email,$username,md5($password));
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_userukmukk');
   }
   public function delete_data_userukmukk(){
       $id_user = $this->uri->segment(3);
       $this->Model_View->delete_user_ukmukk($id_user);
-      $this->session->set_flashdata('msg','<div class="alert alert-success">Data User UKM/UKK Dihapus</div>');
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
+      // $this->session->set_flashdata('msg','<div class="alert alert-success">Data User UKM/UKK Dihapus</div>');
       redirect('c_admin/data_userukmukk');
   }
-   
+
+  public function data_admin()
+  {
+    $data['title'] = 'Data Admin';
+    $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
+    
+    $data['users'] = $this->Model_View->tampil_admin();
+    $data['count_puniv']= $this->M_dana->count_puniv();
+    $data['count_pfklts']= $this->M_dana->count_pfklts();
+    $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+    $data['count_luniv']= $this->M_dana->count_luniv();
+    $data['count_lfklts']= $this->M_dana->count_lfklts();
+    $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/admin', $data);
+    $this->load->view('templates/footeradm');
+  }
+  public function tambah_data_admin()
+  {
+    $nama = $this->input->post('nama');
+    $email = $this->input->post('email');
+    $username = $this->input->post('username');
+    $password = $this->input->post('password');
+    $role = 1;
+    $is_active = 1;
+    $statususer = 1;
+    $kd_himp = $this->input->post('kode_himp');
 
 
+    $data = array(
+      'nama' => $nama,
+      'email' => $email,
+      'username' => $username,
+      'password' => md5($password),
+      'role' => $role,
+      'kode_himp' => $kd_himp,
+      'is_active' => $is_active,
+      'insert_date' => date('Y-m-d H:i:s'),
+      'statususer' => $statususer,
+    );
+    $this->Model_View->tambah_admin($data);
+    redirect('c_admin/data_admin');
+  }
 
-  
+  public function delete_data_admin()
+  {
+    $id_user = $this->uri->segment(3);
+    $this->Model_View->delete_admin($id_user);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success">Data User Himpunan Dihapus</div>');
+    redirect('c_admin/data_admin');
+  }
 
+  public function edit_admin()
+  {
+    $id_user = $this->input->post('id_user');
+    $nama = $this->input->post('nama');
+    $email = $this->input->post('email');
+    $username = $this->input->post('username');
+    $password = $this->input->post('password');
+    $role = 1;
+    $is_active = 1;
+    $kd_himp = $this->input->post('kode_himp');
+
+    $this->Model_View->edit_admin($id_user, $nama, $email, $username, md5($password));
+    redirect('c_admin/data_admin');
+  }
 }

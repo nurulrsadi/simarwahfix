@@ -16,9 +16,24 @@
 		return $query;
 	}
 	function tampil_list_alljurusan(){
-		$query =  $this->db->query('SELECT * FROM jurusan');
+    $this->db->select('*');
+    $this->db->from('jurusan');
+    $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
+    $this->db->join('fakultas', 'fakultas.kode_fakultas = jurusan.parent_fakultas');
+    $query = $this->db->get();
+    return $query;
+  }
+  function tampil_list_alljurusan1(){
+    $query =  $this->db->query('SELECT * FROM jurusan');
 		return $query;
-	}
+  }
+  function tampil_list_universitas(){
+    $this->db->select('*');
+    $this->db->from('jurusan');
+    $this->db->where('parent_fakultas is NULL', NULL, TRUE);
+    $query = $this->db->get();
+    return $query;
+  }
 	function tampil_list_jurusan($fakultas){
 		$query =  $this->db->query('SELECT * FROM jurusan WHERE parent_fakultas = "'.$fakultas.'"');
 		return $query;
@@ -188,7 +203,7 @@
   }
 
   function tampil_user_himpunan(){
-  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user");
+  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0");
   	return $query_tampil_user_himpunan;
   }
 
@@ -201,8 +216,8 @@
   function delete_user_himpunan($id_user){
   	 $this->db->delete('user', array('id_user' => $id_user));
   }
-  function edit_user_himpunan($id_user,$nama,$email,$username,$password){
-  	$query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
+  function edit_user_himpunan($id_user,$nama,$email,$telp,$username,$password){
+  	$query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email',telp='$telp', username = '$username', password = '$password' WHERE id_user = '$id_user'");
   	return $query_update_user;
 
   }
@@ -211,7 +226,10 @@
     $query = $this->db->query('SELECT * FROM ukm_ukk WHERE kode_ukmukk ="'.$kode_ukmukk.'" ');
     return $query;
   }
-
+  function tampil_semua_ukmukk (){
+    $query = $this->db->query('SELECT * FROM ukm_ukk');
+    return $query;
+  }
   function update_visimisi_ukmukk($visi_ukmukk,$misi_ukmukk,$kode_ukmukk){
     $query_update =$this->db->query("UPDATE ukm_ukk SET visi_ukmukk = '$visi_ukmukk', misi_ukmukk = '$misi_ukmukk' WHERE kode_ukmukk ='$kode_ukmukk'");
         return $query_update;
@@ -284,11 +302,7 @@
         return $query_update;
   }
   function tampil_usekben($ukm_ukk){
-    $this->db->select("*");
-    $this->db->from("anggota_ukmukk");
-    $this->db->where("parent_ukmukk =",$ukm_ukk);
-    $this->db->order_by("u_jabatan", 'ASC');
-    $query = $this->db->get();
+    $query = $this->db->query('SELECT * FROM anggota_ukmukk WHERE parent_ukmukk = "'.$ukm_ukk.'"');
     return $query;
   }
   function tampil_uketua($ukm_ukk){
@@ -302,9 +316,13 @@
   }
 
   function tampil_ukabid($ukm_ukk){
-    $query = $this->db->query('SELECT * FROM anggota_ukmukk WHERE u_jabatan = "Ketua Bidang" parent_ukmukk = "'.$ukm_ukk.'"');
+    $query = $this->db->query('SELECT * FROM anggota_ukmukk WHERE u_jabatan = "Ketua Bidang" AND parent_ukmukk = "'.$ukm_ukk.'"');
+    return $query;
   }
-
+  function tampil_ukegiatan($ukm_ukk){
+    $query = $this->db->query('SELECT * FROM kegiatan_ukmukk WHERE parent_ukmukk = "'.$ukm_ukk.'"');
+    return $query;
+  }
   function tampil_uanggota($ukm_ukk){
     $this->db->select("*");
     $this->db->from("anggota_ukmukk");
@@ -339,8 +357,8 @@
     $this->session->set_flashdata('Sukses',"Data User Berhasil Ditambahkan");
     return TRUE;
   }
-  function edit_ukmuser($id_user,$nama,$email,$username,$password){
-    $query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
+  function edit_ukmuser($telp,$id_user,$nama,$email,$username,$password){
+    $query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password', telp='$telp'  WHERE id_user = '$id_user'");
     return $query_update_user;
 
   }
@@ -369,6 +387,30 @@ function tambah_statususer($parent_himpunan,$statususer){
   '$parent_himpunan' ");
 }
 //end_nuy
+
+// tambah molly
+function tampil_admin()
+  {
+    $query_tampil_admin = $this->db->query('SELECT * FROM user WHERE role=1');
+    return $query_tampil_admin;
+  }
+
+  function tambah_admin($data)
+  {
+    $this->db->insert('user', $data);
+    $this->session->set_flashdata('Sukses', "Data Admin Berhasil Ditambahkan");
+    return TRUE;
+  }
+
+  function delete_admin($id_user)
+  {
+    $this->db->delete('user', array('id_user' => $id_user));
+  }
+  function edit_admin($id_user, $nama, $email, $username, $password)
+  {
+    $query_update_admin = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
+    return $query_update_admin;
+  }
 }
 
 

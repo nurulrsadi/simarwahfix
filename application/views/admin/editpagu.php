@@ -5,7 +5,12 @@
     	<div class="d-sm-flex align-items-center justify-content-between mb-4">
     		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
     	</div>
-
+    <?php if(count($usercekagt)>0){
+      foreach($usercekagt as $l){
+      var_dump($l->count_ahimp); 
+      }
+  }
+  ?>
     	<!-- DataTales Example -->
     	<div class="card shadow mb-4">
     		<div class="card-header py-3">
@@ -61,6 +66,7 @@
     							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
     							<td class="align-self-auto">
     								<!-- Button trigger modal -->
+                    
     								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"
     									data-target="#modaleditanggaran<?php echo $kd_jrsn;?>"><i class="fa fa-pen"></i>
     									Edit Anggaran
@@ -74,11 +80,9 @@
     		</div>
     	</div>
     </div>
-                  </div>
-
-    <!-- Modal Tambah Fakultas -->
-    <!-- Akhir Modal Tambah  -->
-    <!-- Edit Modal Fakultas -->
+  </div>
+    
+    
     <?php foreach($userdana->result_array() as $i):
           $kd_jrsn=$i['kd_jrsn'];
           $nama_fakultas=$i['nama_fakultas'];
@@ -98,6 +102,7 @@
     				</button>
     			</div>
     			<div class="modal-body">
+          <?php if($usercekagt==0):?>
     				<form method="post" action="<?php echo base_url().'c_admin/update_dana_awal'?>"
     					enctype="multipart/form-data">
     					<div class="form-group">
@@ -122,7 +127,35 @@
     						</t><input type="number" name="danaawal" min="0" name="danaawal" id="danaawal"
     							value="<?php echo $danaawal;?>" class="form-control" required>
     					</div>
-    			</div>
+    			  </div>
+            <?php elseif($usercekagt>0):?>
+              <form method="post" action="<?php echo base_url().'c_admin/update_dana_awal'?>"
+    					enctype="multipart/form-data">
+    					<div class="form-group">
+    						<label>Tahun Akademik</t></label>
+    						</t><input type="text" name="tahunakademik" class="form-control" value="<?php echo $tahunakademik;?>"
+    							required>
+    					</div>
+    					<div class="form-group ">
+    						<label>Nama Himpunan</t></label>
+    						</t><input type="text" name="kd_jrsn" class="form-control" value="<?php echo $kd_jrsn;?>" required
+    							readonly>
+    					</div>
+    					<div class="form-group ">
+    						<label>
+    							Nama Fakultas</t></label>
+    						</t><input type="text" name="nama_fakultas" class="form-control" value="<?php echo $nama_fakultas;?>"
+    							readonly>
+    					</div>
+    					<div class="form-group ">
+    						<label>Pagu Anggaran <small class="text-decoration" style="color:red">contoh : 2000000</small></t>
+    						</label>
+    						</t><input type="number" name="danaawal" min="0" name="danaawal" id="danaawal"
+    							value="<?php echo $danaawal;?>" class="form-control" required>
+    					</div>
+    			  </div>
+            <?php else:?>
+            <?php endif;?>
     			<div class="modal-footer">
     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     				<button type="submit" class="btn btn-primary">Save changes</button>

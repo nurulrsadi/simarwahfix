@@ -253,10 +253,9 @@ a {
 	-webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 	-ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-	border-bottom: dotted 1px;
-	/* tombol nyumputin sidebar */
 	color: #2F4517;
 	text-decoration: none;
+	-o-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 }
 
 /* warna tulisan dipegang */
@@ -2220,7 +2219,7 @@ input[type="radio"]+label:before {
 .gambarsendiri {
 	padding: 0em 0 0 0;
 	width: 100%;
-	float: right;
+	/* float: right; */
 	display: inline-block;
 	max-height: 100%;
 	max-width: 100%;
@@ -2308,9 +2307,6 @@ input[type="date"]:focus {
 	box-shadow: 0 0 0 0.25rem rgba(0, 120, 250, 0.1);
 }
 
-::-webkit-datetime-edit {}
-
-::-webkit-datetime-edit-fields-wrapper {}
 
 ::-webkit-datetime-edit-month-field:hover,
 ::-webkit-datetime-edit-day-field:hover,
@@ -5329,7 +5325,7 @@ a {
 a:hover,
 a:focus {
 	color: #23527c;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 a:focus {
@@ -8916,7 +8912,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .nav .open>a:hover,
 .nav .open>a:focus {
 	background-color: #eee;
-	border-color: #337ab7;
+  border-color: #337ab7;
+  text-decoration:none;
 }
 
 .nav .nav-divider {

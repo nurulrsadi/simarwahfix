@@ -25,5 +25,63 @@ class ormawa extends CI_Controller{
     $delete=$this->M_ormawa->hapuskeluhannya($kd_ormawa);
     redirect('c_admin/keluhan');
   }
+  function do_sewa(){
+    $this->form_validation->set_rules('surat_sewa', 'required');
+    $kode= date('ymd') . '-' . substr(md5(rand()), 0, 10);
+    $penyewa=$this->input->post('penyewa',true);
+    $Keterangan=$this->input->post('Keterangan',true);
+    $jenisaula=$this->input->post('jenisaula', true);
+    $dari=date("Y-m-d",strtotime($this->input->post('dari')));
+    $hingga=date("Y-m-d",strtotime($this->input->post('hingga')));
+    $mulaipukul=date("h:i",strtotime($this->input->post('mulaipukul')));
+    $akhirpukul=date("h:i",strtotime($this->input->post('akhirpukul')));
+    $nama_pj=$this->input->post('nama_pj', true);
+    $no_pj=$this->input->post('no_pj',true);
+    $surat_sewa = $this->input->post('surat_sewa', true);
+    if ($surat_sewa=''){} else{
+      $config['upload_path'] = './assets/uploads/suratizinaula/';//path folder
+      $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
+      $config['file_name'] = 'SuratIzinSewaAula-'.$kode.'-'.$penyewa.'-'.$Keterangan;
+      $config['max_size']='2048';
+      $this->load->library('upload',$config);
+      if(!$this->upload->do_upload('surat_sewa')){
+        echo "<script>alert('Gagal melakukan, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
+      }else{
+        $surat_sewanya=$this->upload->data('file_name');
+      }
+    $statussewa=1;
+    $id_user=$this->input->post('id_user', true);
+    $data=array(
+      'penyewa' => $penyewa,
+      'Keterangan' => $Keterangan,
+      'jenisaula' => $jenisaula,
+      'dari' => $dari,
+      'hingga' => $hingga,
+      'mulaipukul' => $mulaipukul,
+      'akhirpukul' => $akhirpukul,
+      'nama_pj' => $nama_pj,
+      'no_pj' => $no_pj,
+      'surat_sewa' => $surat_sewanya,
+    );
+    $this->M_ormawa->sewa_aula($data);
+    if($data){ // Jika sukses
+      $this->M_ormawa->update_status_sewa($statussewa,$id_user);
+      $this->session->set_flashdata('flashdata', 'Sewa Aula berhasil dilakukan !');
+      redirect('c_user/Pinjam_Aula');
 
+      }else{ // Jika gagal
+            echo "<script>alert('Silahkan isi form dengan hati-hati, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
+      }
+    }
+  }
+  function hapus_datasewa(){
+    $id_sewa = $this->uri->segment(3);
+    $data=$this->M_ormawa->getDataSewaByID($id_sewa)->row();
+    $hapussuratizin='./assets/uploads/suratizinaula/'.$data->surat_sewa;
+    if(is_readable($hapussuratizin)&&unlink($hapussuratizin)){
+      $this->M_ormawa->hapus_data_sewa_user($id_sewa);
+      $this->session->set_flashdata('msg','<div class="alert alert-success">Data User Himpunan Dihapus</div>');
+      redirect('c_admin/Data_Pinjam');
+    }
+  }
 }

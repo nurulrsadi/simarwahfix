@@ -1,22 +1,51 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use Spipu\Html2Pdf\CssConverter;
 class c_user extends CI_Controller
 {
 function __construct(){
     parent::__construct();
-    $this->load->model('M_data');
-    $this->load->model('Model_View');
-    $this->load->model('M_ormawa');
     if($this->session->userdata('status') != "login"){
-      redirect(base_url("login"));
-  }
-        // if($this->session->userdata('status') != "login"){
-        //     redirect(base_url("login"));
-        // }
+      redirect(base_url("c_home/login"));
+    }
+    if($this->session->userdata('role')==1 ){
+      redirect(base_url("c_admin/index"));
+    }
 }
-
-public function index()
+    public function Cetak_Sewa_Aula($id_sewa){
+      $penyewa=$this->uri->segment(5);
+      
+      if (isset($_POST['test'])) {
+        echo '<pre>';
+        echo htmlentities(print_r($_POST, true));
+        echo '</pre>';
+        exit;
+    }
+    
+    try {
+        ob_start();
+        $this->load->view('user/Print_Sewa_Aula');
+        $html = ob_get_contents();
+        $content = ob_get_clean();
+      
+        $html2pdf = new Html2Pdf('P', 'A4', 'en', false, 'UTF-8', array(5, 5,5, 5));
+        // $html2pdf->setModeDebug();
+        // $html2pdf->addaExtesion(new Spipu\Html2Pdf\Exception\HtmlParsingException());
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->writeHTML($content);
+        $html2pdf->output('forms.pdf');
+    } catch (Html2PdfException $e) {
+        $html2pdf->clean();
+    
+        $formatter = new ExceptionFormatter($e);
+        echo $formatter->getHtmlMessage();
+    }
+    
+    }
+    public function index()
     {
     if($this->session->userdata('status') != "login"){
     redirect(base_url("c_home/login"));
@@ -129,6 +158,8 @@ public function index()
         'title' => 'Peminjaman Aula SC',
         'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
         'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
+        'userlogin' => $this->M_ormawa->get_login($kode_himp_sess),
+        'userpdf' => $this->M_ormawa->get_data_sewa($kode_himp_sess),
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/pinjamaula');

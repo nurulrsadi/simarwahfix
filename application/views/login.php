@@ -36,9 +36,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <li class=""><a href="<?php echo base_url() . 'c_home/index'; ?>">Tentang Kami</a></li>
             <li class=""><a href="<?php echo base_url() . 'c_home/ormawa'; ?>">ORMAWA</a></li>
             <li class=""><a href="<?php echo base_url() . 'c_home/semuaukm'; ?>">UKM&UKK</a></li>
-            <li class=""><a href="#">Daftar Kegiatan</a></li>
-            <li class=""><a href="#">Peminjaman Aula SC</a></li>
-            <li class="active"><a href="">LOGIN</a></li>
+            
+            <li class=""><a href="">Peminjaman Aula SC</a></li>
+            <li class="active"><a href="<?php echo base_url() . 'c_home/login'; ?>">LOGIN</a></li>
           </ul>
         </div>
       </div>
@@ -64,7 +64,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="input-group" style="margin-bottom: 20px;">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="username" style="height:45px;"; class="form-control" name="username" id="username" placeholder="Username"/>
+                    <input type="username" style="height:45px;"; class="form-control" name="username" id="username" placeholder="Username" autocomplete="off" />
                     <div class="validation"></div>
                   </div>
                 </div>

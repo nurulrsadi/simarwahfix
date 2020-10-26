@@ -11,27 +11,32 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
+                <div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashormawahimp');  ?>"></div>
+                <?php if($this->session->flashdata('flashormawahimp')): ?>
+                <?php endif; ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                              <tr>
-                                <th>Id</th>
-                                <th>Nama User</th>
-                                <th>Email</th>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>No HP</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th>Role</th>
+                                <!-- <th>Role</th> -->
                                 <th>UKM/UKK</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <?php $j=1; ?>
                         <?php 
                   foreach($userukmukk->result_array() as $i):
                     $id_user=$i['id_user'];
                     $nama=$i['nama'];
                     $email=$i['email'];
+                    $telp=$i['telp'];
                     $username=$i['username'];
                     $password=$i['password'];
                     $role=$i['role'];
@@ -41,12 +46,13 @@
                     <tbody>
                         <tr>
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
-                          <td><?php echo $id_user ?></td>
+                           <td><?php echo $j++; ?></td>
                           <td><?php echo $nama ?></td>
-                          <td><?php echo $email ?></td>
+                          <!-- <td><?php echo $email ?></td> -->
+                          <td><?php echo $telp ?></td>
                           <td><?php echo $username ?></td>
                           <td><?php echo $password ?></td>                          
-                          <td><?php echo $role ?></td>    
+                         <!--  <td><?php echo $role ?></td>     -->
                           <td><?php echo $kd_ukmukk?></td>                     
                           <td><center>
                             <a class="btn btn-warning" data-toggle="modal" data-target="#modaledituser_ukmukk<?php echo $id_user;?>">Edit</a>
@@ -75,20 +81,20 @@
                    <form method="post" action="<?php echo base_url().'c_admin/tambah_user_ukmukk'?>" enctype="multipart/form-data">
                                             <div class="form-group">
                                             <label>Nama User</t></label>
-                                            </t><input type="text" name="nama" class="form-control" value="" required>
+                                            </t><input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
-                                            <label>Email</t></label>
-                                                </t><input type="text" name="email" class="form-control" value="" required>
+                                            <label>No HP</t></label>
+                                                </t><input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
                                             <label>
                                                 Username</t></label>
-                                                </t><input type="text" name="username" class="form-control" value="">
+                                                </t><input type="text" name="username" class="form-control" autocomplete="off" value="">
                                             </div>  
                                             <div class="form-group " >
                                             <label>Password</t></label>
-                                                </t><input type="password" name="password" class="form-control" value="">
+                                                </t><input type="password" name="password" class="form-control" autocomplete="off" value="">
                                             </div>                                                    
                                             <div class="form-group ">
                                             <label>Kode UKM/UKK</label>
@@ -126,24 +132,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel">Input User UKM/UKK</h6>
+                    <h6 class="modal-title" id="exampleModalLabel">Edit User UKM/UKK</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                    <form method="post" action="<?php echo base_url().'c_admin/edit_user_ukmukk'?>" enctype="multipart/form-data">
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                             <label>Id User</t></label>
                                             </t><input type="text" name="id_user" class="form-control" value="<?php echo $id_user;?>" required readonly>
-                                            </div> 
+                                            </div> -->
+                                            <input type="hidden" id="id_user" name="id_user" value="<?= $id_user?>"> 
                                             <div class="form-group " >
                                             <label>Nama</t></label>
                                                 </t><input type="text" name="nama" class="form-control" value="<?php echo $nama;?>" required>
                                             </div> 
                                             <div class="form-group " >
-                                            <label>Email</t></label>
-                                                </t><input type="text" name="email" class="form-control" value="<?php echo $email;?>" required>
+                                            <label>No HP</t></label>
+                                                </t><input type="number" name="telp" class="form-control" value="<?php echo $telp;?>" required>
                                             </div> 
                                             <div class="form-group " >
                                             <label>

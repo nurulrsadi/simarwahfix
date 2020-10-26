@@ -37,10 +37,6 @@
         <a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_Universitas') ?>">Edit Pagu Universitas</a>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_Fakultas') ?>">Edit Pagu Per Fakultas</a>
         <a class="collapse-item" href="<?php echo base_url('c_admin/Edit_Pagu_UKMUKK') ?>">Edit Pagu Per UKMUKK</a>
-				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pagu') ?>">Cek Pengajuan</a> -->
-				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Data_Pagu') ?>">Data Anggaran</a> -->
-				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/Laporan_Kegiatan') ?>">Cek Laporan Kegiatan</a>
-				<a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan') ?>">Data Pengajuan </a> -->
 			</div>
 		</div>
 	</li>
@@ -49,13 +45,13 @@
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_pengajuan" aria-expanded="true"
 			aria-controls="collapseUtilities">
       <i class="fas fa-fw fa-file-invoice-dollar"></i>
-			<span>Cek Pengajuan</span>
+			<span>Cek Pengajuan </span>
 		</a>
 		<div id="collapse_pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Menu Pengajuan :</h6>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_Universitas') ?>">Pengajuan Universitas</a>
-        <a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_Fakultas') ?>">Pengajuan per Fakultas</a>
+        <a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_Fakultas') ?>">Pengajuan per Fakultas </a>
 				<a class="collapse-item" href="<?php echo base_url('c_admin/Cek_Pengajuan_UKMUKK') ?>">Pengajuan per UKM UKK</a>
 			</div>
 		</div>
@@ -110,6 +106,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu Ormawa :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data Universitas</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
@@ -148,8 +145,14 @@
 		Pengaturan
 	</div>
 
-	<!-- Nav Item - My Profile -->
-	<li class="nav-item">
+  <!-- Admin menu -->
+  <li class="nav-item">
+		<a class="nav-link" href="<?php echo base_url('c_admin/data_admin') ?>">
+			<i class="far fa-fw fa-address-book"></i>
+			<span>Data Admin</span></a>
+	</li>
+
+  <li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('c_admin/Edit_Profil') ?>">
 			<i class="fas fa-fw fa-user-edit"></i>
 			<span>Edit Profil</span></a>

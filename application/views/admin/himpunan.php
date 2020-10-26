@@ -22,44 +22,39 @@
     					<thead>
     						<tr>
     							<th>Fakultas</th>
-    							<th>Kode Himpunan</th>
+    							<th>Jurusan</th>
     							<th>Nama Himpunan</th>
-    							<th>Deskripsi</th>
-    							<th>Visi</th>
-    							<th>Misi</th>
+                  <th>Deskripsi</th>                                    							
     							<th>Image</th>
     							<th>Aksi</th>
     						</tr>
               </thead>
-              
     					<?php 
                   foreach($himpunan->result_array() as $i):
+                    $nama_fakultas=$i['nama_fakultas'];
                     $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
                     $deskripsi=$i['desc_himpunan'];
-                    $visi=$i['visi'];
-                    $misi=$i['misi'];
                     $image=$i['image'];
                     $fakultas=$i['parent_fakultas'];
                     ?>
     					<tbody>
     						<tr>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $fakultas ?></td>
-    							<td><?php echo $kode_himpunan ?></td>
+    							<td><?php echo $nama_fakultas ?></td>    							
     							<td><?php echo $nama_himpunan ?></td>
-    							<td><?php echo $deskripsi ?></td>
-    							<td><?php echo $visi ?></td>
-    							<td><?php echo $misi ?></td>
+                  <td><?php echo $kode_himpunan ?></td>
+                  <td><?php echo $deskripsi ?></td>                                
+    							
     							<td>
     								<img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
     							</td>
     							<td>
     								<center>
-    									<a class="btn btn-warning" data-toggle="modal"
-    										data-target="#modaledithimpunan<?php echo $kode_himpunan;?>">Edit</a>
-    									<a class="btn btn-danger" data-toggle="modal"
-    										data-target="#modal_delete<?php echo $kode_himpunan;?>">Delete</a>
+    									<button class="btn btn-warning" data-toggle="modal"
+    										data-target="#modaledithimpunan<?php echo $kode_himpunan;?>">Edit</button>
+    									<button class="btn btn-danger" data-toggle="modal"
+    										data-target="#modal_delete<?php echo $kode_himpunan;?>">Delete</button>
     								</center>
     							</td>
     						</tr>
@@ -85,27 +80,20 @@
     			<div class="modal-body">
     				<form method="post" action="<?php echo base_url().'c_admin/tambah_data_himpunan'?>"
     					enctype="multipart/form-data">
+                        <div class="form-group ">
+                            <label>Jurusan</t></label>
+                            </t><input type="text" name="nama_himpunan" class="form-control"value="" required autocomplete="off">
+                        </div>
     					<div class="form-group">
-    						<label>Kode Himpunan</t></label>
-    						</t><input type="text" name="kode_himpunan" class="form-control" value="" required>
-    					</div>
-    					<div class="form-group ">
     						<label>Nama Himpunan</t></label>
-    						</t><input type="text" name="nama_himpunan" class="form-control" value="" required>
+    						</t><input type="text" name="kode_himpunan" class="form-control" value=""  style="text-transform:uppercase"  required autocomplete="off">
     					</div>
-    					<div class="form-group ">
-    						<label>
-    							Deskripsi</t></label>
-    						</t><input type="text" name="deskripsi" class="form-control" value="">
-    					</div>
-    					<div class="form-group ">
-    						<label>Visi</t></label>
-    						</t><input type="text" name="visi" class="form-control" value="">
-    					</div>
-    					<div class="form-group ">
-    						<label>Misi</t></label>
-    						</t><input type="text" name="misi" class="form-control" value="">
-    					</div>
+    					<div class="form-group">
+                            <label>Deskripsi Himpunan</t></label>
+                            </t><input type="text" name="desc_himpunan" class="form-control" value="" required autocomplete="off">
+                        </div>
+                        
+    					
 
     					<div class="form-group ">
     						<label>Fakultas</label>
@@ -128,16 +116,17 @@
     	</div>
     </div>
     <!-- Akhir Modal Tambah  -->
-    <!-- Edit Modal Fakultas -->
+    <!-- Edit Modal  -->
     <?php
         foreach($himpunan->result_array() as $i):
+          $nama_fakultas=$i['nama_fakultas'];
             $kode_himpunan=$i['kode_himpunan'];
-                    $nama_himpunan=$i['nama_himpunan'];
-                    $deskripsi=$i['desc_himpunan'];
-                    $visi=$i['visi'];
-                    $misi=$i['misi'];
-                    $image=$i['image'];
-                    $fakultas=$i['parent_fakultas'];
+            $nama_himpunan=$i['nama_himpunan'];
+            $deskripsi=$i['desc_himpunan'];
+            $visi=$i['visi'];
+            $misi=$i['misi'];
+            $image=$i['image'];
+            $fakultas=$i['parent_fakultas'];
         ?>
     <div class="modal fade" id="modaledithimpunan<?php echo $kode_himpunan;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,29 +141,22 @@
     			<div class="modal-body">
     				<form method="post" action="<?php echo base_url().'c_admin/edit_data_himpunan'?>"
     					enctype="multipart/form-data">
+                        <div class="form-group ">
+                            <label>Jurusan</t></label>
+                            </t><input type="text" name="nama_himpunan" class="form-control" value="<?php echo $nama_himpunan;?>"
+                                required>
+                        </div>
     					<div class="form-group">
-    						<label>Kode Himpunan</t></label>
+    						<label>Nama Himpunan</t></label>
     						</t><input type="text" name="kode_himpunan" class="form-control" value="<?php echo $kode_himpunan;?>"
     							required readonly>
-    					</div>
-    					<div class="form-group ">
-    						<label>Nama Himpunan</t></label>
-    						</t><input type="text" name="nama_himpunan" class="form-control" value="<?php echo $nama_himpunan;?>"
-    							required>
-    					</div>
+    					</div>    					
     					<div class="form-group ">
     						<label>
     							Deskripsi</t></label>
     						</t><input type="text" name="deskripsi" class="form-control" value="<?php echo $deskripsi;?>">
     					</div>
-    					<div class="form-group ">
-    						<label>Visi</t></label>
-    						</t><input type="text" name="visi" class="form-control" value="<?php echo $visi;?>">
-    					</div>
-    					<div class="form-group ">
-    						<label>Misi</t></label>
-    						</t><input type="text" name="misi" class="form-control" value="<?php echo $misi;?>">
-    					</div>
+    					
     					<div class="form-group ">
     						<label>Fakultas</t></label>
     						</t><input type="text" name="parent_fakultas" class="form-control" value="<?php echo $fakultas;?>"
@@ -198,24 +180,25 @@
     <!-- Modal Delete -->
     <?php
         foreach($himpunan->result_array() as $i):
-                    $kode_himpunan=$i['kode_himpunan'];
-                    $nama_himpunan=$i['nama_himpunan'];
-                    $deskripsi=$i['desc_himpunan'];
-                    $visi=$i['visi'];
-                    $misi=$i['misi'];
-                    $image=$i['image'];
-                    $fakultas=$i['parent_fakultas'];
+          $nama_fakultas=$i['nama_fakultas'];
+          $kode_himpunan=$i['kode_himpunan'];
+          $nama_himpunan=$i['nama_himpunan'];
+          $deskripsi=$i['desc_himpunan'];
+          $visi=$i['visi'];
+          $misi=$i['misi'];
+          $image=$i['image'];
+          $fakultas=$i['parent_fakultas'];
         ?>
     <div class="modal fade" id="modal_delete<?php echo $kode_himpunan;?>" tabindex="-1" role="dialog"
     	aria-labelledby="largeModal" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
-    				<h3 class="modal-title" id="myModalLabel">Delete Data Himpunan</h3>
+    				<h5 class="modal-title" id="myModalLabel">Delete Data Himpunan</h5>
     			</div>
     			<div class="modal-body">
-    				<h4>Kode Himpunan : <?php echo $kode_himpunan;?></h4>
-    				<h4>Nama Himpunan : <?php echo $nama_himpunan;?></h4>
+    				<h6>Kode Himpunan : <?php echo $kode_himpunan;?></h6>
+    				<h6>Nama Himpunan : <?php echo $nama_himpunan;?></h6><br>
     				<center>
     					<a class="btn btn-danger"
     						href="<?php echo base_url('c_admin/delete_data_himpunan/'.$kode_himpunan); ?>">Lanjutkan</a>

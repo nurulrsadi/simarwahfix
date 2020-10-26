@@ -42,19 +42,19 @@
                 <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
               <?php } else {?>
               <?php } ?>
 
               <?php if($this->session->userdata('status') == "login"){?>
-              
+              <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
               <?php } else {?> 
               <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
+              
               <li class=""><a href="#">Peminjaman Aula SC</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
@@ -77,10 +77,10 @@
                 <?php foreach($himpunan as $him){ ?>
                 <img src="<?php echo base_url('assets/img/jurusan/').$him->image;?>" style="width:100px;height:100px; margin: 10px;">
                 <hr class="bottom-line">
-                  <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $him->nama_himpunan ?></h2>
-                  <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $him->desc_himpunan ?></h2>
+                  <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $him->kode_himpunan ?></h2>
+                  <h2 class="" style="font-family: fixed; font-size: 35px"><?php echo $him->desc_himpunan ?></h2>
                 <?php } ?> 
-                <p>Tentang himpunan.</p>
+                
                 <br>
               </div>
             </div>
@@ -198,8 +198,8 @@
           <table class="fixed-th" >
             <thead>
               <tr>
-                <th>Waktu Acara</th>
-                <th>Nama Kegiatan</th>
+                <th width="300">Waktu Acara</th>
+                <th width="800">Nama Kegiatan</th>
                 
               </tr>
             </thead>
@@ -212,8 +212,8 @@
                       ?>
             <tbody>
               <tr>
-                            <td><?php echo $start_date ?> s/d <?php echo $end_date ?> </td>
-                            <td><?php echo $nama_kegiatan ?></td>
+                            <td width="300"><?php echo $start_date ?> s/d <?php echo $end_date ?> </td>
+                            <td width="800"><?php echo $nama_kegiatan ?></td>
                             
                             
               </tr>   
@@ -227,7 +227,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12 col-sm-12 text-center">
           <h2 class="service-title pad-bt15">Data Anggota</h2>
           <hr class="bottom-line">
@@ -236,7 +236,7 @@
           <br>
           <br>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </section>
@@ -266,7 +266,7 @@
           <div class="col-lg-4 col-sm-4 col-xs-4">
             <ul>
               <li>
-                <h5> <a href="<?php echo base_url().'c_home/index';?>">Tentang SIMARWA</a> </h5>
+                <h5> <a href="<?php echo base_url().'c_home/index';?>">Tentang SIMARWAH</a> </h5>
               </li>
               <li>
                 <h5><a href="#">Panduan</a> </h5>
@@ -284,7 +284,7 @@
     </div>
   </footer>
   <!---->
-  </div>
+
   <script src="assets/js/simarwahjquery.min.js"></script>
   <script src="assets/js/simarwahjquery.easing.min.js"></script>
   <script src="assets/js/simarwahbootstrap.min.js"></script>

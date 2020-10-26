@@ -5,6 +5,50 @@
 <script src="<?= base_url().'assets/js/fullcalendarjs/main.js' ?>"type="text/javascript"/></script>
 <script src="<?= base_url().'assets/js/fullcalendarjs/locales-all.js' ?>" type="text/javascript"></script>
 <!-- Button trigger modal -->
+<?php if( $this->session->userdata('statususer') >=2 && $this->session->userdata('role') == 0 || $this->session->userdata('role') ==2) :?>
+
+<table class="content-table">
+    <thead>
+			<tr>
+				<th>No</th>
+				<th>Penyewa</th>
+        <th>Nama Kegiatan</th>
+        <th>Jenis Aula</th>
+        <th>Mulai Tanggal Sewa</th>
+        <th>Cetak surat izin aula</th>
+			</tr>
+    </thead>
+    <tbody>
+			<tr>
+      <?php $j=1;?>
+      <?php foreach($userpdf->result_array() as $i ):
+        $penyewa=$i['penyewa'];
+        $Keterangan=$i['Keterangan'];
+        $id_sewa=$i['id_sewa'];
+        $jenis_aula=$i['keterangan'];
+        $tanggal_sewa=$i['dari'];
+        $akhir_sewa=$i['hingga'];
+      ?>
+				<td><?= $j++; ?></td>
+				<td><?= $penyewa; ?></td>
+        <td><?= $Keterangan; ?></td>
+        <td><?= $jenis_aula; ?></td>
+        <td><?= date("d M Y",strtotime($tanggal_sewa)); ?></td>
+        <td><center>
+          <a href="<?= base_url('c_user/Cetak_Sewa_Aula/'.$id_sewa.'/'.$penyewa.'/'.$Keterangan)?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Cetak</a>
+            </center>
+        </td>
+			</tr>
+      <?php endforeach;?>
+		</tbody>
+</table>
+
+
+<?php foreach($userlogin->result_array() as $i ):
+  $user_login=$i['kode_himp'];
+  $id_user=$i['id_user'];
+?>
+<br>
 <button type="button" class="button primary" data-toggle="modal" data-target="#exampleModal">
   Sewa Aula SC
 </button>
@@ -18,14 +62,15 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="post" action="#">
+      <form method="post" action="<?php echo base_url().'ormawa/do_sewa';?>" enctype="multipart/form-data" >
       <div class="form-group">
-      <input class="form-control" name="penyewa" id="penyewa" type="text" value="Nama Penyewa" readonly>
+      <input type="hidden" name="id_user" value="<?= $id_user?>">
+      <input class="form-control" name="penyewa" id="penyewa" type="text" value="<?= $user_login?>"required readonly>
       </div>
       <div class="form-group">
       <label for="Keterangan">Nama Acara</label>
-      <input type="text" name="Keterangan-name" id="Keterangan" value=""
-                      placeholder="Nama Acara" />
+      <input type="text" name="Keterangan" id="Keterangan" value=""
+                      placeholder="Nama Acara"  autocomplete="off" required/>
       </div>
       <div class="form-group">
       <label for="surat_sewa">Surat Permohanan Izin </label><br>
@@ -38,8 +83,8 @@
 					</div>
       </div>
       <div class="form-group form-row">
-        <label for="exampleFormControlSelect1">Aula Student Center</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <label for="jenisaula">Aula Student Center</label>
+        <select class="form-control" id="jenisaula" name="jenisaula"  required>
           <option value="">- Aula -</option>
           <option value="blue">Aula A</option>
           <option value="purple">Aula B</option>
@@ -47,33 +92,33 @@
       </div>
       <div class="row form-group">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">Mulai Tanggal</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          <label for="dari">Mulai Tanggal</label>
+          <input type="date" class="form-control" id="dari"  name="dari"  autocomplete="off" required>
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPassword4">Akhir Tanggal</label>
-          <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
+          <label for="hingga">Akhir Tanggal</label>
+          <input type="date" name="hingga" class="form-control" id="hingga" autocomplete="off" required>
         </div>
       </div>
       <div class="row form-group">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">Mulai Pukul</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          <label for="mulaipukul">Mulai Pukul</label>
+          <input type="time" name="mulaipukul" class="form-control" id="mulaipukul"  autocomplete="off" required>
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPassword4">Akhir Pukul</label>
-          <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
+          <label for="akhirpukul">Akhir Pukul</label>
+          <input type="time" class="form-control" id="akhirpukul" name="akhirpukul"  autocomplete="off" required>
         </div>
       </div>
       <div class="form-group">
       <label for="nama_pj">Nama Penanggung Jawab</label>
       <input type="text" name="nama_pj" id="nama_pj" value=""
-                      placeholder="" required/>
+                      placeholder="Nama ketua acara" required  autocomplete="off"/>
       </div>
       <div class="form-group">
       <label for="no_pj">No Penanggung Jawab</label>
-      <input type="text" name="no_pj" id="no_pj" value=""
-                      placeholder="" required/>
+      <input type="text" name="no_pj" id="no_pj"  min="10" max="11" value=""
+                      placeholder="08xxx" required  autocomplete="off"/>
       </div>
       </div>
       <div class="modal-footer">
@@ -84,12 +129,26 @@
   </div>
 </div>
 </form>
+<?php endforeach;?>
 <div id="calendar"></div>
 
 
 
-
-
+<?php else: ?>
+  <section>
+	<header class="main">
+		<!-- <h1>Pagu Keuangan</h1> -->
+  </header>
+  <br>
+  <center>
+    <h2>Terima kasih telah melakukan update profile!</h2>
+      <h4>Silahkan melakukan logout dan login kembali untuk meakses menu ini</h4>
+    </br><br>
+  </center>
+  </section>
+<?php endif;?>
+</div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
 
   <!-- <script ></script> -->
@@ -111,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
-      initialDate: '2020-09-12',
       locale: initialLocaleCode,
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
@@ -179,7 +237,3 @@ document.addEventListener('DOMContentLoaded', function() {
     padding: 0 10px;
   }
   </style>
-
-
-</div>
-</div>

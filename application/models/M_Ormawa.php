@@ -67,4 +67,32 @@ class M_ormawa extends CI_Model{
     ->get()
     ->result();
   }
+
+  function get_login($jurusan){
+    $query =  $this->db->query('SELECT * FROM user WHERE kode_himp = "'.$jurusan.'"');
+		  return $query;
+  }
+  function sewa_aula($data){
+    $this->db->insert('tb_sewaaula',$data);
+    return TRUE;
+  }
+  function update_status_sewa($statussewa,$id_user){
+    return $query= $this->db->query("UPDATE user SET statussewa='$statussewa' WHERE id_user='$id_user'");
+  }
+  function get_data_sewa($jurusan){
+    $this->db->select('*');
+    $this->db->from('tb_sewaaula');
+    $this->db->where('penyewa', $jurusan);
+    $this->db->join('tb_ket_aula', 'tb_ket_aula.warna_id=tb_sewaaula.jenisaula');
+    return $query = $this->db->get();
+  }
+  function get_belum_tanggalnya(){
+    return $query=$this->db->query("SELECT * FROM tb_sewaaula, tb_ket_aula WHERE tb_sewaaula.jenisaula=tb_ket_aula.warna_id order by dari");
+  }
+  function hapus_data_sewa_user($id_sewa){
+    $this->db->delete('tb_sewaaula', array('id_sewa' => $id_sewa));
+  }
+  function getDataSewaByID($id_sewa){
+    return $this->db->get_where('tb_sewaaula', array('id_sewa'=>$id_sewa));
+  }
 }

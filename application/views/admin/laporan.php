@@ -84,7 +84,7 @@
 <div class="modal fade" id="modalACClaporan<?= $kd_jrsn; ?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<form method="post" action="" enctype="multipart/form-data">
+		<form method="post" action="<?php echo base_url('dana/updatedanhapus/'.$kd_jrsn)?>" enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Terima Laporan</h5>
@@ -93,11 +93,12 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					Anda yakin akan terima laporan kegiatan dari <?= $kd_jrsn; ?> ?
-				</div>
+					Anda yakin akan terima laporan kegiatan dari ORMAWA <?= $kd_jrsn; ?> ?
+        </div>
+        <input type="hidden" id="nPengajuan" name="nPengajuan" value="<?= $nPengajuan?>">
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-					<a href="<?php echo base_url('dana/updatedanhapus/'.$kd_jrsn)?>" class="btn btn-primary">Terima Laporan</a>
+					<button type="submit" class="btn btn-primary">Terima Laporan</button>
 				</div>
 			</div>
 		</form>

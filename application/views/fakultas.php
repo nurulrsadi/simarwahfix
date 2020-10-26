@@ -44,19 +44,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
               <?php } else {?>
               <?php } ?>
 
               <?php if($this->session->userdata('status') == "login"){?>
-              
+              <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
               <?php } else {?> 
               <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
+              
               <li class=""><a href="#">Peminjaman Aula SC</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
@@ -359,7 +359,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWA</span></h3>
+            <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
             <ul>
               <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
               <li>

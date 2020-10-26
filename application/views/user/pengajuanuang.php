@@ -9,8 +9,8 @@
 	<header class="main">
 		<!-- <h1>Pagu Keuangan</h1> -->
   </header>
-
-  <?php if( $this->session->userdata('role') ==0 && $this->session->userdata('statususer') ==2 ):?>
+  
+  <?php if( $this->session->userdata('role') ==0 && $this->session->userdata('statususer') >=2 ):?>
 	<?php
       foreach($dana->result_array() as $i):
           $kd_jrsn=$i['kd_jrsn'];
@@ -167,7 +167,7 @@
 <!-- end kirim -->
 
 <!-- untuk ukmukk -->
-<?php elseif($this->session->userdata('role') ==2 && $this->session->userdata('statususer') ==2  ):?>
+<?php elseif($this->session->userdata('role') ==2 && $this->session->userdata('statususer') >=2  ):?>
 	<?php
       foreach($danaukmukk->result_array() as $j):
           $kd_ukmukk=$j['kd_ukmukk'];
@@ -319,7 +319,12 @@
 	</form>
 <?php endforeach;?>   
 <?php else: ?>
-  
+<center>
+  <h2>Terima kasih telah melakukan update profile!</h2>
+	<p>
+		<h4>Silahkan melakukan logout dan login kembali untuk meakses menu ini</h4>
+	</p><br>
+</center>
 <?php endif;?>
 </section>
 </div>

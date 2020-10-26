@@ -48,23 +48,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
               <?php if($this->session->userdata('status') == "login"){?>
-                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">TENTANG KAMI</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                <li class=""><a href="#">Daftar Kegiatan</a></li>
-                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
+                <li class=""><a href="#">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
               <?php if($this->session->userdata('status') == "login"){?>
-              
+              <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
+
               <?php } else {?> 
-              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">TENTANG KAMI</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
-              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>              
+              <li class=""><a href="#">PEMINJAMAN AULA SC</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -78,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="banner-info text-center wow fadeIn delay-05s">
                 <h1>SI<span class="logo-dec">MARWAH</span></h1>
                 <h2 class="bnr-sub-title">Sistem Informasi Organisasi Mahasiswa</h2>
-                <p class="bnr-para">SIMARWA (Sistem Informasi Organisasi Mahasiswa) merupakan sistem informasi pada
+                <p class="bnr-para">SIMARWAH (Sistem Informasi Organisasi Mahasiswa) merupakan sistem informasi pada
                   organisasi mahasiswa yang ada di kampus UIN Sunan Gunung Djati Bandung. Sistem ini mempermudah
                   mahasiswa dalam keperluan di organisasi, seperti peminjaman Aula Student Center, informasi daftar
                   kegiatan, pendaftaran UKM (Unit Kegiatan Mahasiswa), mengajukan anggaran organisasi, serta informasi
@@ -197,77 +196,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!---->
     <!---->
     <!---->
-    <section id="ukm" class="section-padding wow fadeInUp delay-05s">
-      <div class="container">
+     <section id="ukm" class="section-padding wow fadeInUp delay-05s">
+      <div class="container" style="margin-top: 50px;">
         <div class="row">
           <div class="col-md-12 text-center">
             <h2 class="service-title pad-bt15">UKM & UKK</h2>
-            <p class="sub-title pad-bt15">Unit Kegiatan Mahasiswa</p>
+            <p class="sub-title pad-bt15">Unit Kegiatan Mahasiswa & Unit Kegiatan Khusus</p>
             <hr class="bottom-line">
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+          <?php foreach ($semua_ukmukk->result_array() as $u):
+            $kode_ukmukk = $u['kode_ukmukk'];
+            $nama_ukmukk = $u['nama_ukmukk'];
+            $desc_ukmukk = $u['desc_ukmukk'];
+            $image = $u['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
             <figure>
-              <a href="<?php echo base_url().'c_home/ukmaja';?>">
-                <img src="<?php echo base_url('assets/img/pramuka.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
+              <a href="<?php echo base_url().'c_home/ukmaja/'.$kode_ukmukk;?>">
+                <img src="<?php echo base_url('assets/img/jurusan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
                 <figcaption>
-                  <h2>PRAMUKA</h2>
-                  <p>Pramuka UIN Sunan Gunung Djati Bandung</p>
+                  <h2><?php echo $nama_ukmukk ?></h2>
+                  <p><?php echo $desc_ukmukk ?></p>
                 </figcaption>
               </a>
             </figure>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/PSM.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>PSM</h2>
-                <p>Paduan Suara Mahasiswa</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/fabbis.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>FABBIS</h2>
-                <p>Family of Basketball UIN SGD BDG</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/liga.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>LIMA</h2>
-                <p>Liga Mahasiswa</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/LDM.jpg')?>" style="width: 500px; height: 250px;" class="img-responsive">
-              <figcaption>
-                <h2>LDM</h2>
-                <p>Lembaga Dakwah Masjid</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
-            <figure>
-              <img src="<?php echo base_url('assets/img/port06.jpg')?>" class="img-responsive">
-              <figcaption>
-                <h2>Project For Everyone</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+          <?php endforeach ?>
 
-            <h4><a href="<?php echo base_url().'c_home/semuaukm';?>" style="color: #85C441" class="read-more">Lihat Lebih →</a></h4>
-          </div>
+          
+          
+
         </div>
-      </div>
     </section>
     <!---->
     <!---->
@@ -396,7 +355,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWA</span></h3>
+              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
               <ul>
                 <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
                 <li>
@@ -411,7 +370,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-4 col-sm-4 col-xs-4">
               <ul>
                 <li>
-                  <h5> <a href="indexforall.html">Tentang SIMARWA</a> </h5>
+                  <h5> <a href="indexforall.html">Tentang SIMARWAH</a> </h5>
                 </li>
                 <li>
                   <h5><a href="#">Panduan</a> </h5>
