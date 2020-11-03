@@ -5,9 +5,7 @@
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
 					</div>
-
-					<!-- Content Row -->
-					<div class="row">
+          <div class="row">
 						<div class="col-xl-4 col-md-6 col-lg-5">
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
@@ -38,51 +36,172 @@
 								</div>
 							</div>
 						</div>
-
+            
 						<div class="col-xl-4 col-md-6 col-lg-5">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
 								<div class="card-header py-6">
-									<h6 class="m-0 font-weight-bold text-primary">Diagram Mahasiswa Aktif perUKM/UKK</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Diagram Mahasiswa Aktif perUKM/UKK</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
 									<div class="chart-pie pt-4 pb-2">
-										<canvas id="datamhsukmukk" style="height:40vh; width:80vw"></canvas>
+                    <canvas id="datamhsukmukk" style="height:40vh; width:80vw"></canvas>
 									</div>
 								</div>
 							</div>
 						</div>
+            
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Tabel Sewa Aula Hari ini</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nama Ormawa Penyewa</th>
+                                <th>Nama Kegiatan</th>
+                                <th>Nama Aula</th>
+                                <th>Tanggal acara</th>
+                                <th>Keterangan</th>
+                                <th class="sorting_asc_disabled sorting_desc_disabled text-center">Aksi</th>
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($aula_notyet->result_array()as $i):
+                          $ormawa=$i['penyewa'];
+                          $nama_kegiatan=$i['Keterangan'];
+                          $aula=$i['keterangan'];
+                          $mulai=$i['dari'];
+                          $hingga=$i['hingga'];
+                          $id_sewa=$i['id_sewa'];
+                        ?>
+                            <tr>
+                                <td><?= $ormawa;?></td>
+                                <td><?= $nama_kegiatan; ?></td>
+                                <td><?= $aula; ?></td>
+                                <td><?= date_indo($hingga); ?></td>
+                                <td class="text-center">
+                                    <a href=""  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fa fa-check"></i>
+                                        Selesai
+                                    </a></td>
+                                <td class="text-center">
+                                    <a href=""  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaldetail<?php echo $id_sewa;?>"><i class="fa fa-search"></i>
+                                        Lihat
+                                    </a>
+                                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="modal" data-target="#modalhapus<?php echo $id_sewa;?>"><i class="fa fa-trash"></i>
+                                        Hapus
+                                    </a>
+                                </td>
+                                <!--Modal Hapus-->
+                            </tr>
+                        </tbody>
+                        <?php endforeach;?>
+                    </table>
+                </div>
+            <?php foreach($aula_notyet->result_array()as $i):
+            $ormawa=$i['penyewa'];
+            $nama_kegiatan=$i['Keterangan'];
+            $aula=$i['keterangan'];
+            $mulai=$i['dari'];
+            $hingga=$i['hingga'];
+            $id_sewa=$i['id_sewa'];
+            $surat_sewa=$i['surat_sewa'];
+            $nama_pj=$i['nama_pj'];
+            $no_pj=$i['no_pj'];
+            ?>
+            <div class="modal fade" id="modaldetail<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">Detail Sewa</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input type="hidden" id="id_user" name="id_user" value="<?= $id_sewa?>">
+                      <div class="form-group">
+                        <label>Surat pengajuan</t></label>
+                        <a href="<?=site_url().'assets/uploads/suratizinaula/'.$surat_sewa;'.pdf' ?>" onclick="basicPopup(this.href); return false"><?=$surat_sewa?> </a>
+                      </div>
+                      <div class="form-group">
+                        <label>Nama penyewa</t></label>
+                            </t><input type="text" name="penyewa" class="form-control" value="<?php echo $ormawa;?>" required readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Kegiatan</t></label>
+                            </t><input type="text" name="Keterangan" class="form-control" value="<?php echo $nama_kegiatan;?>" required readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>Aula yang disewa</t></label>
+                            </t><input type="text" name="penyewa" class="form-control" value="<?php echo $aula;?>" required readonly>
+                      </div>
+                      <div class="row form-group">
+                        <div class="form-group col-md-6">
+                          <label for="dari">Mulai Tanggal</label>
+                          <input type="date" class="form-control" id="dari" value="<?php echo $mulai;?>"  name="dari" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="hingga">Akhir Tanggal</label>
+                          <input type="date" name="hingga" class="form-control" id="hingga" value="<?php echo $hingga;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Penanggung Jawab Acara</t></label>
+                            </t><input type="text" name="nama_pj" class="form-control" value="<?php echo $nama_pj;?>" required readonly>
+                      </div>
+                      <div class="form-group">
+                        <label>No HP Penanggung Jawab Acara</t></label>
+                            </t><input type="text" name="no_pj" class="form-control" value="<?php echo $no_pj;?>" required readonly>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm card-shadow-2" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php endforeach;?>
 
-					</div>
+            <!-- hapus sewa -->
+            <?php foreach($aula_notyet->result_array()as $i):
+              $ormawa=$i['penyewa'];
+              $nama_kegiatan=$i['Keterangan'];
+              $aula=$i['keterangan'];
+              $mulai=$i['dari'];
+              $hingga=$i['hingga'];
+              $id_sewa=$i['id_sewa'];
+            ?>
+            <div class="modal fade" id="modalhapus<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="exampleModalLabel">Hapus Sewa Aula</h6>
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h7>Anda yakin hapus sewa untuk <?= $ormawa ?> yang berkegiatan <?= $nama_kegiatan ?> pada tanggal <?= date_indo($mulai);?> ?</h7>
+                      <input type="hidden" id="id_user" name="id_user" value="<?= $id_sewa?>">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <a class="btn btn-danger" href="<?php echo base_url('ormawa/hapus_datasewa_index/'.$id_sewa); ?>">Lanjutkan</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-
-					<div class="row">
-
-						<!-- Area Chart -->
-						<!-- <div class="col-xl-8 col-lg-7"> -->
-
-						<!-- Approach -->
-						<!-- <div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<h6 class="m-0 font-weight-bold text-primary">Halaman Admin Simarwah</h6>
-									</div>
-									<div class="card-body">
-										<p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor
-											page performance. Custom CSS classes are used to create custom components and custom utility
-											classes.</p>
-										<p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap
-											framework, especially the utility classes.</p>
-									</div>
-								</div> -->
-
-						<!-- </div> -->
-					</div>
-
-				</div>
-				<!-- /.container-fluid -->
-
-				</div>
+          <?php endforeach;?>
+          </div>
           <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
           <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -247,3 +366,12 @@
           }
         });
 				</script>
+        <script>
+	// javascript for open file
+	function basicPopup(url) {
+		popupWindow = window.open(url, 'popupWindow',
+			'height=300,width=700,left=50, top=50,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=yes,status=yes,download=no'
+		)
+	}
+
+</script>

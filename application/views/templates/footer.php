@@ -6,7 +6,8 @@
 <script src="<?php echo base_url('assets/js/usermain.js')?>"></script>
 <script src="<?php echo base_url('assets/js/userbuttoncairuang.js')?>"></script>
 <script src="<?php echo base_url('assets/js/userbuttonpengajuanuangg.js')?>"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

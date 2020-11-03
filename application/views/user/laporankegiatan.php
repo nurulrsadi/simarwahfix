@@ -29,7 +29,8 @@
 					dapat mengajukan kembali pencairan dana
 					<br>Laporan kegiatan paling lambat dikirim pada
 					</br>
-					<?=date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
+					<?php $tglmaks= date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
+          <?= date_indo($tglmaks); ?>
 			</div>
 		</article>
 	</div>
@@ -122,7 +123,8 @@
 					dapat mengajukan kembali pencairan dana
 					<br>Laporan kegiatan paling lambat dikirim pada
 					</br>
-					<?=date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
+					<?php $tglmaks = date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
+          <?= date_indo($tglmaks); ?>
 			</div>
 		</article>
 	</div>

@@ -159,7 +159,7 @@
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo base_url('c_admin/Password') ?>">
+		<a class="nav-link" href="<?php echo base_url('c_admin/Edit_Password') ?>">
 			<i class="fas fa-fw fa-user-lock"></i>
 			<span>Edit Password</span></a>
 	</li>

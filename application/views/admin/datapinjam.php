@@ -34,12 +34,13 @@
                       $hingga=$i['hingga'];
                       $id_sewa=$i['id_sewa'];
                     ?>
+                    <?php $date_hingga=date('Y-m-d', strtotime($hingga.'-1 day')); ?>
                         <tr>
                             <td><?= $ormawa;?></td>
                             <td><?= $nama_kegiatan; ?></td>
                             <td><?= $aula; ?></td>
-                            <td><?= date("d M Y",strtotime($mulai)); ?></td>
-                            <td><?= date("d M Y",strtotime($hingga)); ?></td>
+                            <td><?= date_indo($mulai);?></td>
+                            <td><?= date_indo($date_hingga);?></td>
                             <td class="text-center">
                                 <a href=""  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaldetail<?php echo $id_sewa;?>"><i class="fa fa-search"></i>
                                     Lihat
@@ -55,7 +56,7 @@
                 </table>
             </div>
         </div>
-    </div>
+      </div>
     
     <?php foreach($aula_notyet->result_array()as $i):
       $ormawa=$i['penyewa'];
@@ -68,6 +69,7 @@
       $nama_pj=$i['nama_pj'];
       $no_pj=$i['no_pj'];
     ?>
+    <?php $date_hingga=date('Y-m-d', strtotime($hingga.'-1 day')); ?>
     <div class="modal fade" id="modaldetail<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
@@ -103,7 +105,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="hingga">Akhir Tanggal</label>
-                      <input type="date" name="hingga" class="form-control" id="hingga" value="<?php echo $hingga;?>" readonly>
+                      <input type="date" name="hingga" class="form-control" id="hingga" value="<?php echo $date_hingga;?>" readonly>
                     </div>
                   </div>
                   <div class="form-group">
@@ -132,6 +134,7 @@
       $hingga=$i['hingga'];
       $id_sewa=$i['id_sewa'];
     ?>
+    <?php $date_hingga=date('Y-m-d', strtotime($hingga.'-1 day')); ?>
     <div class="modal fade" id="modalhapus<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -152,8 +155,8 @@
 			</div>
 		</div>
 	</div>
-</div>
 <?php endforeach;?>
+</div>
 </div>
 <script>
 	// javascript for open file

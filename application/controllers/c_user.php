@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
@@ -8,6 +9,7 @@ class c_user extends CI_Controller
 {
 function __construct(){
     parent::__construct();
+    $this->load->helper('tanggal_indo');
     if($this->session->userdata('status') != "login"){
       redirect(base_url("c_home/login"));
     }
@@ -27,17 +29,17 @@ function __construct(){
     
     try {
         ob_start();
-        $this->load->view('user/Print_Sewa_Aula');
+        $data['detail_sewa']=$this->M_ormawa->get_detail_sewa_surat($id_sewa);
+        $this->load->view('user/Print_Sewa_Aula',$data);
         $html = ob_get_contents();
         $content = ob_get_clean();
       
         $html2pdf = new Html2Pdf('P', 'A4', 'en', false, 'UTF-8', array(5, 5,5, 5));
-        // $html2pdf->setModeDebug();
-        // $html2pdf->addaExtesion(new Spipu\Html2Pdf\Exception\HtmlParsingException());
         $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->setTestTdInOnePage(false);
         $html2pdf->writeHTML($content);
         $html2pdf->output('forms.pdf');
-    } catch (Html2PdfException $e) {
+    }   catch (Html2PdfException $e) {
         $html2pdf->clean();
     
         $formatter = new ExceptionFormatter($e);
@@ -160,11 +162,58 @@ function __construct(){
         'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
         'userlogin' => $this->M_ormawa->get_login($kode_himp_sess),
         'userpdf' => $this->M_ormawa->get_data_sewa($kode_himp_sess),
+        'usersewa' => $this->M_ormawa->get_data_sewaAll(),
         );
         $this->load->view('templates/header', $data);
         $this->load->view('user/pinjamaula');
         $this->load->view('templates/sidebaruser',$data);
         $this->load->view('templates/footer');
+      }
+    }
+    public function ChangePassword()
+    {
+      if($this->session->userdata('status')!="login"){
+        redirect(base_url("c_home/login"));
+      }
+      else{
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        $data=array(
+        'title' => 'Peminjaman Aula SC',
+        'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
+        'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
+        'msg' => $this->session->flashdata('msg'),
+        );
+        $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[6]|matches[new_password2]');
+        $this->form_validation->set_rules('new_password2', 'Confrim New Password', 'required|trim|min_length[6]|matches[new_password1]');
+        if($this->form_validation->run()==false){
+          $this->load->view('templates/header', $data);
+          $this->load->view('user/changePassword', $data);
+          $this->load->view('templates/sidebaruser',$data);
+          $this->load->view('templates/footer');
+        }else
+          {
+          $current_password=$this->input->post('current_password');
+          $new_password=$this->input->post('new_password1');
+          // var_dump($new_password, $current_password, $md5_crpassword, $data['user']['password']);die();
+          // var_dump($user->password); die();
+          if($data['user']['password']!=md5($current_password)){
+            $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+            redirect('c_user/changePassword');
+          }else{
+            if($current_password==$new_password){
+              $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
+              redirect('c_user/changePassword');
+            }else{
+                $this->db->set('password', md5($new_password));
+                $this->db->where('username', $this->session->userdata('username'));
+                $this->db->update('user');
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Password has been changed!</div>');
+                redirect('c_user/changePassword');
+              }
+          }
+        }
       }
     }
     public function Guide_HMJ()
@@ -596,6 +645,49 @@ function __construct(){
         echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
         }
     }
+    // tambahan nisvy 
+    public function updatefoto_ukmukk(){
+      $kode_ukmukk = $this->input->post('kode_ukmukk');       
+      $image = $this->input->post('image');
+      $imageold = $this->input->post('imageold');  
+
+    if ($image=''){}else{
+    $config['upload_path']='./assets/img/ukm';
+    $config['allowed_types']='jpg|gif|png|jpeg';
+    $config['encrypt_name'] = TRUE;
+
+    $this->load->library('upload',$config);
+    if(!$this->upload->do_upload('image'))
+    {
+        $image=$imageold;
+    }else{
+        $image=$this->upload->data('file_name');
+    }
+      $this->Model_View->update_fotoukm($kode_ukmukk,$image);
+      redirect('c_user');
+    }
+  }
+  public function updatefoto_hmj(){
+      $kode_himpunan = $this->input->post('kode_himpunan');       
+      $image = $this->input->post('image');
+      $imageold = $this->input->post('imageold');  
+
+    if ($image=''){}else
+    {
+    $config['upload_path']='./assets/img/jurusan';
+    $config['allowed_types']='jpg|gif|png|jpeg';
+    $config['encrypt_name'] = TRUE;
+
+    $this->load->library('upload',$config);
+    if(!$this->upload->do_upload('image')){
+        $image=$imageold;
+    }else{
+        $image=$this->upload->data('file_name');
+    }
+      $this->Model_View->update_fotohmj($kode_himpunan,$image);
+      redirect('c_user');
+    }
+  }
 }
 
 

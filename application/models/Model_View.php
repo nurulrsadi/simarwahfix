@@ -411,6 +411,15 @@ function tampil_admin()
     $query_update_admin = $this->db->query("UPDATE user SET nama = '$nama', email = '$email', username = '$username', password = '$password' WHERE id_user = '$id_user'");
     return $query_update_admin;
   }
+  // tambahan nisvy
+  function update_fotoukm($kode_ukmukk,$image){
+    $query_update_ukmukk = $this->db->query("UPDATE ukm_ukk SET image = '$image' WHERE kode_ukmukk = '$kode_ukmukk'");
+    return $query_update_ukmukk;
+  }
+  function update_fotohmj($kode_himpunan,$image){
+    $query_update_hmj = $this->db->query("UPDATE jurusan SET image = '$image' WHERE kode_himpunan = '$kode_himpunan'");
+    return $query_update_hmj;
+  }
 }
 
 

@@ -48,8 +48,8 @@
 							<td><?= $j++; ?></td>
 							<td><?= $nama_fakultas; ?></td>
 							<td><?= $kd_jrsn; ?></td>
-							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
-							<td><?= date("d M Y",strtotime($tglmakslaporan)); ?></td>
+							<td><?= date_indo($akhirkegiatan);?></td>
+							<td><?=  date_indo($tglmakslaporan); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
 							<td><a href="<?=site_url().'assets/uploads/laporankegiatan/'.$laporankegiatan;'.pdf' ?>"
 									onclick="basicPopup(this.href); return false"><?=$laporankegiatan?> </a></td>

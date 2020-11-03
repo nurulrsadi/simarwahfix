@@ -47,10 +47,11 @@
     							<td><?php echo $misi ?></td>
     							<td>
     								<center>
+                      <span data-toggle="tooltip" data-placement="bottom">
     									<button class="btn btn-warning" data-toggle="modal"
-    										data-target="#modaleditfakultas<?php echo $kode_fakultas;?>">Edit</button>
+    										data-target="#modaleditfakultas<?php echo $kode_fakultas;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
     									<button class="btn btn-danger" data-toggle="modal"
-    										data-target="#modal_delete<?php echo $kode_fakultas;?>">Delete</button>
+    										data-target="#modal_delete<?php echo $kode_fakultas;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
     								</center>
     							</td>
     						</tr>

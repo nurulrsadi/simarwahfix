@@ -48,9 +48,9 @@ class M_ormawa extends CI_Model{
 
   function getAnggotaAktiffak(){
     $this->db->select('*');
-    $this->db->select('SUM(jml_mhsaktif) as total_amount');
     $this->db->from('jurusan');
     $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
+    $this->db->select('SUM(jml_mhsaktif) as total_amount');
     $this->db->group_by('parent_fakultas');
     $res = $this->db->get();
     if($res->num_rows() > 0)
@@ -89,10 +89,41 @@ class M_ormawa extends CI_Model{
   function get_belum_tanggalnya(){
     return $query=$this->db->query("SELECT * FROM tb_sewaaula, tb_ket_aula WHERE tb_sewaaula.jenisaula=tb_ket_aula.warna_id order by dari");
   }
+  function get_saat_tanggalnya($date_minus,$date_now)
+  {
+    // SELECT * FROM `tb_sewaaula` WHERE `hingga` >= "2020-10-24" AND `hingga` <= "2020-10-31"
+    $array=array('hingga >=' => $date_minus, 'hingga <=' =>$date_now);
+    $this->db->select('*');
+    $this->db->from('tb_sewaaula');
+    $this->db->join('tb_ket_aula', 'tb_ket_aula.warna_id=tb_sewaaula.jenisaula');
+    $this->db->where($array);
+    return $query = $this->db->get();
+    //  return $query=$this->db->query('SELECT * FROM tb_sewaaula, tb_ket_aula WHERE tb_sewaaula.jenisaula=tb_ket_aula.warna_id AND hingga >= "'.$date_minus.'" AND hingga <= "'.$date_minus.'" ');
+    // var_dump($query); die();
+  }
+
   function hapus_data_sewa_user($id_sewa){
     $this->db->delete('tb_sewaaula', array('id_sewa' => $id_sewa));
   }
   function getDataSewaByID($id_sewa){
     return $this->db->get_where('tb_sewaaula', array('id_sewa'=>$id_sewa));
+  }
+  function get_detail_sewa_surat($id_sewa){
+    $this->db->select('*');
+    $this->db->from('tb_sewaaula');
+    $this->db->where('id_sewa', $id_sewa);
+    $this->db->join('tb_ket_aula', 'tb_ket_aula.warna_id=tb_sewaaula.jenisaula');
+    return $query = $this->db->get();
+    // return $this->db->get_where('tb_sewaaula', array('id_sewa'=>$id_sewa));
+  }
+  function get_data_sewaAll(){
+    $this->db->select('*');
+    $this->db->from('tb_sewaaula');
+    $this->db->join('tb_ket_aula', 'tb_ket_aula.warna_id=tb_sewaaula.jenisaula');
+    return $query = $this->db->get();
+  }
+  public function getAllEvents(){
+    $this->db->order_by('id_sewa');
+    return $this->db->get('tb_sewaaula');
   }
 }

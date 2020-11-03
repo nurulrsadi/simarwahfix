@@ -212,7 +212,7 @@
                       ?>
             <tbody>
               <tr>
-                            <td width="300"><?php echo $start_date ?> s/d <?php echo $end_date ?> </td>
+                            <td width="300"><?php echo p_bulanindo($start_date) ?> s/d <?php echo p_bulanindo($end_date) ?> </td>
                             <td width="800"><?php echo $nama_kegiatan ?></td>
                             
                             

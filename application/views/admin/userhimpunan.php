@@ -48,15 +48,14 @@
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                           <td><?php echo $j++; ?></td>
                           <td><?php echo $nama ?></td>
-                         <!--  <td><?php echo $email ?></td> -->
                           <td><?php echo $telp ?></td>
                           <td><?php echo $username ?></td>
                           <td><?php echo $password ?></td>
-                         <!--  <td><?php echo $role ?></td> -->
                           <td><?php echo $kd_himp ?></td>
                           <td><center>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser<?php echo $id_user;?>">Edit</button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>">Delete</button>
+                            <span data-toggle="tooltip" data-placement="bottom">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser<?php echo $id_user;?>" title="Edit"><i class="far fa-edit" ></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" ></i></button>
                         </center>
                     </td>
                 </tr>

@@ -45,8 +45,9 @@
                             <img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
                           </td>
                           <td><center>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit_ukmukk<?php echo $kode_ukmukk;?>">Edit</button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldelete_ukmukk<?php echo $kode_ukmukk;?>">Delete</button>
+                            <span data-toggle="tooltip" data-placement="bottom">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit_ukmukk<?php echo $kode_ukmukk;?>"title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldelete_ukmukk<?php echo $kode_ukmukk;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
                         </center>
                     </td>
                 </tr>

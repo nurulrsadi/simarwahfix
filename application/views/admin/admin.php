@@ -17,14 +17,14 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                              <tr>
-                                <th>Id Admin</th>
+                                <th>No</th>
                                 <th>Nama Admin</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th>Role</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <?php $j=1;?>
                         <?php 
                   foreach($users->result_array() as $i):
                     $id_user=$i['id_user'];
@@ -37,15 +37,14 @@
                     <tbody>
                         <tr>
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
-                          <td><?php echo $id_user ?></td>
+                          <td><?php echo $j++ ?></td>
                           <td><?php echo $nama ?></td>
                           <td><?php echo $username ?></td>
                           <td><?php echo $password ?></td>
-                          <td><?php echo $role ?></td>
                           <td><center>
-                            <a class="btn btn-warning" data-toggle="modal" data-target="#modaleditadmin<?php echo $id_user;?>">Edit</a>
-                            <a class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>">Delete</a>
-                        </center>
+                          <span data-toggle="tooltip" data-placement="bottom">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaleditadmin<?php echo $id_user;?>"title="Edit"><i class="far fa-edit" ></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" ></i></button>
                     </td>
                 </tr>
             </tbody>

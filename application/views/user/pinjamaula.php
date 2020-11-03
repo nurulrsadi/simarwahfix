@@ -33,7 +33,7 @@
 				<td><?= $penyewa; ?></td>
         <td><?= $Keterangan; ?></td>
         <td><?= $jenis_aula; ?></td>
-        <td><?= date("d M Y",strtotime($tanggal_sewa)); ?></td>
+        <td><?= longdate_indo($tanggal_sewa);?></td>
         <td><center>
           <a href="<?= base_url('c_user/Cetak_Sewa_Aula/'.$id_sewa.'/'.$penyewa.'/'.$Keterangan)?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Cetak</a>
             </center>
@@ -49,88 +49,111 @@
   $id_user=$i['id_user'];
 ?>
 <br>
-<button type="button" class="button primary" data-toggle="modal" data-target="#exampleModal">
-  Sewa Aula SC
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Sewa Aula Student Center</h4>
+<?php endforeach;?>
+<div class="row gtr-200">
+  <div class="col-4 col-12-medium">
+    <button type="button" class="button primary" data-toggle="modal" data-target="#exampleModal">
+        Sewa Aula SC
         </button>
+  </div>
+  <div class="col-4 col-12-medium">
+  </div>
+  <div class="col-4 col-12-medium">
+    <b>Keterangan</b>
+    <br><br>
+      <div class="ket" style="display:flex;">
+        <div class="boxaulaA" style="padding-top:5px;width:20px;height:20px;background:#0000ff; display:flex; pading-right:5px;"></div>&nbsp;&nbsp;&nbsp;Aula A
       </div>
-      <div class="modal-body">
-      <form method="post" action="<?php echo base_url().'ormawa/do_sewa';?>" enctype="multipart/form-data" >
-      <div class="form-group">
-      <input type="hidden" name="id_user" value="<?= $id_user?>">
-      <input class="form-control" name="penyewa" id="penyewa" type="text" value="<?= $user_login?>"required readonly>
+      <br>
+      <div class="ket" style="display:flex;">
+        <div class="boxaulaA" style="width:20px;height:20px;background:#800080; display:flex;"></div>&nbsp;&nbsp;&nbsp;Aula B
       </div>
-      <div class="form-group">
-      <label for="Keterangan">Nama Acara</label>
-      <input type="text" name="Keterangan" id="Keterangan" value=""
-                      placeholder="Nama Acara"  autocomplete="off" required/>
-      </div>
-      <div class="form-group">
-      <label for="surat_sewa">Surat Permohanan Izin </label><br>
-      <div class="file-upload-custom">
-						<input class="file-upload__input-custom" type="file" value="" name="surat_sewa" id="surat_sewa"
-							accept="application/pdf" required>
-						<button class="file-upload__button-custom" type="button">Choose A
-							File</button>
-						<span class="file-upload__label-custom"></span>
-					</div>
-      </div>
-      <div class="form-group form-row">
-        <label for="jenisaula">Aula Student Center</label>
-        <select class="form-control" id="jenisaula" name="jenisaula"  required>
-          <option value="">- Aula -</option>
-          <option value="blue">Aula A</option>
-          <option value="purple">Aula B</option>
-        </select>
-      </div>
-      <div class="row form-group">
-        <div class="form-group col-md-6">
-          <label for="dari">Mulai Tanggal</label>
-          <input type="date" class="form-control" id="dari"  name="dari"  autocomplete="off" required>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="hingga">Akhir Tanggal</label>
-          <input type="date" name="hingga" class="form-control" id="hingga" autocomplete="off" required>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="form-group col-md-6">
-          <label for="mulaipukul">Mulai Pukul</label>
-          <input type="time" name="mulaipukul" class="form-control" id="mulaipukul"  autocomplete="off" required>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="akhirpukul">Akhir Pukul</label>
-          <input type="time" class="form-control" id="akhirpukul" name="akhirpukul"  autocomplete="off" required>
-        </div>
-      </div>
-      <div class="form-group">
-      <label for="nama_pj">Nama Penanggung Jawab</label>
-      <input type="text" name="nama_pj" id="nama_pj" value=""
-                      placeholder="Nama ketua acara" required  autocomplete="off"/>
-      </div>
-      <div class="form-group">
-      <label for="no_pj">No Penanggung Jawab</label>
-      <input type="text" name="no_pj" id="no_pj"  min="10" max="11" value=""
-                      placeholder="08xxx" required  autocomplete="off"/>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="button" data-dismiss="modal">Tutup</button>
-        <button type="submit" class="button primary">Kirim</button>
-      </div>
-    </div>
   </div>
 </div>
-</form>
-<?php endforeach;?>
-<div id="calendar"></div>
+  <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">Sewa Aula Student Center</h4>
+            </button>
+          </div>
+          <div class="modal-body">
+          <form method="post" action="<?php echo base_url().'ormawa/do_sewa';?>" enctype="multipart/form-data" >
+          <div class="form-group">
+          <input type="hidden" name="id_user" value="<?= $id_user?>">
+          <input class="form-control" name="penyewa" id="penyewa" type="text" value="<?= $user_login?>"required readonly>
+          </div>
+          <div class="form-group">
+          <label for="Keterangan">Nama Acara</label>
+          <input type="text" name="Keterangan" id="Keterangan" value=""
+                          placeholder="Nama Acara"  autocomplete="off" required/>
+          </div>
+          <div class="form-group">
+          <label for="no_surat">No Surat Permohonan Izin</label>
+          <input type="text" name="no_surat" id="no_surat" value=""
+                          placeholder="no_surat"  autocomplete="off" required/>
+          </div>
+          <div class="form-group">
+          <label for="surat_sewa">Surat Permohanan Izin </label><br>
+          <div class="file-upload-custom">
+                <input class="file-upload__input-custom" type="file" value="" name="surat_sewa" id="surat_sewa"
+                  accept="application/pdf" required>
+                <button class="file-upload__button-custom" type="button">Choose A
+                  File</button>
+                <span class="file-upload__label-custom"></span>
+              </div>
+          </div>
+          <div class="form-group form-row">
+            <label for="jenisaula">Aula Student Center</label>
+            <select class="form-control" id="jenisaula" name="jenisaula"  required>
+              <option>- Aula -</option>
+              <option value="blue">Aula A</option>
+              <option value="purple">Aula B</option>
+            </select>
+          </div>
+          <div class="row form-group">
+            <div class="form-group col-md-6">
+              <label for="dari">Mulai Tanggal</label>
+              <input type="date" class="form-control" id="dari"  name="dari"  autocomplete="off" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="hingga">Akhir Tanggal</label>
+              <input type="date" name="hingga" class="form-control" id="hingga" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="form-group col-md-6">
+              <label for="mulaipukul">Mulai Pukul</label>
+              <input type="time" name="mulaipukul" class="form-control" id="mulaipukul"  autocomplete="off" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="akhirpukul">Akhir Pukul</label>
+              <input type="time" class="form-control" id="akhirpukul" name="akhirpukul"  autocomplete="off" required>
+            </div>
+          </div>
+          <div class="form-group">
+          <label for="nama_pj">Nama Penanggung Jawab</label>
+          <input type="text" name="nama_pj" id="nama_pj" value=""
+                          placeholder="Nama ketua acara" required  autocomplete="off"/>
+          </div>
+          <div class="form-group">
+          <label for="no_pj">No Penanggung Jawab</label>
+          <input type="text" name="no_pj" id="no_pj"  min="10" max="11" value=""
+                          placeholder="08xxx" required  autocomplete="off"/>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="button primary">Kirim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<div id="calendar">
+
+</div>
 
 
 
@@ -163,45 +186,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialLocaleCode = 'id';
     var localeSelectorEl = document.getElementById('locale-selector');
     var calendarEl = document.getElementById('calendar');
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
+      // startEditable:true,
+      allDayDefault:true,
       locale: initialLocaleCode,
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-        title: 'All Day Event',
-        start: '2020-09-01',
-        color:'purple'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10',
-          color:'purple'
-        },
-        {
-        title: 'All Day Event',
-        start: '2020-09-01',
-        color:'red'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10',
-          color:'blue'
-        }
-      ]
-    });
-
+      eventSources: [{
+        url : "<?php echo base_url('ormawa/getEvents');?>"
+      }]
+        });
+        
+    calendar.getEventSources();
     calendar.render();
 
     // build the locale selector's options
@@ -219,7 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.setOption('locale', this.value);
       }
     });
-
   });
 </script>
   <style>

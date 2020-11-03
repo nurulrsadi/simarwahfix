@@ -10,18 +10,21 @@ class c_admin extends CI_Controller
         }
 	}
     public function index()
-    {       
+    { 
+      $date_now=date('Y-m-d');
+      $date_minus=date('Y-m-d', strtotime($date_now.'-7 day'));      
       $data['title'] = 'Dashboard';
       $data['totalFklts'] = $this->M_ormawa->getTotalAnggotafak();
       $data['sumAktifFklts'] = $this->M_ormawa->getAnggotaAktiffak();
       $data['sumAktifukmukk'] = $this->M_ormawa->getAnggotaAktifUKMUKK();
-      
+      $data['aula_notyet']=$this->M_ormawa->get_saat_tanggalnya($date_minus,$date_now);
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
       $data['count_pukmukk']= $this->M_dana->count_pukmukk();
       $data['count_luniv']= $this->M_dana->count_luniv();
       $data['count_lfklts']= $this->M_dana->count_lfklts();
       $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -41,6 +44,7 @@ class c_admin extends CI_Controller
     $data['count_luniv']= $this->M_dana->count_luniv();
     $data['count_lfklts']= $this->M_dana->count_lfklts();
     $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
     $this->load->view('templates/headeradm', $data);
     $this->load->view('templates/sidebaradm', $data);
     $this->load->view('templates/topbar', $data);
@@ -56,6 +60,7 @@ class c_admin extends CI_Controller
             'usercekagt'=>$this->M_dana->tampil_list_user_anggota(),
             'fak' => $this->Model_View->tampil_list_fakultas(),
         );
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -76,6 +81,7 @@ class c_admin extends CI_Controller
             'title' => 'Edit Pagu Anggaran UKM UKK',
             'userdanaukmukk'=> $this->M_dana->tampil_list_user_dana_ormawa(),
         );
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -95,6 +101,7 @@ class c_admin extends CI_Controller
             'title' => 'Data Pagu Anggaran',
             'getpengajuandana'=> $this->M_dana->tampil_pengajuandana()->result()
         );
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -119,6 +126,7 @@ class c_admin extends CI_Controller
         $data['count_luniv']= $this->M_dana->count_luniv();
         $data['count_lfklts']= $this->M_dana->count_lfklts();
         $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -131,6 +139,7 @@ class c_admin extends CI_Controller
           'title' => 'Cek Pengajuan ORMAWA Tingkat Fakultas',
           'datapengaju' => $this->M_dana->tampil_list_user_pengajuan(),
         );
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -149,6 +158,7 @@ class c_admin extends CI_Controller
           'title' => 'Cek Pengajuan ORMAWA Tingkat UKM UKK',
           'datapengajuukm' => $this->M_dana->tampil_list_user_pengajuanukm(),
         );
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -165,6 +175,7 @@ class c_admin extends CI_Controller
     {
          
         $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat Universitas';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['lpjuniv'] = $this->M_dana->tampil_list_lpjuniv();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -181,6 +192,7 @@ class c_admin extends CI_Controller
     public function Laporan_Kegiatan_Fakultas()
     {
         $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat Fakultas';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['lpjjrsn'] = $this->M_dana->tampil_list_lpjjrsn();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -196,8 +208,8 @@ class c_admin extends CI_Controller
     }
     public function Laporan_Kegiatan_UKMUKK()
     {
-         
         $data['title'] = 'Cek Laporan Kegiatan ORMAWA Tingkat UKM UKK';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['lpjukmukk'] = $this->M_dana->tampil_list_lpjukmukk();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -213,6 +225,7 @@ class c_admin extends CI_Controller
     }
     public function List_Pengajuan_Universitas(){
       $data['title'] = 'List Pengajuan Berhasil';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['datauserbelumuniv'] = $this->M_dana->tampil_list_user_laporanbelumdikirimuniv();
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -228,6 +241,7 @@ class c_admin extends CI_Controller
     }
     public function List_Pengajuan_Fakultas(){
       $data['title'] = 'List Pengajuan Berhasil';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['datauserbelum'] = $this->M_dana->tampil_list_user_laporanbelumdikirim();
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -243,6 +257,7 @@ class c_admin extends CI_Controller
     }
     public function List_Pengajuan_UKMUKK(){
       $data['title'] = 'List Pengajuan Berhasil';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['datauserbelum_ukmukk'] = $this->M_dana->tampil_list_user_laporanbelumdikirim_ukmukk();
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -262,6 +277,7 @@ class c_admin extends CI_Controller
     public function Cek_Surat()
     {
         $data['title'] = 'Cek Surat Izin';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -277,6 +293,7 @@ class c_admin extends CI_Controller
     public function Data_Pinjam()
     {
         $data['title'] = 'Data Peminjaman';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -295,6 +312,7 @@ class c_admin extends CI_Controller
     public function Keluhan()
     {
         $data['title'] = 'Keluhan';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['userkeluhan']=$this->M_ormawa->tampil_keluhan();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -310,48 +328,79 @@ class c_admin extends CI_Controller
     }
     public function Edit_Profil()
     {
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
         $data['title'] = 'Edit Profil';
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
         $data['count_luniv']= $this->M_dana->count_luniv();
         $data['count_lfklts']= $this->M_dana->count_lfklts();
-        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/editprofil', $data);
-        $this->load->view('templates/footeradm');
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk(); 
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $data['msg'] = $this->session->flashdata('msg');
+        $this->form_validation->set_rules('name', 'Nama', 'required|trim');
+        if($this->form_validation->run()==false){
+          $this->load->view('templates/headeradm', $data);
+          $this->load->view('templates/sidebaradm', $data);
+          $this->load->view('templates/topbar', $data);
+          $this->load->view('admin/editprofil', $data);
+          $this->load->view('templates/footeradm');
+        }else
+        {
+          $nama=$this->input->post('name');
+          $this->db->set('nama', $nama);
+          $this->db->where('username',  $this->session->userdata('username'));
+          $this->db->update('user');
+          $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Name has been changed!</div>');
+          redirect('c_admin/Edit_Profil');
+        }
     }
-    public function Profil()
-    {
-        $data['title'] = 'Profil Admin';
-        $data['count_puniv']= $this->M_dana->count_puniv();
-        $data['count_pfklts']= $this->M_dana->count_pfklts();
-        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
-        $data['count_luniv']= $this->M_dana->count_luniv();
-        $data['count_lfklts']= $this->M_dana->count_lfklts();
-        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/profil', $data);
-        $this->load->view('templates/footeradm');
-    }
-    public function Password()
+    public function Edit_Password()
     {
         $data['title'] = 'Edit Password';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
         $data['count_luniv']= $this->M_dana->count_luniv();
         $data['count_lfklts']= $this->M_dana->count_lfklts();
         $data['count_lukmukk']= $this->M_dana->count_lukmukk();
-        $this->load->view('templates/headeradm', $data);
-        $this->load->view('templates/sidebaradm', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/editpass', $data);
-        $this->load->view('templates/footeradm');
+        $data['msg']=$this->session->flashdata('msg');
+        $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[6]|matches[new_password2]');
+        $this->form_validation->set_rules('new_password2', 'Confrim New Password', 'required|trim|min_length[6]|matches[new_password1]');
+        if($this->form_validation->run()==false){
+          $this->load->view('templates/headeradm', $data);
+          $this->load->view('templates/sidebaradm', $data);
+          $this->load->view('templates/topbar', $data);
+          $this->load->view('admin/editpass', $data);
+          $this->load->view('templates/footeradm');
+        }else
+          {
+            $current_password=$this->input->post('current_password');
+            $new_password=$this->input->post('new_password1');
+
+            if($data['admin']['password']!=md5($current_password))
+            {
+              $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+              redirect('c_admin/Edit_Password');
+            }else
+              {
+                if($current_password==$new_password)
+                {
+                  $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
+                  redirect('c_admin/Edit_Password');
+                }else
+                  {
+                    $this->db->set('password', md5($new_password));
+                    $this->db->where('username', $this->session->userdata('username'));
+                    $this->db->update('user');
+
+                    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Password has been changed!</div>');
+                    redirect('c_admin/Edit_Password');
+                  }
+              }
+            }
     }
     function Cek_Data_Pengajuan($kd_jrsn){
       $data['title'] = 'Cek Data';
@@ -370,6 +419,7 @@ class c_admin extends CI_Controller
     }
     function Cek_Data_Pengajuan_UKMUKK($kd_ukmukk){
       $data['title'] = 'Cek Data';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -425,6 +475,7 @@ class c_admin extends CI_Controller
   }
     public function data_universitas(){
       $data['title'] = 'Data Universitas';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['univ'] = $this->Model_View->tampil_list_universitas();
       $data['fak'] = $this->Model_View->tampil_list_fakultas();
       $data['count_puniv']= $this->M_dana->count_puniv();
@@ -441,6 +492,7 @@ class c_admin extends CI_Controller
     }
     public function data_fakultas(){
         $data['title'] = 'Data Fakultas';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['fakultas'] = $this->Model_View->tampil_list_fakultas();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -457,6 +509,7 @@ class c_admin extends CI_Controller
 
     public function data_himpunan(){
       $data['title'] = 'Data Himpunan';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
       $data['fak'] = $this->Model_View->tampil_list_fakultas();
       $data['count_puniv']= $this->M_dana->count_puniv();
@@ -475,6 +528,7 @@ class c_admin extends CI_Controller
 
     public function data_user_himpunan(){
       $data['title'] = 'Data User Himpunan';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan1();
       $data['users'] = $this->Model_View->tampil_user_himpunan();
       $data['count_puniv']= $this->M_dana->count_puniv();
@@ -751,6 +805,7 @@ public function edit_data_himpunan(){
   }
   public function data_ukmukk(){
         $data['title'] = 'Data UKM/UKK';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['ukmukk'] = $this->Model_View->tampil_list_ukmukk();
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
@@ -766,6 +821,7 @@ public function edit_data_himpunan(){
     }
     public function data_userukmukk(){
         $data['title'] = 'Data User UKM/UKK';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['ukmukk'] = $this->Model_View->tampil_list_ukmukk();
         $data['userukmukk'] = $this->Model_View->tampil_user_ukmukk();
         $data['count_puniv']= $this->M_dana->count_puniv();
@@ -891,7 +947,7 @@ public function edit_data_himpunan(){
   {
     $data['title'] = 'Data Admin';
     $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
-    
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
     $data['users'] = $this->Model_View->tampil_admin();
     $data['count_puniv']= $this->M_dana->count_puniv();
     $data['count_pfklts']= $this->M_dana->count_pfklts();

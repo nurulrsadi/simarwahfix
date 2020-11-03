@@ -55,8 +55,9 @@
                          <!--  <td><?php echo $role ?></td>     -->
                           <td><?php echo $kd_ukmukk?></td>                     
                           <td><center>
-                            <a class="btn btn-warning" data-toggle="modal" data-target="#modaledituser_ukmukk<?php echo $id_user;?>">Edit</a>
-                            <a class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_ukmukk<?php echo $id_user;?>">Delete</a>
+                            <span data-toggle="tooltip" data-placement="bottom">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser_ukmukk<?php echo $id_user;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_ukmukk<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
                         </center></td>
                 </tr>
             </tbody>

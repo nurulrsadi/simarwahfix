@@ -293,7 +293,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <table class="fixed-th" >
             <thead>
               <tr>
-                <th width="300">Waktu Acara</th>
+                <th width="300">Perkiraan Acara</th>
 
                 <th width="800">Nama Kegiatan</th>
                 
@@ -308,7 +308,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       ?>
             <tbody>
               <tr>
-                            <td width="300"><?php echo $start_date ?> s/d <?php echo $end_date ?> </td>
+                            <td width="300"><?php echo p_bulanindo($start_date) ?> s/d <?php echo p_bulanindo($end_date) ?> </td>
                             <td width="800"><?php echo $nama_kegiatan ?></td>
                             
                             

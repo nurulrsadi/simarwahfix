@@ -32,11 +32,13 @@ class ormawa extends CI_Controller{
     $Keterangan=$this->input->post('Keterangan',true);
     $jenisaula=$this->input->post('jenisaula', true);
     $dari=date("Y-m-d",strtotime($this->input->post('dari')));
-    $hingga=date("Y-m-d",strtotime($this->input->post('hingga')));
+    $hingga1=date("Y-m-d",strtotime($this->input->post('hingga')));
+    $hingga=date('Y-m-d', strtotime($hingga1.'+1 day' ));
     $mulaipukul=date("h:i",strtotime($this->input->post('mulaipukul')));
     $akhirpukul=date("h:i",strtotime($this->input->post('akhirpukul')));
     $nama_pj=$this->input->post('nama_pj', true);
     $no_pj=$this->input->post('no_pj',true);
+    $no_surat=$this->input->post('no_surat',true);
     $surat_sewa = $this->input->post('surat_sewa', true);
     if ($surat_sewa=''){} else{
       $config['upload_path'] = './assets/uploads/suratizinaula/';//path folder
@@ -62,10 +64,12 @@ class ormawa extends CI_Controller{
       'nama_pj' => $nama_pj,
       'no_pj' => $no_pj,
       'surat_sewa' => $surat_sewanya,
+      'no_surat' => $no_surat,
     );
+    // var_dump($data); die();
     $this->M_ormawa->sewa_aula($data);
     if($data){ // Jika sukses
-      $this->M_ormawa->update_status_sewa($statussewa,$id_user);
+      // $this->M_ormawa->update_status_sewa($statussewa,$id_user);
       $this->session->set_flashdata('flashdata', 'Sewa Aula berhasil dilakukan !');
       redirect('c_user/Pinjam_Aula');
 
@@ -83,5 +87,35 @@ class ormawa extends CI_Controller{
       $this->session->set_flashdata('msg','<div class="alert alert-success">Data User Himpunan Dihapus</div>');
       redirect('c_admin/Data_Pinjam');
     }
+  }
+  function hapus_datasewa_index(){
+    $id_sewa = $this->uri->segment(3);
+    $data=$this->M_ormawa->getDataSewaByID($id_sewa)->row();
+    $hapussuratizin='./assets/uploads/suratizinaula/'.$data->surat_sewa;
+    if(is_readable($hapussuratizin)&&unlink($hapussuratizin)){
+      $this->M_ormawa->hapus_data_sewa_user($id_sewa);
+      $this->session->set_flashdata('msg','<div class="alert alert-success">Data User Himpunan Dihapus</div>');
+      redirect('c_admin');
+    }
+  }
+  public function getEvents(){
+    $r=$this->M_ormawa->getAllEvents();
+    
+    foreach($r->result_array() as $row ){
+      $pengguna = $row['penyewa'];
+      $Acara = $row['Keterangan'];
+      $tgl_mulai = $row['dari'];
+      $tgl_akhir = $row['hingga'];
+      $warna = $row['jenisaula'];
+      $data[]=array(
+        // 'id' => $row['id_sewa'],
+        'title'=> $pengguna.' - '.$Acara,
+        'start' => $tgl_mulai,
+        'end' => $tgl_akhir,
+        'color' => $warna,
+      );
+    }
+    echo json_encode($data);
+    // var_dump($r); die();
   }
 }
