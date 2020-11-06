@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Okt 2020 pada 10.47
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Generation Time: Nov 06, 2020 at 02:22 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `anggota_himpunan`
+-- Table structure for table `anggota_himpunan`
 --
 
 CREATE TABLE `anggota_himpunan` (
@@ -40,26 +40,16 @@ CREATE TABLE `anggota_himpunan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `anggota_himpunan`
+-- Dumping data for table `anggota_himpunan`
 --
 
 INSERT INTO `anggota_himpunan` (`nim`, `nama`, `alamat`, `jenis_kelamin`, `kontak`, `email`, `jabatan`, `parent_himpunan`, `parent_bidang`) VALUES
-('1127050100', 'dimas', '', 'L', '08982736531', 'dimasta@gmail.com', 'KETUA BIDANG', 'Kimia', 'PAO'),
-('1157050083', 'Nm', '', 'L', '', '', 'KETUA', 'HIMANETRO', 'Sosroh'),
-('1157050093', 'qw', '', 'P', '', '', 'SEKRETARIS', 'HIMANETRO', 'Sosroh'),
-('11570501012', 'qw', '', 'L', '', '', 'KETUA', 'HIMANETRO', 'ADFOKOM'),
-('1177050093', 'as', '', 'L', '', '', 'BENDAHARA', 'HIMATIF', 'EXOFFHIMATIF'),
-('1177050100', 'jeruk', '', 'L', '', '', 'KETUA', 'HIMATIF', 'ADFOKOMHIMATIF'),
-('1177050101', 'DF', '', 'P', '', '', 'KETUA', 'HIMATIF', 'EXOFFHIMATIF'),
-('1177050102', 'asd', '', 'P', '', '', 'SEKRETARIS', 'HIMATIF', 'ADFOKOMHIMATIF'),
-('11770501023', 'asd', 'bandung', 'L', '08982736531', 'jeruk@gmail.com', 'ANGGOTA', 'HIMATIF', 'ADFOKOMHIMATIF'),
-('1197050100', 'QS', '', 'P', '', '', 'ANGGOTA', 'PGSD', 'ADFOKOM PGSD'),
-('1197050101', 'HM', '', 'L', '', '', 'KETUA BIDANG', 'PGSD', 'ADFOKOM PGSD');
+('1177050083', 'qwerty', 'bandung', 'P', '098873652', '', 'KETUA BIDANG', 'HIMATIF', 'SOSROH_HIMATIF');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `anggota_ukmukk`
+-- Table structure for table `anggota_ukmukk`
 --
 
 CREATE TABLE `anggota_ukmukk` (
@@ -74,10 +64,17 @@ CREATE TABLE `anggota_ukmukk` (
   `parent_ubidang` varchar(255) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `anggota_ukmukk`
+--
+
+INSERT INTO `anggota_ukmukk` (`u_nim`, `u_nama`, `u_alamat`, `u_jeniskelamin`, `u_kontak`, `u_email`, `u_jabatan`, `parent_ukmukk`, `parent_ubidang`) VALUES
+('117787362', 'hehe', 'bandung', 'L', '', 'nhsad@gmail.com', 'KETUA BIDANG', 'Ukk_pramuka', 'PAO_Pramuka');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bidang_ukmukk`
+-- Table structure for table `bidang_ukmukk`
 --
 
 CREATE TABLE `bidang_ukmukk` (
@@ -89,16 +86,16 @@ CREATE TABLE `bidang_ukmukk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bidang_ukmukk`
+-- Dumping data for table `bidang_ukmukk`
 --
 
 INSERT INTO `bidang_ukmukk` (`kode_ubidang`, `label_ubidang`, `desc_ubidang`, `image`, `parent_ukmukk`) VALUES
-('randomaja', 'randomaja', 'randomaja', '', 'UKM_PSM');
+('PAO_Pramuka', 'PAO', 'Singkatannya', 'a5ad2c02fbc0cf418ea2b124cecf17de.png', 'Ukk_pramuka');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `daftar_kegiatan`
+-- Table structure for table `daftar_kegiatan`
 --
 
 CREATE TABLE `daftar_kegiatan` (
@@ -109,10 +106,17 @@ CREATE TABLE `daftar_kegiatan` (
   `Parent_himpunan` varchar(255) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `daftar_kegiatan`
+--
+
+INSERT INTO `daftar_kegiatan` (`id_kegiatan`, `nama_kegiatan`, `start_date`, `end_date`, `Parent_himpunan`) VALUES
+(1, 'PBAK', '2020-11-19', '2020-11-21', 'HIMATIF');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `fakultas`
+-- Table structure for table `fakultas`
 --
 
 CREATE TABLE `fakultas` (
@@ -125,18 +129,16 @@ CREATE TABLE `fakultas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `fakultas`
+-- Dumping data for table `fakultas`
 --
 
 INSERT INTO `fakultas` (`kode_fakultas`, `nama_fakultas`, `deskripsi`, `visi`, `misi`, `parent_univ`) VALUES
-('SAINTEK', 'Sains dan Teknologi', 'Since 2010', 'sainteksatu', 'sainteksatu', NULL),
-('Tarbiyah', 'Tarbiyah dan Keguruan', '', '', '', NULL),
-('Ushuluddin', 'Ushuluddin', '', '', '', NULL);
+('SAINTEK', 'Sains dan Teknologi', '', 'visi saintek', 'misi saintek', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurusan`
+-- Table structure for table `jurusan`
 --
 
 CREATE TABLE `jurusan` (
@@ -151,28 +153,18 @@ CREATE TABLE `jurusan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jurusan`
+-- Dumping data for table `jurusan`
 --
 
 INSERT INTO `jurusan` (`kode_himpunan`, `nama_himpunan`, `desc_himpunan`, `visi`, `misi`, `jml_mhsaktif`, `image`, `parent_fakultas`) VALUES
 ('DEMAU', 'DEMAU', 'Dema Mahasiswa Universitas', '', '', 0, '005ef1cbc869f611acf8cf13d160f959.jpg', NULL),
-('HIMANETRO', 'Himpunan Mahasiswa Teknik Elektro', '', 'visi elektro', 'misi elektro', 0, '114957ea22a8959998b0dcdab5608212.jpg', 'SAINTEK'),
-('HIMASAKI', 'Himpunan Mahasiswa Fisika', '', '', '', 0, '31ebb51f1c3f4feed5ab80087f636ff0.jpg', 'SAINTEK'),
-('HIMATIF', 'Himpunan Mahasiswa Teknik Informatika', '', 'visi himatif', 'misi himatif', 0, '867cc687efb6f0d4944ac50b9a46d329.jpg', 'SAINTEK'),
-('Ilmu Hadist', 'Ilmu Hadist', '', '', '', 0, '866340740b81f9c837ebff2a70ac539f.jpg', 'Ushuluddin'),
-('Kimia', 'kimia', '', 'visi', 'misi', 0, 'c36e150a184398f0f355918ee21ca678.jpg', 'SAINTEK'),
-('KM-HB', 'Keluarga Mahasiswa Himpunan Biologi', '', '', '', 0, '0eba58501f44fa87a7e4d9ba6912aaf6.jpg', 'SAINTEK'),
-('Matematika', 'Matematika Murni', '', '', '', 0, '7899c22d4ea5c6f98ede3db50ea3994f.png', 'SAINTEK'),
-('PAI', 'pai', '', '', '', 0, 'fe325e1ef0ddfb234806fff35df9b88b.jpg', 'Tarbiyah'),
-('PenKimia', 'Pendidikan Kimia', '', '', '', 0, 'f1d7e759c6e41bb21e85a147672ca045.png', 'Tarbiyah'),
-('Perbandingan Agama', 'Perbandingan Agama', '', '', '', 0, '76d4ba9b66e537273e63e67071498379.jpg', 'Ushuluddin'),
-('PGSD', 'Perguruan SD', '', '', '', 0, 'aace5ce95d05333b6de821b26612b15c.png', 'Tarbiyah'),
+('HIMATIF', 'Teknik Informatika', 'Himpunan Mahasiswa Teknik Informatika', 'visi himatif', 'misi himatif', 1900, '6d1464e2fb6e0c84cd4c60e89038d751.jpg', 'SAINTEK'),
 ('SEMAU', 'SEMAU', 'Senat Mahasiswa Universitas', 'xxxx', 'Test', 0, '5580f7bbef60dc1f86cd0e3ab7a9e372.PNG', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kegiatan_ukmukk`
+-- Table structure for table `kegiatan_ukmukk`
 --
 
 CREATE TABLE `kegiatan_ukmukk` (
@@ -183,10 +175,17 @@ CREATE TABLE `kegiatan_ukmukk` (
   `parent_ukmukk` varchar(255) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kegiatan_ukmukk`
+--
+
+INSERT INTO `kegiatan_ukmukk` (`id_ukegiatan`, `nama_ukegiatan`, `ustart_date`, `uend_date`, `parent_ukmukk`) VALUES
+(4, 'mos', '2020-11-10', '2020-12-02', 'Ukk_pramuka');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `nama_bidang`
+-- Table structure for table `nama_bidang`
 --
 
 CREATE TABLE `nama_bidang` (
@@ -198,21 +197,16 @@ CREATE TABLE `nama_bidang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `nama_bidang`
+-- Dumping data for table `nama_bidang`
 --
 
 INSERT INTO `nama_bidang` (`kode_bidang`, `label_bidang`, `desc_bidang`, `parent_himpunan`, `image`) VALUES
-('ADFOKOM', 'ADFOKOM', 'Advokasi dan Komunikasi', 'HIMANETRO', '8b6a85c4732ccd10161a5cb1ef83870d.jpg'),
-('ADFOKOM PGSD', 'ADFOKOM', 'Advokasi dan Komunikasi', 'PGSD', '2854d53a4d7697a6f2aefae0dc592e5e.jpg'),
-('ADFOKOMHIMATIF', 'ADFOKOMHIMATIF', 'ADFOKOM', 'HIMATIF', 'd785c3e7a68f59ac6cdab7595fd946a1.jpg'),
-('EXOFFHIMATIF', 'EXOFFHIMATIF', 'EX OFFICIO HIMATIF', 'HIMATIF', '4efd79ba58ff28861f118154ea8b13a8.jpg'),
-('PAO', 'PAO', 'peaaoo', 'Kimia', '7b5935cca26aceca89589b7cdfd71da8.jpg'),
-('Sosroh', 'Sosroh', 'Sosial dan Rohani', 'HIMANETRO', 'e5c3f86dab21bfd1113ca9203abe8f84.jpg');
+('SOSROH_HIMATIF', 'SOSROH', 'Sosial dan Rohani', 'HIMATIF', 'b4199843f2695a75112ecb89d2c89901.png');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_detailmenu`
+-- Table structure for table `tb_detailmenu`
 --
 
 CREATE TABLE `tb_detailmenu` (
@@ -225,7 +219,7 @@ CREATE TABLE `tb_detailmenu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_detailmenu`
+-- Dumping data for table `tb_detailmenu`
 --
 
 INSERT INTO `tb_detailmenu` (`id`, `status_id`, `url`, `title`, `icon`, `is_active`) VALUES
@@ -243,7 +237,7 @@ INSERT INTO `tb_detailmenu` (`id`, `status_id`, `url`, `title`, `icon`, `is_acti
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_detailuser`
+-- Table structure for table `tb_detailuser`
 --
 
 CREATE TABLE `tb_detailuser` (
@@ -261,28 +255,44 @@ CREATE TABLE `tb_detailuser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_detailuser`
+-- Dumping data for table `tb_detailuser`
 --
 
 INSERT INTO `tb_detailuser` (`id_dana`, `kd_jrsn`, `kd_fklts`, `jurusan`, `statususer`, `pesangagal`, `nPengajuan`, `danaawal`, `danasisa`, `tahunakademik`, `insertdata`) VALUES
 (20, 'SEMAU', NULL, NULL, 1, 'Alasan tidak ACC', 1, 14000000, 14000000, 2020, '2020-09-27 17:09:33'),
 (23, 'DEMAU', NULL, NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-29 11:47:03'),
-(24, 'HIMATIF', 'SAINTEK', NULL, 2, '\'Alasan tidak ACC\'', 1, 10000000, 8000000, 2021, '2020-10-08 09:02:04'),
-(26, 'HIMANETRO', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-29 14:21:32'),
-(27, 'PGSD', 'Tarbiyah', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 13:01:48'),
-(28, 'HIMASAKI', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:12:33'),
-(29, 'Kimia', 'SAINTEK', NULL, 5, '\'Alasan tidak ACC\'', 1, 19000000, 11000000, 2021, '2020-10-08 10:04:50'),
-(30, 'KM-HB', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:13:56'),
-(31, 'PenKimia', 'Tarbiyah', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:14:32'),
-(32, 'Matematika', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 1, 19000000, 19000000, 2021, '2020-10-06 08:49:15'),
-(33, 'Perbandingan Agama', 'Ushuluddin', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:16:29'),
-(34, 'Ilmu Hadist', 'Ushuluddin', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:17:12'),
-(35, 'PAI', 'Tarbiyah', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-09-30 14:17:50');
+(39, 'HIMATIF', 'SAINTEK', NULL, 4, 'KURANG LENGKAP', 1, 19000000, 11000000, 2020, '2020-11-06 00:35:22');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_keluhan`
+-- Table structure for table `tb_detailuserukmukk`
+--
+
+CREATE TABLE `tb_detailuserukmukk` (
+  `id_dana` int(11) NOT NULL,
+  `kd_ukmukk` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `nama_ukmukk` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `statususer` int(5) NOT NULL DEFAULT 1,
+  `pesangagal` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `nPengajuan` int(3) NOT NULL,
+  `danaawal` bigint(20) NOT NULL DEFAULT 0,
+  `danasisa` bigint(20) NOT NULL DEFAULT 0,
+  `tahunakademik` year(4) NOT NULL DEFAULT 0000,
+  `insertdata` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_detailuserukmukk`
+--
+
+INSERT INTO `tb_detailuserukmukk` (`id_dana`, `kd_ukmukk`, `nama_ukmukk`, `statususer`, `pesangagal`, `nPengajuan`, `danaawal`, `danasisa`, `tahunakademik`, `insertdata`) VALUES
+(6, 'Ukk_pramuka', 'Pramuka', 4, '', 1, 13000000, 11500000, 2020, '2020-11-06 01:17:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_keluhan`
 --
 
 CREATE TABLE `tb_keluhan` (
@@ -293,17 +303,29 @@ CREATE TABLE `tb_keluhan` (
   `isikeluhan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `tb_keluhan`
+-- Table structure for table `tb_ket_aula`
 --
 
-INSERT INTO `tb_keluhan` (`id`, `kd_ormawa`, `kd_fakultas`, `tanggal`, `isikeluhan`) VALUES
-(1, 'PGSD', 'Tarbiyah', '2020-09-25', 'kurang jelas');
+CREATE TABLE `tb_ket_aula` (
+  `warna_id` varchar(11) CHARACTER SET latin1 NOT NULL,
+  `keterangan` varchar(10) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_ket_aula`
+--
+
+INSERT INTO `tb_ket_aula` (`warna_id`, `keterangan`) VALUES
+('blue', 'Aula B'),
+('purple', 'Aula A');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_menuuser`
+-- Table structure for table `tb_menuuser`
 --
 
 CREATE TABLE `tb_menuuser` (
@@ -313,7 +335,7 @@ CREATE TABLE `tb_menuuser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_menuuser`
+-- Dumping data for table `tb_menuuser`
 --
 
 INSERT INTO `tb_menuuser` (`id`, `status_id`, `menu_id`) VALUES
@@ -331,7 +353,7 @@ INSERT INTO `tb_menuuser` (`id`, `status_id`, `menu_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pengajuan`
+-- Table structure for table `tb_pengajuan`
 --
 
 CREATE TABLE `tb_pengajuan` (
@@ -341,7 +363,7 @@ CREATE TABLE `tb_pengajuan` (
   `jurusan` varchar(255) CHARACTER SET latin1 NOT NULL,
   `tahunakademik` year(4) NOT NULL,
   `nPengajuan` int(3) DEFAULT NULL,
-  `statususer` int(4) NOT NULL,
+  `statususer` int(5) NOT NULL,
   `akhirkegiatan` date NOT NULL,
   `tglmakslaporan` date NOT NULL,
   `tgluploadlpj` date NOT NULL,
@@ -359,16 +381,83 @@ CREATE TABLE `tb_pengajuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pengajuan`
+-- Dumping data for table `tb_pengajuan`
 --
 
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `kd_jrsn`, `kd_fakultas`, `jurusan`, `tahunakademik`, `nPengajuan`, `statususer`, `akhirkegiatan`, `tglmakslaporan`, `tgluploadlpj`, `namaKegiatan`, `danaawal`, `danasisa`, `danaacc`, `suratpengajuan`, `rinciankegiatan`, `rkakl`, `tor`, `laporankegiatan`, `laporanrincianbiaya`, `insertdata`) VALUES
-(24, 'Kimia', 'SAINTEK', '', 2021, 1, 5, '2020-12-10', '2020-12-17', '2020-10-08', 'PBAK, AUDIENSI, ', 19000000, 11000000, 8000000, 'SPJ-201008-bee87c62c0.pdf', 'RKG-201008-bee87c62c0.pdf', 'RKA_KL-201008-bee87c62c0.pdf', 'TOR-201008-bee87c62c0.pdf', 'LPJ-201008-f2c39a8edd.pdf', 'RBY-201008-f2c39a8edd.pdf', '2020-10-08 10:04:50');
+(27, 'HIMATIF', 'SAINTEK', '', 2020, 1, 4, '2020-11-12', '0000-00-00', '0000-00-00', 'PBAK, Monitor', 19000000, 11000000, 8000000, 'SPJ-201105-206235bc40.pdf', 'RKG-201105-206235bc40.pdf', 'RKA_KL-201105-206235bc40.pdf', 'TOR-201105-206235bc40.pdf', '', '', '2020-11-06 00:35:22');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_status`
+-- Table structure for table `tb_pengajuan_ukmukk`
+--
+
+CREATE TABLE `tb_pengajuan_ukmukk` (
+  `id_pengajuan_ukmukk` int(11) NOT NULL,
+  `kd_ukmkk` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `nama_ukmukk` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `tahunakademik` year(4) NOT NULL,
+  `nPengajuan` int(3) NOT NULL,
+  `statususer` int(5) NOT NULL,
+  `akhirkegiatan` date NOT NULL,
+  `tglmakslaporan` date NOT NULL,
+  `tgluploadlpj` date NOT NULL,
+  `namaKegiatan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `danaawal` bigint(20) NOT NULL,
+  `danasisa` bigint(20) NOT NULL,
+  `danaacc` bigint(20) NOT NULL,
+  `suratpengajuan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `rinciankegiatan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `rkakl` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `tor` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `laporankegiatan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `laporanrincianbiaya` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `inserdata` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_pengajuan_ukmukk`
+--
+
+INSERT INTO `tb_pengajuan_ukmukk` (`id_pengajuan_ukmukk`, `kd_ukmkk`, `nama_ukmukk`, `tahunakademik`, `nPengajuan`, `statususer`, `akhirkegiatan`, `tglmakslaporan`, `tgluploadlpj`, `namaKegiatan`, `danaawal`, `danasisa`, `danaacc`, `suratpengajuan`, `rinciankegiatan`, `rkakl`, `tor`, `laporankegiatan`, `laporanrincianbiaya`, `inserdata`) VALUES
+(2, 'HM', 'hm', 0000, 1, 3, '2020-11-09', '0000-00-00', '0000-00-00', 'monitor', 1982000, 1982000, 0, '', '', '', '', '', '', '2020-11-06 00:31:27'),
+(3, 'Ukk_pramuka', 'Pramuka', 2020, 1, 4, '2020-11-18', '0000-00-00', '0000-00-00', 'ospek', 13000000, 11500000, 1500000, 'SPJ-201106-1dbf660b02.pdf', 'RKG-201106-1dbf660b02.pdf', 'RKA_KL-201106-1dbf660b02.pdf', 'TOR-201106-1dbf660b02.pdf', '', '', '2020-11-06 01:17:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_sewaaula`
+--
+
+CREATE TABLE `tb_sewaaula` (
+  `id_sewa` int(11) NOT NULL,
+  `penyewa` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `Keterangan` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `no_surat` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `surat_sewa` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `jenisaula` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `dari` date NOT NULL,
+  `hingga` date NOT NULL,
+  `mulaipukul` time NOT NULL,
+  `akhirpukul` time NOT NULL,
+  `nama_pj` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `no_pj` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_sewaaula`
+--
+
+INSERT INTO `tb_sewaaula` (`id_sewa`, `penyewa`, `Keterangan`, `no_surat`, `surat_sewa`, `jenisaula`, `dari`, `hingga`, `mulaipukul`, `akhirpukul`, `nama_pj`, `no_pj`) VALUES
+(1, 'HIMATIF', 'PRS', '19283/2983/Permohonan Izin Sewa Aula', 'SuratIzinSewaAula-201105-0d6ed3d935-HIMATIF-PRS.pdf', 'blue', '2020-11-06', '2020-11-08', '09:00:00', '04:00:00', 'saya', '0876273612'),
+(2, 'HIMATIF', 'PRS2', '987/2312/B/312', 'SuratIzinSewaAula-201105-7704668530-HIMATIF-PRS2.pdf', 'purple', '2020-11-12', '2020-11-14', '09:00:00', '03:00:00', 'YYYYYyyyyy', '0967567564'),
+(4, 'Ukk_pramuka', 'Ospek', '12873/23/B', 'SuratIzinSewaAula-201106-07f389b2b6-Ukk_pramuka-Ospek.pdf', 'blue', '2020-11-06', '2020-11-08', '09:01:00', '07:02:00', 'saya', '0986745643');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_status`
 --
 
 CREATE TABLE `tb_status` (
@@ -377,7 +466,7 @@ CREATE TABLE `tb_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_status`
+-- Dumping data for table `tb_status`
 --
 
 INSERT INTO `tb_status` (`id_status`, `Nama Status`) VALUES
@@ -390,7 +479,26 @@ INSERT INTO `tb_status` (`id_status`, `Nama Status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_sumtotalanggotafak`
+-- Table structure for table `tb_statussewa`
+--
+
+CREATE TABLE `tb_statussewa` (
+  `id_status` int(11) NOT NULL,
+  `keterangan` varchar(10) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_statussewa`
+--
+
+INSERT INTO `tb_statussewa` (`id_status`, `keterangan`) VALUES
+(0, 'tidak akti'),
+(1, 'aktif sewa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_sumtotalanggotafak`
 --
 
 CREATE TABLE `tb_sumtotalanggotafak` (
@@ -401,7 +509,7 @@ CREATE TABLE `tb_sumtotalanggotafak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_sumtotalanggotafak`
+-- Dumping data for table `tb_sumtotalanggotafak`
 --
 
 INSERT INTO `tb_sumtotalanggotafak` (`id`, `kd_fakultas`, `nama_fakultas`, `total_anggota`) VALUES
@@ -411,7 +519,7 @@ INSERT INTO `tb_sumtotalanggotafak` (`id`, `kd_fakultas`, `nama_fakultas`, `tota
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ukm_ukk`
+-- Table structure for table `ukm_ukk`
 --
 
 CREATE TABLE `ukm_ukk` (
@@ -425,16 +533,16 @@ CREATE TABLE `ukm_ukk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ukm_ukk`
+-- Dumping data for table `ukm_ukk`
 --
 
 INSERT INTO `ukm_ukk` (`kode_ukmukk`, `nama_ukmukk`, `desc_ukmukk`, `visi_ukmukk`, `misi_ukmukk`, `jml_umhsaktif`, `image`) VALUES
-('UKM_PSM', 'PSM', 'padus uin', 'visi', 'misi', 70, '');
+('Ukk_pramuka', 'Pramuka', 'ya pramuka', 'visi pramuka', 'misi pramuka', 1200, 'dbe6bea1849ac8b36a503c1536d29fdb.png');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -442,34 +550,33 @@ CREATE TABLE `user` (
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `telp` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` int(11) NOT NULL,
   `kode_himp` varchar(255) NOT NULL,
   `is_active` int(11) NOT NULL,
   `statususer` int(5) DEFAULT NULL,
+  `statussewa` int(11) NOT NULL,
   `update_date` datetime NOT NULL,
   `insert_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `password`, `role`, `kode_himp`, `is_active`, `statususer`, `update_date`, `insert_date`) VALUES
-(17, 'admin aljamiah', 'admin@gmail.com', 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 1, 'Contoh', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(22, 'admin2', 'email@gmail.com', 'admin2', 'c84258e9c39059a89ab77d846ddab909', 1, '', 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(30, 'if', 'jeruk@gmail.com', 'ifsakti', '929d97cf81785edc0ff40c0fcad87726', 0, 'HIMATIF', 1, 2, '0000-00-00 00:00:00', '2020-09-29 16:22:35'),
-(31, 'elektro', 'asd@gmail.com', 'elektro', '3f0062caa096feac56117e460aa91bdd', 0, 'HIMANETRO', 1, 2, '0000-00-00 00:00:00', '2020-09-29 16:23:03'),
-(32, 'PGSD', 'jeruk@gmail.com', 'pgsd', '115b3860d663b4206ee6dfd929e72a93', 0, 'PGSD', 1, 2, '0000-00-00 00:00:00', '2020-09-30 15:02:19'),
-(33, 'kimiasains', 'kimia@uinsgd.ac.id', 'kimiasains', '5c913be9b7d3732443786aeebbad0818', 0, 'Kimia', 1, 5, '0000-00-00 00:00:00', '2020-10-08 11:49:26'),
-(34, 'admin_psm', 'adminpsm@gmail.com', 'admin_psm', '4985dbae7730df12cf8f64c9c06a8f8a', 2, 'UKM_PSM', 1, 1, '2020-10-12 09:38:20', '2020-10-12 09:39:36');
+INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `telp`, `password`, `role`, `kode_himp`, `is_active`, `statususer`, `statussewa`, `update_date`, `insert_date`) VALUES
+(17, 'admin aljamiahaaaa', 'admin@gmail.com', 'admin1', '', 'eed57216df3731106517ccaf5da2122d', 1, 'Contoh', 1, 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 'admin2', 'email@gmail.com', 'admin2', '', 'c84258e9c39059a89ab77d846ddab909', 1, '', 1, 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(39, 'HMJ Teknik Informatika', '', 'himatif@uinsgd.ac.id', '0898746352', '23abc39caa54c738db2e54511dac4e96', 0, 'HIMATIF', 1, 4, 0, '0000-00-00 00:00:00', '2020-11-05 19:55:19'),
+(40, 'UKK Pramuka', '', 'Pramuka@uinsgd.ac.id', '098785756', '78ef2c624387fdd0837ad47421536a27', 2, 'Ukk_pramuka', 1, 4, 0, '0000-00-00 00:00:00', '2020-11-06 02:04:31');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `anggota_himpunan`
+-- Indexes for table `anggota_himpunan`
 --
 ALTER TABLE `anggota_himpunan`
   ADD PRIMARY KEY (`nim`),
@@ -477,7 +584,7 @@ ALTER TABLE `anggota_himpunan`
   ADD KEY `parent_bidang` (`parent_bidang`);
 
 --
--- Indeks untuk tabel `anggota_ukmukk`
+-- Indexes for table `anggota_ukmukk`
 --
 ALTER TABLE `anggota_ukmukk`
   ADD PRIMARY KEY (`u_nim`),
@@ -485,54 +592,54 @@ ALTER TABLE `anggota_ukmukk`
   ADD KEY `parent_ubidang` (`parent_ubidang`);
 
 --
--- Indeks untuk tabel `bidang_ukmukk`
+-- Indexes for table `bidang_ukmukk`
 --
 ALTER TABLE `bidang_ukmukk`
   ADD PRIMARY KEY (`kode_ubidang`),
   ADD KEY `parent_ukmukk` (`parent_ukmukk`);
 
 --
--- Indeks untuk tabel `daftar_kegiatan`
+-- Indexes for table `daftar_kegiatan`
 --
 ALTER TABLE `daftar_kegiatan`
   ADD PRIMARY KEY (`id_kegiatan`),
   ADD KEY `Parent_himpunan` (`Parent_himpunan`);
 
 --
--- Indeks untuk tabel `fakultas`
+-- Indexes for table `fakultas`
 --
 ALTER TABLE `fakultas`
   ADD PRIMARY KEY (`kode_fakultas`);
 
 --
--- Indeks untuk tabel `jurusan`
+-- Indexes for table `jurusan`
 --
 ALTER TABLE `jurusan`
   ADD PRIMARY KEY (`kode_himpunan`),
   ADD KEY `parent_fakultas` (`parent_fakultas`);
 
 --
--- Indeks untuk tabel `kegiatan_ukmukk`
+-- Indexes for table `kegiatan_ukmukk`
 --
 ALTER TABLE `kegiatan_ukmukk`
   ADD PRIMARY KEY (`id_ukegiatan`),
   ADD KEY `parent_ukmukk` (`parent_ukmukk`);
 
 --
--- Indeks untuk tabel `nama_bidang`
+-- Indexes for table `nama_bidang`
 --
 ALTER TABLE `nama_bidang`
   ADD PRIMARY KEY (`kode_bidang`),
   ADD KEY `parent_himpunan` (`parent_himpunan`);
 
 --
--- Indeks untuk tabel `tb_detailmenu`
+-- Indexes for table `tb_detailmenu`
 --
 ALTER TABLE `tb_detailmenu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_detailuser`
+-- Indexes for table `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
   ADD PRIMARY KEY (`id_dana`),
@@ -540,19 +647,32 @@ ALTER TABLE `tb_detailuser`
   ADD KEY `jurusan_ibfk_2` (`kd_fklts`);
 
 --
--- Indeks untuk tabel `tb_keluhan`
+-- Indexes for table `tb_detailuserukmukk`
+--
+ALTER TABLE `tb_detailuserukmukk`
+  ADD PRIMARY KEY (`id_dana`),
+  ADD KEY `statususer` (`statususer`);
+
+--
+-- Indexes for table `tb_keluhan`
 --
 ALTER TABLE `tb_keluhan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_menuuser`
+-- Indexes for table `tb_ket_aula`
+--
+ALTER TABLE `tb_ket_aula`
+  ADD PRIMARY KEY (`warna_id`);
+
+--
+-- Indexes for table `tb_menuuser`
 --
 ALTER TABLE `tb_menuuser`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_pengajuan`
+-- Indexes for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
   ADD PRIMARY KEY (`id_pengajuan`),
@@ -560,131 +680,182 @@ ALTER TABLE `tb_pengajuan`
   ADD KEY `status1` (`statususer`);
 
 --
--- Indeks untuk tabel `tb_status`
+-- Indexes for table `tb_pengajuan_ukmukk`
+--
+ALTER TABLE `tb_pengajuan_ukmukk`
+  ADD PRIMARY KEY (`id_pengajuan_ukmukk`),
+  ADD KEY `statususer` (`statususer`);
+
+--
+-- Indexes for table `tb_sewaaula`
+--
+ALTER TABLE `tb_sewaaula`
+  ADD PRIMARY KEY (`id_sewa`),
+  ADD KEY `jenisaula` (`jenisaula`),
+  ADD KEY `penyewa` (`penyewa`);
+
+--
+-- Indexes for table `tb_status`
 --
 ALTER TABLE `tb_status`
   ADD PRIMARY KEY (`id_status`);
 
 --
--- Indeks untuk tabel `tb_sumtotalanggotafak`
+-- Indexes for table `tb_statussewa`
+--
+ALTER TABLE `tb_statussewa`
+  ADD PRIMARY KEY (`id_status`);
+
+--
+-- Indexes for table `tb_sumtotalanggotafak`
 --
 ALTER TABLE `tb_sumtotalanggotafak`
   ADD KEY `kd_fakultas` (`kd_fakultas`);
 
 --
--- Indeks untuk tabel `ukm_ukk`
+-- Indexes for table `ukm_ukk`
 --
 ALTER TABLE `ukm_ukk`
   ADD PRIMARY KEY (`kode_ukmukk`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
-  ADD KEY `kode_himp` (`kode_himp`) USING BTREE,
-  ADD KEY `status` (`statususer`);
+  ADD KEY `status` (`statususer`),
+  ADD KEY `statussewa` (`statussewa`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `daftar_kegiatan`
+-- AUTO_INCREMENT for table `daftar_kegiatan`
 --
 ALTER TABLE `daftar_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `kegiatan_ukmukk`
+-- AUTO_INCREMENT for table `kegiatan_ukmukk`
 --
 ALTER TABLE `kegiatan_ukmukk`
-  MODIFY `id_ukegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ukegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_detailuser`
+-- AUTO_INCREMENT for table `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
-  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_keluhan`
+-- AUTO_INCREMENT for table `tb_detailuserukmukk`
+--
+ALTER TABLE `tb_detailuserukmukk`
+  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tb_keluhan`
 --
 ALTER TABLE `tb_keluhan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pengajuan`
+-- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `tb_pengajuan_ukmukk`
+--
+ALTER TABLE `tb_pengajuan_ukmukk`
+  MODIFY `id_pengajuan_ukmukk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_sewaaula`
+--
+ALTER TABLE `tb_sewaaula`
+  MODIFY `id_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `anggota_himpunan`
+-- Constraints for table `anggota_himpunan`
 --
 ALTER TABLE `anggota_himpunan`
   ADD CONSTRAINT `anggota_himpunan_ibfk_3` FOREIGN KEY (`parent_himpunan`) REFERENCES `jurusan` (`kode_himpunan`),
   ADD CONSTRAINT `anggota_himpunan_ibfk_4` FOREIGN KEY (`parent_bidang`) REFERENCES `nama_bidang` (`kode_bidang`);
 
 --
--- Ketidakleluasaan untuk tabel `anggota_ukmukk`
+-- Constraints for table `anggota_ukmukk`
 --
 ALTER TABLE `anggota_ukmukk`
   ADD CONSTRAINT `anggota_ukmukk_ibfk_1` FOREIGN KEY (`parent_ukmukk`) REFERENCES `ukm_ukk` (`kode_ukmukk`),
   ADD CONSTRAINT `anggota_ukmukk_ibfk_2` FOREIGN KEY (`parent_ubidang`) REFERENCES `bidang_ukmukk` (`kode_ubidang`);
 
 --
--- Ketidakleluasaan untuk tabel `bidang_ukmukk`
+-- Constraints for table `bidang_ukmukk`
 --
 ALTER TABLE `bidang_ukmukk`
   ADD CONSTRAINT `bidang_ukmukk_ibfk_1` FOREIGN KEY (`parent_ukmukk`) REFERENCES `ukm_ukk` (`kode_ukmukk`);
 
 --
--- Ketidakleluasaan untuk tabel `daftar_kegiatan`
+-- Constraints for table `daftar_kegiatan`
 --
 ALTER TABLE `daftar_kegiatan`
   ADD CONSTRAINT `daftar_kegiatan_ibfk_1` FOREIGN KEY (`Parent_himpunan`) REFERENCES `jurusan` (`kode_himpunan`);
 
 --
--- Ketidakleluasaan untuk tabel `jurusan`
+-- Constraints for table `jurusan`
 --
 ALTER TABLE `jurusan`
   ADD CONSTRAINT `jurusan_ibfk_1` FOREIGN KEY (`parent_fakultas`) REFERENCES `fakultas` (`kode_fakultas`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `kegiatan_ukmukk`
+-- Constraints for table `kegiatan_ukmukk`
 --
 ALTER TABLE `kegiatan_ukmukk`
   ADD CONSTRAINT `kegiatan_ukmukk_ibfk_1` FOREIGN KEY (`parent_ukmukk`) REFERENCES `ukm_ukk` (`kode_ukmukk`);
 
 --
--- Ketidakleluasaan untuk tabel `nama_bidang`
+-- Constraints for table `nama_bidang`
 --
 ALTER TABLE `nama_bidang`
   ADD CONSTRAINT `parent_himpunan` FOREIGN KEY (`parent_himpunan`) REFERENCES `jurusan` (`kode_himpunan`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_detailuser`
+-- Constraints for table `tb_detailuser`
 --
 ALTER TABLE `tb_detailuser`
   ADD CONSTRAINT `jurusan_ibfk_2` FOREIGN KEY (`kd_fklts`) REFERENCES `fakultas` (`kode_fakultas`) ON UPDATE CASCADE,
   ADD CONSTRAINT `status` FOREIGN KEY (`statususer`) REFERENCES `tb_status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_pengajuan`
+-- Constraints for table `tb_detailuserukmukk`
+--
+ALTER TABLE `tb_detailuserukmukk`
+  ADD CONSTRAINT `status_user_relationship` FOREIGN KEY (`statususer`) REFERENCES `tb_status` (`id_status`);
+
+--
+-- Constraints for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
   ADD CONSTRAINT `status1` FOREIGN KEY (`statususer`) REFERENCES `tb_status` (`id_status`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_pengajuan_ukmukk`
+--
+ALTER TABLE `tb_pengajuan_ukmukk`
+  ADD CONSTRAINT `status12` FOREIGN KEY (`statususer`) REFERENCES `tb_status` (`id_status`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
