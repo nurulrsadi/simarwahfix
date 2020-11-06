@@ -18,6 +18,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahbootstrap.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahanimate.css')?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahstyle.css')?>">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js"></script>
+  <link href="<?= base_url().'assets/js/fullcalendarjs/main.min.css'?>" rel="stylesheet" type="text/css"> 
+  <script src="<?= base_url().'assets/js/fullcalendarjs/main.js' ?>"type="text/javascript"/></script>
+  <script src="<?= base_url().'assets/js/fullcalendarjs/locales-all.js' ?>" type="text/javascript"></script>
   <!-- =======================================================
     Theme Name: Baker
     Theme URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
@@ -281,46 +286,70 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               mahasiswa.</p>
             <hr class="bottom-line">
           </div>
-          <div id="calendar" style="max-width: 800px;margin: 2rem auto;padding: 0 5px">
+          <div id="calendar">
 
-            <pre id="debug" style="overflow-x:hidden"></pre>
-            
-                
-                <link rel="stylesheet" href="<?php echo base_url('assets/dist/calendar.css')?>">
-               <link rel="stylesheet" href="<?php echo base_url('assets/css/main.css')?>">
-                <script src="<?php echo base_url('assets/dist/calendar.js')?>"></script>
+            </div>
 
-
-                <script>
-                  var d = new Date()
-                  var calendar = new Calendar({
-                    target: document.querySelector("#calendar"),
-                    data: {
-                      view: 'calendar',
-                      escape: false,
-                      year: d.getFullYear(),
-                      month: d.getMonth(),
-                    }
-                  })
-
-                  // fetch("entries.json").then(r => r.json()).then(data => {
-                  //   var entries = calendar.get('entries')
-                  //   var cardEntries = data.cards.filter(c => !!c.badges.due && !c.closed).map(c => {
-
-                  //   return {
-                  //     title: c.name,
-                  //     start: c.badges.due,
-                  //     content: c.desc,
-                  //     image: c.attachments.length > 0 ? c.attachments[0].previews.sort((a,b) => b.bytes - a.bytes)[0].url : null
-                  //   }
-                  //   })
-
-                  //   entries = entries.concat(cardEntries)
-                  //   calendar.set({entries: entries, message: ''})
-                  //   })
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var initialLocaleCode = 'id';
+                var localeSelectorEl = document.getElementById('locale-selector');
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                  headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                  },
+                  // startEditable:true,
+                  allDayDefault:true,
+                  locale: initialLocaleCode,
+                  buttonIcons: false, // show the prev/next text
+                  weekNumbers: true,
+                  navLinks: true, // can click day/week names to navigate views
+                  editable: true,
+                  dayMaxEvents: true, // allow "more" link when too many events
+                  eventSources: [{
+                    url : "<?php echo base_url('ormawa/getEvents');?>"
+                  }]
+                    });
                     
-          
-                </script>
+                calendar.getEventSources();
+                calendar.render();
+
+                // build the locale selector's options
+                calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
+                  var optionEl = document.createElement('option');
+                  optionEl.value = localeCode;
+                  optionEl.selected = localeCode == initialLocaleCode;
+                  optionEl.innerText = localeCode;
+                  localeSelectorEl.appendChild(optionEl);
+                });
+
+                // when the selected option changes, dynamically change the calendar option
+                localeSelectorEl.addEventListener('change', function() {
+                  if (this.value) {
+                    calendar.setOption('locale', this.value);
+                  }
+                });
+              });
+            </script>
+              <style>
+              #top {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                padding: 0 10px;
+                line-height: 40px;
+                font-size: 12px;
+              }
+
+              #calendar {
+                max-width: 1100px;
+                margin: 40px auto;
+                padding: 0 10px;
+              }
+              </style>
+              
               
           </div>
           <div class="col-md- col-sm-6 col-xs-12">
@@ -329,9 +358,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <h2>Keterangan Telah Dipinjam : </h2>
                 <br>
                 <div class="row" style="margin-bottom: 15px; margin-left: 30px">
-                  <div class="biru" style="display: inline-grid;"></div>
+                  <div class="biru" style="display: inline-grid; background:#0000ff;"></div>
                   <p>Aula SC A</p>
-                  <div class="merah" style="display: inline-grid;"></div>
+                  <div class="merah" style="display: inline-grid; background:#800080;"></div>
                   <p>Aula SC B</p>
                 </div>
 

@@ -151,9 +151,9 @@
         </div>
       </div>
     </div>
-<div id="calendar">
+  <div id="calendar" width="10%">
 
-</div>
+  </div>
 
 <?php elseif($user['statususer'] ==1 && $user['role']==0 ) :?>
   <section>

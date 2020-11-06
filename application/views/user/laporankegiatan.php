@@ -30,7 +30,7 @@
 					<br>Laporan kegiatan paling lambat dikirim pada
 					</br>
 					<?php $tglmaks= date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
-          <?= date_indo($tglmaks); ?>
+          <?= ($tglmaks); ?>
 			</div>
 		</article>
 	</div>
@@ -122,9 +122,9 @@
 					pencairan<br><br>Silahkan melakukan laporan kegiatan maksimal h+7 dari waktu terlaksanakannya acara, agar
 					dapat mengajukan kembali pencairan dana
 					<br>Laporan kegiatan paling lambat dikirim pada
-					</br>
 					<?php $tglmaks = date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
-          <?= date_indo($tglmaks); ?>
+					<?=($tglmaks) ?>
+					<!--  -->
 			</div>
 		</article>
 	</div>

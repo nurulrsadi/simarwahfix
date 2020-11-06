@@ -54,11 +54,11 @@
         						<?= $m['title']; ?></a></li>
         				<?php endforeach;?>
                 <?php endforeach;?>
-                <li><a href="<?php echo base_url() . 'c_user/ChangePassword'; ?>"><i class="fas fa-key fa-2x"></i>&nbsp;
+                <li><a href="<?php echo base_url() . 'c_user/ChangePassword'; ?>"><i class="fas fa-key fa-2x"></i>&nbsp;&nbsp;&nbsp;
         						Edit Password</a></li>
-        				<li><a href="<?php echo base_url() . 'c_user/Guide_HMJ'; ?>"><i class="fas fa-book-reader fa-2x "></i>&nbsp;
+        				<li><a href="<?php echo base_url() . 'c_user/Guide_HMJ'; ?>"><i class="fas fa-book-reader fa-2x "></i>&nbsp;&nbsp;&nbsp;
         						Panduan SIMARWAH</a></li>
-        				<li><a href="<?php echo base_url() . 'data/logout'; ?>"><i class="fas fa-sign-out-alt fa-2x"></i>&nbsp;&nbsp;Log
+        				<li><a href="<?php echo base_url() . 'data/logout'; ?>"><i class="fas fa-sign-out-alt fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log
         						Out</a></li>
         			</ul>
         		</nav>
