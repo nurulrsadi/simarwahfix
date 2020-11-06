@@ -41,7 +41,6 @@
                     $danasisa=$i['danasisa'];
                     $danaawal=$i['danasisa'];
                     $nPengajuan=$i['nPengajuan'];
-                    $kd_fklts=$i['kd_fklts'];
                     $nama_fakultas=$i['nama_fakultas'];
                     // $fakultas=$i['parent_fakultas'];
                     ?>
@@ -50,7 +49,6 @@
 							<td><?= $kd_jrsn; ?></td>
 							<td>Rp. <?= number_format($danasisa,0,',','.'); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
-							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>
 								<span class="btn btn-sm btn-danger">Belum disetujui</span>
 							</td>

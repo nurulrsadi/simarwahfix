@@ -80,11 +80,12 @@
                           $hingga=$i['hingga'];
                           $id_sewa=$i['id_sewa'];
                         ?>
+                        <?php $date_hingga=date('Y-m-d', strtotime($hingga.'-1 day')); ?>
                             <tr>
                                 <td><?= $ormawa;?></td>
                                 <td><?= $nama_kegiatan; ?></td>
                                 <td><?= $aula; ?></td>
-                                <td><?= date_indo($hingga); ?></td>
+                                <td><?= date_indo($date_hingga); ?></td>
                                 <td class="text-center">
                                     <a href=""  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fa fa-check"></i>
                                         Selesai

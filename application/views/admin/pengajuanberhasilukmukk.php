@@ -46,7 +46,6 @@
 							<td>Rp. <?=  number_format($danasisa,0,',','.'); ?></td>
 							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
-							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>
 								<span class="btn btn-sm btn-danger">Laporan Belum Dikirim</span>
 							</td>
@@ -65,6 +64,7 @@
 		</div>
 	</div>
 </div>
+
 <?php 
     foreach($datauserbelum_ukmukk->result_array() as $i):
       $kd_ukmkk=$i['kd_ukmkk'];
@@ -97,12 +97,6 @@
 						</t><input type="text" name="kd_ukmkk" class="form-control" value="<?php echo $kd_ukmkk;?>" required readonly>
 					</div>
 					<div class="form-group ">
-						<label>
-							Nama Fakultas</t></label>
-						</t><input type="text" name="nama_fakultas" class="form-control" value="<?php echo $nama_fakultas;?>"
-							readonly>
-					</div>
-					<div class="form-group ">
 						<label>Dana Sisa</t></label>
 						</t><input type="text" name="danaawal" class="form-control"
 							value="Rp <?php echo number_format($danaawal,0,',','.');?>" readonly>
@@ -130,4 +124,4 @@
 	</div>
 </div>
 <?php endforeach;?>
-</div>
+

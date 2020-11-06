@@ -221,6 +221,83 @@ class dana extends CI_Controller{
         }
         // if()
       }
+      public function admin_acc_pengajuan_ukmukk(){
+        $kd_ukmkk = $this->input->post('kd_ukmukk');
+        $where = array('kd_ukmkk' => $kd_ukmkk);
+        $u = $this->M_dana->getDataByID($kd_ukmkk)->row();
+        $tahunakademik = $this->input->post('tahunakademik', true);
+        $danasisa =$this->input->post('danasisa', true);
+        $danaminus =$this->input->post('danaminus', true);
+        $pesangagal =$this->input->post('pesangagal', true);
+        $nPengajuan =$this->input->post('nPengajuan', true);
+        $statususer = $this->input->post('statususer');
+        $uangsisaacc = $this->input->post('uangsisaacc');
+        $sup = 1;
+
+        // kalau diacc
+        if($danaminus!=''){
+          $statususer6 = 4;
+          $kd_ukmkk = $this->input->post('kd_ukmkk', true);
+          $b = $danasisa;
+          $c = $danaminus;
+          $x = $b-$c;
+          if($data['nPengajuan'] = 1 )
+            {
+              $pengajuan1 = $data['nPengajuan']+$data['a'];
+              $nPengajuan6 = $pengajuan1; 
+            } else if ($data['nPengajuan'] = 2 )
+            {
+              $pengajuan2 = $data['nPengajuan']+$data['a'];
+              $nPengajuan6 = $pengajuan2; 
+            } else if ($data['nPengajuan'] = 3 )
+            {
+              $pengajuan3 = $data['nPengajuan']+$data['a'];
+              $nPengajuan6 = $pengajuan3; 
+            } else {
+              $data['b'] = 1;
+              $pengajuan4 = $data['b'];
+              $nPengajuan6 = $pengajuan4;
+            }
+            
+            $this->M_dana->pengajuandiacc_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6,$c);
+            $this->M_dana->pengajuandiaccupdatedb_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6);
+            $this->M_dana->pengajuandiaccupdatedbuser_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6);
+            redirect('c_admin/Cek_Pengajuan_UKMUKK');
+            $this->session->set_flashdata('flashpengajuan','Pengajuan UKM/UKK telah diterima');
+        }
+        else{
+          redirect('c_admin/tolak_pengajuan');
+          // $statususer7 = 2;
+          // $kd_jrsn = $this->input->post('kd_jrsn', true);
+          // if($data['nPengajuan'] = 1 )
+          // {
+          //   $pengajuan1 = $data['nPengajuan'];
+          //   $nPengajuan7 = $pengajuan1; 
+          // } else if ($data['nPengajuan'] = 2 )
+          // {
+          //   $pengajuan2 = $data['nPengajuan']-$data['a'];
+          //   $nPengajuan7 = $pengajuan2; 
+          // } else if ($data['nPengajuan'] = 3 )
+          // {
+          //   $pengajuan3 = $data['nPengajuan']-$data['a'];
+          //   $nPengajuan7 = $pengajuan3; 
+          // } else {
+          //   $data['b'] = 1;
+          //   $pengajuan4 = $data['b'];
+          //   $nPengajuan7 = $pengajuan4;
+          // }
+
+          //   $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
+          //   $this->M_dana->pengajuantidakdiaccdetil($kd_jrsn,$statususer7, $danasisa,$nPengajuan7,$pesangagal);
+            
+            
+            
+            
+          //   // $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer7, $nPengajuan6);
+          //   redirect('c_admin/Cek_Pengajuan_Fakultas');
+        }
+        // if()
+      }
       function do_laporan(){
       $this->form_validation->set_rules('laporankegiatan', 'laporanrincianbiaya', 'rkakl', 'tor', 'required');
       $kode= date('ymd') . '-' . substr(md5(rand()), 0, 10);

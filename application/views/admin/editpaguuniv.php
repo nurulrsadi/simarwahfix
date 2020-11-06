@@ -40,16 +40,17 @@
     					<tbody>
     						<tr>
     							<td><?=$j++;?></td>
-    							<!-- <td><center><?php echo $no++ ?></center></td> -->
     							<td><?php echo $kd_jrsn ?></td>
     							<td><?php echo $tahunakademik ?></td>
     							<td>Rp. <?php echo number_format($danaawal,0,',','.') ?></td>
     							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
     							<td class="align-self-auto">
-    								<!-- Button trigger modal -->
-    								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"
-    									data-target="#modaleditanggaran<?php echo $kd_jrsn;?>"><i class="fa fa-pen"></i>
-    									Edit Anggaran
+                    <span data-toggle="tooltip" data-placement="bottom">
+    								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" data-toggle="modal"
+    									data-target="#modaleditanggaran<?php echo $kd_jrsn;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
+    								</a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="modal"
+    									data-target="#modalresetakun<?php echo $kd_jrsn;?>" title="Reset Akun"><i class="fa fa-undo"></i>
     								</a>
     							</td>
     						</tr>
@@ -60,6 +61,7 @@
     		</div>
     	</div>
     </div>
+	</div>
                   <!-- </div> -->
     <!-- Modal Tambah Fakultas -->
     <!-- Akhir Modal Tambah  -->
@@ -112,6 +114,33 @@
     <?php endforeach;?>
     <!-- Akhir Modal Edit -->
 
-    <!-- Modal Delete -->
-    <!-- Akhir Modal Delete -->
+<!-- modal reset akun -->
+<?php foreach($userdanauniv->result_array() as $i):
+          $kd_jrsn=$i['kd_jrsn'];
+          ?>
+  <div class="modal fade" id="modalresetakun<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
+    	aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  >
+    	<div class="modal-dialog modal-dialog-centered">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<h6 class="modal-title" id="exampleModalLabel">Reset Akun </h6>
+    				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+    				</button>
+    			</div>
+    			<div class="modal-body">
+    				<form method="post" action="<?php echo base_url().'c_admin/reset_akun_fakultas'?>"
+    					enctype="multipart/form-data">
+              <h7>Anda yakin akan mereset akun <?= $kd_jrsn; ?>?</h7>
+    					<input type="hidden" name="kd_jrsn" id="kd_jrsn" value="<?= $kd_jrsn ?>" >
+              <!-- <input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>"> -->
+    			</div>
+    			<div class="modal-footer">
+    				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    				<button type="submit" class="btn btn-danger">Reset</button>
+    			</div>
+    			</form>
+    		</div>
+    	</div>
     </div>
+    <?php endforeach;?>

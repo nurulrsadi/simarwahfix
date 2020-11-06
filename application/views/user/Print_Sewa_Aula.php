@@ -93,12 +93,13 @@
             <td width="470">: <?= $aula;?></td>
           </tr>
           <?php $date_akhir=date('Y-m-d', strtotime($akhir_tanggal.'-1 day')); ?>
+          
           <?php if($date_akhir!=$mulai_tanggal): ?>
           <tr> 
             <td style="padding-left:65;">Tanggal</td>
             <td width="470">: <?= longdate_indo($mulai_tanggal); ?> - <?= date_indo($date_akhir);?></td>
           </tr>
-          <?php elseif($akhir_tanggal==$mulai_tanggal):?>
+          <?php elseif($mulai_tanggal==$date_akhir):?>
           <tr> 
             <td style="padding-left:65;">Tanggal</td>
             <td width="470">: <?= longdate_indo($mulai_tanggal); ?></td>

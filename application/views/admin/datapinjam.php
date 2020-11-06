@@ -70,7 +70,7 @@
       $no_pj=$i['no_pj'];
     ?>
     <?php $date_hingga=date('Y-m-d', strtotime($hingga.'-1 day')); ?>
-    <div class="modal fade" id="modaldetail<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
+    <div class="modal fade modal-dialog modal-dialog-scrollable" id="modaldetail<?php echo $id_sewa;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">

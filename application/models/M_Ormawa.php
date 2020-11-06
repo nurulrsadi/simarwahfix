@@ -97,7 +97,7 @@ class M_ormawa extends CI_Model{
     $this->db->from('tb_sewaaula');
     $this->db->join('tb_ket_aula', 'tb_ket_aula.warna_id=tb_sewaaula.jenisaula');
     $this->db->where($array);
-    return $query = $this->db->get();
+    return $this->db->get();
     //  return $query=$this->db->query('SELECT * FROM tb_sewaaula, tb_ket_aula WHERE tb_sewaaula.jenisaula=tb_ket_aula.warna_id AND hingga >= "'.$date_minus.'" AND hingga <= "'.$date_minus.'" ');
     // var_dump($query); die();
   }

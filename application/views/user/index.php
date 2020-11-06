@@ -15,7 +15,7 @@
                           <div class="features">
                               <article>
                                   <div class="content">
-                                   <h2>HI, <?php echo strtoupper($this->session->userdata('user_login')) ?> !</h2>
+                                   <h2>HI, Admin <?php echo strtoupper($this->session->userdata('user_login')) ?> !</h2>
                                    <p>Anda diharuskan Update Profile terlebih dahulu agar dapat melakukan akses ke menu lainnya.</p>
                                </div>
                            </article>
@@ -41,7 +41,7 @@
                                 ?>
                                 <br>
                                 <center>
-                                <img src="<?php echo base_url('assets/img/ukm/'.$image.'')?>" class="img-fluid" alt="Responsive image" width="100%">
+                                <img src="<?php echo base_url('assets/img/jurusan/'.$image.'')?>" class="img-fluid" alt="Responsive image" width="100%" style="width: 50%; height: 50%; ">
                                 </center>
                                 <center>
                                 <a class="btn btn-success justify-content-end" style="margin-left: 50px; margin-top: 10px;" href="" data-toggle="modal" data-target="#modal_edit_foto_ukm" >Update Foto</a>
@@ -438,8 +438,8 @@
                       </div>
        
                       <div class="modal-footer">
-                           <button type="button" class="btn " aria-hidden="true" data-dismiss="modal">Close</button>
-                           <button type="submit" class="btn ">Save</button>
+                          <button type="button" class="btn " aria-hidden="true" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn ">Save</button>
                       </div>
                   </form>
                   </div>

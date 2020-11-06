@@ -9,7 +9,6 @@
 	<header class="main">
 		<!-- <h1>Pagu Keuangan</h1> -->
   </header>
-  
   <?php if( $this->session->userdata('role') ==0 && $this->session->userdata('statususer') >=2 ):?>
 	<?php
       foreach($dana->result_array() as $i):
@@ -20,8 +19,8 @@
           $nPengajuan=$i['nPengajuan'];
           $statususer=$i['statususer'];
           $tahunakademik=$i['tahunakademik'];
-          $jurusan=$i['jurusan'];
-  ?>
+					$jurusan=$i['jurusan'];
+	?>
 
 	<div class="features">
 
@@ -76,8 +75,9 @@
 			<input type="date" name="akhirkegiatan" id="akhirkegiatan" required />
 		</div>
 	</div>
-
+	<br><br>
 	<!-- tabel -->
+	<b><small> Jika sebelumnya telah melakukan pengajuan, namun gagal. silahkan hubungi kontak berikut: 0875xxxx </small></b>
 	<table class="content-table">
 		<thead>
 			<tr>
@@ -233,7 +233,9 @@
 			<input type="date" name="akhirkegiatan" id="akhirkegiatan" required />
 		</div>
 	</div>
-
+	<br><br>
+	<!-- tabel -->
+	<b><small> Jika sebelumnya telah melakukan pengajuan, namun gagal. silahkan hubungi kontak berikut: 0875xxxx </small></b>
 	<!-- tabel -->
 	<table class="content-table">
 		<thead>
@@ -317,7 +319,21 @@
 	</div>
 	<!--  -->
 	</form>
-<?php endforeach;?>   
+<?php endforeach;?>
+	<?php elseif($user['statususer'] ==1 && $user['role']==0 ) :?>
+<center>
+  <h2>HEI!</h2>
+	<p>
+		<h4>Silahkan update profile untuk dapat meakses menu ini</h4>
+	</p><br>
+</center>
+<?php elseif($user['statususer'] ==1 && $user['role']==2 ) :?>
+<center>
+  <h2>HEI!</h2>
+	<p>
+		<h4>Silahkan update profile untuk dapat meakses menu ini</h4>
+	</p><br>
+</center>
 <?php else: ?>
 <center>
   <h2>Terima kasih telah melakukan update profile!</h2>

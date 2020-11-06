@@ -37,9 +37,10 @@
                   <input type="password" class="form-control" id="new_password" name="new_password2">
                 </div>
               </div>
-              <div class="form-group">
-                <div class="">
-                  <button type="submit" class="button primary" data-toggle="modal" data-target="#exampleModal" style="background-color:#007bff;">Change Password
+              <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                <button type="submit" class="button primary" style="background-color:#007bff;">Change Password
                   </button>
                 </div>
               </div>

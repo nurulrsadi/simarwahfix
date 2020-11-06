@@ -386,6 +386,10 @@ function tambah_statususer($parent_himpunan,$statususer){
   return $query = $this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp=
   '$parent_himpunan' ");
 }
+function tambah_statususerukmukk($parent_ukmukk,$statususer){
+  return $query = $this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp=
+  '$parent_ukmukk' ");
+}
 //end_nuy
 
 // tambah molly

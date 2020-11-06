@@ -49,9 +49,12 @@
     							<td>Rp. <?php echo number_format($danasisa,0,',','.') ?></td>
     							<td class="align-self-auto">
     								<!-- Button trigger modal -->
-    								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-light shadow-sm" data-toggle="modal"
-    									data-target="#modaleditanggaran<?php echo $kd_ukmukk;?>"><i class="fa fa-pen"></i>
-    									Edit Anggaran
+                    <span data-toggle="tooltip" data-placement="bottom">
+    								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" data-toggle="modal"
+    									data-target="#modaleditanggaran<?php echo $kd_ukmukk;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
+    								</a>
+                    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="modal"
+    									data-target="#modalresetakun<?php echo $kd_ukmukk;?>" title="Reset Akun"><i class="fa fa-undo"></i>
     								</a>
     							</td>
     						</tr>
@@ -96,9 +99,10 @@
     					</div>
     					<div class="form-group ">
     						<label>Nama ORMAWA</t></label>
-    						</t><input type="text" name="kd_ukmukk" class="form-control" value="<?php echo $kd_ukmukk;?>" required
+    						</t><input type="text" name="nama_ukmukk" class="form-control" value="<?php echo $nama_ukmukk;?>" required
     							readonly>
     					</div>
+                  <input type="hidden" name="kd_ukmukk" class="form-control" value="<?php echo $kd_ukmukk;?>">
     					<div class="form-group ">
     						<label>Pagu Anggaran <small class="text-decoration" style="color:red">contoh : 2000000</small></t>
     						</label>
@@ -114,8 +118,36 @@
     		</div>
     	</div>
     </div>
+  </div>
     <?php endforeach;?>
     <!-- Akhir Modal Edit -->
-        </div>
-    <!-- Modal Delete -->
-    <!-- Akhir Modal Delete -->
+    <!-- Reset akun -->
+    <?php 
+        foreach($userdanaukmukk->result_array() as $i):
+          $kd_ukmukk=$i['kd_ukmukk'];
+          ?>
+  <div class="modal fade" id="modalresetakun<?php echo $kd_ukmukk;?>" tabindex="-1" role="dialog"
+    	aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  >
+    	<div class="modal-dialog modal-dialog-centered">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<h6 class="modal-title" id="exampleModalLabel">Reset Akun </h6>
+    				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+    				</button>
+    			</div>
+    			<div class="modal-body">
+    				<form method="post" action="<?php echo base_url().'c_admin/reset_akun_ukmukk'?>"
+    					enctype="multipart/form-data">
+              <h7>Anda yakin akan mereset akun <?= $kd_ukmukk; ?>?</h7>
+    					<input type="hidden" name="kd_ukmukk" id="kd_ukmukk" value="<?= $kd_ukmukk ?>" >
+    			</div>
+    			<div class="modal-footer">
+    				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    				<button type="submit" class="btn btn-danger">Reset</button>
+    			</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+    <?php endforeach;?>

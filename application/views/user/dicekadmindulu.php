@@ -7,7 +7,7 @@
 	<header class="main">
 
 	</header>
-  <?php if( $this->session->userdata('statususer') ==3 ):?>
+  <?php if( $user['statususer'] ==3 ):?>
 	<div class="features">
 
 		<article>

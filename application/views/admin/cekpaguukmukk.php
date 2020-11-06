@@ -5,8 +5,6 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-		<a href="<?= base_url().'c_admin/Cek_Pagu_Tingkat_Univ';?>"
-			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Cek Pengajuan Dana DEMAU SEMAU</a>
 	</div>
 
 	<!-- DataTales Example -->
@@ -36,7 +34,7 @@
 							<?php $j=1; ?>
 							<?php 
                   foreach($datapengajuukm->result_array() as $i):
-                    $kd_ukmukk=$i['kd_ukmukk'];
+                    $kd_ukmukk=$i['kd_ukmkk'];
                     // $nama_fakultas=$i['nama_fakultas'];
                     $tahunakademik=$i['tahunakademik'];
                     $danasisa=$i['danasisa'];

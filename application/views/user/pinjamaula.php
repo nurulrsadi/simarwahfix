@@ -63,7 +63,7 @@
     <b>Keterangan</b>
     <br><br>
       <div class="ket" style="display:flex;">
-        <div class="boxaulaA" style="padding-top:5px;width:20px;height:20px;background:#0000ff; display:flex; pading-right:5px;"></div>&nbsp;&nbsp;&nbsp;Aula A
+        <div class="boxaulaA" style="padding-top:5px;width:20px;height:20px;background:#0000ff; display:flex; padding-right:5px;"></div>&nbsp;&nbsp;&nbsp;Aula A
       </div>
       <br>
       <div class="ket" style="display:flex;">
@@ -155,8 +155,30 @@
 
 </div>
 
-
-
+<?php elseif($user['statususer'] ==1 && $user['role']==0 ) :?>
+  <section>
+	<header class="main">
+		<!-- <h1>Pagu Keuangan</h1> -->
+  </header>
+  <br>
+  <center>
+  <h2>Hei!</h2>
+    <h4>Silahkan update profile untuk dapat mengakses menu ini</h4>
+  </br><br>
+  </center>
+  </section>
+  <?php elseif($user['statususer'] ==1 && $user['role']==2 ) :?>
+  <section>
+	<header class="main">
+		<!-- <h1>Pagu Keuangan</h1> -->
+  </header>
+  <br>
+  <center>
+  <h2>Hei!</h2>
+    <h4>Silahkan update profile untuk dapat mengakses menu ini</h4>
+  </br><br>
+  </center>
+  </section>
 <?php else: ?>
   <section>
 	<header class="main">
@@ -170,6 +192,7 @@
   </center>
   </section>
 <?php endif;?>
+
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>

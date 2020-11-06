@@ -81,6 +81,7 @@ function __construct(){
               'dana' => $this->M_dana->tampil_data_dana_login($kode_himp_sess),
               'danaukmukk' => $this->M_dana->tampil_data_dana_loginukm($kode_himp_sess),
               'useruser'=>$this->Model_View->tampil_statususer($kode_himp_sess),
+              'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(),
           );
           $this->load->view('templates/header', $data);
           $this->load->view('user/pengajuanuang', $data);
@@ -115,6 +116,7 @@ function __construct(){
       $data['title'] = 'Laporan Kegiatan';
       $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
       $data['laporan_ukmukk']=$this->M_dana->tampil_data_laporan_login_ukmukk($kode_himp_sess);
+      $data['user'] =  $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $this->load->view('templates/header',$data);
       $this->load->view('user/laporankegiatan',$data);
       $this->load->view('templates/sidebaruser',$data);
@@ -129,6 +131,7 @@ function __construct(){
       $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
       $data['title'] = 'Verifikasi Laporan Kegiatan';
       $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
+      $data['user']= $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $this->load->view('templates/header',$data);
       $this->load->view('user/diceklaporandulu',$data);
       $this->load->view('templates/sidebaruser',$data);
@@ -434,9 +437,9 @@ function __construct(){
           'end_date' => $end_date
       );
 
-      $this->Model_View->tambah_kegiatan($data);
+      $datakegiatan=$this->Model_View->tambah_kegiatan($data);
        if($datakegiatan){ // Jika sukses
-               echo "<script>alert('Data berhasil ditambah');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
+              echo "<script>alert('Data berhasil ditambah');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
         }else{ // Jika gagal
               echo "<script>alert('Data gagal ditambahkan');window.location = '".base_url('c_user/Program_Kerja')."';</script>";
       }    
@@ -539,7 +542,8 @@ function __construct(){
         $u_jabatan=$this->input->post('u_jabatan');
         $parent_ukmukk=$this->input->post('parent_ukmukk');
         $parent_ubidang=$this->input->post('parent_ubidang');
-
+        $statususer=2;
+        $datastatus = $this->Model_View->tambah_statususerukmukk($parent_ukmukk,$statususer);
         $databarang = $this->Model_View->simpan_ukmanggota($u_nim,$u_nama,$u_jeniskelamin,$u_alamat,$u_kontak,$u_email,$u_jabatan,$parent_ukmukk,$parent_ubidang);
      if($databarang){ // Jika sukses
       echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
