@@ -23,7 +23,12 @@
 			<i class="fas fa-fw fa-tachometer-alt"></i>
 			<span>Dashboard</span></a>
 	</li>
+	<hr class="sidebar-divider">
 
+	<!-- Heading -->
+	<div class="sidebar-heading">
+		Menu Dana
+	</div>
 	<!-- Nav Item - Utilities Collapse Menu -->
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_editdana" aria-expanded="true"
@@ -90,6 +95,49 @@
 			</div>
 		</div>
 	</li>
+
+	<!-- Menu History Pengajuan-->
+	<li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_History_Pengajuan" aria-expanded="true"
+			aria-controls="collapseUtilities">
+      <i class="fas fa-fw fas fa-archive"></i>
+			<!-- <i class="fas fa-fw fa-dollar-sign"></i> -->
+			<span>History Pengajuan</span>
+		</a>
+		<div id="collapse_History_Pengajuan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Menu History :</h6>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Pengajuan_Universitas') ?>">History Pengajuan Universitas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Pengajuan_Fakultas') ?>">History Pengajuan Fakultas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Pengajuan_UKMUKK') ?>">History Pengajuan UKM UKK</a>
+				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan_UKMUKK') ?>">Dana ACC UKM UKK</a> -->
+			</div>
+		</div>
+	</li>
+	<!-- Menu History Laporan-->
+	<li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_History_Laporan" aria-expanded="true"
+			aria-controls="collapseUtilities">
+      <i class="fas fa-fw fas fa-archive"></i>
+			<!-- <i class="fas fa-fw fa-dollar-sign"></i> -->
+			<span>History Laporan</span>
+		</a>
+		<div id="collapse_History_Laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Menu History :</h6>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Laporan_Universitas') ?>">History Laporan Universitas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Laporan_Fakultas') ?>">History Laporan Fakultas</a>
+				<a class="collapse-item" href="<?php echo base_url('c_admin/History_Laporan_UKMUKK') ?>">History Laporan UKM UKK</a>
+				<!-- <a class="collapse-item" href="<?php echo base_url('c_admin/List_Pengajuan_UKMUKK') ?>">Dana ACC UKM UKK</a> -->
+			</div>
+		</div>
+	</li>
+	<hr class="sidebar-divider">
+
+<!-- Heading -->
+<div class="sidebar-heading">
+	Menu Ormawa
+</div>
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('c_admin/Data_Pinjam') ?>">
@@ -101,7 +149,7 @@
   	<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="far fa-fw fa-address-book"></i>
-            <span>Data Ormawa</span>
+            <span>Data Ormawa Tingkat Fakultas</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

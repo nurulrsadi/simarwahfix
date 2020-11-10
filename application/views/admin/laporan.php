@@ -146,6 +146,6 @@
 
 	renderPDF('<?=site_url().'
 		assets / uploads / suratpengajuan / '.$suratpengajuan;'.pdf '?>', document.getElementById('<?=$suratpengajuan ?>')
-	); <
+	); 
 
 </script>

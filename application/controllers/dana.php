@@ -1,18 +1,7 @@
 <?php 
 
 class dana extends CI_Controller{ 
-        
-        private function _detail()
-        {
-        // join 3 table 
-        $this->db->select('*');
-        return $this->db->from('user')
-                ->join('tb_pengajuandana', 'user.dana_awal=tb_pengajuandana.id_pengajuan')
-                // ->join('tb_kelas', 'tb_user.kelas=tb_kelas.id_kelas')
-                ->get()
-                ->row_array();
-        }
-        
+
       function do_pengajuan()
       {
       $this->form_validation->set_rules('suratpengajuan', 'rinciankegiatan', 'rkakl', 'tor', 'required');
@@ -113,11 +102,6 @@ class dana extends CI_Controller{
       $rinciankegiatannya = $rkg;
       $rkaklnya = $rkakl;
       $tornya = $tor;
-      // $tahunakademik= $this->input->post('tahunakademik',true);
-      // $waktuupload = date('l jS \of F Y \a\t h:i:s A', timestamp);
-      // $nPengajuannya = $nPengajuan6;
-
-      // $datadana = $this->M_dana->update_pengajuan($kd_jrsn, $statususer6,$nPengajuan);
       $datadana1=array(
         'kd_jrsn' =>$kd_jrsn, 
         'kd_fakultas'=>$kd_fklts,
@@ -133,7 +117,7 @@ class dana extends CI_Controller{
         'tor' =>$tornya,
         'tahunakademik'=>$tahunakademik
       );
-      // $datadana1 = $this->M_dana->insert_pengajuan($kd_jrsn,$kd_fklts,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya,$nPengajuan,$namaKegiatan,$statususer6,$akhirkegiatan,$danasisa);
+
         $databerhasil=$this->M_dana->pengajuanfile($kd_jrsn,$statususer);
         $databerhasil1=$this->M_dana->pengajuanfileuser($kd_jrsn,$statususer);
       $this->M_dana->tambah_pengajuan($datadana1);
@@ -183,7 +167,7 @@ class dana extends CI_Controller{
             }
             
             $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c);
-            $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            // $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
             $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer6, $x, $nPengajuan6);
             redirect('c_admin/Cek_Pengajuan_Fakultas');
             $this->session->set_flashdata('flashpengajuan','Pengajuan Ormawa telah diterima');
@@ -408,17 +392,14 @@ class dana extends CI_Controller{
       $hapustor='./assets/uploads/tor/'.$data->tor;
       $hapuslpj='./assets/uploads/laporankegiatan/'.$data->laporankegiatan;
       $hapusrby='./assets/uploads/laporanrincianbiaya/'.$data->laporanrincianbiaya;
-
-
       if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&($hapusrkakl)&&($hapuslpj)&&($hapusrby)){
-        $delete=$this->M_dana->hapusFile($kd_jrsn);
+        $this->M_dana->hapusFile($kd_jrsn);
         redirect(base_url('c_admin/Laporan_Kegiatan_Fakultas'));
       }
       else{
         echo "ulangi";
       }
     }
-
     // pengajuan UKMUKK
     function do_pengajuan_ukmukk(){
       $this->form_validation->set_rules('suratpengajuan', 'rinciankegiatan', 'rkakl', 'tor', 'required');
@@ -637,4 +618,36 @@ class dana extends CI_Controller{
       $this->M_dana->update_laporanuser_ukmukk($kd_ukmkk, $statususer);
       redirect('c_user/Verifikasi_Laporan');
     }
+    // fungsi menolak nolak
+      // tolak pengajuan jurusan
+      function hapus_pengajuan_jrsn(){
+        $kd_jrsn=$this->input->post('pengaju', true);
+        $alasan_tolak_pengajuan=$this->input->post('alasan_tolak_pengajuan',true);
+        // $data=$this->M_dana->getDataByID($kd_jrsn)->row();
+        $statususer=6;
+        $nPengajuan=$this->input->post('nPengajuan');
+        if($data['nPengajuan'] = 1 )
+        {
+          $pengajuan1 = $data['nPengajuan'];
+          $nPengajuan7 = $pengajuan1; 
+        } else if ($data['nPengajuan'] = 2 )
+        {
+          $pengajuan2 = $data['nPengajuan']-$data['a'];
+          $nPengajuan7 = $pengajuan2; 
+        } else if ($data['nPengajuan'] = 3 )
+        {
+          $pengajuan3 = $data['nPengajuan']-$data['a'];
+          $nPengajuan7 = $pengajuan3; 
+        } else {
+          $data['b'] = 1;
+          $pengajuan4 = $data['b'];
+          $nPengajuan7 = $pengajuan4;
+        }
+        $this->M_dana->send_alasan_p_fklts($kd_jrsn,$statususer,$alasan_tolak_pengajuan,$nPengajuan7);
+        $this->M_dana->send_update_u_fklts($kd_jrsn,$statususer);
+        // $this->M_dana->send_update_d_fklts($kd_jrsn,$statususer,$nPengajuan7);
+        redirect(base_url('c_admin/Cek_Pengajuan_Fakultas'));
+          
+      }
+    // end fungsi menolak nolak
 }

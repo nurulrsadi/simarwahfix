@@ -18,7 +18,7 @@
 			<?php ?>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">
-				<img src="<?php echo base_url('assets/img/reportkegiatan.png')?>" class="img-fluid" alt="Responsive image"
+				<img src="<?php echo base_url('assets/img/default/reportkegiatan.png')?>" class="img-fluid" alt="Responsive image"
 					width="100%">
 			</div>
 		</article>
@@ -112,7 +112,7 @@
 			<?php ?>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">
-				<img src="<?php echo base_url('assets/img/reportkegiatan.png')?>" class="img-fluid" alt="Responsive image"
+				<img src="<?php echo base_url('assets/img/default/reportkegiatan.png')?>" class="img-fluid" alt="Responsive image"
 					width="100%">
 			</div>
 		</article>

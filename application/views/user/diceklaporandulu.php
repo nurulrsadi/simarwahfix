@@ -13,7 +13,7 @@
 		<article>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">
-				<img src="<?php echo base_url('assets/img/cekfile.png')?>" class="img-fluid" alt="Responsive image"
+				<img src="<?php echo base_url('assets/img/default/cekfile.png')?>" class="img-fluid" alt="Responsive image"
 					width="100%">
 			</div>
 		</article>

@@ -278,21 +278,55 @@ class c_admin extends CI_Controller
     // function Cek_Data_Pengajuan/Tidak_ACC(){
 
     // }
-    public function Cek_Surat()
-    {
-        $data['title'] = 'Cek Surat Izin';
+    // history pengajuan
+      // pengajuan univ
+      function History_Pengajuan_Universitas()
+      {
+        $data['title'] = 'Recap Data Pengajuan';
         $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
-        $data['count_puniv']= $this->M_dana->count_puniv();
-        $data['count_pfklts']= $this->M_dana->count_pfklts();
-        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
-        $data['count_luniv']= $this->M_dana->count_luniv();
-        $data['count_lfklts']= $this->M_dana->count_lfklts();
-        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/suratizin', $data);
+        $this->load->view('admin/h_pengajuan_univ', $data);
         $this->load->view('templates/footeradm');
+      }
+      // pengajuan fakultas
+      function History_Pengajuan_Fakultas()
+      {
+        $data['title'] = 'Recap Data Pengajuan';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $data['npengajuan']=$this->M_history->count_pengajuan_fklts();
+        $data['pengaju_fklts']=$this->M_history->get_all_pengajuan_fak();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/h_pengajuan_fklts', $data);
+        $this->load->view('templates/footeradm');
+      }
+      // pengajuan ukmukk
+      function History_Pengajuan_UKMUKK()
+      {
+        $data['title'] = 'Recap Data Pengajuan';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/h_pengajuan_ukmukk', $data);
+        $this->load->view('templates/footeradm');
+      }
+    // end history pengajuan
+
+    // detail history pengajuan
+    public function Detail_History_Pengajuan($kd_jrsn)
+    {
+      $data['title']= 'Detail Recap Pengajuan '.$kd_jrsn.'';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['h_p_fklts']=$this->M_history->get_pengajuan_fklts($kd_jrsn);
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_detail_p_fklts', $data);
+      $this->load->view('templates/footeradm');
     }
     public function Data_Pinjam()
     {
@@ -1087,40 +1121,5 @@ public function edit_data_himpunan(){
     $this->Model_View->edit_admin($id_user, $nama, $email, $username, md5($password));
     redirect('c_admin/data_admin');
   }
-  function hapus_pengajuan_jrsn(){
-    $kd_jrsn=$this->input->post('kd_jrsn');
-    $data=$this->M_dana->getDataByID($kd_jrsn)->row();
-    $statususer7=2;
-    $nPengajuan=$this->input->post('nPengajuan');
-    if($data['nPengajuan'] = 1 )
-    {
-      $pengajuan1 = $data['nPengajuan'];
-      $nPengajuan7 = $pengajuan1; 
-    } else if ($data['nPengajuan'] = 2 )
-    {
-      $pengajuan2 = $data['nPengajuan']-$data['a'];
-      $nPengajuan7 = $pengajuan2; 
-    } else if ($data['nPengajuan'] = 3 )
-    {
-      $pengajuan3 = $data['nPengajuan']-$data['a'];
-      $nPengajuan7 = $pengajuan3; 
-    } else {
-      $data['b'] = 1;
-      $pengajuan4 = $data['b'];
-      $nPengajuan7 = $pengajuan4;
-    }
-      $hapusspj='./assets/uploads/suratpengajuan/'.$data->suratpengajuan;
-      $hapusrkg='./assets/uploads/rinciankegiatan/'.$data->rinciankegiatan;
-      $hapusrkakl='./assets/uploads/rkakl/'.$data->rkakl;
-      $hapustor='./assets/uploads/tor/'.$data->tor;
-        if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&unlink($hapusrkakl)){
-        $this->M_dana->hapusFile($kd_jrsn);
-        $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
-        $this->M_dana->pengajuanditolaktbdetailuser($kd_jrsn, $statususer7,$nPengajuan7);
-        redirect(base_url('c_admin/Cek_Pengajuan_Fakultas'));
-      }
-      else{
-        echo "ulangi";
-      }
-  }
+
 }

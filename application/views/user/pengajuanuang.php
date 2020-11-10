@@ -8,8 +8,9 @@
 <section>
 	<header class="main">
 		<!-- <h1>Pagu Keuangan</h1> -->
-  </header>
-  <?php if( $this->session->userdata('role') ==0 && $this->session->userdata('statususer') >=2 ):?>
+	</header>
+	<?php echo $msg; ?>
+  <?php if( $this->session->userdata('role') ==0 && $user['statususer']==2 ):?>
 	<?php
       foreach($dana->result_array() as $i):
           $kd_jrsn=$i['kd_jrsn'];
@@ -28,7 +29,7 @@
 			<form class="form-horizontal" action="<?php echo base_url().'dana/do_pengajuan';?>" enctype="multipart/form-data"
 				method="post">
 				<div class="content">
-					<img src="<?php echo base_url('assets/img/money.png')?>" class="img-fluid" alt="Responsive image"
+					<img src="<?php echo base_url('assets/img/default/money.png')?>" class="img-fluid" alt="Responsive image"
 						width="100%">
 				</div>
 		</article>
@@ -77,7 +78,6 @@
 	</div>
 	<br><br>
 	<!-- tabel -->
-	<b><small> Jika sebelumnya telah melakukan pengajuan, namun gagal. silahkan hubungi kontak berikut: 0875xxxx </small></b>
 	<table class="content-table">
 		<thead>
 			<tr>
@@ -167,7 +167,7 @@
 <!-- end kirim -->
 
 <!-- untuk ukmukk -->
-<?php elseif($this->session->userdata('role') ==2 && $this->session->userdata('statususer') >=2  ):?>
+<?php elseif($this->session->userdata('role') ==2 && $user['statususer']==2  ):?>
 	<?php
       foreach($danaukmukk->result_array() as $j):
           $kd_ukmukk=$j['kd_ukmukk'];
@@ -187,7 +187,7 @@
 				method="post">
 				<!-- <span class="icon fa-gem"></span> -->
 				<div class="content">
-					<img src="<?php echo base_url('assets/img/money.png')?>" class="img-fluid" alt="Responsive image"
+					<img src="<?php echo base_url('assets/img/default/money.png')?>" class="img-fluid" alt="Responsive image"
 						width="100%">
 				</div>
 		</article>
@@ -234,8 +234,6 @@
 		</div>
 	</div>
 	<br><br>
-	<!-- tabel -->
-	<b><small> Jika sebelumnya telah melakukan pengajuan, namun gagal. silahkan hubungi kontak berikut: 0875xxxx </small></b>
 	<!-- tabel -->
 	<table class="content-table">
 		<thead>
@@ -320,14 +318,14 @@
 	<!--  -->
 	</form>
 <?php endforeach;?>
-	<?php elseif($user['statususer'] ==1 && $user['role']==0 ) :?>
+	<?php elseif($user['statususer']==1&& $user['role']==0 ) :?>
 <center>
   <h2>HEI!</h2>
 	<p>
 		<h4>Silahkan update profile untuk dapat meakses menu ini</h4>
 	</p><br>
 </center>
-<?php elseif($user['statususer'] ==1 && $user['role']==2 ) :?>
+<?php elseif($user['statususer']==1 && $user['role']==2 ) :?>
 <center>
   <h2>HEI!</h2>
 	<p>
@@ -335,12 +333,12 @@
 	</p><br>
 </center>
 <?php else: ?>
-<center>
+<!-- <center>
   <h2>Terima kasih telah melakukan update profile!</h2>
 	<p>
 		<h4>Silahkan melakukan logout dan login kembali untuk meakses menu ini</h4>
 	</p><br>
-</center>
+</center> -->
 <?php endif;?>
 </section>
 </div>

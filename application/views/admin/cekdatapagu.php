@@ -159,10 +159,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="<?php echo base_url().'c_admin/hapus_pengajuan_jrsn'?>" enctype="multipart/form-data">
-					<input type="hidden"  name="kd_jrsn" value="<?php echo $kd_jrsn;?>">
+				<form method="post" action="<?php echo base_url().'dana/hapus_pengajuan_jrsn'?>" enctype="multipart/form-data">
+					<!-- <input type="hidden"  name="kd_jrsn" value="<?php echo $kd_jrsn;?>"> -->
 					<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
-					<div class="modal-footer">
+					<div class="form-group">
+						<label for="pengaju">Pengaju</label>
+						<input type="text" class="form-control" id="pengaju" name="pengaju" value="<?= $kd_jrsn;?>" readonly required>
+					</div>
+					<div class="form-group">
+						<label for="alasan_tolak_pengajuan">Alasan menolak pengajuan anggaran</label>
+						<textarea class="form-control" id="alasan_tolak_pengajuan" name="alasan_tolak_pengajuan" rows="5" required></textarea>
+					</div>
+						<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Update changes</button>
 					</div>

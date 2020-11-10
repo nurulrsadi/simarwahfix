@@ -2,25 +2,14 @@
         <div id="sidebar">
         	<div class="inner">
 
-        		<!-- Search -->
-        		<section id="search" class="alt">
-        			<h2><strong>Selamat datang, <br>Admin dari <?php echo $this->session->userdata("user_login"); ?> !</strong></h2>
-        		</section>
-        		<?php
-        // $kode_himp_sess = $this->session->userdata('kode_himp_sess');
-        // // $cek="SELECT `statususer` FROM user='.$jurusan.' "
-        // $sess_data['username'] = $session->username;
+				<!-- Search -->
+				<section id="search" class="alt">
+					<h2><strong>Selamat datang, <br>Admin dari <?php echo $this->session->userdata("user_login"); ?> !</strong></h2>
+        </section>
+				<?php
         $loginuser = $this->session->userdata('username');
-        
-        $querysession = "SELECT `statususer` FROM `user` WHERE `username` = '$loginuser'
-        ";
-        // $statususer=$querysession;
-        // return $querysession;
+        $querysession = "SELECT `statususer` FROM `user` WHERE `username` = '$loginuser'";
         $user=$this->db->query($querysession)->result_array(); 
-        // $statusnya = $array['user'];
-        //       var_dump($statusnya);
-        //       die;
-
         ?>
         		<?php foreach($user as $i):
           $statususer=$i['statususer'];
@@ -36,8 +25,6 @@
                         WHERE `tb_status`.`id_status` = $statususerlogin
                         ORDER BY `tb_detailmenu`.`id`
                         ";?>
-
-
         		<?php $usernya=$this->db->query($queryuser)->result_array(); ?>
 
         		<nav id="menu">
@@ -45,9 +32,9 @@
         				<h2>Menu</h2>
         			</header>
         			<ul>
-        				<li><a href="<?php echo base_url() . 'c_user/index'; ?>"><i class="fas fa-user fa-2x "></i>&nbsp;&nbsp;&nbsp;Edit
+        				<li><a href="<?php echo base_url() . 'c_user/index'; ?>"><i class="fas fa-user fa-2x "></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit
         						Profil</a></li>
-                <li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Program Kerja</a></li>
+                <li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program Kerja</a></li>
         				<?php foreach($usernya as $m) : ?>
 
         				<li><a href="<?=base_url($m['url']); ?>"><i class="<?= $m['icon']; ?>"></i>&nbsp;
