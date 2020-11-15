@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 07:25 AM
+-- Generation Time: Nov 15, 2020 at 07:15 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -477,7 +477,8 @@ CREATE TABLE `ukm_ukk` (
 --
 
 INSERT INTO `ukm_ukk` (`kode_ukmukk`, `nama_ukmukk`, `desc_ukmukk`, `visi_ukmukk`, `misi_ukmukk`, `jml_umhsaktif`, `image`) VALUES
-('UKK Pramuka', 'PRAMUKA', 'PRAMUKA', '', '', 0, 'd0032888b458671ac647038abb320f30.jpg');
+('UKK Pramuka', 'PRAMUKA', 'PRAMUKA', '', '', 0, 'd0032888b458671ac647038abb320f30.jpg'),
+('Ukk_pramuka', 'Pramuka', 'ya pramuka', 'visi pramuka', 'misi pramuka', 1200, 'dbe6bea1849ac8b36a503c1536d29fdb.png');
 
 -- --------------------------------------------------------
 
