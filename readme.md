@@ -1,11 +1,13 @@
 # test login
-Database yang digunakan : simarwahfix.sql
+Database yang digunakan : 
+simarwah.sql
 
-jangan lupa samakan yang dari config
+ganti folder dengan nama simarwahh
+
 jika tidak dapat convert pdf, install html2pdf menggunakan composer
-ubah folder menjadi simarwahh, atau anda dapat sesuaikan dengan confignya
 ## ormawa : 
-you can add manual from admin, thank you:)
+username : himatif@uinsgd
+password : sayahimatif
 ## admin : 
 username admin1
 password admin9
