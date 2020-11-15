@@ -8,7 +8,7 @@
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords"
   content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css"
   href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahjquery.bxslider.css')?>">
@@ -39,8 +39,8 @@
           <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
               <?php if($this->session->userdata('status') == "login"){?>
-                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-                <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
                 
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
@@ -51,8 +51,8 @@
               <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
               <?php } else {?> 
-              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
               
               <li class=""><a href="#">Peminjaman Aula SC</a></li> 
@@ -123,15 +123,15 @@
                 </div>
               <?php } ?> 
             </div>
-
+            <center>
             <div class="row">
               <?php $id=1; foreach($sekben as $him){ ?>
-               <?php if($him->jabatan == 'SEKRETARIS' || $him->jabatan == 'BENDAHARA')
+               <?php if($him->jabatan == 'SEKRETARIS')
                {?>
-                <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+                <div class="col-md-6 col-sm-12 col-xs-12 text-center">
                     <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
                       <div class="service-item">
-                      <h3><span style="font-size: 35px;"><?php echo $him->jabatan ?></span></h3>
+                      <h3><span style="font-size: 35px;"><?php echo $him->jabatan?> <?php echo $id++; ?></span></h3>
                       <p><?php echo $him->nim ?></p>
                       <p><?php echo $him->nama?></p>
                     </div>
@@ -142,6 +142,28 @@
               <?php } ?>
             <?php } ?>          
           </div>
+          </center>
+
+          <center>
+          <div class="row">
+              <?php $id=1; foreach($sekben as $him){ ?>
+               <?php if($him->jabatan == 'BENDAHARA')
+               {?>
+                <div class="col-md-6 col-sm-12 col-xs-12 text-center">
+                    <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
+                      <div class="service-item">
+                      <h3><span style="font-size: 35px;"><?php echo $him->jabatan?> <?php echo $id++; ?></span></h3>
+                      <p><?php echo $him->nim ?></p>
+                      <p><?php echo $him->nama?></p>
+                    </div>
+                  </div>
+                </div>
+              <?php } else {?>
+                <p></p>
+              <?php } ?>
+            <?php } ?>          
+          </div>
+          </center>
 
           <center>
            <div>
@@ -241,58 +263,3 @@
     </div>
   </section>
 
-  <!-- footer -->
-  <footer>
-    <div class="footer" id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <img src="<?php echo base_url('assets/img/uinlogo.png')?>" style="width:110px;height:160px; margin: auto;">
-          </div>
-
-          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
-            <ul>
-              <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
-              <li>
-                <p>Bandung</p>
-              </li>
-              <li>
-                <p>Jawa Barat</p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-sm-4 col-xs-4">
-            <ul>
-              <li>
-                <h5> <a href="<?php echo base_url().'c_home/index';?>">Tentang SIMARWAH</a> </h5>
-              </li>
-              <li>
-                <h5><a href="#">Panduan</a> </h5>
-              </li>
-              <li>
-                <h5><a href="#">Kontak</a> </h5>
-              </li>
-              <li>
-                <h5><a href="#">Lokasi Kami</a> </h5>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!---->
-
-  <script src="assets/js/simarwahjquery.min.js"></script>
-  <script src="assets/js/simarwahjquery.easing.min.js"></script>
-  <script src="assets/js/simarwahbootstrap.min.js"></script>
-  <script src="assets/js/simarwahwow.js"></script>
-  <script src="assets/js/simarwah/jquery.bxslider.min.js"></script>
-  <script src="assets/js/simarwahcustom.js"></script>
-  <script src="contactform/contactform.js"></script>
-
-  </body>
-
-  </html>

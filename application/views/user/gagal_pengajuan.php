@@ -27,7 +27,7 @@
 						<form action="<?php echo base_url().'history/simpan_gagal_pengajuan_fak' ?>" method="post">
 							<div class="content">
 								<p class="customtextcheckdana">Pengajuan Anggaran yang anda ajukan tidak kami terima,
-									<br><?= $alsan_ditolak?> </p>
+									<br><?= $alsan_ditolak?></p>
 							</div>
 							<br><br>
 							<input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>">
@@ -52,7 +52,7 @@
 								<br><br>
 							</div>
 								<button type="submit" class="button primary">
-									Sewa Aula SC
+									Ulangi Pengajuan Anggaran
 								</button>
 						</form>
 						</article>

@@ -26,6 +26,7 @@ class ormawa extends CI_Controller{
     redirect('c_admin/keluhan');
   }
   function do_sewa(){
+    date_default_timezone_set('Asia/Jakarta');
     $this->form_validation->set_rules('surat_sewa', 'required');
     $kode= date('ymd') . '-' . substr(md5(rand()), 0, 10);
     $penyewa=$this->input->post('penyewa',true);
@@ -34,8 +35,8 @@ class ormawa extends CI_Controller{
     $dari=date("Y-m-d",strtotime($this->input->post('dari')));
     $hingga1=date("Y-m-d",strtotime($this->input->post('hingga')));
     $hingga=date('Y-m-d', strtotime($hingga1.'+1 day' ));
-    $mulaipukul=date("h:i",strtotime($this->input->post('mulaipukul')));
-    $akhirpukul=date("h:i",strtotime($this->input->post('akhirpukul')));
+    $mulaipukul=date("H:i:s",strtotime($this->input->post('mulaipukul')));
+    $akhirpukul=date("H:i:s",strtotime($this->input->post('akhirpukul')));
     $nama_pj=$this->input->post('nama_pj', true);
     $no_pj=$this->input->post('no_pj',true);
     $no_surat=$this->input->post('no_surat',true);
@@ -65,9 +66,11 @@ class ormawa extends CI_Controller{
       'no_pj' => $no_pj,
       'surat_sewa' => $surat_sewanya,
       'no_surat' => $no_surat,
+      'statussewa' =>1,
     );
     // var_dump($data); die();
     $this->M_ormawa->sewa_aula($data);
+    $this->M_ormawa->update_status_sewa($penyewa,$statussewa);
     if($data){ // Jika sukses
       // $this->M_ormawa->update_status_sewa($statussewa,$id_user);
       $this->session->set_flashdata('flashdata', 'Sewa Aula berhasil dilakukan !');

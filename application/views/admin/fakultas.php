@@ -24,39 +24,35 @@
     							<th>Kode Fakultas</th>
     							<th>Nama Fakultas</th>
     							<th>Deskripsi</th>
-    							<th>Visi</th>
-    							<th>Misi</th>
+    							
     							<th>Aksi</th>
     						</tr>
     					</thead>
-    					<?php 
-                  foreach($fakultas->result_array() as $i):
-                    $kode_fakultas=$i['kode_fakultas'];
-                    $nama_fakultas=$i['nama_fakultas'];
-                    $deskripsi=$i['deskripsi'];
-                    $visi=$i['visi'];
-                    $misi=$i['misi'];
-                    ?>
     					<tbody>
+                        <?php 
+                          foreach($fakultas->result_array() as $i):
+                            $kode_fakultas=$i['kode_fakultas'];
+                            $nama_fakultas=$i['nama_fakultas'];
+                            $deskripsi=$i['deskripsi'];                            
+                            ?>    					
     						<tr>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
     							<td><?php echo $kode_fakultas ?></td>
     							<td><?php echo $nama_fakultas ?></td>
     							<td><?php echo $deskripsi ?></td>
-    							<td><?php echo $visi ?></td>
-    							<td><?php echo $misi ?></td>
+    							
     							<td>
     								<center>
-                      <span data-toggle="tooltip" data-placement="bottom">
+                            <span data-toggle="tooltip" data-placement="bottom">
     									<button class="btn btn-warning" data-toggle="modal"
     										data-target="#modaleditfakultas<?php echo $kode_fakultas;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
-    									<button class="btn btn-danger" data-toggle="modal"
-    										data-target="#modal_delete<?php echo $kode_fakultas;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
+    									<!-- <button class="btn btn-danger" data-toggle="modal"
+    										data-target="#modal_delete<?php echo $kode_fakultas;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
     								</center>
     							</td>
     						</tr>
-    					</tbody>
-    					<?php endforeach;?>
+                            <?php endforeach;?>
+    					</tbody>    					
     				</table>
     			</div>
     		</div>

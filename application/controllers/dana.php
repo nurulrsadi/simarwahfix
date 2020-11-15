@@ -117,8 +117,8 @@ class dana extends CI_Controller{
         'tor' =>$tornya,
         'tahunakademik'=>$tahunakademik
       );
-
-        $databerhasil=$this->M_dana->pengajuanfile($kd_jrsn,$statususer);
+        // var_dump($datadana1); die();
+        // $databerhasil=$this->M_dana->pengajuanfile($kd_jrsn,$statususer);
         $databerhasil1=$this->M_dana->pengajuanfileuser($kd_jrsn,$statususer);
       $this->M_dana->tambah_pengajuan($datadana1);
       if($datadana1){ // Jika sukses
@@ -129,158 +129,46 @@ class dana extends CI_Controller{
       }
 
       public function admin_acc_pengajuan(){
+        $id_pengajuan = $this->input->post('id_pengajuan');
         $kd_jrsn = $this->input->post('kd_jrsn');
-        $where = array('kd_jrsn' => $kd_jrsn);
-        $u = $this->M_dana->getDataByID($kd_jrsn)->row();
-        $tahunakademik = $this->input->post('tahunakademik', true);
         $danasisa =$this->input->post('danasisa', true);
         $danaminus =$this->input->post('danaminus', true);
-        $pesangagal =$this->input->post('pesangagal', true);
-        $nPengajuan =$this->input->post('nPengajuan', true);
-        $statususer = $this->input->post('statususer');
-        $uangsisaacc = $this->input->post('uangsisaacc');
-        $sup = 1;
 
         // kalau diacc
-        if($danaminus!=''){
           $statususer6 = 4;
           $kd_jrsn = $this->input->post('kd_jrsn', true);
           $b = $danasisa;
           $c = $danaminus;
           $x = $b-$c;
-          if($data['nPengajuan'] = 1 )
-            {
-              $pengajuan1 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan1; 
-            } else if ($data['nPengajuan'] = 2 )
-            {
-              $pengajuan2 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan2; 
-            } else if ($data['nPengajuan'] = 3 )
-            {
-              $pengajuan3 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan3; 
-            } else {
-              $data['b'] = 1;
-              $pengajuan4 = $data['b'];
-              $nPengajuan6 = $pengajuan4;
-            }
+        
+        $nPengajuan6 = $this->input->post('nPengajuan', true);
             
-            $this->M_dana->pengajuandiacc($kd_jrsn, $statususer6, $x, $nPengajuan6,$c);
-            // $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $statususer6, $x, $nPengajuan6);
+            $this->M_dana->pengajuandiacc($id_pengajuan, $statususer6, $x, $nPengajuan6,$c);
+            $this->M_dana->pengajuandiaccupdatedb($kd_jrsn, $x, $nPengajuan6);
             $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer6, $x, $nPengajuan6);
-            redirect('c_admin/Cek_Pengajuan_Fakultas');
             $this->session->set_flashdata('flashpengajuan','Pengajuan Ormawa telah diterima');
-        }
-        else{
-          redirect('c_admin/tolak_pengajuan');
-          // $statususer7 = 2;
-          // $kd_jrsn = $this->input->post('kd_jrsn', true);
-          // if($data['nPengajuan'] = 1 )
-          // {
-          //   $pengajuan1 = $data['nPengajuan'];
-          //   $nPengajuan7 = $pengajuan1; 
-          // } else if ($data['nPengajuan'] = 2 )
-          // {
-          //   $pengajuan2 = $data['nPengajuan']-$data['a'];
-          //   $nPengajuan7 = $pengajuan2; 
-          // } else if ($data['nPengajuan'] = 3 )
-          // {
-          //   $pengajuan3 = $data['nPengajuan']-$data['a'];
-          //   $nPengajuan7 = $pengajuan3; 
-          // } else {
-          //   $data['b'] = 1;
-          //   $pengajuan4 = $data['b'];
-          //   $nPengajuan7 = $pengajuan4;
-          // }
-
-          //   $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
-          //   $this->M_dana->pengajuantidakdiaccdetil($kd_jrsn,$statususer7, $danasisa,$nPengajuan7,$pesangagal);
-            
-            
-            
-            
-          //   // $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer7, $nPengajuan6);
-          //   redirect('c_admin/Cek_Pengajuan_Fakultas');
-        }
-        // if()
+            redirect('c_admin/Cek_Pengajuan_Fakultas');
+        
       }
       public function admin_acc_pengajuan_ukmukk(){
+        $id_pengajuan_ukmukk=$this->input->post('id_pengajuan_ukmukk', true);
         $kd_ukmkk = $this->input->post('kd_ukmukk');
-        $where = array('kd_ukmkk' => $kd_ukmkk);
-        $u = $this->M_dana->getDataByID($kd_ukmkk)->row();
-        $tahunakademik = $this->input->post('tahunakademik', true);
         $danasisa =$this->input->post('danasisa', true);
         $danaminus =$this->input->post('danaminus', true);
-        $pesangagal =$this->input->post('pesangagal', true);
-        $nPengajuan =$this->input->post('nPengajuan', true);
-        $statususer = $this->input->post('statususer');
-        $uangsisaacc = $this->input->post('uangsisaacc');
-        $sup = 1;
 
         // kalau diacc
-        if($danaminus!=''){
           $statususer6 = 4;
           $kd_ukmkk = $this->input->post('kd_ukmkk', true);
           $b = $danasisa;
           $c = $danaminus;
           $x = $b-$c;
-          if($data['nPengajuan'] = 1 )
-            {
-              $pengajuan1 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan1; 
-            } else if ($data['nPengajuan'] = 2 )
-            {
-              $pengajuan2 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan2; 
-            } else if ($data['nPengajuan'] = 3 )
-            {
-              $pengajuan3 = $data['nPengajuan']+$data['a'];
-              $nPengajuan6 = $pengajuan3; 
-            } else {
-              $data['b'] = 1;
-              $pengajuan4 = $data['b'];
-              $nPengajuan6 = $pengajuan4;
-            }
-            
-            $this->M_dana->pengajuandiacc_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6,$c);
-            $this->M_dana->pengajuandiaccupdatedb_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6);
+            $nPengajuan6 = $this->input->post('nPengajuan', true);
+            $this->M_dana->pengajuandiacc_ukmukk($id_pengajuan_ukmukk, $statususer6, $x, $nPengajuan6,$c);
+            $this->M_dana->pengajuandiaccupdatedb_ukmukk($kd_ukmkk, $x, $nPengajuan6);
             $this->M_dana->pengajuandiaccupdatedbuser_ukmukk($kd_ukmkk, $statususer6, $x, $nPengajuan6);
             redirect('c_admin/Cek_Pengajuan_UKMUKK');
             $this->session->set_flashdata('flashpengajuan','Pengajuan UKM/UKK telah diterima');
-        }
-        else{
-          redirect('c_admin/tolak_pengajuan');
-          // $statususer7 = 2;
-          // $kd_jrsn = $this->input->post('kd_jrsn', true);
-          // if($data['nPengajuan'] = 1 )
-          // {
-          //   $pengajuan1 = $data['nPengajuan'];
-          //   $nPengajuan7 = $pengajuan1; 
-          // } else if ($data['nPengajuan'] = 2 )
-          // {
-          //   $pengajuan2 = $data['nPengajuan']-$data['a'];
-          //   $nPengajuan7 = $pengajuan2; 
-          // } else if ($data['nPengajuan'] = 3 )
-          // {
-          //   $pengajuan3 = $data['nPengajuan']-$data['a'];
-          //   $nPengajuan7 = $pengajuan3; 
-          // } else {
-          //   $data['b'] = 1;
-          //   $pengajuan4 = $data['b'];
-          //   $nPengajuan7 = $pengajuan4;
-          // }
-
-          //   $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
-          //   $this->M_dana->pengajuantidakdiaccdetil($kd_jrsn,$statususer7, $danasisa,$nPengajuan7,$pesangagal);
-            
-            
-            
-            
-          //   // $this->M_dana->pengajuandiaccupdatedbuser($kd_jrsn, $statususer7, $nPengajuan6);
-          //   redirect('c_admin/Cek_Pengajuan_Fakultas');
-        }
-        // if()
+        
       }
       function do_laporan(){
       $this->form_validation->set_rules('laporankegiatan', 'laporanrincianbiaya', 'rkakl', 'tor', 'required');
@@ -334,17 +222,17 @@ class dana extends CI_Controller{
       $tgluploadlpj=date("Y-m-d",strtotime($this->input->post('tgluploadlpj')));
       $tglmakslaporan= date('Y-m-d',strtotime('+7 day',strtotime($akhirkegiatan))); 
       $statususer=5;
-      $data=array(
-        'kd_jrsn' => $kd_jrsn,
-        'statususer' => $statususer,
-        'akhirkegiatan' => $akhirkegiatan,
-        'tgluploadlpj' => $tgluploadlpj,
-        'tglmakslaporan' => $tglmakslaporan,
-        'laporankegiatan' => $laporankegiatannya,
-        'rincianbiaya' => $rincianbiayanya,
-      );
+      // $data=array(
+      //   'kd_jrsn' => $kd_jrsn,
+      //   'statususer' => $statususer,
+      //   'akhirkegiatan' => $akhirkegiatan,
+      //   'tgluploadlpj' => $tgluploadlpj,
+      //   'tglmakslaporan' => $tglmakslaporan,
+      //   'laporankegiatan' => $laporankegiatannya,
+      //   'rincianbiaya' => $rincianbiayanya,
+      // );
       $this->M_dana->update_laporan($kd_jrsn, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya);
-      $this->M_dana->update_laporandetail($kd_jrsn, $statususer);
+      // $this->M_dana->update_laporandetail($kd_jrsn, $statususer);
       $this->M_dana->update_laporanuser($kd_jrsn, $statususer);
       redirect('c_user/Verifikasi_Laporan');
     }
@@ -400,6 +288,60 @@ class dana extends CI_Controller{
         echo "ulangi";
       }
     }
+    // terima laporan
+    function acc_laporan_univ($id_pengajuan)
+    {
+      $statususer_user=2;
+      $nPengajuan = $this->input->post('nPengajuan', true);
+      $kd_jrsn = $this->input->post('kd_jrsn', true);
+      $x = $nPengajuan;
+      $y = 1;
+      $tambah_pengajuan=$x+$y;
+      $statususer_pengajuan=10;
+      // untuk tb_detailuser
+      $this->M_dana->update_detailnpengajuan_fklts($kd_jrsn,$tambah_pengajuan);
+      // untuk tb_pengajuan
+      $this->M_dana->update_npengajuan_fklts($id_pengajuan,$statususer_pengajuan);
+      // untuk user
+      $this->M_dana->update_pengajuanuser_fklts($kd_jrsn,$statususer_user);
+      $this->session->set_flashdata('flashormawahimp','Laporan Kegiatan berhasil diterima, silahkan melihat ke history pengajuan untuk informasi lebih lengkap!');
+      redirect(base_url('c_admin/Laporan_Kegiatan_Universitas'));
+    }
+    function acc_laporan_fklts()
+    {
+      $id_pengajuan=$this->uri->segment(3);
+      $statususer_user=2;
+      $nPengajuan = $this->input->post('nPengajuan', true);
+      $kd_jrsn = $this->input->post('kd_jrsn', true);
+      $x = $nPengajuan;
+      $y = 1;
+      $tambah_pengajuan=$x+$y;
+      $statususer_pengajuan=10;
+      // untuk tb_detailuser
+      $this->M_dana->update_detailnpengajuan_fklts($kd_jrsn,$tambah_pengajuan);
+      // untuk tb_pengajuan
+      $this->M_dana->update_npengajuan_fklts($id_pengajuan,$statususer_pengajuan);
+      // untuk user
+      $this->M_dana->update_pengajuanuser_fklts($kd_jrsn,$statususer_user);
+      // var_dump($update,$update1,$update2); die();
+      // if(!$update){
+      $this->session->set_flashdata('flashormawahimp','Laporan Kegiatan berhasil diterima, silahkan melihat ke history pengajuan untuk informasi lebih lengkap!');
+      // }
+      redirect(base_url('c_admin/Laporan_Kegiatan_Fakultas'));
+    }
+    function tolak_laporan()
+    {
+      $id_pengajuan=$this->input->post('id_pengajuan', true);
+      $statususer=7;
+      $alasan_gagal_laporan=$this->input->post('alasan_tolak_laporan',true);
+      $kd_jrsn=$this->input->post('pengaju', true);
+
+      $this->M_dana->send_alasan_l_fklts($id_pengajuan, $alasan_gagal_laporan);
+      $this->M_dana->send_update_l_u_fklts($kd_jrsn,$statususer);
+      $this->session->set_flashdata('flashormawahimp','Laporan kegiatan berhasil ditolak!');
+      redirect(base_url('c_admin/Laporan_Kegiatan_Fakultas'));
+    }
+
     // pengajuan UKMUKK
     function do_pengajuan_ukmukk(){
       $this->form_validation->set_rules('suratpengajuan', 'rinciankegiatan', 'rkakl', 'tor', 'required');
@@ -524,6 +466,37 @@ class dana extends CI_Controller{
               echo "<script>alert('Data gagal diupdate, File pdf min 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
         }
     }
+    function acc_laporan_ukmukk()
+    {
+      $id_pengajuan_ukmukk=$this->uri->segment(3);
+      $statususer_user=2;
+      $nPengajuan = $this->input->post('nPengajuan', true);
+      $kd_ukmkk = $this->input->post('kd_ukmkk', true);
+      $x = $nPengajuan;
+      $y = 1;
+      $tambah_pengajuan=$x+$y;
+      $statususer_pengajuan=10;
+      // untuk tb_detailuserukmukk
+      $this->M_dana->update_detailnpengajuan_ukmukk($kd_ukmkk,$tambah_pengajuan);
+      // untuk tb_pengajuan_ukmukk
+      $this->M_dana->update_npengajuan_ukmukk($id_pengajuan_ukmukk,$statususer_pengajuan);
+      // untuk user
+      $this->M_dana->update_pengajuanuser_ukmukk($kd_ukmkk,$statususer_user);
+      $this->session->set_flashdata('flashormawahimp','Laporan Kegiatan berhasil diterima, silahkan melihat ke history pengajuan untuk informasi lebih lengkap!');
+      redirect(base_url('c_admin/Laporan_Kegiatan_UKMUKK'));
+    }
+    function tolak_laporan_ukmukk()
+    {
+      $id_pengajuan_ukmukk=$this->input->post('id_pengajuan_ukmukk', true);
+      $statususer=7;
+      $alasan_gagal_laporan=$this->input->post('alasan_tolak_laporan',true);
+      $kd_ukmkk=$this->input->post('pengaju', true);
+
+      $this->M_dana->send_alasan_l_fklts($id_pengajuan_ukmukk, $alasan_gagal_laporan);
+      $this->M_dana->send_update_l_u_fklts($kd_ukmkk,$statususer);
+      $this->session->set_flashdata('flashormawahimp','Laporan kegiatan berhasil ditolak!');
+      redirect(base_url('c_admin/Laporan_Kegiatan_UKMUKK'));
+    }
     function updatedanhapus_ukmukk($kd_ukmkk){
       $kd_jrsn=$this->input->post('kd_ukmkk');
       $nPengajuan=$this->input->post('nPengajuan',true);
@@ -604,15 +577,15 @@ class dana extends CI_Controller{
       $tgluploadlpj=date("Y-m-d",strtotime($this->input->post('tgluploadlpj')));
       $tglmakslaporan= date('Y-m-d',strtotime('+7 day',strtotime($akhirkegiatan))); 
       $statususer=5;
-      $data=array(
-        'kd_ukmkk' => $kd_ukmkk,
-        'statususer' => $statususer,
-        'akhirkegiatan' => $akhirkegiatan,
-        'tgluploadlpj' => $tgluploadlpj,
-        'tglmakslaporan' => $tglmakslaporan,
-        'laporankegiatan' => $laporankegiatannya,
-        'rincianbiaya' => $rincianbiayanya,
-      );
+      // $data=array(
+      //   'kd_ukmkk' => $kd_ukmkk,
+      //   'statususer' => $statususer,
+      //   'akhirkegiatan' => $akhirkegiatan,
+      //   'tgluploadlpj' => $tgluploadlpj,
+      //   'tglmakslaporan' => $tglmakslaporan,
+      //   'laporankegiatan' => $laporankegiatannya,
+      //   'rincianbiaya' => $rincianbiayanya,
+      // );
       $this->M_dana->update_laporan_ukmukk($kd_ukmkk, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya);
       $this->M_dana->update_laporandetail_ukmukk($kd_ukmkk, $statususer);
       $this->M_dana->update_laporanuser_ukmukk($kd_ukmkk, $statususer);
@@ -621,30 +594,14 @@ class dana extends CI_Controller{
     // fungsi menolak nolak
       // tolak pengajuan jurusan
       function hapus_pengajuan_jrsn(){
+        $id_pengajuan= $this->input->post('id_pengajuan', true);
         $kd_jrsn=$this->input->post('pengaju', true);
         $alasan_tolak_pengajuan=$this->input->post('alasan_tolak_pengajuan',true);
         // $data=$this->M_dana->getDataByID($kd_jrsn)->row();
         $statususer=6;
-        $nPengajuan=$this->input->post('nPengajuan');
-        if($data['nPengajuan'] = 1 )
-        {
-          $pengajuan1 = $data['nPengajuan'];
-          $nPengajuan7 = $pengajuan1; 
-        } else if ($data['nPengajuan'] = 2 )
-        {
-          $pengajuan2 = $data['nPengajuan']-$data['a'];
-          $nPengajuan7 = $pengajuan2; 
-        } else if ($data['nPengajuan'] = 3 )
-        {
-          $pengajuan3 = $data['nPengajuan']-$data['a'];
-          $nPengajuan7 = $pengajuan3; 
-        } else {
-          $data['b'] = 1;
-          $pengajuan4 = $data['b'];
-          $nPengajuan7 = $pengajuan4;
-        }
-        $this->M_dana->send_alasan_p_fklts($kd_jrsn,$statususer,$alasan_tolak_pengajuan,$nPengajuan7);
+        $this->M_dana->send_alasan_p_fklts($id_pengajuan,$statususer,$alasan_tolak_pengajuan);
         $this->M_dana->send_update_u_fklts($kd_jrsn,$statususer);
+        $this->session->set_flashdata('flashpengajuan', 'Pengajuan Anggaran Dana berhasil ditolak');
         // $this->M_dana->send_update_d_fklts($kd_jrsn,$statususer,$nPengajuan7);
         redirect(base_url('c_admin/Cek_Pengajuan_Fakultas'));
           

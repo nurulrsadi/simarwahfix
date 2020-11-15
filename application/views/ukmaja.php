@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords"
     content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahjquery.bxslider.css')?>">
@@ -36,15 +36,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">SI<span class="logo-dec">MARWA</span></a>
+            <a class="navbar-brand">SI<span class="logo-dec">MARWAH</span></a>
           </div>
            <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
               <?php if($this->session->userdata('status') == "login"){?>
-                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                
+                <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
               <?php } else {?>
               <?php } ?>
@@ -53,9 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
               <?php } else {?> 
-              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
+              <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
               
               <li class=""><a href="#">Peminjaman Aula SC</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
@@ -193,95 +192,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
 
-      <!-- <div class="row">
-        <div class="col-md-12 col-sm-12 text-center">
-          <h2 class="service-title pad-bt15">Data Anggota</h2>
-          <hr class="bottom-line">
-          <h4><a href="" style="color: #85C441" class="read-more">Anggota Pramuka Angkatan 2019</a></h4>
-          <h4><a href="" style="color: #85C441" class="read-more">Anggota Pramuka Angkatan 2018</a></h4>
-          <h4><a href="" style="color: #85C441" class="read-more">Anggota Pramuka Angkatan 2017</a></h4>
-          <br>
-          <br>
-        </div>
-      </div> -->
-    </section>
-    <!---->
-   <!--  <section id="aulasc" class="section-padding wow fadeInUp delay-05s" style="background-color: #f3f3f3;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <h2 class="service-title pad-bt15">Kegiatan</h2>
-
-            <hr class="bottom-line">
-          </div>
-
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="blog-sec">
-              <div class="blog-img">
-                <a href="">
-                  <img src="<?php echo base_url('assets/img/blog01.jpg')?>" class="img-responsive">
-                </a>
-              </div>
-              <div class="blog-info">
-                <h2>This is Lorem ipsum heading.</h2>
-                <div class="blog-comment">
-                  <p>Posted In: <span>Legal Advice</span></p>
-                  <p>
-                    <span><a href="#"><i class="fa fa-comments"></i></a> 15</span>
-                    <span><a href="#"><i class="fa fa-eye"></i></a> 11</span></p>
-                </div>
-                <p>We cannot expect people to have respect for laws and orders until we teach respect to those we have
-                  entrusted to enforce those laws all the time. we always want to help people cordially.</p>
-                <a href="" class="read-more">Read more →</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="blog-sec">
-              <div class="blog-img">
-                <a href="">
-                  <img src="<?php echo base_url('assets/img/blog02.jpg')?>" class="img-responsive">
-                </a>
-              </div>
-              <div class="blog-info">
-                <h2>This is Lorem ipsum heading.</h2>
-                <div class="blog-comment">
-                  <p>Posted In: <span>Legal Advice</span></p>
-                  <p>
-                    <span><a href="#"><i class="fa fa-comments"></i></a> 15</span>
-                    <span><a href="#"><i class="fa fa-eye"></i></a> 11</span></p>
-                </div>
-                <p>We cannot expect people to have respect for laws and orders until we teach respect to those we have
-                  entrusted to enforce those laws all the time. we always want to help people cordially.</p>
-                <a href="" class="read-more">Read more →</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="blog-sec">
-              <div class="blog-img">
-                <a href="">
-                  <img src="<?php echo base_url('assets/img/blog03.jpg')?>" class="img-responsive">
-                </a>
-              </div>
-              <div class="blog-info">
-                <h2>This is Lorem ipsum heading.</h2>
-                <div class="blog-comment">
-                  <p>Posted In: <span>Legal Advice</span></p>
-                  <p>
-                    <span><a href="#"><i class="fa fa-comments"></i></a> 15</span>
-                    <span><a href="#"><i class="fa fa-eye"></i></a> 11</span></p>
-                </div>
-                <p>We cannot expect people to have respect for laws and orders until we teach respect to those we have
-                  entrusted to enforce those laws all the time. we always want to help people cordially.</p>
-                <a href="" class="read-more">Read more →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
     <section id="service" class="section-padding wow fadeInUp delay-05s">
       <div class="container">
        <div class="row">
@@ -326,58 +236,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
 
 
-    <!-- footer -->
-    <footer>
-      <div class="footer" id="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <img src="<?php echo base_url('assets/img/uinlogo.png')?>" style="width:150px;height:150px; margin: 10px;">
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
-              <ul>
-                <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
-                <li>
-                  <p>Bandung</p>
-                </li>
-                <li>
-                  <p>Jawa Barat</p>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-4 col-sm-4 col-xs-4">
-              <ul>
-                <li>
-                  <h5> <a href="indexforall.html">Tentang SIMARWA</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Panduan</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Kontak</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Lokasi Kami</a> </h5>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!---->
-  </div>
-  <script src="<?php echo base_url('assets/js/simarwahjquery.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahjquery.easing.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahbootstrap.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahwow.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwah/jquery.bxslider.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahcustom.js')?>"></script>
-  <script src="<?php echo base_url('contactform/contactform.js')?>"></script>
-
-</body>
-
-</html>
+    

@@ -43,12 +43,11 @@
 							<td><?= $kd_jrsn; ?></td>
 							<td>Rp. <?= number_format($danasisa,0,',','.'); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
-							<!-- <td class="text-center"><?= $j->dana_sisa; ?></td> -->
 							<td>
 								<span class="btn btn-sm btn-danger">Belum disetujui</span>
 							</td>
 							<td class="text-center">
-								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan/'.$kd_jrsn)?>"
+								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan_Universitas/'.$kd_jrsn)?>"
 									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search"></i> Cek
 									File</a>
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->

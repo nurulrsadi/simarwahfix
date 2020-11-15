@@ -11,9 +11,6 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
-			<div class="flash-data-pengajuan" data-flashdata="<?= $this->session->flashdata('flashpengajuan');  ?>"></div>
-			<?php if($this->session->flashdata('flashpengajuan')): ?>
-			<?php endif; ?>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -51,8 +48,8 @@
 							<td><?= $nama_fakultas; ?></td>
               <td><?= $kd_jrsn; ?></td>
 							<td><?= date_indo($tgl_pengajuan);?></td>
-							<td><?= $nPengajuan; ?></td>
-							<td>
+							<td class="text-center"><?= $nPengajuan; ?></td>
+							<td class="text-center">
 								<span class="<?= $color_button?>"><?= $nama_status?></span>
 							</td>
 							<td class="text-center">

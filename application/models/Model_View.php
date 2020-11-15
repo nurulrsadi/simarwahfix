@@ -5,6 +5,14 @@
  	function cek_login($table,$where){
  		return $this->db->get_where($table,$where);
  	}
+  function ceknim_anggota($nim){
+    $this->db->select('*');
+    $this->db->from('anggota_himpunan');
+    $this->db->where("nim =",$nim);
+    $query = $this->db->get();
+    return $query;
+  }
+
  	function cek_datahimp($where){
 		$query =  $this->db->query('SELECT * FROM user WHERE kode_himp = "'.$where.'"');
 		// print_r($query);
@@ -20,6 +28,7 @@
     $this->db->from('jurusan');
     $this->db->where('parent_fakultas is NOT NULL', NULL, FALSE);
     $this->db->join('fakultas', 'fakultas.kode_fakultas = jurusan.parent_fakultas');
+    $this->db->order_by('kode_himpunan', 'ASC');
     $query = $this->db->get();
     return $query;
   }
@@ -58,7 +67,7 @@
 		$this->db->select("*");
 		$this->db->from("anggota_himpunan");
 		$this->db->where("parent_himpunan =",$jurusan);
-		$this->db->order_by("jabatan", 'ASC');
+		$this->db->order_by("create_date", 'ASC');
 		$query = $this->db->get();
 		return $query;
 	}
@@ -186,24 +195,34 @@
   }
 
 
-  function tambah_himpunan($data,$datadana){
-    $this->db->insert('jurusan',$data);
+  function tambah_himpunan($data){
+    $this->db->insert('jurusan',$data);        
+    // $this->db->insert('tb_detailuser',$datadana);
     $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
-    $this->db->insert('tb_detailuser',$datadana);
     return TRUE;
   }
-
+  function tambah_detailhimpunan($datadana)
+  {
+    $this->db->insert('tb_detailuser',$datadana);
+    $this->session->set_flashdata('Sukses',"Data Jurusan Berhasil Ditambahkan");
+    return TRUE;
+  }
   function edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image){
   	 $query_update_himpunan = $this->db->query("UPDATE jurusan SET nama_himpunan = '$nama_himpunan',desc_himpunan = '$deskripsi',visi = '$visi',misi = '$misi',image = '$image' WHERE kode_himpunan = '$kode_himpunan'");
   	 return $query_update_himpunan;
   }
 
     function delete_himpunan($kode_himpunan){
-  	  $this->db->delete('jurusan', array('kode_himpunan' => $kode_himpunan));
+  	$query=$this->db->query("DELETE FROM jurusan WHERE kode_himpunan='$kode_himpunan'");
+    return $query;    
+  }
+   function delete_userhimpunan($username){
+    $query=$this->db->query("DELETE FROM user WHERE username='$username'");
+    return $query;
   }
 
   function tampil_user_himpunan(){
-  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0");
+  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0 ORDER BY kode_himp ASC");
   	return $query_tampil_user_himpunan;
   }
 
@@ -219,6 +238,11 @@
   function edit_user_himpunan($id_user,$nama,$email,$telp,$username,$password){
   	$query_update_user = $this->db->query("UPDATE user SET nama = '$nama', email = '$email',telp='$telp', username = '$username', password = '$password' WHERE id_user = '$id_user'");
   	return $query_update_user;
+
+  }
+  function edit_useraja($kode_himp,$username){
+    $query_update_user = $this->db->query("UPDATE user SET username = '$username' WHERE kode_himp = '$kode_himp'");
+    return $query_update_user;
 
   }
 
@@ -367,8 +391,12 @@
      return $query_update_ukmukk;
   }
 
-   function delete_ukmukk($kode_ukmukk){
+  function delete_ukmukk($kode_ukmukk){
       $this->db->delete('ukm_ukk', array('kode_ukmukk' => $kode_ukmukk));
+  }
+  function delete_userukmukk($username){
+    $query=$this->db->query("DELETE FROM user WHERE username='$username'");
+    return $query;
   }
   function delete_user_ukmukk($id_user){
      $this->db->delete('user', array('id_user' => $id_user));

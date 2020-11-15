@@ -54,24 +54,24 @@
             
           </div>
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tabel Sewa Aula Hari ini</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Nama Ormawa Penyewa</th>
-                                <th>Nama Kegiatan</th>
-                                <th>Nama Aula</th>
-                                <th>Tanggal acara</th>
-                                <th>Keterangan</th>
-                                <th class="sorting_asc_disabled sorting_desc_disabled text-center">Aksi</th>
-                            </tr>
-                            </tr>
-                        </thead>
-                        <tbody>
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Tabel Sewa Aula Selesai</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>Nama Peminjam</th>
+											<th>Nama Kegiatan</th>
+											<th>Nama Aula</th>
+											<th>Tanggal Akhir Acara</th>
+											<th>Keterangan</th>
+											<th class="sorting_asc_disabled sorting_desc_disabled text-center">Aksi</th>
+										</tr>
+										</tr>
+									</thead>
+									<tbody>
                         <?php foreach($aula_notyet->result_array()as $i):
                           $ormawa=$i['penyewa'];
                           $nama_kegiatan=$i['Keterangan'];

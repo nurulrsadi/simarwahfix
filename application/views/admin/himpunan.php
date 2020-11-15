@@ -24,50 +24,58 @@
     							<th>Fakultas</th>
     							<th>Jurusan</th>
     							<th>Nama Himpunan</th>
-                  <th>Deskripsi</th>                                    							
+                                <th>Deskripsi</th>
+                                <th>Username</th>                                    							
     							<th>Image</th>
     							<th>Aksi</th>
     						</tr>
-              </thead>
-    					<?php 
-                  foreach($himpunan->result_array() as $i):
-                    $nama_fakultas=$i['nama_fakultas'];
-                    $kode_himpunan=$i['kode_himpunan'];
-                    $nama_himpunan=$i['nama_himpunan'];
-                    $deskripsi=$i['desc_himpunan'];
-                    $image=$i['image'];
-                    $fakultas=$i['parent_fakultas'];
-                    ?>
+                        </thead>
+    				                
     					<tbody>
-    						<tr>
-    							<!-- <td><center><?php echo $no++ ?></center></td> -->
-    							<td><?php echo $nama_fakultas ?></td>    							
-    							<td><?php echo $nama_himpunan ?></td>
-                  <td><?php echo $kode_himpunan ?></td>
-                  <td><?php echo $deskripsi ?></td>                                
-    							
-    							<td>
-    								<img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
-    							</td>
-    							<td>
-    								<center>
-                      <span data-toggle="tooltip" data-placement="bottom">  
-    									<button class="btn btn-warning" data-toggle="modal"
-    										data-target="#modaledithimpunan<?php echo $kode_himpunan;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
-    									<button class="btn btn-danger" data-toggle="modal"
-    										data-target="#modal_delete<?php echo $kode_himpunan;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
-    								</center>
-    							</td>
-    						</tr>
+                        <?php 
+                        foreach($datahimpunan as $i):
+                        // $nama_fakultas=$i['nama_fakultas'];
+                        $kode_himpunan=$i['kode_himpunan'];
+                        $nama_himpunan=$i['nama_himpunan'];
+                        $deskripsi=$i['deskripsi'];                   
+                        $image=$i['image'];
+                        $fakultas=$i['fakultas'];
+                        $user=$i['user'];                        
+                        ?>
+                        <?php if ($nama_himpunan == 'SEMAF' || $nama_himpunan == 'DEMAF' ){?>    
+                        <?php }else { ?>
+                            <tr>
+                                <!-- <td><center><?php echo $no++ ?></center></td> -->
+                                <td><?php echo $fakultas ?></td>                                
+                                <td><?php echo $nama_himpunan ?></td>
+                                <td><?php echo $kode_himpunan ?></td>
+                                <td><?php echo $deskripsi ?></td>
+                                <td><?php echo $user ?></td>        
+                                <td>
+                                    <img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
+                                </td>
+                                <td>
+                                    <center>
+                                        <span data-toggle="tooltip" data-placement="bottom"></span>  
+                                        <button class="btn btn-warning" data-toggle="modal"
+                                            data-target="#modaledithimpunan<?php echo $kode_himpunan;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
+                                        <!-- <button class="btn btn-danger" data-toggle="modal"
+                                            data-target="#modal_delete<?php echo $kode_himpunan;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
+                                    </center>
+                                </td>
+                            </tr>
+                        <?php  }?>
+    						
+                            <?php endforeach;?> 
     					</tbody>
-    					<?php endforeach;?>
+    					                      
     				</table>
     			</div>
     		</div>
     	</div>
     </div>
 
-    <!-- Modal Tambah Fakultas -->
+    <!-- Modal Tambah Himpunan -->
     <div class="modal fade" id="modaltambahhimpunan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     	aria-hidden="true">
     	<div class="modal-dialog">
@@ -82,21 +90,34 @@
     				<form method="post" action="<?php echo base_url().'c_admin/tambah_data_himpunan'?>"
     					enctype="multipart/form-data">
                         <div class="form-group ">
-                            <label>Jurusan</t></label>
-                            </t><input type="text" name="nama_himpunan" class="form-control"value="" required autocomplete="off">
+                            <label>Jurusan</label>
+                            <input type="text" name="nama_himpunan" class="form-control"value="" required autocomplete="off">
                         </div>
     					<div class="form-group">
-    						<label>Nama Himpunan</t></label>
-    						</t><input type="text" name="kode_himpunan" class="form-control" value=""  style="text-transform:uppercase"  required autocomplete="off">
+    						<label>Nama Himpunan</label>
+    						<input type="text" name="kode_himpunan" class="form-control" value=""  style="text-transform:uppercase"  required autocomplete="off">
     					</div>
     					<div class="form-group">
-                            <label>Deskripsi Himpunan</t></label>
-                            </t><input type="text" name="desc_himpunan" class="form-control" value="" required autocomplete="off">
+                            <label>Deskripsi Himpunan</label>
+                            <input type="text" name="desc_himpunan" class="form-control" value="" required autocomplete="off">
                         </div>
-                        
-    					
-
-    					<div class="form-group ">
+                        <div class="form-group">
+                            <label>Nama User</label>
+                            <input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
+                        </div> 
+                        <div class="form-group " >
+                            <label>Telp</label>
+                            <input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
+                        </div> 
+                        <div class="form-group " >
+                            <label>Username</label>
+                            <input type="email" name="username" class="form-control" autocomplete="off" value="">
+                        </div>  
+                        <div class="form-group " >
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" autocomplete="off" value="">
+                        </div>
+       					<div class="form-group ">
     						<label>Fakultas</label>
     						<select class="form-control" name="parent_fakultas">
     							<option value="">No Selected</option>
@@ -106,8 +127,8 @@
     						</select>
     					</div>
     					<div class="form-group ">
-    						<label>Logo Himpunan</t></label>
-    						</t><input type="file" name="image" class="form-control" value="" required>
+    						<label>Logo Himpunan</label>
+    						<input type="file" name="image" class="form-control" value="" required>
     					</div>
     					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     					<button type="submit" class="btn btn-primary">Save changes</button>
@@ -117,18 +138,19 @@
     	</div>
     </div>
     <!-- Akhir Modal Tambah  -->
+
     <!-- Edit Modal  -->
-    <?php
-        foreach($himpunan->result_array() as $i):
-          $nama_fakultas=$i['nama_fakultas'];
-            $kode_himpunan=$i['kode_himpunan'];
-            $nama_himpunan=$i['nama_himpunan'];
-            $deskripsi=$i['desc_himpunan'];
-            $visi=$i['visi'];
-            $misi=$i['misi'];
-            $image=$i['image'];
-            $fakultas=$i['parent_fakultas'];
-        ?>
+   <?php 
+                        foreach($datahimpunan as $i):
+                        // $nama_fakultas=$i['nama_fakultas'];
+                        $kode_himpunan=$i['kode_himpunan'];
+                        $nama_himpunan=$i['nama_himpunan'];
+                        $deskripsi=$i['deskripsi'];                   
+                        $image=$i['image'];
+                        $fakultas=$i['fakultas'];
+                        $user=$i['user'];                        
+                        ?>
+    
     <div class="modal fade" id="modaledithimpunan<?php echo $kode_himpunan;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
@@ -140,32 +162,35 @@
     				</button>
     			</div>
     			<div class="modal-body">
-    				<form method="post" action="<?php echo base_url().'c_admin/edit_data_himpunan'?>"
+    				<form method="post" action="<?php echo base_url().'c_admin/edit_data_himpunan?var1=himpunan'?>"
     					enctype="multipart/form-data">
                         <div class="form-group ">
-                            <label>Jurusan</t></label>
-                            </t><input type="text" name="nama_himpunan" class="form-control" value="<?php echo $nama_himpunan;?>"
+                            <label>Jurusan</label>
+                            <input type="text" name="nama_himpunan" class="form-control" value="<?php echo $nama_himpunan;?>"
                                 required>
                         </div>
     					<div class="form-group">
-    						<label>Nama Himpunan</t></label>
-    						</t><input type="text" name="kode_himpunan" class="form-control" value="<?php echo $kode_himpunan;?>"
+    						<label>Nama Himpunan</label>
+    						<input type="text" name="kode_himpunan" class="form-control" value="<?php echo $kode_himpunan;?>"
     							required readonly>
     					</div>    					
     					<div class="form-group ">
-    						<label>
-    							Deskripsi</t></label>
-    						</t><input type="text" name="deskripsi" class="form-control" value="<?php echo $deskripsi;?>">
+    						<label>Deskripsi</label>
+    						<input type="text" name="deskripsi" class="form-control" value="<?php echo $deskripsi;?>">
     					</div>
+                        <div class="form-group ">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" value="<?php echo $user;?>">
+                        </div>
     					
     					<div class="form-group ">
-    						<label>Fakultas</t></label>
-    						</t><input type="text" name="parent_fakultas" class="form-control" value="<?php echo $fakultas;?>"
+    						<label>Fakultas</label>
+    						<input type="text" name="parent_fakultas" class="form-control" value="<?php echo $fakultas;?>"
     							readonly>
     					</div>
     					<div class="form-group ">
-    						<label>Logo Himpunan</t></label>
-    						</t><input type="file" name="image" class="form-control" value="<?php echo $image;?>">
+    						<label>Logo Himpunan</label>
+    						<input type="file" name="image" class="form-control" value="<?php echo $image;?>">
     					</div>
     					<input type="hidden" name="imageold" value="<?php echo $image;?>">
     					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -176,20 +201,20 @@
     	</div>
     </div>
     <?php endforeach;?>
+   
     <!-- Akhir Modal Edit -->
 
     <!-- Modal Delete -->
     <?php
-        foreach($himpunan->result_array() as $i):
-          $nama_fakultas=$i['nama_fakultas'];
-          $kode_himpunan=$i['kode_himpunan'];
-          $nama_himpunan=$i['nama_himpunan'];
-          $deskripsi=$i['desc_himpunan'];
-          $visi=$i['visi'];
-          $misi=$i['misi'];
-          $image=$i['image'];
-          $fakultas=$i['parent_fakultas'];
+        foreach($datahimpunan as $i):
+        $kode_himpunan=$i['kode_himpunan'];
+        $nama_himpunan=$i['nama_himpunan'];
+        $deskripsi=$i['deskripsi'];                   
+        $image=$i['image'];
+        $fakultas=$i['fakultas'];
+        $user=$i['user'];
         ?>
+    
     <div class="modal fade" id="modal_delete<?php echo $kode_himpunan;?>" tabindex="-1" role="dialog"
     	aria-labelledby="largeModal" aria-hidden="true">
     	<div class="modal-dialog">
@@ -198,15 +223,16 @@
     				<h5 class="modal-title" id="myModalLabel">Delete Data Himpunan</h5>
     			</div>
     			<div class="modal-body">
+                    
     				<h6>Kode Himpunan : <?php echo $kode_himpunan;?></h6>
     				<h6>Nama Himpunan : <?php echo $nama_himpunan;?></h6><br>
     				<center>
     					<a class="btn btn-danger"
-    						href="<?php echo base_url('c_admin/delete_data_himpunan/'.$kode_himpunan); ?>">Lanjutkan</a>
+    						href="<?php echo base_url('c_admin/delete_data_himpunan?var1='.$kode_himpunan.'&var2='.$user.'');?>">Lanjutkan</a>
     				</center>
     			</div>
     		</div>
     	</div>
     </div>
-    <?php endforeach;?>
+    <?php endforeach;?>   
     <!-- Akhir Modal Delete -->

@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
   <meta name="keywords"
     content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahjquery.bxslider.css')?>">
@@ -18,12 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahbootstrap.min.css')?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahanimate.css')?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahstyle.css')?>">
-  <!-- =======================================================
-    Theme Name: Baker
-    Theme URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
+ 
 </head>
 
 <body>
@@ -45,22 +40,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
               <?php if($this->session->userdata('status') == "login"){?>
-                <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-                <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                <li class=""><a href="#">Daftar Kegiatan</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+                <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
                 <li class=""><a href="#">Peminjaman Aula SC</a></li>
               <?php } else {?>
               <?php } ?>
 
               <?php if($this->session->userdata('status') == "login"){?>
-              
+              <li class=""><a href="<?php echo base_url().'c_user/index';?>">DASHBOARD</a></li>
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
               <?php } else {?> 
-              <li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
-              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              <li class=""><a href="#">Daftar Kegiatan</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+              <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>              
               <li class=""><a href="#">Peminjaman Aula SC</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
@@ -123,57 +116,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!---->
     <!---->
-    <footer>
-      <div class="footer" id="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <img src="<?php echo base_url('assets/img/uinlogo.png')?>" style="width:110px;height:160px; margin: auto;">
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <h3 style="font-size: 30px;">SI<span class="logo-dec">MARWAH</span></h3>
-              <ul>
-                <li><a href="https://uinsgd.ac.id">UIN Sunan Gunung Djati</a></li>
-                <li>
-                  <p>Bandung</p>
-                </li>
-                <li>
-                  <p>Jawa Barat</p>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-4 col-sm-4 col-xs-4">
-              <ul>
-                <li>
-                  <h5> <a href="<?php echo base_url().'c_home/index';?>">Tentang SIMARWAH</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Panduan</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Kontak</a> </h5>
-                </li>
-                <li>
-                  <h5><a href="#">Lokasi Kami</a> </h5>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!---->
-  </div>
-  <script src="<?php echo base_url('assets/js/simarwahjquery.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahjquery.easing.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahbootstrap.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahwow.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwah/jquery.bxslider.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/simarwahcustom.js')?>"></script>
-  <script src="<?php echo base_url('contactform/contactform.js')?>"></script>
-
-</body>
-
-</html>

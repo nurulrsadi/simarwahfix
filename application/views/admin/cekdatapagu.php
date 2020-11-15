@@ -25,13 +25,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
           $tor=$u['tor'];
           $danasisa=$u['danasisa'];
           $statususer=$u['statususer'];
-          $nama_fakultas=$u['nama_fakultas'];
+					$nama_fakultas=$u['nama_fakultas'];
+					$id_pengajuan=$u['id_pengajuan'];
 					?>
 		<?php foreach($user->result_array() as $j):
 		$nama=$j['nama'];
 			?>
 		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post" id="formpengajuan">
 			<input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>">
+			<input type="hidden" id="id_pengajuan" name="id_pengajuan" value="<?= $id_pengajuan?>">
 			<input type="hidden" id="statususer" name="statususer" value="<?= $statususer?>">
 			<input type="hidden" id="kd_fakultas" name="kd_fakultas" value="<?= $kd_fakultas?>">
 			<input type="hidden" id="tahunakademik" name="tahunakademik" value="<?= $tahunakademik?>">
@@ -70,6 +72,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="nPengajuan" id="nPengajuan"
 								value="Pengajuan ke-<?= $nPengajuan ?>">
+							<input type="hidden" id="nPengajuan" name="nPengajuan" value="<?= $nPengajuan?>">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -143,7 +146,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 <?php foreach($dataacc->result_array() as $u):
-          $kd_jrsn=$u['kd_jrsn'];
+					$id_pengajuan=$u['id_pengajuan'];
+					$kd_jrsn=$u['kd_jrsn'];
           $suratpengajuan=$u['suratpengajuan'];
           $nPengajuan=$u['nPengajuan'];
           $danasisa=$u['danasisa'];
@@ -161,7 +165,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="modal-body">
 				<form method="post" action="<?php echo base_url().'dana/hapus_pengajuan_jrsn'?>" enctype="multipart/form-data">
 					<!-- <input type="hidden"  name="kd_jrsn" value="<?php echo $kd_jrsn;?>"> -->
-					<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
+					<input type="hidden" name="id_pengajuan" value="<?= $id_pengajuan?>">
 					<div class="form-group">
 						<label for="pengaju">Pengaju</label>
 						<input type="text" class="form-control" id="pengaju" name="pengaju" value="<?= $kd_jrsn;?>" readonly required>
@@ -191,46 +195,3 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	}
 
 </script>
-<!-- spj -->
-<!-- 
-<script type="text/javascript">
-$('.tombol-yakin').on('click',function(e){
-  var kd_jrsn = $('#kd_jrsn').val()
-  var statususer = $('#statususer').val()
-  var kd_fakultas = $('#kd_fakultas').val()
-  var tahunakademik = $('#tahunakademik').val()
-  var jurusan = $('#jurusan').val()
-  var danaminus = $('#danaminus').val()
-  var danasisa = $('#danasisa').val()
-
-
-  e.preventDefault();
-  var form = "dana/admin_acc_pengajuan.php"
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then(cekdata => {
-    if (cekdata) {
-      // if CONFIRMED => go to delete url
-      $.ajax({
-        type: "POST",
-        url : "<?= base_url('dana/admin_acc_pengajuan'); ?>"
-        data :{
-          kd_jrsn : kd_jrsn,
-          statususer : statususer,
-          kd_fakultas : kd_fakultas,
-          tahunakademik : tahunakademik,
-          jurusan : jurusan,
-          danaminus : danaminus,
-          danasisa: danasisa
-        }
-      })
-    }
-  });
-});
-</script> -->

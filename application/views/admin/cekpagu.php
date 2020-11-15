@@ -53,7 +53,7 @@
 								<span class="btn btn-sm btn-danger">Belum disetujui</span>
 							</td>
 							<td class="text-center">
-								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan/'.$kd_jrsn)?>"
+								<a href="<?= base_url('c_admin/Cek_Data_Pengajuan_Fakultas/'.$kd_jrsn)?>"
 									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search"></i> Cek
 									File</a>
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->

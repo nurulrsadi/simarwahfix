@@ -11,8 +11,8 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
-                <div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashormawahimp');  ?>"></div>
-                <?php if($this->session->flashdata('flashormawahimp')): ?>
+                <div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashcoba');  ?>"></div>
+                <?php if($this->session->flashdata('flashcoba')): ?>
                 <?php endif; ?>
             </div>
             <div class="card-body">

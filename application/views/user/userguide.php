@@ -1,8 +1,3 @@
-<ul class="icons" class="text-left">
-	<li><a href=#awal> Panduan Awal</a></li>
-	<li><a href=#dana> Pengajuan Dana</a></li>
-	<li><a href=#aula> Peminjaman Aula</a></li>
-</ul>
 </header>
 <section id="awal">
 	<article>

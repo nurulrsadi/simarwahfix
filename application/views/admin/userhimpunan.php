@@ -55,7 +55,8 @@
                           <td><center>
                             <span data-toggle="tooltip" data-placement="bottom">
                             <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser<?php echo $id_user;?>" title="Edit"><i class="far fa-edit" ></i></button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" ></i></button>
+                            <!-- <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
+                            
                         </center>
                     </td>
                 </tr>
@@ -80,21 +81,21 @@
                 <div class="modal-body">
                    <form method="post" action="<?php echo base_url().'c_admin/tambah_data_user'?>" enctype="multipart/form-data">
                                             <div class="form-group">
-                                            <label>Nama User</t></label>
-                                            </t><input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
+                                            <label>Nama User</label>
+                                            <input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
-                                            <label>Telp</t></label>
-                                                </t><input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
+                                            <label>Telp</label>
+                                                <input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
                                             </div> 
                                             <div class="form-group " >
                                             <label>
-                                                Username</t></label>
-                                                </t><input type="email" name="username" class="form-control" autocomplete="off" value="">
+                                                Username</label>
+                                                <input type="email" name="username" class="form-control" autocomplete="off" value="">
                                             </div>  
                                             <div class="form-group " >
-                                            <label>Password</t></label>
-                                                </t><input type="password" name="password" class="form-control" autocomplete="off" value="">
+                                            <label>Password</label>
+                                                <input type="password" name="password" class="form-control" autocomplete="off" value="">
                                             </div>                                                    
                                             <div class="form-group ">
                                             <label>Kode Himpunan</label>

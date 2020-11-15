@@ -8,20 +8,20 @@
 <?php if( $this->session->userdata('statususer') >=2 && $this->session->userdata('role') == 0 || $this->session->userdata('role') ==2) :?>
 
 <table class="content-table">
-    <thead>
-			<tr>
-				<th>No</th>
-				<th>Penyewa</th>
-        <th>Nama Kegiatan</th>
-        <th>Jenis Aula</th>
-        <th>Mulai Tanggal Sewa</th>
-        <th>Cetak surat izin aula</th>
-			</tr>
-    </thead>
-    <tbody>
-			<tr>
-      <?php $j=1;?>
-      <?php foreach($userpdf->result_array() as $i ):
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Peminjam</th>
+			<th>Nama Kegiatan</th>
+			<th>Jenis Aula</th>
+			<th>Mulai Tanggal Pinjam</th>
+			<th>Cetak surat izin aula</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<?php $j=1;?>
+			<?php foreach($userpdf->result_array() as $i ):
         $penyewa=$i['penyewa'];
         $Keterangan=$i['Keterangan'];
         $id_sewa=$i['id_sewa'];
@@ -29,18 +29,18 @@
         $tanggal_sewa=$i['dari'];
         $akhir_sewa=$i['hingga'];
       ?>
-				<td><?= $j++; ?></td>
-				<td><?= $penyewa; ?></td>
-        <td><?= $Keterangan; ?></td>
-        <td><?= $jenis_aula; ?></td>
-        <td><?= longdate_indo($tanggal_sewa);?></td>
-        <td><center>
-          <a href="<?= base_url('c_user/Cetak_Sewa_Aula/'.$id_sewa.'/'.$penyewa.'/'.$Keterangan)?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Cetak</a>
-            </center>
-        </td>
-			</tr>
-      <?php endforeach;?>
-		</tbody>
+			<td><?= $j++; ?></td>
+			<td><?= $penyewa; ?></td>
+			<td><?= $Keterangan; ?></td>
+			<td><?= $jenis_aula; ?></td>
+			<td><?= longdate_indo($tanggal_sewa);?></td>
+			<td>
+				<a href="<?= base_url('c_user/Cetak_Sewa_Aula/'.$id_sewa.'/'.$penyewa.'/'.$Keterangan)?>" target="_blank"
+					class="btn btn-default"><i class="fa fa-print"></i> Cetak</a>
+			</td>
+		</tr>
+		<?php endforeach;?>
+	</tbody>
 </table>
 
 
@@ -151,9 +151,9 @@
         </div>
       </div>
     </div>
-  <div id="calendar" width="10%">
+<div id="calendar">
 
-  </div>
+</div>
 
 <?php elseif($user['statususer'] ==1 && $user['role']==0 ) :?>
   <section>

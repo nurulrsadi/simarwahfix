@@ -1,5 +1,5 @@
 @import url(fontawesome-all.min.css);
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700"); */
 
 /*
 	Editorial by HTML5 UP
@@ -3592,7 +3592,7 @@ button:disabled,
 
 	#sidebar .toggle:before {
 		/* button menu untuk hp */
-		color: #A9CE82;
+		/* color: #A9CE82; */
 		margin-left: -0.0625em;
 		margin-top: -0.25em;
 		font-size: 1.1rem;
@@ -3801,6 +3801,7 @@ button:disabled,
 	display: block;
 	font-size: 0.9em;
 	padding: 0.625em 0;
+	text-decoration: none;
 }
 
 #menu ul a:hover,

@@ -24,10 +24,8 @@
 			<span>Dashboard</span></a>
 	</li>
 	<hr class="sidebar-divider">
-
-	<!-- Heading -->
 	<div class="sidebar-heading">
-		Menu Dana
+		Dana
 	</div>
 	<!-- Nav Item - Utilities Collapse Menu -->
 	<li class="nav-item">
@@ -95,7 +93,61 @@
 			</div>
 		</div>
 	</li>
+	<!-- Nav Item - Pages Collapse Menu -->
+	<li class="nav-item">
+		<a class="nav-link" href="<?php echo base_url('c_admin/Data_Pinjam') ?>">
+			<i class="fas fa-fw fa-hotel"></i>
+			<span>Peminjaman Aula</span></a>
+	</li>
+	<hr class="sidebar-divider">
+	<div class="sidebar-heading">
+		Data Akun
+	</div>
+	<!-- Nav Item - Ormawa -->
+  	<li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="far fa-fw fa-address-book"></i>
+            <span>Data SEMA/DEMA & HMJ</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu Ormawa :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data Universitas</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_demasemaf') ?>">Data DEMA-F/SEMA-F</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
+                
+            </div>
+        </div>
+    </li>
 
+    <!-- Collapse Menu UKM UKK -->
+    <li class="nav-item">
+		<a class="nav-link" href="<?php echo base_url('c_admin/data_ukmukk') ?>">
+			<i class="far fa-fw fa-address-book"></i>
+			<span>Data UKM/UKK</span></a>
+	</li>
+    
+
+    <!-- Collapse Menu User -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
+            <i class="far fa-fw fa-address-book"></i>
+            <span>Data User</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu USER :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_userukmukk') ?>">Data User UKM/UKK</a>
+            </div>
+        </div>
+    </li>
+	<!-- Divider -->
+	<hr class="sidebar-divider">
+	<div class="sidebar-heading">
+		Recap Pengajuan dan Laporan
+	</div>
 	<!-- Menu History Pengajuan-->
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_History_Pengajuan" aria-expanded="true"
@@ -134,59 +186,6 @@
 	</li>
 	<hr class="sidebar-divider">
 
-<!-- Heading -->
-<div class="sidebar-heading">
-	Menu Ormawa
-</div>
-	<!-- Nav Item - Pages Collapse Menu -->
-	<li class="nav-item">
-		<a class="nav-link" href="<?php echo base_url('c_admin/Data_Pinjam') ?>">
-			<i class="fas fa-fw fa-hotel"></i>
-			<span>Peminjaman Aula</span></a>
-	</li>
-
-	<!-- Nav Item - Ormawa -->
-  	<li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="far fa-fw fa-address-book"></i>
-            <span>Data Ormawa Tingkat Fakultas</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Menu Ormawa :</h6>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data Universitas</a>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_user_himpunan') ?>">Data User Himpunan</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Collapse Menu UKM UKK -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUKMUKK" aria-expanded="true" aria-controls="collapseUKMUKK">
-            <i class="far fa-fw fa-address-book"></i>
-            <span>Data UKM/UKK</span>
-        </a>
-        <div id="collapseUKMUKK" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Menu UKM/UKK :</h6>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_ukmukk') ?>">Data UKM/UKK</a>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_userukmukk') ?>">Data User UKM/UKK</a>
-            </div>
-        </div>
-    </li>
-
-	<!-- Nav Item - Keluhan -->
-	<li class="nav-item">
-		<a class="nav-link" href="<?php echo base_url('c_admin/Keluhan') ?>">
-			<i class="fas fa-fw 
-            fa-inbox"></i>
-			<span>Keluhan</span></a>
-	</li>
-
-	<!-- Divider -->
-	<hr class="sidebar-divider">
 
 	<!-- Heading -->
 	<div class="sidebar-heading">
@@ -214,7 +213,7 @@
 
 	<!-- Nav Item - Log Out -->
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo base_url('c_home/login') ?>">
+		<a class="nav-link" href="<?php echo base_url('data/logout') ?>">
 			<i class="fas fa-fw fa-sign-out-alt"></i>
 			<span>Logout</span></a>
 	</li>

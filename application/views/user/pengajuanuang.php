@@ -55,12 +55,13 @@
 	<input type="hidden" name="danaawal" value="<?= $danaawal?>">
 	<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 	<input type="hidden" name="jurusan" value="<?= $jurusan?>">
-
-
+	
+	
 	<div class="form-group row">
 		<label for="nPengajuan" class="col-sm-2 col-form-label">Pengajuan ke</label>
 		<div class="col-sm-3">
-			<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly />
+			<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly required/>
+			<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
 		</div>
 	</div>
   
@@ -219,12 +220,13 @@
 		<label for="nPengajuan" class="col-sm-2 col-form-label">Pengajuan ke</label>
 		<div class="col-sm-3">
 			<input type="text" name="nPengajuan" id="nPengajuan" value="<?php echo $nPengajuan;?> " readonly />
+			<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label for="namaKegiatan" class="col-sm-2 col-form-label">Nama Kegiatan</label>
 		<div class="col-sm-3">
-			<input type="text" name="namaKegiatan" id="namaKegiatan" placeholder=" contoh : PBAK, AUDIENSI" required />
+			<input type="text" autocomplete="off" name="namaKegiatan" id="namaKegiatan" placeholder=" contoh : PBAK, AUDIENSI" required />
 		</div>
 	</div>
 	<div class="form-group row">

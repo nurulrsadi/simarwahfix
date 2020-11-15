@@ -13,11 +13,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 
 		<?php foreach($dataacc->result_array() as $u):
-          $kd_ukmkk=$u['kd_ukmkk'];
+					$id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
+					$kd_ukmkk=$u['kd_ukmkk'];
           $nPengajuan=$u['nPengajuan'];
           $tahunakademik=$u['tahunakademik'];
-          // $kd_fakultas=$u['kd_fakultas'];
-          // $jurusan=$u['jurusan'];
           $namaKegiatan=$u['namaKegiatan'];
           $suratpengajuan=$u['suratpengajuan'];
           $rinciankegiatan=$u['rinciankegiatan'];
@@ -32,6 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			?>
 		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan_ukmukk/')?>" method="post" id="formpengajuan">
 			<input type="hidden" id="kd_ukmkk" name="kd_ukmkk" value="<?= $kd_ukmkk?>">
+			<input type="hidden" id="id_pengajuan_ukmukk" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
 			<input type="hidden" id="statususer" name="statususer" value="<?= $statususer?>">
 			<input type="hidden" id="tahunakademik" name="tahunakademik" value="<?= $tahunakademik?>">
 			<input type="hidden" name="suratpengajuan" value="'./assets/uploads/suratpengajuan/'.<?= $suratpengajuan?>">
@@ -50,13 +50,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								value="<?= $tahunakademik ?>">
 						</div>
 					</div>
-					<!-- <div class="form-group row">
-						<label for="kd_fakultas" class="col-sm-2 col-form-label">Fakultas</label>
-						<div class="col-sm-10">
-							<input type="text" readonly class="form-control-plaintext" id="kd_fakultas" name="kd_fakultas"
-								value="<?=$nama_fakultas?> ">
-						</div>
-					</div> -->
 					<div class="form-group row">
 						<label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
 						<div class="col-sm-10">
@@ -68,6 +61,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="nPengajuan" id="nPengajuan"
 								value="Pengajuan ke-<?= $nPengajuan ?>">
+							<input type="hidden" id="nPengajuan" name="nPengajuan" value="<?= $nPengajuan?>">
 						</div>
 					</div>
 					<div class="form-group row">

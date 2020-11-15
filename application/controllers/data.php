@@ -30,11 +30,11 @@ class data extends CI_Controller{
 		if($cek -> num_rows() == 1){
 			foreach ($cek->result() as $session) {
 				$sess_data['username'] = $session->username;
-        $sess_data['role'] = $session->role;
-        $sess_data['statususer'] = $session->statususer;
-        $sess_data['user_login'] = $session->kode_himp;
-        $sess_data['kode_himp_sess'] = $session->kode_himp;
-        $sess_data['nama'] = $session->nama;
+		        $sess_data['role'] = $session->role;
+		        $sess_data['statususer'] = $session->statususer;
+		        $sess_data['user_login'] = $session->kode_himp;
+		        $sess_data['kode_himp_sess'] = $session->kode_himp;
+		        $sess_data['nama'] = $session->nama;
 				$sess_data['status'] = "login";
 				$this->session->set_userdata($sess_data);
 			}

@@ -60,21 +60,14 @@
         <br>
         </table>
         <!-- konten -->
+        <table align="center">
+        <tr>
+        <td><font size="4" style=" text-align:center; font-weight: bold;">Surat Izin Peminjaman Aula SC oleh <?= $penyewa;?></font></td>
+        </tr>
+        </table>
         <table class="no-surat" align="center">
           <tr>
-            <td><font size="2">No </font></td>
-            <td width="500"><font size="2">: -</font></td>
-          </tr>
-          <tr>
-            <td><font size="2">Lampiran</font></td>
-            <td width="500"><font size="2">: -</font></td>
-          </tr>
-          <tr>
-            <td><font size="2">Hal </font></td>
-            <td width="500"><font size="2">: Balasan Permohanan Sewa Aula Student Center oleh <?= $penyewa;?></font></td>
-          </tr>
-          <tr>
-            <td  width="500" height="50" colspan="2"></td>
+            <td  width="500" height="40" colspan="2"></td>
           </tr>
           <tr>
             <td colspan="2" style="padding-left:65;">Berdasarkan surat <?= $penyewa;?> dengan nomor <?= $no_surat; ?> </td>

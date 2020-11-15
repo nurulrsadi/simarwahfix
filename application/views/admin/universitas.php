@@ -23,20 +23,20 @@
     						<tr>
     							<th>Jurusan</th>
     							<th>Nama Himpunan</th>
-                  <th>Deskripsi</th>                                    							
+                                <th>Deskripsi</th>                                    							
     							<th>Image</th>
     							<th>Aksi</th>
     						</tr>
               </thead>
-              
-    					<?php 
+                <tbody>
+    			<?php 
                   foreach($univ->result_array() as $i):
                     $kode_himpunan=$i['kode_himpunan'];
                     $nama_himpunan=$i['nama_himpunan'];
                     $deskripsi=$i['desc_himpunan'];
                     $image=$i['image'];
                     ?>
-    					<tbody>
+    			
     						<tr>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->  							
     							<td><?php echo $nama_himpunan ?></td>
@@ -56,8 +56,9 @@
     								</center>
     							</td>
     						</tr>
-    					</tbody>
+    					
     					<?php endforeach;?>
+                        </tbody>
     				</table>
     			</div>
     		</div>
@@ -132,7 +133,7 @@
     				</button>
     			</div>
     			<div class="modal-body">
-    				<form method="post" action="<?php echo base_url().'c_admin/edit_data_himpunan'?>"
+    				<form method="post" action="<?php echo base_url().'c_admin/edit_data_himpunan?var1=univ'?>"
     					enctype="multipart/form-data">
                         <div class="form-group ">
                             <label>Jurusan</t></label>

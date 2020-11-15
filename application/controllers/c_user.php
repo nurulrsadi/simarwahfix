@@ -16,9 +16,6 @@ function __construct(){
     if($this->session->userdata('role')==1 ){
       redirect(base_url("c_admin/index"));
     }
-    // if($this->session->userdata('role')==0||$this->session->userdata('role')==2 ){
-      // $datauser = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
-    // }
 }
     public function Cetak_Sewa_Aula($id_sewa){
       $penyewa=$this->uri->segment(5);
@@ -199,8 +196,10 @@ function __construct(){
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
       $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
       $data['title'] = 'Gagal Melakukan Laporan Kegiatan';
-      $data['laporan']=$this->M_dana->tampil_data_laporan_login($kode_himp_sess);
+      $data['alasan_ditolak_fklts']=$this->M_dana->get_laporan_fklts($kode_himp_sess);
+      $data['alasan_ditolak_ukmukk']=$this->M_dana->get_laporan_ukmukk($kode_himp_sess);
       $data['user']= $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['jrsn']= $this->db->get_where('tb_pengajuan', ['kd_jrsn'=>$this->session->userdata('username')])->row_array();
       $this->load->view('templates/header',$data);
       $this->load->view('user/gagal_laporan',$data);
       $this->load->view('templates/sidebaruser',$data);
@@ -208,8 +207,7 @@ function __construct(){
     }
   }
     public function Pinjam_Aula()
-    {
-      if($this->session->userdata('status') != "login"){
+    {if($this->session->userdata('status') != "login"){
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
@@ -221,14 +219,10 @@ function __construct(){
         'userpdf' => $this->M_ormawa->get_data_sewa($kode_himp_sess),
         'usersewa' => $this->M_ormawa->get_data_sewaAll(),
         );
-        if($data['user']['statususer']>=2){
         $this->load->view('templates/header', $data);
-        $this->load->view('user/pinjamaula',$data);
+        $this->load->view('user/pinjamaula');
         $this->load->view('templates/sidebaruser',$data);
         $this->load->view('templates/footer');
-        }else{
-          redirect(base_url("c_user"));
-        }
       }
     }
     public function ChangePassword()
@@ -283,6 +277,16 @@ function __construct(){
       redirect(base_url("c_home/login"));
       }else{
       $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      // $cek = $this->Model_View->cek_datahimp($kode_himp_sess);
+      // if($cek -> num_rows() == 1){
+      // $sess_data['data_himpunan'] = "true";
+      // $this->session->set_userdata($sess_data);
+      // }else{
+      // $sess_data['data_himpunan'] = "false";
+      // $this->session->set_userdata($sess_data);
+      // }
+  
+      // $ceksess = $this->session->userdata('data_himpunan');
         $data=array(
             'title' => 'Cara menggunakan Website SIMARWAH',
             'user' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(), 
@@ -334,13 +338,21 @@ function __construct(){
       $parent_himpunan=$this->input->post('parent_himpunan');
       $parent_bidang=$this->input->post('parent_bidang');
       $statususer=2;
-      $datastatus = $this->Model_View->tambah_statususer($parent_himpunan,$statususer);
+      $ceknim=$this->Model_View->ceknim_anggota($nim);
+      if ($ceknim->num_rows()>0) {
+        $this->session->set_flashdata('error', 'NIM sudah terdaftar!');
+        redirect('c_user/index');
+      }
+      else{
+        $datastatus = $this->Model_View->tambah_statususer($parent_himpunan,$statususer);
       $databarang = $this->Model_View->simpan_anggota_baru($nim,$nama,$jenis_kelamin,$alamat,$kontak,$email,$jabatan,$parent_himpunan,$parent_bidang);
-   if($databarang){ // Jika sukses
-    echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
-   }else{ // Jika gagal
-      echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
-  }
+      if($databarang){ // Jika sukses
+        echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
+       }else{ // Jika gagal
+          echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
+      }
+      }
+      
   }
 
   public function update_data_anggota(){
@@ -408,26 +420,41 @@ function __construct(){
   $nama_bidang = $this->input->post('nama_bidang');
   $parent_himpunan = $this->input->post('parent_himpunan');
   $image = $this->input->post('image'); 
-  $imageold = $this->input->post('imageold'); 
+  $imageold = $this->input->post('imageold');  
 
-      if ($image=''){} else{
-      $config['upload_path']='./assets/img/bidang';
-      $config['allowed_types']='jpg|gif|png|jpeg';
-      $config['encrypt_name'] = TRUE;
+      if (!empty($_FILES["image"]["name"])){
+        $config['upload_path']='./assets/img/bidang';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
 
-      $this->load->library('upload',$config);
-      if(!$this->upload->do_upload('image')){
-          $image = $imageold;
-      }else{
+        $this->load->library('upload',$config);
+        // var_dump($this->upload->do_upload('image'));
+        // exit();
+        if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Foto"; die();
+        }
+        else{
           $image=$this->upload->data('file_name');
-      }
-      $databidang = $this->Model_View->update_bidang($label_bidang,$nama_bidang,$kode_bidang,$parent_himpunan,$image);
-      redirect('c_user');
-  }
-}
+          $newimage= $image;
+          // var_dump($imageold);
+          // exit();
+          if($image!=NULL){
+            $path = './assets/img/bidang/'.$imageold.'';
+            unlink($path);
+          }
+        }
+         $databidang = $this->Model_View->update_bidang($label_bidang,$nama_bidang,$kode_bidang,$parent_himpunan,$newimage);
+      }else{
+         $databidang = $this->Model_View->update_bidang($label_bidang,$nama_bidang,$kode_bidang,$parent_himpunan,$imageold);
+      }     
+      redirect('c_user');  
+}  
 
   public function delete_data_bidang(){
-  $kode_bidang = $this->uri->segment(3);
+  $kode_bidang = $this->input->get('var1');
+  $image = $this->input->get('var2');  
+  $path='./assets/img/bidang/'.$image.'';
+  unlink($path);
   $this->Model_View->delete_bidang($kode_bidang);
   $this->session->set_flashdata('msg','<div class="alert alert-success">Anggota Himpunan Dihapus</div>');
   redirect('c_user');
@@ -555,29 +582,38 @@ function __construct(){
     public function update_bidang_ukmukk(){
     $kode_ubidang = $this->input->post('kode_ubidang');
     $label_ubidang = $this->input->post('label_ubidang');
-    $desc_ubidang = $this->input->post('desc_ubidang');
+    $nama_ubidang = $this->input->post('nama_ubidang');
     $parent_ukmukk = $this->input->post('parent_ukmukk');
     $image = $this->input->post('image'); 
-    $imageold = $this->input->post('imageold'); 
+    $imageold = $this->input->post('imageold');
 
-        if ($image=''){} else{
+    if (!empty($_FILES["image"]["name"])){
         $config['upload_path']='./assets/img/bidang';
         $config['allowed_types']='jpg|gif|png|jpeg';
         $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload',$config);
         if(!$this->upload->do_upload('image')){
-            $image = $imageold;
-        }else{
-            $image=$this->upload->data('file_name');
+          echo "Gagal Menambahkan Foto"; die();
         }
-        $databidang = $this->Model_View->update_ukmbidang($label_ubidang,$desc_ubidang,$kode_ubidang,$parent_ukmukk,$image);
+        else{
+          $image=$this->upload->data('file_name');
+          $newimage= $image;
+          if($image!=NULL){
+            $path = './assets/img/bidang/'.$imageold.'';
+            unlink($path);
+          }
+        }
+      $databidang = $this->Model_View->update_ukmbidang($label_ubidang,$nama_ubidang,$kode_ubidang,$parent_ukmukk,$newimage);
+      }else{
+      $databidang = $this->Model_View->update_ukmbidang($label_ubidang,$nama_ubidang,$kode_ubidang,$parent_ukmukk,$imageold);
+      }      
         if($databidang){ // Jika sukses
           echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('c_user/index')."';</script>";
          }else{ // Jika gagal
             echo "<script>alert('Data gagal disimpan');window.location = '".base_url('c_user/index')."';</script>";
         }
-        }
+        
     }
 
     public function simpan_anggota_ukmukk(){
@@ -703,42 +739,63 @@ function __construct(){
       $image = $this->input->post('image');
       $imageold = $this->input->post('imageold');  
 
-    if ($image=''){}else{
-    $config['upload_path']='./assets/img/ukm';
-    $config['allowed_types']='jpg|gif|png|jpeg';
-    $config['encrypt_name'] = TRUE;
+      if (!empty($_FILES["image"]["name"])){
+        $config['upload_path']='./assets/img/ukmukk';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
 
-    $this->load->library('upload',$config);
-    if(!$this->upload->do_upload('image'))
-    {
-        $image=$imageold;
-    }else{
-        $image=$this->upload->data('file_name');
-    }
-      $this->Model_View->update_fotoukm($kode_ukmukk,$image);
-      redirect('c_user');
-    }
+        $this->load->library('upload',$config);
+        if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Foto"; die();
+        }
+        else{
+          $image=$this->upload->data('file_name');
+          $newimage= $image;
+          if($image!=NULL){
+            $path = './assets/img/ukmukk/'.$imageold.'';
+            unlink($path);
+          }
+        }
+      $this->Model_View->update_fotoukm($kode_ukmukk,$newimage);
+      }else{
+      $this->Model_View->update_fotoukm($kode_ukmukk,$imageold);
+      }    
+    redirect('c_user');
   }
+
+
   public function updatefoto_hmj(){
       $kode_himpunan = $this->input->post('kode_himpunan');       
       $image = $this->input->post('image');
       $imageold = $this->input->post('imageold');  
 
-    if ($image=''){}else
-    {
-    $config['upload_path']='./assets/img/jurusan';
-    $config['allowed_types']='jpg|gif|png|jpeg';
-    $config['encrypt_name'] = TRUE;
+      if (!empty($_FILES["image"]["name"])){
+        $config['upload_path']='./assets/img/jurusan';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
 
-    $this->load->library('upload',$config);
-    if(!$this->upload->do_upload('image')){
-        $image=$imageold;
-    }else{
-        $image=$this->upload->data('file_name');
-    }
-      $this->Model_View->update_fotohmj($kode_himpunan,$image);
+        $this->load->library('upload',$config);
+        // var_dump($this->upload->do_upload('image'));
+        // exit();
+        if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Foto"; die();
+        }
+        else{
+          $image=$this->upload->data('file_name');
+          $newimage= $image;
+          // var_dump($imageold);
+          // exit();
+          if($image!=NULL){
+            $path = './assets/img/jurusan/'.$imageold.'';
+            unlink($path);
+          }
+        }
+         $this->Model_View->update_fotohmj($kode_himpunan,$newimage);
+      }else{
+         $this->Model_View->update_fotohmj($kode_himpunan,$imageold);
+      }   
       redirect('c_user');
-    }
+   
   }
 }
 

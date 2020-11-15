@@ -47,8 +47,8 @@
                             <td><?php echo p_bulanindo($start_date) ?> s/d <?php echo p_bulanindo($end_date) ?> </td>
                             <td><?php echo $nama_kegiatan ?></td>                          
                             <td>
-                                <a class="btn btn-warning" data-toggle="modal" data-target="#modal_edit_kegiatan<?php echo $id_kegiatan;?>">Edit</a>
-                                <a class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_kegiatan<?php echo $id_kegiatan;?>">Delete</a>
+                                <a class="btn btn-warning" data-toggle="modal" data-target="#modal_edit_kegiatan<?php echo $id_kegiatan;?>"><i class="far fa-edit"></i></a>
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_kegiatan<?php echo $id_kegiatan;?>"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>   
                     </tbody>

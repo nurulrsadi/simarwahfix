@@ -23,36 +23,43 @@
                                 <th>Kode UKM/UKK</th>
                                 <th>Nama UKM/UKK</th>
                                 <th>Deskripsi</th>
+                                <th>Username</th>
                                 <th>Image</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <?php 
-                  foreach($ukmukk->result_array() as $i):
-                    $kode_ukmukk=$i['kode_ukmukk'];
-                    $nama_ukmukk=$i['nama_ukmukk'];
-                    $desc_ukmukk=$i['desc_ukmukk'];
-                    $image=$i['image'];
-                    ?>
+                    
                     <tbody>
+                         <?php 
+                              foreach($dataukmukk as $i):
+                                $kode_ukmukk=$i['kode_ukmukk'];
+                                $nama_ukmukk=$i['nama_ukmukk'];
+                                $desc_ukmukk=$i['desc_ukmukk'];
+                                $image=$i['image'];
+                                $user=$i['user'];                        
+                            ?>
                         <tr>
+                           
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                           <td><?php echo $kode_ukmukk ?></td>
                           <td><?php echo $nama_ukmukk ?></td>
                           <td><?php echo $desc_ukmukk ?></td>
+                          <td><?php echo $user ?></td>        
                                                  
                           <td>
-                            <img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
+                            <img width="100" height="100" src="<?php echo base_url('assets/img/ukmukk/').$image?>">
                           </td>
                           <td><center>
                             <span data-toggle="tooltip" data-placement="bottom">
                             <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit_ukmukk<?php echo $kode_ukmukk;?>"title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#modaldelete_ukmukk<?php echo $kode_ukmukk;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
+                            <!-- <button class="btn btn-danger" data-toggle="modal" data-target="#modaldelete_ukmukk<?php echo $kode_ukmukk;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
                         </center>
-                    </td>
-                </tr>
-            </tbody>
-        <?php endforeach;?>
+                        </td>
+                        
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+        
                     </table>
                 </div>
             </div>
@@ -71,24 +78,40 @@
                 </div>
                 <div class="modal-body">
                    <form method="post" action="<?php echo base_url().'c_admin/tambahdata_ukmukk'?>" enctype="multipart/form-data">
-                                            <div class="form-group">
-                                            <label>Kode UKM/UKK</t></label>
-                                            </t><input type="text" name="kode_ukmukk" style="text-transform:uppercase" autocomplete="off" placeholder="" class="form-control" value="" required>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Nama UKM/UKK</t></label>
-                                                </t><input type="text" name="nama_ukmukk" autocomplete="off" class="form-control" value="" required>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Deskripsi</t></label>
-                                                </t><input type="text" name="desc_ukmukk" autocomplete="off" class="form-control" value="">
-                                            </div>  
-                                            <div class="form-group " >
-                                            <label>Image UKM/UKK</t></label>
-                                                </t><input type="file" name="image" class="form-control" value="" required>
-                                            </div>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        <div class="form-group">
+                        <label>Kode UKM/UKK</t></label>
+                        </t><input type="text" name="kode_ukmukk" style="text-transform:uppercase" autocomplete="off" placeholder="" class="form-control" value="" required>
+                         </div> 
+                            <div class="form-group " >
+                                <label>Nama UKM</label>
+                                <input type="text" name="nama_ukmukk" autocomplete="off" class="form-control" value="" required>
+                            </div> 
+                            <div class="form-group " >
+                                <label>Deskr</label>
+                                <input type="text" name="desc_ukmukk" autocomplete="off" class="form-control" value="">
+                            </div> 
+                            <div class="form-group">
+                                <label>Nama User</label>
+                                <input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
+                            </div> 
+                            <div class="form-group " >
+                                <label>Telp</label>
+                                <input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
+                            </div> 
+                            <div class="form-group " >
+                                <label>Username</label>
+                                <input type="email" name="username" class="form-control" autocomplete="off" value="">
+                            </div>  
+                            <div class="form-group " >
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" autocomplete="off" value="">
+                            </div> 
+                            <div class="form-group " >
+                                <label>Image UKM/UKK</label>
+                                <input type="file" name="image" class="form-control" value="" required>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
                     </div>
                 </div>
@@ -98,13 +121,12 @@
 
 <!-- Edit Modal  -->
     <?php
-        foreach($ukmukk->result_array() as $i):
+        foreach($dataukmukk as $i):
             $kode_ukmukk=$i['kode_ukmukk'];
             $nama_ukmukk=$i['nama_ukmukk'];
             $desc_ukmukk=$i['desc_ukmukk'];
-            $visi_ukmukk=$i['visi_ukmukk'];
-            $misi_ukmukk=$i['misi_ukmukk'];
             $image=$i['image'];
+            $user=$i['user'];            
     ?>
  <div class="modal fade" id="modaledit_ukmukk<?php echo $kode_ukmukk;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -116,30 +138,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                   <form method="post" action="<?php echo base_url().'c_admin/editdata_ukmukk'?>"  enctype="multipart/form-data">
+                <form method="post" action="<?php echo base_url().'c_admin/editdata_ukmukk'?>"  enctype="multipart/form-data">
                     <input type="hidden" name="imageold" value="<?php echo $image;?>">
-                                            <div class="form-group">
-                                            <label>Kode UKM/UKK</t></label>
-                                            </t><input type="text" name="kode_ukmukk" class="form-control" value="<?php echo $kode_ukmukk;?>" required readonly>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Nama UKM/UKK</t></label>
-                                                </t><input type="text" name="nama_ukmukk" class="form-control" value="<?php echo $nama_ukmukk;?>" required>
-                                            </div> 
-                                            <div class="form-group " >
-                                            <label>Deskripsi</t></label>
-                                                </t><input type="text" name="desc_ukmukk" class="form-control" value="<?php echo $desc_ukmukk;?>">
-                                            </div>  
-                                           
-                                            <div class="form-group " >
-                                            <label>Logo UKM/UKK</t></label>
-                                                </t><input type="file" name="image" class="form-control" value="<?php echo $image;?>">
-                                            </div> 
-                                            <input type="hidden" name="imageold"  value="<?php echo $image;?>">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Update changes</button>
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <label>Kode UKM/UKK</label>
+                            <input type="text" name="kode_ukmukk" class="form-control" value="<?php echo $kode_ukmukk;?>" required readonly>
+                        </div> 
+                        <div class="form-group " >
+                            <label>Nama UKM/UKK</label>
+                            <input type="text" name="nama_ukmukk" class="form-control" value="<?php echo $nama_ukmukk;?>" required>
+                        </div> 
+                        <div class="form-group " >
+                            <label>Deskripsi</label>
+                            <input type="text" name="desc_ukmukk" class="form-control" value="<?php echo $desc_ukmukk;?>">
+                        </div>
+                        <div class="form-group ">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" value="<?php echo $user;?>">
+                        </div>                                             
+                        <div class="form-group " >
+                            <label>Logo UKM/UKK</label>
+                             <input type="file" name="image" class="form-control" value="<?php echo $image;?>">
+                            </div> 
+                            <input type="hidden" name="imageold"  value="<?php echo $image;?>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update changes</button>
+                </form>
+                </div>
                 </div>
             </div>
         </div>
@@ -147,16 +172,15 @@
 <!-- Akhir Modal Edit -->
 
 <!-- Modal Delete -->
- <?php
-        foreach($ukmukk->result_array() as $i):
+    <?php
+        foreach($dataukmukk as $i):
             $kode_ukmukk=$i['kode_ukmukk'];
             $nama_ukmukk=$i['nama_ukmukk'];
             $desc_ukmukk=$i['desc_ukmukk'];
-            $visi_ukmukk=$i['visi_ukmukk'];
-            $misi_ukmukk=$i['misi_ukmukk'];
             $image=$i['image'];
-        ?>
-<div class="modal fade" id="modaldelete_ukmukk<?php echo $kode_ukmukk;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            $user=$i['user'];            
+    ?>
+    <div class="modal fade" id="modaldelete_ukmukk<?php echo $kode_ukmukk;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -164,8 +188,8 @@
             </div>
                 <div class="modal-body">
                     <h6>Nama UKM/UKK : <?php echo $nama_ukmukk;?></h6><br>
-                    <center>
-                     <a class="btn btn-danger" href="<?php echo base_url('c_admin/delete_data_ukmukk/'.$kode_ukmukk); ?>">Lanjutkan</a>
+                    <center>                        
+                    <a class="btn btn-danger" href="<?php echo base_url('c_admin/delete_data_ukmukk?var1='.$kode_ukmukk.'&var2='.$user.'');?>">Lanjutkan</a>
                     </center>
                 </div>
             </div>
@@ -173,3 +197,4 @@
         </div>
     <?php endforeach;?>
 <!-- Akhir Modal Delete -->
+

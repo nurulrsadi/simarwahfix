@@ -15,7 +15,6 @@
         $nPengajuan=$i['nPengajuan'];
         $statususer=$i['statususer'];
   ?>
-			<?php ?>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">
 				<img src="<?php echo base_url('assets/img/default/reportkegiatan.png')?>" class="img-fluid" alt="Responsive image"
@@ -90,9 +89,7 @@
 			<div class="col-2 col-12-medium">
 			</div>
 			<div class="col-2 col-12-medium">
-				<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
 				<p><button type="submit" class="btn-succes">Kirim</button></p>
-				<!-- </a> -->
 			</div>
 	</form>
 	<hr class="major" />
@@ -184,9 +181,7 @@
 			<div class="col-2 col-12-medium">
 			</div>
 			<div class="col-2 col-12-medium">
-				<!-- <a href="<?php echo base_url().'c_user/Verifikasi_Data';?>"> -->
 				<p><button type="submit" class="btn-succes">Kirim</button></p>
-				<!-- </a> -->
 			</div>
 	</form>
 	<hr class="major" />

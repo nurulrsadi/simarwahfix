@@ -278,12 +278,29 @@ class c_admin extends CI_Controller
     // function Cek_Data_Pengajuan/Tidak_ACC(){
 
     // }
-    // history pengajuan
+    public function Cek_Surat()
+    {
+        $data['title'] = 'Cek Surat Izin';
+        $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $data['count_puniv']= $this->M_dana->count_puniv();
+        $data['count_pfklts']= $this->M_dana->count_pfklts();
+        $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+        $data['count_luniv']= $this->M_dana->count_luniv();
+        $data['count_lfklts']= $this->M_dana->count_lfklts();
+        $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+        $this->load->view('templates/headeradm', $data);
+        $this->load->view('templates/sidebaradm', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/suratizin', $data);
+        $this->load->view('templates/footeradm');
+    }
+  // history pengajuan
       // pengajuan univ
       function History_Pengajuan_Universitas()
       {
         $data['title'] = 'Recap Data Pengajuan';
         $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $data['npengajuan']=$this->M_history->count_pengajuan_univ();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -308,6 +325,7 @@ class c_admin extends CI_Controller
       {
         $data['title'] = 'Recap Data Pengajuan';
         $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $data['npengajuan']=$this->M_history->count_pengajuan_ukmukk();
         $this->load->view('templates/headeradm', $data);
         $this->load->view('templates/sidebaradm', $data);
         $this->load->view('templates/topbar', $data);
@@ -317,7 +335,18 @@ class c_admin extends CI_Controller
     // end history pengajuan
 
     // detail history pengajuan
-    public function Detail_History_Pengajuan($kd_jrsn)
+    public function Detail_History_Pengajuan_Universitas($kd_jrsn)
+    {
+      $data['title']= 'Detail Recap Pengajuan '.$kd_jrsn.'';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['h_p_fklts']=$this->M_history->get_pengajuan_univ($kd_jrsn);
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_detail_p_univ', $data);
+      $this->load->view('templates/footeradm');
+    }
+    public function Detail_History_Pengajuan_Fakultas($kd_jrsn)
     {
       $data['title']= 'Detail Recap Pengajuan '.$kd_jrsn.'';
       $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
@@ -328,6 +357,93 @@ class c_admin extends CI_Controller
       $this->load->view('admin/h_detail_p_fklts', $data);
       $this->load->view('templates/footeradm');
     }
+    public function Detail_History_Pengajuan_UKMUKK($kd_ukmkk)
+    {
+      $data['title']= 'Detail Recap Pengajuan '.$kd_ukmkk.'';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['h_p_ukmukk']=$this->M_history->get_pengajuan_ukmukk($kd_ukmkk);
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_detail_p_ukmukk', $data);
+      $this->load->view('templates/footeradm');
+    }
+    // end detail pengajuan
+
+  // history laporan
+    // laporan univ
+    public function History_Laporan_Universitas()
+    {
+      $data['title'] = 'Recap Data Laporan Kegiatan';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['nlaporan']= $this->M_history->count_laporan_univ();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_laporan_univ', $data);
+      $this->load->view('templates/footeradm');
+    }
+    // laporan fakultas
+    public function History_Laporan_Fakultas()
+    {
+      $data['title'] = 'Recap Data Laporan Kegiatan';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['nlaporan']= $this->M_history->count_laporan_fklts();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_laporan_fklts', $data);
+      $this->load->view('templates/footeradm');
+    }
+    // laporan ukmukk
+    public function History_Laporan_UKMUKK()
+    {
+      $data['title'] = 'Recap Data Laporan Kegiatan';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['nlaporan']= $this->M_history->count_laporan_ukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/h_laporan_ukmukk', $data);
+      $this->load->view('templates/footeradm');
+    }
+  // end history laporan
+
+  // detail laporan kegiatan
+  public function Detail_History_Laporan_Kegiatan_Universitas($kd_jrsn)
+  {
+    $data['title']= 'Detail Recap Laporan Kegiatan '.$kd_jrsn.'';
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+    $data['h_l_univ']=$this->M_history->get_laporan_univ($kd_jrsn);
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/h_detail_l_univ', $data);
+    $this->load->view('templates/footeradm');
+  }
+  public function Detail_History_Laporan_Kegiatan_Fakultas($kd_jrsn)
+  {
+    $data['title']= 'Detail Recap Laporan Kegiatan '.$kd_jrsn.'';
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+    $data['h_l_fklts']=$this->M_history->get_laporan_fklts($kd_jrsn);
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/h_detail_l_fklts', $data);
+    $this->load->view('templates/footeradm');
+  }
+  public function Detail_History_Laporan_Kegiatan_UKMUKK($kd_ukmkk)
+  {
+    $data['title']= 'Detail Recap Laporan Kegiatan '.$kd_ukmkk.'';
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+    $data['h_l_ukmukk']=$this->M_history->get_laporan_ukmukk($kd_ukmkk);
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/h_detail_l_ukmukk', $data);
+    $this->load->view('templates/footeradm');
+  }
+  // end detail laporan kegiatan 
     public function Data_Pinjam()
     {
         $data['title'] = 'Data Peminjaman';
@@ -591,6 +707,29 @@ class c_admin extends CI_Controller
       $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
       $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      $data['users'] = $this->Model_View->tampil_user_himpunan();
+
+      for ($i=0; $i<$data['users']->num_rows(); $i++) { 
+        $username[$i]=$data['users']->result_array()[$i]['username'];
+        // $nama_fakultas[$i]=$data['himpunan']->result_array()[$i]['parent_fakultas'];
+        $kode_himpunan[$i]=$data['himpunan']->result_array()[$i]['kode_himpunan'];
+        $nama_himpunan[$i]=$data['himpunan']->result_array()[$i]['nama_himpunan'];        
+        $deskripsi[$i]=$data['himpunan']->result_array()[$i]['desc_himpunan'];
+        $image[$i]=$data['himpunan']->result_array()[$i]['image'];
+        $fakultas[$i]=$data['himpunan']->result_array()[$i]['parent_fakultas'];
+
+        $myJson['user']=$username[$i];
+        // $myJson['nama_fakultas']=$nama_fakultas[$i];
+        $myJson['kode_himpunan']=$kode_himpunan[$i];
+        $myJson['nama_himpunan']=$nama_himpunan[$i];
+        $myJson['deskripsi']=$deskripsi[$i];
+        $myJson['image']=$image[$i];
+        $myJson['fakultas']=$fakultas[$i];
+        
+        $myDataJson[]=$myJson;
+      }
+      $data['datahimpunan']=$myDataJson;    
+
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
       $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -601,6 +740,47 @@ class c_admin extends CI_Controller
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('admin/himpunan', $data);
+      $this->load->view('templates/footeradm');
+  }
+
+   public function data_demasemaf(){
+      $data['title'] = 'Data DEMA-F/SEMA-F';
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['himpunan'] = $this->Model_View->tampil_list_alljurusan();
+      $data['fak'] = $this->Model_View->tampil_list_fakultas();
+      $data['users'] = $this->Model_View->tampil_user_himpunan();
+
+      for ($i=0; $i<$data['users']->num_rows(); $i++) { 
+        $username[$i]=$data['users']->result_array()[$i]['username'];
+        // $nama_fakultas[$i]=$data['himpunan']->result_array()[$i]['parent_fakultas'];
+        $kode_himpunan[$i]=$data['himpunan']->result_array()[$i]['kode_himpunan'];
+        $nama_himpunan[$i]=$data['himpunan']->result_array()[$i]['nama_himpunan'];        
+        $deskripsi[$i]=$data['himpunan']->result_array()[$i]['desc_himpunan'];
+        $image[$i]=$data['himpunan']->result_array()[$i]['image'];
+        $fakultas[$i]=$data['himpunan']->result_array()[$i]['parent_fakultas'];
+
+        $myJson['user']=$username[$i];
+        // $myJson['nama_fakultas']=$nama_fakultas[$i];
+        $myJson['kode_himpunan']=$kode_himpunan[$i];
+        $myJson['nama_himpunan']=$nama_himpunan[$i];
+        $myJson['deskripsi']=$deskripsi[$i];
+        $myJson['image']=$image[$i];
+        $myJson['fakultas']=$fakultas[$i];
+        $myDataJson[]=$myJson;
+
+      }
+      $data['datahimpunan']=$myDataJson;    
+
+      $data['count_puniv']= $this->M_dana->count_puniv();
+      $data['count_pfklts']= $this->M_dana->count_pfklts();
+      $data['count_pukmukk']= $this->M_dana->count_pukmukk();
+      $data['count_luniv']= $this->M_dana->count_luniv();
+      $data['count_lfklts']= $this->M_dana->count_lfklts();
+      $data['count_lukmukk']= $this->M_dana->count_lukmukk();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/demasemaf', $data);
       $this->load->view('templates/footeradm');
   }
 
@@ -682,10 +862,17 @@ class c_admin extends CI_Controller
   public function tambah_data_himpunan(){
       $kode_himpunan = $this->input->post('kode_himpunan');
       $nama_himpunan = $this->input->post('nama_himpunan');
-      $deskripsi = $this->input->post('desc_himpunan');
+      $deskripsi = $this->input->post('desc_himpunan');      
+      $nama = $this->input->post('nama');
+
+      $username = $this->input->post('username');
+      $password = $this->input->post('password');
+      $role = 0;
+      $is_active = 1;
+      $statususer=1;      
+      $telp=$this->input->post('telp');      
       $parent_fakultas = $this->input->post('parent_fakultas');
       $image = $this->input->post('image');
-
 
       if ($image=''){} else{
       $config['upload_path']='./assets/img/jurusan';
@@ -708,7 +895,19 @@ class c_admin extends CI_Controller
       );
       $datadana = array(
           'kd_jrsn'=> $kode_himpunan,
+          'statususer' => $statususer,
       );
+      $datauser = array(
+          'nama' => $nama,
+          'username' => $username,
+          'password' => md5($password),
+          'role' => $role,
+          'kode_himp' => $kode_himpunan,
+          'is_active' => $is_active,
+          'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
+          'telp' =>$telp,
+      );    
       }
       else{
           $data =  array(
@@ -721,22 +920,177 @@ class c_admin extends CI_Controller
       $datadana = array(
         'kd_jrsn'=> $kode_himpunan,
         'kd_fklts' => $parent_fakultas,
-    );
+        'statususer' => $statususer,
+      );
+      $datauser = array(
+          'nama' => $nama,
+          'username' => $username,
+          'password' => md5($password),
+          'role' => $role,
+          'kode_himp' => $kode_himpunan,
+          'is_active' => $is_active,
+          'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
+          'telp' =>$telp,
+      );
        }
       // $this->M_dana->tambah_datauser($datadana);
-      $this->Model_View->tambah_himpunan($data,$datadana);
+      $this->Model_View->tambah_himpunan($data);
+      $this->Model_View->tambah_detailhimpunan($datadana);
+      $this->Model_View->tambah_user_himpunan($datauser);
       $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
       redirect('c_admin/data_himpunan');
   }
   }
 
+  public function tambah_data_demasemaf(){
+      $kode_himpunan = $this->input->post('kode_himpunan');
+      $nama_himpunan = $this->input->post('nama_himpunan');
+      $deskripsi = $this->input->post('desc_himpunan');      
+      $nama = $this->input->post('nama');
+
+      $username = $this->input->post('username');
+      $password = $this->input->post('password');
+      $role = 0;
+      $is_active = 1;
+      $statususer=1;      
+      $telp=$this->input->post('telp');      
+      $parent_fakultas = $this->input->post('parent_fakultas');
+      $image = $this->input->post('image');
+
+      if ($image=''){} else{
+      $config['upload_path']='./assets/img/jurusan';
+      $config['allowed_types']='jpg|gif|png|jpeg';
+      $config['encrypt_name'] = TRUE;
+
+      $this->load->library('upload',$config);
+      if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Himpunan"; die();
+      }else{
+          $image=$this->upload->data('file_name');
+      }
+
+      if($parent_fakultas == ''){
+          $data =  array(
+          'kode_himpunan' => $kode_himpunan,
+          'nama_himpunan'=> $nama_himpunan,
+          'desc_himpunan' => $deskripsi,
+          'image' => $image,
+          // 'statususer' => $statususer,
+      );
+      $datadana = array(
+          'kd_jrsn'=> $kode_himpunan,
+      );
+      $datauser = array(
+          'nama' => $nama,
+          'username' => $username,
+          'password' => md5($password),
+          'role' => $role,
+          'kode_himp' => $kode_himpunan,
+          'is_active' => $is_active,
+          'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
+          'telp' =>$telp,
+      );    
+      }
+      else{
+          $data =  array(
+          'kode_himpunan' => $kode_himpunan,
+          'nama_himpunan'=> $nama_himpunan,
+          'desc_himpunan' => $deskripsi,
+          'parent_fakultas' => $parent_fakultas,
+          'image' => $image
+      );
+      $datadana = array(
+        'kd_jrsn'=> $kode_himpunan,
+        'kd_fklts' => $parent_fakultas,
+      );
+      $datauser = array(
+          'nama' => $nama,
+          'username' => $username,
+          'password' => md5($password),
+          'role' => $role,
+          'kode_himp' => $kode_himpunan,
+          'is_active' => $is_active,
+          'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
+          'telp' =>$telp,
+      );
+       }
+      // $this->M_dana->tambah_datauser($datadana);
+      $this->Model_View->tambah_himpunan($data,$datadana);
+      $this->Model_View->tambah_user_himpunan($datauser);
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
+      redirect('c_admin/data_demasemaf');
+  }
+  }
+
+
 public function edit_data_himpunan(){
+      $param = $this->input->get('var1');     
       $kode_himpunan = $this->input->post('kode_himpunan');
       $nama_himpunan = $this->input->post('nama_himpunan');
       $deskripsi = $this->input->post('deskripsi');
       $visi = $this->input->post('visi');
       $misi = $this->input->post('misi');
       $parent_fakultas = $this->input->post('parent_fakultas');
+      $username = $this->input->post('username');
+      $kode_himp = $this->input->post('kode_himp');
+      $image = $this->input->post('image');
+      $imageold = $this->input->post('imageold');  
+
+      if (!empty($_FILES["image"]["name"])){
+        $config['upload_path']='./assets/img/jurusan';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload',$config);
+        // var_dump($this->upload->do_upload('image'));
+        // exit();
+        if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Foto"; die();
+        }
+        else{
+          $image=$this->upload->data('file_name');
+          $newimage= $image;
+          // var_dump($imageold);
+          // exit();
+          if($image!=NULL){
+            $path = './assets/img/jurusan/'.$imageold.'';
+            unlink($path);
+          }
+        }
+      $this->Model_View->edit_useraja($kode_himpunan,$username);
+      $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$newimage);
+      }else{
+      $this->Model_View->edit_useraja($kode_himpunan,$username);
+      $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$imageold);
+      }
+      // $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
+      
+      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
+      if ($param=='univ') {
+        redirect('c_admin/data_universitas');
+      }      
+      else{
+       redirect('c_admin/data_himpunan');
+      }
+      // elseif ($param='demasemaf') {
+      //  redirect('c_admin/data_himpunan');
+      // }
+      
+  }
+
+
+public function edit_data_demasemaf(){
+      $kode_himpunan = $this->input->post('kode_himpunan');
+      $nama_himpunan = $this->input->post('nama_himpunan');
+      $deskripsi = $this->input->post('deskripsi');
+      $visi = $this->input->post('visi');
+      $misi = $this->input->post('misi');
+      $parent_fakultas = $this->input->post('parent_fakultas');
+      $username = $this->input->post('username');
+      $kode_himp = $this->input->post('kode_himp');
       $image = $this->input->post('image');
       $imageold = $this->input->post('imageold');  
 
@@ -752,18 +1106,37 @@ public function edit_data_himpunan(){
           $image=$this->upload->data('file_name');
       }
       // $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
+      $this->Model_View->edit_useraja($kode_himpunan,$username);
       $this->Model_View->edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image);
       $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
-      redirect('c_admin/data_himpunan');
+      redirect('c_admin/data_demasemaf');
   }
 }
 
   public function delete_data_himpunan(){
-  $kode_himpunan = $this->uri->segment(3);
+  $kode_himpunan = $this->input->get('var1');
+  $username = $this->input->get('var2');  
+  // var_dump($kode_himpunan);
+  // var_dump($username);
+  // exit();
   $this->Model_View->delete_himpunan($kode_himpunan);
+  $this->Model_View->delete_userhimpunan($username);
   $this->M_dana->delete_datauser($kode_himpunan);
   $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
   redirect('c_admin/data_himpunan');
+  }
+
+  public function delete_data_demasemaf(){
+  $kode_himpunan = $this->input->get('var1');
+  $username = $this->input->get('var2');  
+  // var_dump($kode_himpunan);
+  // var_dump($username);
+  // exit();
+  $this->Model_View->delete_himpunan($kode_himpunan);
+  $this->Model_View->delete_userhimpunan($username);
+  $this->M_dana->delete_datauser($kode_himpunan);
+  $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
+  redirect('c_admin/data_demasemaf');
   }
 
   public function tambah_data_user() {
@@ -918,6 +1291,25 @@ public function edit_data_himpunan(){
         $data['title'] = 'Data UKM/UKK';
         $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
         $data['ukmukk'] = $this->Model_View->tampil_list_ukmukk();
+        $data['users'] = $this->Model_View->tampil_user_ukmukk();
+        for ($i=0; $i<$data['users']->num_rows(); $i++) { 
+        $username[$i]=$data['users']->result_array()[$i]['username'];        
+        $kode_ukmukk[$i]=$data['ukmukk']->result_array()[$i]['kode_ukmukk'];
+        $nama_ukmukk[$i]=$data['ukmukk']->result_array()[$i]['nama_ukmukk'];        
+        $desc_ukmukk[$i]=$data['ukmukk']->result_array()[$i]['desc_ukmukk'];
+        $image[$i]=$data['ukmukk']->result_array()[$i]['image'];        
+
+        $myJson['user']=$username[$i];        
+        $myJson['kode_ukmukk']=$kode_ukmukk[$i];
+        $myJson['nama_ukmukk']=$nama_ukmukk[$i];
+        $myJson['desc_ukmukk']=$desc_ukmukk[$i];
+        $myJson['image']=$image[$i];
+        
+        $myDataJson[]=$myJson;
+
+      }
+      $data['dataukmukk']=$myDataJson;
+
         $data['count_puniv']= $this->M_dana->count_puniv();
         $data['count_pfklts']= $this->M_dana->count_pfklts();
         $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -929,7 +1321,9 @@ public function edit_data_himpunan(){
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/ukmukk', $data);
         $this->load->view('templates/footeradm');
-    }
+  }
+
+
     public function data_userukmukk(){
         $data['title'] = 'Data User UKM/UKK';
         $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
@@ -953,6 +1347,13 @@ public function edit_data_himpunan(){
         $desc_ukmukk = $this->input->post('desc_ukmukk');
         // $visi_ukmukk = $this->input->post('visi_ukmukk');
         // $misi_ukmukk = $this->input->post('misi_ukmukk');
+        $nama = $this->input->post('nama');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $role = 2;
+        $is_active = 1;
+        $statususer=1;      
+        $telp=$this->input->post('telp');             
         $image = $this->input->post('image');
 
         if ($image=''){} else{
@@ -962,7 +1363,7 @@ public function edit_data_himpunan(){
 
         $this->load->library('upload',$config);
         if(!$this->upload->do_upload('image')){
-            echo "Gagal Menambahkan Himpunan"; die();
+            echo "Gagal Menambahkan UKM/UKK"; die();
         }else{
             $image=$this->upload->data('file_name');
         }
@@ -975,12 +1376,24 @@ public function edit_data_himpunan(){
             // 'misi_ukmukk' => $misi_ukmukk,
             'image' => $image
         );
+        $datauser = array(
+          'nama' => $nama,
+          'username' => $username,
+          'password' => md5($password),
+          'role' => $role,          
+          'is_active' => $is_active,
+          'insert_date' => date('Y-m-d H:i:s'),
+          'statususer' => $statususer,
+          'telp' =>$telp,
+        );
         $datadana=array(
           'kd_ukmukk' => $kode_ukmukk,
-          'nama_ukmukk' => $nama_ukmukk
+          'nama_ukmukk' => $nama_ukmukk,
+          'statususer' => '1',
         );
-        $this->Model_View->tambah_ukmukk($data,$datadana);
-        $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil ditambahkan!');
+        $this->Model_View->tambah_ukmukk($data,$datadana);        
+        $this->Model_View->tambah_userukmukk($datauser);
+        $this->session->set_flashdata('flashormawahimp','Data UKM/UKK berhasil ditambahkan!');
         redirect('c_admin/data_ukmukk');
     }
     }
@@ -991,15 +1404,51 @@ public function edit_data_himpunan(){
         $desc_ukmukk = $this->input->post('desc_ukmukk');
         $visi_ukmukk = $this->input->post('visi_ukmukk');
         $misi_ukmukk = $this->input->post('misi_ukmukk');
+        $username = $this->input->post('username');        
         $image = $this->input->post('image');
-        $this->Model_View->update_ukmukk($kode_ukmukk,$nama_ukmukk,$desc_ukmukk,$visi_ukmukk,$misi_ukmukk,$image);
+        $imageold = $this->input->post('imageold');
+
+        if (!empty($_FILES["image"]["name"])){
+        $config['upload_path']='./assets/img/ukmukk';
+        $config['allowed_types']='jpg|gif|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload',$config);
+        // var_dump($this->upload->do_upload('image'));
+        // exit();
+        if(!$this->upload->do_upload('image')){
+          echo "Gagal Menambahkan Foto"; die();
+        }
+        else{
+          $image=$this->upload->data('file_name');
+          $newimage= $image;
+          // var_dump($imageold);
+          // exit();
+          if($image!=NULL){
+            $path = './assets/img/ukmukk/'.$imageold.'';
+            unlink($path);
+          }
+        }
+      $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
+      $this->Model_View->edit_useraja($kode_himpunan,$username);
+      $this->Model_View->update_ukmukk($kode_ukmukk,$nama_ukmukk,$desc_ukmukk,$visi_ukmukk,$misi_ukmukk,$newimage);
+      }else{
+      $this->M_dana->edit_datauser($kode_himpunan,$parent_fakultas);
+      $this->Model_View->edit_useraja($kode_himpunan,$username);
+      $this->Model_View->update_ukmukk($kode_ukmukk,$nama_ukmukk,$desc_ukmukk,$visi_ukmukk,$misi_ukmukk,$imageold);
+      }
+      
         $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
         redirect('c_admin/data_ukmukk');
+            
     }
 
     public function delete_data_ukmukk(){
-    $kode_ukmukk = $this->uri->segment(3);
+    $kode_ukmukk = $this->input->get('var1');
+    $username = $this->input->get('var2'); 
+
     $this->Model_View->delete_ukmukk($kode_ukmukk);
+    $this->Model_View->delete_userukmukk($username);
     $this->M_dana->delete_datauserukmukk($kode_ukmukk);
     $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil dihapus!');
     // $this->session->set_flashdata('msg','<div class="alert alert-success">Data Himpunan Dihapus</div>');
@@ -1043,9 +1492,10 @@ public function edit_data_himpunan(){
       $telp=$this->input->post('telp');
 
       $this->Model_View->edit_ukmuser($telp,$id_user,$nama,$email,$username,md5($password));
-      $this->session->set_flashdata('flashormawahimp','Data Ormawa berhasil diperbaharui!');
+      $this->session->set_flashdata('flashcoba','Data Ormawa berhasil diperbaharui!');
       redirect('c_admin/data_userukmukk');
   }
+  
   public function delete_data_userukmukk(){
       $id_user = $this->uri->segment(3);
       $this->Model_View->delete_user_ukmukk($id_user);
@@ -1121,5 +1571,40 @@ public function edit_data_himpunan(){
     $this->Model_View->edit_admin($id_user, $nama, $email, $username, md5($password));
     redirect('c_admin/data_admin');
   }
-
+  function hapus_pengajuan_jrsn(){
+    $kd_jrsn=$this->input->post('kd_jrsn');
+    $data=$this->M_dana->getDataByID($kd_jrsn)->row();
+    $statususer7=2;
+    $nPengajuan=$this->input->post('nPengajuan');
+    if($data['nPengajuan'] = 1 )
+    {
+      $pengajuan1 = $data['nPengajuan'];
+      $nPengajuan7 = $pengajuan1; 
+    } else if ($data['nPengajuan'] = 2 )
+    {
+      $pengajuan2 = $data['nPengajuan']-$data['a'];
+      $nPengajuan7 = $pengajuan2; 
+    } else if ($data['nPengajuan'] = 3 )
+    {
+      $pengajuan3 = $data['nPengajuan']-$data['a'];
+      $nPengajuan7 = $pengajuan3; 
+    } else {
+      $data['b'] = 1;
+      $pengajuan4 = $data['b'];
+      $nPengajuan7 = $pengajuan4;
+    }
+      $hapusspj='./assets/uploads/suratpengajuan/'.$data->suratpengajuan;
+      $hapusrkg='./assets/uploads/rinciankegiatan/'.$data->rinciankegiatan;
+      $hapusrkakl='./assets/uploads/rkakl/'.$data->rkakl;
+      $hapustor='./assets/uploads/tor/'.$data->tor;
+        if(is_readable($hapusspj)&&is_readable($hapusrkg)&&is_readable($hapusrkakl)&&is_readable($hapustor)&&unlink($hapusspj)&&unlink($hapusrkg)&&unlink($hapustor)&&unlink($hapusrkakl)){
+        $this->M_dana->hapusFile($kd_jrsn);
+        $this->M_dana->pengajuantidakdiaccupdate($kd_jrsn, $statususer7);
+        $this->M_dana->pengajuanditolaktbdetailuser($kd_jrsn, $statususer7,$nPengajuan7);
+        redirect(base_url('c_admin/Cek_Pengajuan_Fakultas'));
+      }
+      else{
+        echo "ulangi";
+      }
+  }
 }

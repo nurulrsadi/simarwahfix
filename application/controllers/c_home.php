@@ -9,12 +9,15 @@ class c_home extends CI_Controller
 
 	}
 	public function index()
-	{
+	{		
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		// $data['jurusan'] = $this->Model_View->tampil_list_jurusan()->result();
 		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();	
 		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$this->load->view('templates/navbarhome', $data);
 		$this->load->view('home',$data);
+		$this->load->view('templates/footerhome', $data);
 	}
 	public function demau()
 	{
@@ -23,9 +26,11 @@ class c_home extends CI_Controller
 	public function fakultas()
 	{
 		$kode_fakultas = $this->uri->segment(3);
-		$data['jurusan'] = $this->Model_View->tampil_list_jurusan($kode_fakultas);
+		$data['jurusan'] = $this->Model_View->tampil_list_jurusan($kode_fakultas);		
 		$data['fakultas'] = $this->Model_View->tampil_detail_fakultas($kode_fakultas);
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();		
 		$this->load->view('fakultas',$data);
+		$this->load->view('templates/footerhome', $data);
 	}
 	public function himpunan()
 	{
@@ -37,19 +42,27 @@ class c_home extends CI_Controller
 		$data['himpunan'] = $this->Model_View->tampil_himpunan($kode_jurusan)->result();
 		$data['bidang'] = $this->Model_View->tampil_bidang($kode_jurusan)->result();
 		$data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
+		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 
 		$this->load->view('himpunan',$data);
+		$this->load->view('templates/footerhome', $data);
 	}
 
 	public function login()
 	{
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		$this->load->view('login');
+		$this->load->view('templates/footerhome', $data);
 	}
 	public function ormawa()
 	{
 		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		$this->load->view('ormawa',$data);
+		$this->load->view('templates/footerhome', $data);
 	}
 	public function semau()
 	{
@@ -58,7 +71,10 @@ class c_home extends CI_Controller
 	public function semuaukm()
 	{
 		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		$this->load->view('semuaukm', $data);
+		$this->load->view('templates/footerhome', $data);
 	}
 	public function ukmaja()
 	{
@@ -70,8 +86,15 @@ class c_home extends CI_Controller
 		$data['ukm_ukk'] = $this->Model_View->tampil_ukmukk($kode_ubidang)->result();
 		$data['ubidang'] = $this->Model_View->tampil_ubidang($kode_ubidang)->result();
 		$data['kegiatan_ukmukk'] = $this->Model_View->tampil_ukegiatan($kode_ubidang);
+		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		$this->load->view('ukmaja',$data);
+		$this->load->view('templates/footerhome', $data);
 
 		// $data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
+	}
+	public function aulasc()
+	{
+		$this->load->view('aulasc');
 	}
 }
