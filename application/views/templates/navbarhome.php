@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="active"><a href="<?php echo base_url().'c_home/index';?>">TENTANG KAMI</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
-                <li class="">a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
