@@ -27,7 +27,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
           // $nama_fakultas=$u['nama_fakultas'];
           ?>
     <?php foreach($user->result_array() as $j):
-		$nama=$j['nama'];
+		$nama=$j['nama_ukmukk'];
 			?>
 		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan_ukmukk/')?>" method="post" id="formpengajuan">
 			<input type="hidden" id="kd_ukmkk" name="kd_ukmkk" value="<?= $kd_ukmkk?>">

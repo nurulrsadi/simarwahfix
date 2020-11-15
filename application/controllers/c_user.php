@@ -16,6 +16,7 @@ function __construct(){
     if($this->session->userdata('role')==1 ){
       redirect(base_url("c_admin/index"));
     }
+    $kode_himp_sess=$this->session->userdata('kode_himp_sess');
 }
     public function Cetak_Sewa_Aula($id_sewa){
       $penyewa=$this->uri->segment(5);
@@ -170,6 +171,26 @@ function __construct(){
   $this->load->view('templates/sidebaruser', $data);
   $this->load->view('templates/footer');
   }
+  }
+  public function Riwayat_Pengajuan($kode_himp_sess)
+  {
+    if($this->session->userdata('status') != "login")
+    {
+      redirect(base_url("c_home/login"));
+    }else
+      {
+        $kode_himp=$this->session->userdata('kode_himp_sess');
+        $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+        $data['title'] = 'Riwayat Pengajuan Anggaran Dana '.$kode_himp_sess;
+        $data['fklts']=$this->M_history->get_riwayat_tbpengajuan($kode_himp);
+        $data['jrsn']= $this->db->get_where('tb_detailuser', ['kd_jrsn'=>$this->session->userdata('kode_himp')])->row_array();
+        // $data['alasan_ditolak_ukmukk']=$this->M_dana->get_pengajuan_ukmukk($kode_pengaju);
+        $data['user']= $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+        $this->load->view('templates/header',$data);
+        $this->load->view('user/riwayat',$data);
+        $this->load->view('templates/sidebaruser',$data);
+        $this->load->view('templates/footer');
+      }
   }
   public function Failed_Anggaran()
   {

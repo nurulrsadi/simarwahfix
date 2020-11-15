@@ -29,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					$id_pengajuan=$u['id_pengajuan'];
 					?>
 		<?php foreach($user->result_array() as $j):
-		$nama=$j['nama'];
+		$nama=$j['desc_himpunan'];
 			?>
 		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post" id="formpengajuan">
 			<input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>">

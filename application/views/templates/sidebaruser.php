@@ -15,16 +15,15 @@
           $statususer=$i['statususer'];
         ?>
         		<?php 
-        		// $status = $user;
         		$statususerlogin=$statususer;
         		$queryuser =
             "SELECT *
-                        FROM `tb_detailmenu` JOIN `tb_status`
-                        ON `tb_detailmenu`.`status_id` = `tb_status`.`id_status`
-                        -- ON
-                        WHERE `tb_status`.`id_status` = $statususerlogin
-                        ORDER BY `tb_detailmenu`.`id`
-                        ";?>
+							FROM `tb_detailmenu` JOIN `tb_status`
+							ON `tb_detailmenu`.`status_id` = `tb_status`.`id_status`
+							-- ON
+							WHERE `tb_status`.`id_status` = $statususerlogin
+							ORDER BY `tb_detailmenu`.`id`
+							";?>
         		<?php $usernya=$this->db->query($queryuser)->result_array(); ?>
 
         		<nav id="menu">
@@ -34,9 +33,9 @@
         			<ul>
         				<li><a href="<?php echo base_url() . 'c_user/index'; ?>"><i class="fas fa-user fa-2x "></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit
         						Profil</a></li>
-                <li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program Kerja</a></li>
-        				<?php foreach($usernya as $m) : ?>
-
+									<li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>"><i class="fas fa-clipboard-list fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program Kerja</a></li>
+									<li><a href="<?php echo base_url() . 'c_user/Riwayat_Pengajuan/'.$this->session->userdata("kode_himp_sess"); ?>"><i class="fas fa-tasks fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Riwayat & Status <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengajuan Anggaran Dana</a></li>	
+								<?php foreach($usernya as $m) : ?>
         				<li><a href="<?=base_url($m['url']); ?>"><i class="<?= $m['icon']; ?>"></i>&nbsp;
         						<?= $m['title']; ?></a></li>
         				<?php endforeach;?>

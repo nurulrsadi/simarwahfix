@@ -3,7 +3,18 @@
 use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class M_history extends CI_Model{
-
+  // riwayat user
+  function get_riwayat_tbpengajuan($kode_pengaju)
+  {
+    $statususer=array('3','5','8','9','10');
+    $this->db->select('*');
+    $this->db->from('tb_pengajuan');
+    $this->db->join('tb_status', 'tb_status.id_status=tb_pengajuan.statususer', 'left');
+    $this->db->where_in('statususer', $statususer);
+    $this->db->where('kd_jrsn', $kode_pengaju);
+    $this->db->order_by('insertdata', 'DESC');
+    return $this->db->get();
+  }
   // all about pengajuan
   function get_all_pengajuan_fak(){
     $this->db->select('*');

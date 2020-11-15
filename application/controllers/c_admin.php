@@ -556,7 +556,19 @@ class c_admin extends CI_Controller
               }
             }
     }
-    function Cek_Data_Pengajuan($kd_jrsn){
+    function Cek_Data_Pengajuan_Universitas($kd_jrsn)
+    {
+      $data['title'] = 'Cek Data';
+      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanuniv($kd_jrsn);
+      $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $data['user'] = $this->db->get_where('jurusan', ['kode_himpunan'=>$kd_jrsn]);
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/cekdatapaguuniv', $data);
+      $this->load->view('templates/footeradm');
+    }
+    function Cek_Data_Pengajuan_Fakultas($kd_jrsn){
       $data['title'] = 'Cek Data';
       $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuan($kd_jrsn);
       $data['count_puniv']= $this->M_dana->count_puniv();
@@ -566,7 +578,7 @@ class c_admin extends CI_Controller
       $data['count_lfklts']= $this->M_dana->count_lfklts();
       $data['count_lukmukk']= $this->M_dana->count_lukmukk();
       $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
-      $data['user'] = $this->db->get_where('user', ['kode_himp'=>$kd_jrsn]);
+      $data['user'] = $this->db->get_where('jurusan', ['kode_himpunan'=>$kd_jrsn]);
       $this->load->view('templates/headeradm', $data);
       $this->load->view('templates/sidebaradm', $data);
       $this->load->view('templates/topbar', $data);
@@ -577,7 +589,7 @@ class c_admin extends CI_Controller
       $data['title'] = 'Cek Data';
       $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
       $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
-      $data['user'] = $this->db->get_where('user', ['kode_himp'=>$kd_ukmukk]);
+      $data['user'] = $this->db->get_where('ukm_ukk', ['nama_ukmukk'=>$kd_ukmukk]);
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
       $data['count_pukmukk']= $this->M_dana->count_pukmukk();
@@ -1385,6 +1397,7 @@ public function edit_data_demasemaf(){
           'insert_date' => date('Y-m-d H:i:s'),
           'statususer' => $statususer,
           'telp' =>$telp,
+          'kode_himp' => $kode_ukmukk,
         );
         $datadana=array(
           'kd_ukmukk' => $kode_ukmukk,
