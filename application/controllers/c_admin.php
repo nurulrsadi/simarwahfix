@@ -587,9 +587,9 @@ class c_admin extends CI_Controller
     }
     function Cek_Data_Pengajuan_UKMUKK($kd_ukmukk){
       $data['title'] = 'Cek Data';
+      $data['dataukmukk'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
       $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
-      $data['dataacc'] = $this->M_dana->tampil_data_dana_maupengajuanukmukk($kd_ukmukk);
-      $data['user'] = $this->db->get_where('ukm_ukk', ['nama_ukmukk'=>$kd_ukmukk]);
+      $data['user'] = $this->db->get_where('ukm_ukk', ['kode_ukmukk'=>$kd_ukmukk]);
       $data['count_puniv']= $this->M_dana->count_puniv();
       $data['count_pfklts']= $this->M_dana->count_pfklts();
       $data['count_pukmukk']= $this->M_dana->count_pukmukk();

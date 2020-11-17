@@ -39,22 +39,21 @@
                                 $user=$i['user'];                        
                             ?>
                         <tr>
-                           
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                           <td><?php echo $kode_ukmukk ?></td>
                           <td><?php echo $nama_ukmukk ?></td>
                           <td><?php echo $desc_ukmukk ?></td>
                           <td><?php echo $user ?></td>        
-                                                 
                           <td>
-                            <img width="100" height="100" src="<?php echo base_url('assets/img/ukmukk/').$image?>">
+                            <img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
                           </td>
-                          <td><center>
+                          <td>
+                            <center>
                             <span data-toggle="tooltip" data-placement="bottom">
                             <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit_ukmukk<?php echo $kode_ukmukk;?>"title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
                             <!-- <button class="btn btn-danger" data-toggle="modal" data-target="#modaldelete_ukmukk<?php echo $kode_ukmukk;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
-                        </center>
-                        </td>
+                          </center>
+                          </td>
                         
                         </tr>
                         <?php endforeach;?>

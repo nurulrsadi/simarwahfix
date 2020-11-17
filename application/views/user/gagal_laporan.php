@@ -158,7 +158,7 @@
 							<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
 							<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 							</div>
-								<button type="submit" class="button primary">
+								<button type="submit" class="button primary" style="background-color:royalblue;">
 									Ulangi Laporan Kegiatan
 								</button>
 						</form>

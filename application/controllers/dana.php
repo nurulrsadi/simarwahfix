@@ -442,7 +442,7 @@ class dana extends CI_Controller{
       $rinciankegiatannya = $rkg;
       $rkaklnya = $rkakl;
       $tornya = $tor;
-      $datadana1=array(
+      $datadana=array(
         'kd_ukmkk'=>$kd_ukmukk,
         'nama_ukmukk'=>$nama_ukmukk,
         'statususer' =>3,
@@ -454,13 +454,11 @@ class dana extends CI_Controller{
         'suratpengajuan'=>$suratpengajuannya,
         'rinciankegiatan'=>$rinciankegiatannya,
         'rkakl'=>$rkaklnya,
-        'tor' =>$tor,
+        'tor' =>$tornya,
         'tahunakademik'=>$tahunakademik
       );
-        $databerhasil=$this->M_dana->pengajuanfile($kd_ukmukk,$statususer);
-        $databerhasil1=$this->M_dana->pengajuanfileuser($kd_ukmukk,$statususer);
-      $this->M_dana->tambah_pengajuan_ukmukk($datadana1);
-      if($datadana1){ // Jika sukses
+      $this->M_dana->tambah_pengajuan_ukmukk($datadana);
+      if($datadana){ // Jika sukses
         redirect('c_user/Verifikasi_Data');
         }else{ // Jika gagal
               echo "<script>alert('Data gagal diupdate, File pdf min 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";

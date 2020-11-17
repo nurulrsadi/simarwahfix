@@ -137,8 +137,10 @@ class M_dana extends CI_Model{
 		  return $query;
     }
     function tampil_data_dana_maupengajuanukmukk($kd_ukmukk){
-      $query =$this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE kd_ukmkk = "'.$kd_ukmukk.'" ');
-		  return $query;
+      $query =$this->db->query("SELECT * FROM tb_pengajuan_ukmukk WHERE statususer='3' AND kd_ukmkk = '$kd_ukmukk' ");
+      // $query =$this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE statususer="3" AND kd_ukmkk = "'.$kd_ukmukk.'" ');
+      // var_dump($query); die();
+      return $query;
     }
     function tampil_data_laporan_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE statususer="4" AND kd_jrsn = "'.$jurusan.'"');
@@ -342,10 +344,14 @@ class M_dana extends CI_Model{
       $this->db->insert('tb_pengajuan',$datadana1);
       return TRUE;
     }
-    function tambah_pengajuan_ukmukk($datadana1){
-      $this->db->insert('tb_pengajuan_ukmukk',$datadana1);
+    function tambah_pengajuan_ukmukk($datadana){
+      $this->db->insert('tb_pengajuan',$datadana);
       return TRUE;
     }
+    // function tambah_pengajuan_ukmukk($datadana1){
+    //   $this->db->insert('tb_pengajuan_ukmukk',$datadana1);
+    //   return TRUE;
+    // }
     function pengajuanfile($kd_jrsn,$statususer){
       return $query=$this->db->query("UPDATE tb_detailuser set statususer='$statususer' WHERE kd_jrsn='$kd_jrsn'");
     }

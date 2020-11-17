@@ -15,6 +15,17 @@ class M_history extends CI_Model{
     $this->db->order_by('insertdata', 'DESC');
     return $this->db->get();
   }
+  function get_riwayat_tbpengajuanukm($kd_ukmkk)
+  {
+    $statususer=array('3','5','8','9','10');
+    $this->db->select('*');
+    $this->db->from('tb_pengajuan_ukmukk');
+    $this->db->join('tb_status', 'tb_status.id_status=tb_pengajuan_ukmukk.statususer', 'left');
+    $this->db->where_in('statususer', $statususer);
+    $this->db->where('kd_ukmkk', $kd_ukmkk);
+    $this->db->order_by('insertdata', 'DESC');
+    return $this->db->get();
+  }
   // all about pengajuan
   function get_all_pengajuan_fak(){
     $this->db->select('*');

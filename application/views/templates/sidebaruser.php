@@ -4,7 +4,7 @@
 
 				<!-- Search -->
 				<section id="search" class="alt">
-					<h2><strong>Selamat datang, <br>Admin dari <?php echo $this->session->userdata("user_login"); ?> !</strong></h2>
+					<h2><strong>Selamat datang, <br> <?php echo $this->session->userdata("nama"); ?> !</strong></h2>
         </section>
 				<?php
         $loginuser = $this->session->userdata('username');

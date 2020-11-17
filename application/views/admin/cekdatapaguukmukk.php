@@ -12,8 +12,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
 		</div>
 
-		<?php foreach($dataacc->result_array() as $u):
-					$id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
+		<?php foreach($dataukmukk->result_array() as $u):
+					$id_pengajuan_ukmuk=$u['id_pengajuan_ukmukk'];
 					$kd_ukmkk=$u['kd_ukmkk'];
           $nPengajuan=$u['nPengajuan'];
           $tahunakademik=$u['tahunakademik'];
@@ -134,11 +134,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <?php endforeach; ?>
 
 <!-- modal -->
-<?php foreach($dataacc->result_array() as $u):
+<?php foreach($dataukmukk->result_array() as $u):
           $kd_ukmkk=$u['kd_ukmkk'];
           $suratpengajuan=$u['suratpengajuan'];
           $nPengajuan=$u['nPengajuan'];
-          $danasisa=$u['danasisa'];
+					$danasisa=$u['danasisa'];
+					$id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
           ?>
 <div class="modal fade" id="modalalasan<?php echo $kd_ukmkk;?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,6 +164,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							placeholder="Data kurang lengkap, silahkan perbaiki dahulu!" required>
 					</div>
 					<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
+					<input type="hidden" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Update changes</button>

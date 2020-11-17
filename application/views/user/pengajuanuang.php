@@ -116,7 +116,7 @@
 			</tr>
 			<tr>
 				<td>3</td>
-				<td>RKA-KL </td>
+				<td>RKA-KL Kegiatan </td>
 				<td>
 					<div class="file-upload-custom">
 						<input class="file-upload__input-custom" type="file" name="rkakl" id="rkakl" accept="application/pdf"
@@ -274,7 +274,7 @@
 			</tr>
 			<tr>
 				<td>3</td>
-				<td>RKA-KL </td>
+				<td>RKA-KL Kegiatan </td>
 				<td>
 					<div class="file-upload-custom">
 						<input class="file-upload__input-custom" type="file" name="rkakl" id="rkakl" accept="application/pdf"
