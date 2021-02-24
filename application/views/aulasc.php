@@ -42,11 +42,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
 						<?php if($this->session->userdata('status') == "login"){?>
-						<li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+						<li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-						<li class=""><a href="#">Daftar Kegiatan</a></li>
-						<li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
+						
+						<li class="active"><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
 						<?php } else {?>
 						<?php } ?>
 
@@ -54,11 +54,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
 						<?php } else {?>
-						<li class="active"><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
+						<li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-						<li class=""><a href="#">Daftar Kegiatan</a></li>
-						<li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
+						
+						<li class="active"><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>
 						<?php } ?>
 					</ul>

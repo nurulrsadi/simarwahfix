@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
-                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>              
-              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -76,6 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php foreach ($himpunan->result_array() as $i):
             $nama_himpunan = $i['nama_himpunan'];
             $kode_himpunan = $i['kode_himpunan'];
+            $deskripsi = $i['desc_himpunan'];
+            $image = $i['image'];
           ?>
           <?php if($kode_himpunan == 'SEMAU' || $kode_himpunan == 'DEMAU')
              {?>
@@ -83,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="kotakb" style="margin-left: 20;">
               <div class="service-item">
                 <a href="<?php echo base_url().'c_home/himpunan/'.$kode_himpunan.'';?>">
-                  <img src="<?php echo base_url('assets/img/'.$kode_himpunan.'.jpg')?>" style="width:100px;height:100px; margin: 10px;">
+                  <img src="<?php echo base_url('assets/img/jurusan/').$image;?>" style="width:100px;height:100px; margin: 10px;">
                   <h3><?php echo $kode_himpunan;?></h3>
                   <p><?php echo $nama_himpunan;?></p>
                 </a>

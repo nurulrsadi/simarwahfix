@@ -43,7 +43,7 @@
                 <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
                 
-                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
@@ -55,7 +55,7 @@
               <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
               
-              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -76,7 +76,7 @@
               <div class="service-item">
                 <?php foreach($himpunan as $him){ ?>
                 <img src="<?php echo base_url('assets/img/jurusan/').$him->image;?>" style="width:100px;height:100px; margin: 10px;">
-                <hr class="bottom-line">
+                <br>
                   <h2 class="service-title pad-bt15" style="font-family: fixed; font-size: 35px"><?php echo $him->kode_himpunan ?></h2>
                   <h2 class="" style="font-family: fixed; font-size: 35px"><?php echo $him->desc_himpunan ?></h2>
                 <?php } ?> 
@@ -110,7 +110,7 @@
             <?php } ?> 
           </div>
 
-            <div class="row">
+          <div class="row">
               <?php $id=1; foreach($ketua as $him){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                   <div class="kotakb" style="width: 50%; border-color: white; margin:auto; margin-bottom: 20px;">
@@ -123,7 +123,8 @@
                 </div>
               <?php } ?> 
             </div>
-            <center>
+            
+          <center>
             <div class="row">
               <?php $id=1; foreach($sekben as $him){ ?>
                <?php if($him->jabatan == 'SEKRETARIS')
@@ -177,8 +178,7 @@
               <?php if($him->desc_bidang != 'EX OFFICIO'){?>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="kotakb" style="border-color: white;">
-                  <div class="service-item">
-                    <!-- <img src="<?php echo base_url('assets/img/PAO.png')?>" style="width:100px;height:100px; padding: 10px;"> -->
+                  <div class="service-item">                    
                     <img width="200" height="200" src="<?php echo base_url('assets/img/bidang/').$him->image?>" >
                     <h3><span><?php echo $him->label_bidang?></span></h3>
                     <p><?php echo $him->desc_bidang?></p>
@@ -249,6 +249,33 @@
         </div>
       </div>
 
+      <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">Foto Kegiatan</h2>
+            <p class="sub-title pad-bt15"></p>
+            <hr class="bottom-line">
+          </div>
+          <?php 
+            foreach($kegiatan->result_array() as $i):
+            $start_date=$i['start_date'];
+            $end_date=$i['end_date'];
+            $nama_kegiatan=$i['nama_kegiatan'];
+            $image=$i['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+            <figure>              
+                <img src="<?php echo base_url('assets/img/kegiatan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <figcaption>
+                  <h2><?php echo $nama_kegiatan ?></h2>
+                  <p><?php echo p_bulanindo($start_date) ?> s/d <?php echo p_bulanindo($end_date) ?></p>                  
+                </figcaption>
+            
+            </figure>
+          </div>
+          <?php endforeach ?>
+
+        </div>
+
       <!-- <div class="row">
         <div class="col-md-12 col-sm-12 text-center">
           <h2 class="service-title pad-bt15">Data Anggota</h2>
@@ -263,3 +290,45 @@
     </div>
   </section>
 
+<section id="blog" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+        <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">PRESTASI ORGANISASI</h2>
+            <p class="sub-title pad-bt15"></p>
+            <hr class="bottom-line">
+          </div>
+        <div class="row"> 
+          <!-- <div class="col-md-6 col-sm-6 col-xs-6"> -->
+            <?php foreach ($prestasi->result_array() as $i): 
+              $waktu=$i['waktu'];
+              $nama_prestasi=$i['nama_prestasi'];
+              $jenis_prestasi=$i['jenis_prestasi'];
+              $desc_prestasi=$i['desc_prestasi'];
+              $image=$i['image'];
+              $lokasi=$i['lokasi'];
+
+            ?>
+            <div class="col-md-4">
+              <div class="blog-img">
+                <img src="<?php echo base_url('assets/img/prestasi/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+              </div>   
+              <div class="blog-info">
+                <h2><?php echo $nama_prestasi ?></h2>
+                <p>Oleh : <?php echo $jenis_prestasi ?></p>
+                <div class="blog-comment">
+                  <p><?php echo $waktu?></p>
+                  <p>
+                    <span><i class="fa fa-map-pin"></i>  <?php echo $lokasi?></span>
+                    
+                  </p>
+                </div>
+                <p><?php echo $desc_prestasi?></p>
+                <!-- <a href="" class="read-more">Read more →</a> -->
+              </div>
+            </div>
+          <?php endforeach ?>
+      
+          
+        </div>
+      </div>
+    </section>

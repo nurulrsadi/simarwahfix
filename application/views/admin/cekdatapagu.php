@@ -13,31 +13,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 
 		<?php foreach($dataacc->result_array() as $u):
-          $kd_jrsn=$u['kd_jrsn'];
-          $nPengajuan=$u['nPengajuan'];
-          $tahunakademik=$u['tahunakademik'];
-          $kd_fakultas=$u['kd_fakultas'];
-          $jurusan=$u['jurusan'];
-          $namaKegiatan=$u['namaKegiatan'];
-          $suratpengajuan=$u['suratpengajuan'];
-          $rinciankegiatan=$u['rinciankegiatan'];
-          $rkakl=$u['rkakl'];
-          $tor=$u['tor'];
-          $danasisa=$u['danasisa'];
-          $statususer=$u['statususer'];
-					$nama_fakultas=$u['nama_fakultas'];
-					$id_pengajuan=$u['id_pengajuan'];
-					?>
+            $kd_jrsn=$u['kd_jrsn'];
+            $nPengajuan=$u['nPengajuan'];
+            $tahunakademik=$u['tahunakademik'];
+            $kd_fakultas=$u['kd_fakultas'];
+            $jurusan=$u['jurusan'];
+            $namaKegiatan=$u['namaKegiatan'];
+            $suratpengajuan=$u['suratpengajuan'];
+            $rinciankegiatan=$u['rinciankegiatan'];
+            $rkakl=$u['rkakl'];
+            $tor=$u['tor'];
+            $danasisa=$u['danasisa'];
+            $statususer=$u['statususer'];
+            $nama_fakultas=$u['nama_fakultas'];
+            $id_pengajuan=$u['id_pengajuan'];
+            $akhirkegiatan=$u['akhirkegiatan'];
+            ?>
 		<?php foreach($user->result_array() as $j):
 		$nama=$j['desc_himpunan'];
 			?>
-		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post" id="formpengajuan">
+		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan/')?>" method="post" id="formpengajuan" onsubmit="javascript: return (confirm('Anda yakin ACC Pengajuan?') ? this.submit() : false);">
 			<input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>">
 			<input type="hidden" id="id_pengajuan" name="id_pengajuan" value="<?= $id_pengajuan?>">
 			<input type="hidden" id="statususer" name="statususer" value="<?= $statususer?>">
 			<input type="hidden" id="kd_fakultas" name="kd_fakultas" value="<?= $kd_fakultas?>">
 			<input type="hidden" id="tahunakademik" name="tahunakademik" value="<?= $tahunakademik?>">
 			<input type="hidden" id="jurusan"name="jurusan" value="<?= $jurusan?>">
+			<input type="hidden" id="jurusan"name="akhirkegiatan" value="<?= $akhirkegiatan?>">
 			<input type="hidden" name="suratpengajuan" value="'./assets/uploads/suratpengajuan/'.<?= $suratpengajuan?>">
 			<input type="hidden" name="rinciankegiatan" value="'./assets/uploads/rinciankegiatan/'.<?= $rinciankegiatan?>">
 			<input type="hidden" name="rkakl" value="'./assets/uploads/rkakl/'.<?= $rkakl?>">
@@ -80,6 +82,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="namaKegiatan" id="staticEmail"
 								value="<?= $namaKegiatan ?>">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="akhirkegiatan" class="col-sm-2 col-form-label">Keterangan Kegiatan</label>
+						<div class="col-sm-10">
+							<input type="text" readonly class="form-control-plaintext" name="akhirkegiatan" id="akhirkegiatan"
+								value="<?= date_indo($akhirkegiatan) ?>">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -128,7 +137,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<small class="text-decoration" style="color:red">contoh : 2000000</small>
 						</div>
 					</div>
-					<a href="<?= base_url('/c_admin/Cek_Pagu'); ?>"
+					<a href="<?= base_url('/c_admin/Cek_Pengajuan_Fakultas'); ?>"
 						class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"> Kembali</a>
 					<!-- <a href="<?= base_url('c_admin/Cek_Data_Pengajuan/Tidak_ACC/'.$kd_jrsn)?>" class=" d-none d-lg-inline-block btn
 						btn-sm btn-danger shadow-lg">Tidak
@@ -145,13 +154,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <?php endforeach; ?>
 
 
-<?php foreach($dataacc->result_array() as $u):
-					$id_pengajuan=$u['id_pengajuan'];
-					$kd_jrsn=$u['kd_jrsn'];
-          $suratpengajuan=$u['suratpengajuan'];
-          $nPengajuan=$u['nPengajuan'];
-          $danasisa=$u['danasisa'];
-          ?>
+        <?php foreach($dataacc->result_array() as $u):
+            $id_pengajuan=$u['id_pengajuan'];
+            $kd_jrsn=$u['kd_jrsn'];
+            $suratpengajuan=$u['suratpengajuan'];
+            $nPengajuan=$u['nPengajuan'];
+            $danasisa=$u['danasisa'];
+            ?>
 <div class="modal fade" id="modalalasan<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -176,7 +185,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 						<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Update changes</button>
+						<button type="submit" class="btn btn-primary">Tolak Pengajuan</button>
 					</div>
 				</form>
 			</div>

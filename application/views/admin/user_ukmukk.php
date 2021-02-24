@@ -4,7 +4,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaltambahuser"><i class="fa fa-user-plus"></i> Tambah User UKM/UKK</a>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaltambahuser"><i class="fa fa-user-plus"></i> Tambah User UKM/UKK</a> -->
         </div>
 
         <!-- DataTales Example -->
@@ -30,6 +30,8 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        
+                    <tbody>
                         <?php $j=1; ?>
                         <?php 
                   foreach($userukmukk->result_array() as $i):
@@ -43,7 +45,6 @@
                     $kd_ukmukk=$i['kode_himp'];
                     
                     ?>
-                    <tbody>
                         <tr>
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                            <td><?php echo $j++; ?></td>
@@ -57,11 +58,12 @@
                           <td><center>
                             <span data-toggle="tooltip" data-placement="bottom">
                             <button class="btn btn-warning" data-toggle="modal" data-target="#modaledituser_ukmukk<?php echo $id_user;?>" title="Edit"><i class="far fa-edit" style="color: white;"></i></button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_ukmukk<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button>
+                           <!--  <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_ukmukk<?php echo $id_user;?>" title="Delete"><i class="far fa-trash-alt" style="color: white;"></i></button> -->
                         </center></td>
                 </tr>
+                <?php endforeach;?>
             </tbody>
-        <?php endforeach;?>
+        
                     </table>
                 </div>
             </div>

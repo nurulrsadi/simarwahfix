@@ -57,8 +57,8 @@
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->
 							</td>
 						</tr>
-					</tbody>
 					<?php endforeach; ?>
+					</tbody>
 				</table>
 			</div>
 		</div>

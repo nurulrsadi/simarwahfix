@@ -98,18 +98,50 @@
 	}
 
 	function tampil_bidang($jurusan){
-		$query =  $this->db->query('SELECT * FROM nama_bidang WHERE parent_himpunan = "'.$jurusan.'"');
+		$query =  $this->db->query("SELECT * FROM nama_bidang WHERE parent_himpunan = '$jurusan' ORDER BY create_date ASC");
 		return $query;
 	}
 	function tampil_himpunan($jurusan){
 		$query =  $this->db->query('SELECT * FROM jurusan WHERE kode_himpunan = "'.$jurusan.'"');
 		return $query;
 	}
-
-	function tampil_kegiatan($jurusan){
-		$query = $this->db->query('SELECT * FROM daftar_kegiatan WHERE Parent_himpunan = "'.$jurusan.'"');
+	function tampil_kegiatan_allhimp(){
+		$query = $this->db->query('SELECT * FROM daftar_kegiatan');
 		return $query;
 	}
+	function tampil_kegiatan_allukmukk(){
+    $query = $this->db->query('SELECT * FROM kegiatan_ukmukk');
+    return $query;
+  }
+  
+  function tampil_prestasi_allhimpunan(){
+    $query = $this->db->query('SELECT * FROM prestasi_himpunan');
+    return $query;
+  }
+  function tampil_prestasi_allukmukk(){
+    $query = $this->db->query('SELECT * FROM prestasi_ukmukk');
+    return $query;
+  }
+	
+	function tampil_prestasi_himpunan($jurusan){    
+    $query = $this->db->query("SELECT * FROM prestasi_himpunan WHERE parent_himpunan = '$jurusan' ORDER BY create_date ASC");
+    return $query;
+    }
+    
+    function tampil_prestasi_ukmukk($ukm_ukk){
+    $query =  $this->db->query("SELECT * FROM prestasi_ukmukk WHERE parent_ukmukk = '$ukm_ukk' ORDER BY create_date ASC");    
+    return $query;
+  }
+
+	function tampil_kegiatan_himp($jurusan){    
+    $query = $this->db->query("SELECT * FROM daftar_kegiatan WHERE Parent_himpunan = '$jurusan' ORDER BY create_date ASC");
+    return $query;
+  }
+  
+  function tampil_ukegiatan($ukm_ukk){
+    $query =  $this->db->query("SELECT * FROM kegiatan_ukmukk WHERE parent_ukmukk = '$ukm_ukk' ORDER BY create_date ASC");
+    return $query;
+  }
 
 
 	function simpan_anggota_baru($nim,$nama,$jenis_kelamin,$alamat,$kontak,$email,$jabatan,$parent_himpunan,$parent_bidang){
@@ -135,8 +167,8 @@
         return $query_update;
     }
 
-    function update_kegiatan($start_date,$end_date,$nama_kegiatan, $Parent_himpunan, $id_kegiatan){
-    	$query_update=$this->db->query("UPDATE daftar_kegiatan SET start_date='$start_date',end_date='$end_date', nama_kegiatan='$nama_kegiatan' WHERE id_kegiatan='$id_kegiatan' ");
+    function update_kegiatan($start_date,$end_date,$nama_kegiatan, $Parent_himpunan, $id_kegiatan, $image){
+    	$query_update=$this->db->query("UPDATE daftar_kegiatan SET start_date='$start_date',end_date='$end_date', nama_kegiatan='$nama_kegiatan',image='$image' WHERE id_kegiatan='$id_kegiatan' ");
     	return $query_update;
     }
 
@@ -183,6 +215,32 @@
   function delete_kegiatan($id_kegiatan){
   	 $this->db->delete('daftar_kegiatan', array('id_kegiatan' => $id_kegiatan));	
   }
+  
+  function tambah_prestasi($data){
+    $this->db->insert('prestasi_himpunan', $data);
+    $this->session->set_flashdata('Sukses', "Prestasi Berhasil Ditambahkan");
+    return TRUE;
+  }
+  function update_prestasi($waktu,$nama_prestasi,$jenis_prestasi,$desc_prestasi,$lokasi,$parent_himpunan,$id_prestasi,$image){
+      $query_update=$this->db->query("UPDATE prestasi_himpunan SET waktu='$waktu', nama_prestasi='$nama_prestasi', jenis_prestasi='$jenis_prestasi', desc_prestasi='$desc_prestasi', lokasi='$lokasi', image='$image' WHERE id_prestasi='$id_prestasi' ");
+      return $query_update;
+  }
+  function delete_prestasi($id_prestasi){
+     $this->db->delete('prestasi_himpunan', array('id_prestasi' => $id_prestasi));  
+  }
+
+  function tambah_uprestasi($data){
+    $this->db->insert('prestasi_ukmukk', $data);
+    $this->session->set_flashdata('Sukses', "Prestasi Berhasil Ditambahkan");
+    return TRUE;
+  }
+  function update_uprestasi($waktu,$nama_uprestasi,$jenis_uprestasi,$desc_uprestasi,$ulokasi,$parent_ukmukk,$id_uprestasi,$image){
+      $query_update=$this->db->query("UPDATE prestasi_ukmukk SET waktu='$waktu', nama_uprestasi='$nama_uprestasi', jenis_uprestasi='$jenis_uprestasi', desc_uprestasi='$desc_uprestasi', ulokasi='$ulokasi', image='$image' WHERE id_uprestasi='$id_uprestasi' ");
+      return $query_update;
+  }
+  function delete_uprestasi($id_uprestasi){
+     $this->db->delete('prestasi_ukmukk', array('id_uprestasi' => $id_uprestasi));  
+  }
 
 
   function update_fakultas($kode_fakultas,$nama_fakultas,$deskripsi,$visi,$misi){
@@ -211,7 +269,10 @@
   	 $query_update_himpunan = $this->db->query("UPDATE jurusan SET nama_himpunan = '$nama_himpunan',desc_himpunan = '$deskripsi',visi = '$visi',misi = '$misi',image = '$image' WHERE kode_himpunan = '$kode_himpunan'");
   	 return $query_update_himpunan;
   }
-
+//   function edit_himpunan($kode_himpunan,$nama_himpunan,$deskripsi,$visi,$misi,$parent_fakultas,$image){
+//   	 $query_update_himpunan = $this->db->query("UPDATE jurusan SET nama_himpunan = '$nama_himpunan',desc_himpunan = '$deskripsi',visi = '$visi',misi = '$misi',image = '$image' WHERE kode_himpunan = '$kode_himpunan'");
+//   	 return $query_update_himpunan;
+//   }
     function delete_himpunan($kode_himpunan){
   	$query=$this->db->query("DELETE FROM jurusan WHERE kode_himpunan='$kode_himpunan'");
     return $query;    
@@ -222,8 +283,16 @@
   }
 
   function tampil_user_himpunan(){
-  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0 ORDER BY kode_himp ASC");
+  	$query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0 AND kode_himp != 'semau' AND kode_himp != 'demau' ORDER BY kode_himp ASC");
   	return $query_tampil_user_himpunan;
+  }
+  function tampil_semua_userhimp(){
+    $query_tampil_user_himpunan = $this->db->query("SELECT * FROM user WHERE role=0 ORDER BY kode_himp ASC");
+    return $query_tampil_user_himpunan;
+  }
+  function tampil_user_semaudemau(){
+    $usersemau = $this->db->query("SELECT * FROM user WHERE role=0 AND kode_himp = 'semau' OR kode_himp = 'demau' ORDER BY kode_himp ASC");
+    return $usersemau;
   }
 
   function tambah_user_himpunan($data){
@@ -243,7 +312,6 @@
   function edit_useraja($kode_himp,$username){
     $query_update_user = $this->db->query("UPDATE user SET username = '$username' WHERE kode_himp = '$kode_himp'");
     return $query_update_user;
-
   }
 
   function tampil_ukmukk ($kode_ukmukk){
@@ -259,8 +327,8 @@
         return $query_update;
   }
 
-  function tampil_bidang_ukmukk ($kode_ukmukk){
-    $query = $this->db->query('SELECT * FROM bidang_ukmukk WHERE parent_ukmukk ="'.$kode_ukmukk.'" ');
+  function tampil_bidang_ukmukk ($kode_ukmukk){    
+    $query = $this->db->query("SELECT * FROM bidang_ukmukk WHERE parent_ukmukk ='$kode_ukmukk' ORDER BY create_date ASC");
     return $query;
   }
 
@@ -314,8 +382,8 @@
     return $query;
   }
 
-  function update_ukegiatan($ustart_date,$uend_date,$nama_ukegiatan, $parent_ukmukk, $id_ukegiatan){
-      $query_update=$this->db->query("UPDATE kegiatan_ukmukk SET ustart_date='$ustart_date',uend_date='$uend_date', nama_ukegiatan='$nama_ukegiatan' WHERE id_ukegiatan='$id_ukegiatan' ");
+  function update_ukegiatan($ustart_date,$uend_date,$nama_ukegiatan, $parent_ukmukk, $id_ukegiatan, $image){
+      $query_update=$this->db->query("UPDATE kegiatan_ukmukk SET ustart_date='$ustart_date',uend_date='$uend_date', nama_ukegiatan='$nama_ukegiatan', image='$image' WHERE id_ukegiatan='$id_ukegiatan' ");
       return $query_update;
   }
   function delete_ukegiatan($id_ukegiatan){
@@ -326,7 +394,11 @@
         return $query_update;
   }
   function tampil_usekben($ukm_ukk){
-    $query = $this->db->query('SELECT * FROM anggota_ukmukk WHERE parent_ukmukk = "'.$ukm_ukk.'"');
+    $this->db->select("*");
+    $this->db->from("anggota_ukmukk");
+    $this->db->where("parent_ukmukk =",$ukm_ukk);
+    $this->db->order_by("create_date", 'ASC');
+    $query = $this->db->get();
     return $query;
   }
   function tampil_uketua($ukm_ukk){
@@ -343,10 +415,7 @@
     $query = $this->db->query('SELECT * FROM anggota_ukmukk WHERE u_jabatan = "Ketua Bidang" AND parent_ukmukk = "'.$ukm_ukk.'"');
     return $query;
   }
-  function tampil_ukegiatan($ukm_ukk){
-    $query = $this->db->query('SELECT * FROM kegiatan_ukmukk WHERE parent_ukmukk = "'.$ukm_ukk.'"');
-    return $query;
-  }
+  
   function tampil_uanggota($ukm_ukk){
     $this->db->select("*");
     $this->db->from("anggota_ukmukk");

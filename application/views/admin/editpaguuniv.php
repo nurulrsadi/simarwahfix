@@ -27,9 +27,12 @@
     							<th>Aksi</th>
     						</tr>
     					</thead>
+    					<tbody>
+    						<tr>
     					<?php $j=1; ?>
     					<?php 
                   foreach($userdanauniv->result_array() as $i):
+                    $id_dana=$i['id_dana']; 
                     $kd_jrsn=$i['kd_jrsn'];
                     $tahunakademik=$i['tahunakademik'];
                     $danaawal=$i['danaawal'];
@@ -37,8 +40,6 @@
                     $nPengajuan=$i['nPengajuan'];
                     // $fakultas=$i['parent_fakultas'];
                     ?>
-    					<tbody>
-    						<tr>
     							<td><?=$j++;?></td>
     							<td><?php echo $kd_jrsn ?></td>
     							<td><?php echo $tahunakademik ?></td>
@@ -47,15 +48,15 @@
     							<td class="align-self-auto">
                     <span data-toggle="tooltip" data-placement="bottom">
     								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" data-toggle="modal"
-    									data-target="#modaleditanggaran<?php echo $kd_jrsn;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
+    									data-target="#modaleditanggaran<?php echo $id_dana;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
     								</a>
                     <a href="" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="modal"
-    									data-target="#modalresetakun<?php echo $kd_jrsn;?>" title="Reset Akun"><i class="fa fa-undo"></i>
+    									data-target="#modalresetakun<?php echo $id_dana;?>" title="Reset Akun"><i class="fa fa-undo"></i>
     								</a>
     							</td>
     						</tr>
-    					</tbody>
     					<?php endforeach;?>
+    					</tbody>
     				</table>
     			</div>
     		</div>
@@ -67,13 +68,14 @@
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->
     <?php foreach($userdanauniv->result_array() as $i):
-          $kd_jrsn=$i['kd_jrsn'];
-          $tahunakademik=$i['tahunakademik'];
-          $danaawal=$i['danaawal'];
-          $danasisa=$i['danasisa'];
-          $nPengajuan=$i['nPengajuan'];
-          ?>
-    <div class="modal fade" id="modaleditanggaran<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
+      $id_dana=$i['id_dana'];    
+      $kd_jrsn=$i['kd_jrsn'];
+      $tahunakademik=$i['tahunakademik'];
+      $danaawal=$i['danaawal'];
+      $danasisa=$i['danasisa'];
+      $nPengajuan=$i['nPengajuan'];
+      ?>
+    <div class="modal fade" id="modaleditanggaran<?php echo $id_dana;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">
@@ -102,6 +104,7 @@
     						</t><input type="number" name="danaawal" min="0" name="danaawal" id="danaawal"
     							value="<?php echo $danaawal;?>" class="form-control" required>
     					</div>
+    					<input type="hidden" name="id_dana" id="id_dana" value="<?= $id_dana ?>" >
     			</div>
     			<div class="modal-footer">
     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -116,9 +119,10 @@
 
 <!-- modal reset akun -->
 <?php foreach($userdanauniv->result_array() as $i):
+          $id_dana=$i['id_dana']; 
           $kd_jrsn=$i['kd_jrsn'];
           ?>
-  <div class="modal fade" id="modalresetakun<?php echo $kd_jrsn;?>" tabindex="-1" role="dialog"
+  <div class="modal fade" id="modalresetakun<?php echo $id_dana;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  >
     	<div class="modal-dialog modal-dialog-centered">
     		<div class="modal-content">
@@ -132,7 +136,8 @@
     				<form method="post" action="<?php echo base_url().'c_admin/reset_akun_fakultas'?>"
     					enctype="multipart/form-data">
               <h7>Anda yakin akan mereset akun <?= $kd_jrsn; ?>?</h7>
-    					<input type="hidden" name="kd_jrsn" id="kd_jrsn" value="<?= $kd_jrsn ?>" >
+    			<input type="hidden" name="kd_jrsn" id="kd_jrsn" value="<?= $kd_jrsn ?>" >
+    			<input type="hidden" name="id_dana" id="id_dana" value="<?= $id_dana ?>" >
               <!-- <input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn?>"> -->
     			</div>
     			<div class="modal-footer">

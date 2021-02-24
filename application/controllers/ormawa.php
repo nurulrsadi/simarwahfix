@@ -2,28 +2,33 @@
 
 class ormawa extends CI_Controller{ 
   function do_keluhan(){
-    $kd_ormawa=$this->input->post('kd_jrsn',true);
-    $kd_fklts=$this->input->post('kd_fklts',true);
+    $namaormawa=$this->input->post('namaormawa',true);
     $tanggal=date("Y-m-d",strtotime($this->input->post('tanggal')));
     $isikeluhan=$this->input->post('isikeluhan', true);
     $data1=array(
-      'kd_ormawa'=>$kd_ormawa,
-      'kd_fakultas' => $kd_fklts,
+      'kd_ormawa'=>$namaormawa,
       'tanggal' => $tanggal,
       'isikeluhan' => $isikeluhan,
     );
     $this->M_ormawa->tambah_keluhan($data1);
     if($data1){ // Jika sukses
+      $this->session->set_flashdata('msg','<div class="alert alert-success">Keluhan ataupun saran anda berhasil dikirim. Terima kasih !</div>');
       redirect('c_user/Keluhan');
       }else{ // Jika gagal
             echo "<script>alert('Keluhan gagal dikirim, silahkan input keluhan maksimal 250kata ');window.location = '".base_url('c_user/Keluhan')."';</script>";
       }
   }
-  function hapuskeluhan($kd_ormawa){
-    $kd_ormawa=$this->input->post('kd_ormawa',true);
-    $data=$this->M_ormawa->getDataByID($kd_ormawa)->row();
-    $delete=$this->M_ormawa->hapuskeluhannya($kd_ormawa);
+  function deletekeluhan(){
+    $id=$this->uri->segment(3);
+    // var_dump($id_keluhan); die();
+    $this->M_ormawa->hapuskeluhannya($id);
+    $this->session->set_flashdata('flashdana', 'Keluhan user berhasil dihapus');
     redirect('c_admin/keluhan');
+  }
+  function delete_all_keluhan(){
+      $this->db->empty_table('tb_keluhan');
+      $this->session->set_flashdata('flashdana', 'Seluruh keluhan berhasil dihapus');
+      redirect('c_admin/keluhan');
   }
   function do_sewa(){
     date_default_timezone_set('Asia/Jakarta');
@@ -41,46 +46,63 @@ class ormawa extends CI_Controller{
     $no_pj=$this->input->post('no_pj',true);
     $no_surat=$this->input->post('no_surat',true);
     $surat_sewa = $this->input->post('surat_sewa', true);
-    if ($surat_sewa=''){} else{
-      $config['upload_path'] = './assets/uploads/suratizinaula/';//path folder
-      $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
-      $config['file_name'] = 'SuratIzinSewaAula-'.$kode.'-'.$penyewa.'-'.$Keterangan;
-      $config['max_size']='2048';
-      $this->load->library('upload',$config);
-      if(!$this->upload->do_upload('surat_sewa')){
-        echo "<script>alert('Gagal melakukan, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
-      }else{
-        $surat_sewanya=$this->upload->data('file_name');
-      }
-    $statussewa=1;
-    $id_user=$this->input->post('id_user', true);
-    $data=array(
-      'penyewa' => $penyewa,
-      'Keterangan' => $Keterangan,
-      'jenisaula' => $jenisaula,
-      'dari' => $dari,
-      'hingga' => $hingga,
-      'mulaipukul' => $mulaipukul,
-      'akhirpukul' => $akhirpukul,
-      'nama_pj' => $nama_pj,
-      'no_pj' => $no_pj,
-      'surat_sewa' => $surat_sewanya,
-      'no_surat' => $no_surat,
-      'statussewa' =>1,
-    );
-    // var_dump($data); die();
-    $this->M_ormawa->sewa_aula($data);
-    $this->M_ormawa->update_status_sewa($penyewa,$statussewa);
-    if($data){ // Jika sukses
-      // $this->M_ormawa->update_status_sewa($statussewa,$id_user);
-      $this->session->set_flashdata('flashdata', 'Sewa Aula berhasil dilakukan !');
-      redirect('c_user/Pinjam_Aula');
+    
+    if(!$this->checkData($jenisaula,$dari,$hingga)){
+            if ($surat_sewa=''){} else{
+              $config['upload_path'] = './assets/uploads/suratizinaula/';//path folder
+              $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
+              $config['file_name'] = 'SuratIzinSewaAula-'.$kode.'-'.$penyewa.'-'.$Keterangan;
+              $config['max_size']='2048';
+              $this->load->library('upload',$config);
+              if(!$this->upload->do_upload('surat_sewa')){
+                echo "<script>alert('Gagal melakukan, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
+              }else{
+                $surat_sewanya=$this->upload->data('file_name');
+              }
 
-      }else{ // Jika gagal
-            echo "<script>alert('Silahkan isi form dengan hati-hati, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
-      }
+            $id_user=$this->input->post('id_user', true);
+            $data=array(
+              'penyewa' => $penyewa,
+              'Keterangan' => $Keterangan,
+              'jenisaula' => $jenisaula,
+              'dari' => $dari,
+              'hingga' => $hingga,
+              'mulaipukul' => $mulaipukul,
+              'akhirpukul' => $akhirpukul,
+              'nama_pj' => $nama_pj,
+              'no_pj' => $no_pj,
+              'surat_sewa' => $surat_sewanya,
+              'no_surat' => $no_surat,
+
+            );
+            // var_dump($data); die();
+            $this->M_ormawa->sewa_aula($data);
+            //$this->M_ormawa->update_status_sewa($penyewa,$statussewa);
+            if($data){ // Jika sukses
+              // $this->M_ormawa->update_status_sewa($statussewa,$id_user);
+              $this->session->set_flashdata('flashdata', 'Sewa Aula berhasil dilakukan !');
+              redirect('c_user/Pinjam_Aula');
+
+              }else{ // Jika gagal
+                    echo "<script>alert('Silahkan isi form dengan hati-hati, File pdf min 2MB');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
+              }
+            }
+    }else{
+      echo "<script>alert('Maaf pada tanggal tersebut aula sudah terlebih dahulu disewa !');window.location = '".base_url('c_user/Pinjam_Aula')."';</script>";
     }
+
   }
+
+
+  public function checkData($jenisAula,$tanggalAwal,$tanggalAkhir){
+       $query=$this->M_ormawa->check_aula($jenisAula,$tanggalAwal,$tanggalAkhir);
+       if($query->num_rows()>0){
+          return true;
+       }else{
+          return false;
+       }
+  }
+  
   function hapus_datasewa(){
     $id_sewa = $this->uri->segment(3);
     $data=$this->M_ormawa->getDataSewaByID($id_sewa)->row();

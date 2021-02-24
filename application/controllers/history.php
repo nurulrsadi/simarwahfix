@@ -3,32 +3,28 @@
 class history extends CI_Controller{ 
   function simpan_gagal_pengajuan_fak()
   {
-    $statususer=6;
     $kd_jrsn=$this->input->post('kd_jrsn', true);
     $ubah=$this->M_dana->change_jadi_failed_fklts($kd_jrsn);
     if($ubah)
     {
       $this->db->set('statususer', 2);
       $this->db->where('username', $this->session->userdata('username'));
-      $this->db->where('statususer', $statususer);
       $this->db->update('user');
       $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Silahkan melakukan pengajuan anggaran dengan format yang benar!</div>');
       redirect(base_url("c_user/Pagu_Anggaran"));
     }
     else
     {
-      echo "<script>alert('Silahkan Ulangi');window.location = '".base_url('c_user/Failde_Anggaran')."';</script>";
+      echo "<script>alert('Silahkan Ulangi');window.location = '".base_url('c_user/Failed_Anggaran')."';</script>";
     }
   }
   function simpan_gagal_pengajuan_ukmukk()
   {
-    $statususer=6;
-    $kd_ukmukk=$this->input->post('kd_ukmukk');
-    $ubah=$this->M_dana->change_jadi_failed_ukmuk($kd_ukmukk);
+    $id_pengajuan_ukmukk=$this->input->post('id_pengajuan_ukmukk');
+    $ubah=$this->M_dana->change_jadi_failed_ukmukk($id_pengajuan_ukmukk);
     if($ubah)
       {
         $this->db->set('statususer', 2);
-        $this->db->where('statususer', $statususer);
         $this->db->where('username', $this->session->userdata('username'));
         $this->db->update('user');
         $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Silahkan melakukan pengajuan anggaran dengan format yang benar!</div>');
@@ -43,7 +39,6 @@ class history extends CI_Controller{
   {
     $statususer_new=4;
     $kd_jrsn=$this->input->post('kd_jrsn', true);
-    $id_pengajuan=$this->input->post('id_pengajuan', true);
     $akhirkegiatan=$this->input->post('akhirkegiatan', true);
     $tglmakslaporan=$this->input->post('tglmakslaporan', true);
     $namakegiatan=$this->input->post('namakegiatan', true);
@@ -56,11 +51,11 @@ class history extends CI_Controller{
     $tor=$this->input->post('tor', true);
     $tahunakademik=$this->input->post('tahunakademik', true);
     $nPengajuan=$this->input->post('nPengajuan', true);
-    $row=$this->M_dana->getDataByID_pengajuan($id_pengajuan)->row();
-    $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
-    $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
-    if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
-    {
+    // $row=$this->M_dana->getDataByID_pengajuan($id_pengajuan)->row();
+    // $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
+    // $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
+    // if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
+    // {
       $data=array(
         'kd_jrsn' => $kd_jrsn,
         'akhirkegiatan' => $akhirkegiatan,
@@ -89,8 +84,8 @@ class history extends CI_Controller{
           $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Silahkan melakukan pengajuan anggaran dengan format yang benar!</div>');
           redirect(base_url("c_user/Laporan_Kegiatan"));
         }
-      }
-    }
+     }
+    // }
   }
   function simpan_gagal_laporan_fak()
   {
@@ -110,11 +105,11 @@ class history extends CI_Controller{
     $tahunakademik=$this->input->post('tahunakademik', true);
     $kd_fakultas=$this->input->post('kd_fakultas', true);
     $nPengajuan=$this->input->post('nPengajuan', true);
-    $row=$this->M_dana->getDataByID_pengajuan($id_pengajuan)->row();
-    $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
-    $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
-    if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
-    {
+    // $row=$this->M_dana->getDataByID_pengajuan($id_pengajuan)->row();
+    // $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
+    // $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
+    // if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
+    // {
       $data=array(
         'kd_jrsn' => $kd_jrsn,
         'akhirkegiatan' => $akhirkegiatan,
@@ -145,7 +140,7 @@ class history extends CI_Controller{
           redirect(base_url("c_user/Laporan_Kegiatan"));
         }
       }
-    }
+    // }
   }
   function simpan_gagal_laporan_ukmukk()
   {
@@ -164,11 +159,11 @@ class history extends CI_Controller{
     $tor=$this->input->post('tor', true);
     $tahunakademik=$this->input->post('tahunakademik', true);
     $nPengajuan=$this->input->post('nPengajuan', true);
-    $row=$this->M_dana->getDataByID_pengajuan($id_pengajuan_ukmukk)->row();
-    $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
-    $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
-    if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
-    {
+    // $row=$this->M_dana->getDataByID_pengajuanUKMUKK($id_pengajuan_ukmukk)->row();
+    // $hapuslpj='./assets/uploads/laporankegiatan/'.$row->laporankegiatan;
+    // $hapusrby='./assets/uploads/laporanrincianbiaya/'.$row->laporanrincianbiaya;
+    // if(is_readable($hapuslpj)&&is_readable($hapusrby)&&unlink($hapuslpj)&&unlink($hapusrby))
+    // {
       $data=array(
         'kd_ukmkk' => $kd_ukmkk,
         'akhirkegiatan' => $akhirkegiatan,
@@ -199,5 +194,5 @@ class history extends CI_Controller{
         }
       }
     }
-  }
+  // }
 }

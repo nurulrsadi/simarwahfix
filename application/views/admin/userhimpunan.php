@@ -4,7 +4,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaltambahuser"><i class="fa fa-user-plus"></i> Tambah User Himpunan</a>
+           <!--  <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modaltambahuser"><i class="fa fa-user-plus"></i> Tambah User Himpunan</a> -->
         </div>
 
         <!-- DataTales Example -->
@@ -23,14 +23,14 @@
                                 <th>No</th>
                                 <th>Nama User</th>
                                 <th>No HP</th>
-                                <th>Username</th>
-                                
-                                <th>Password</th>
-                               <!--  <th>Role</th> -->
+                                <th>Username</th>                                
+                                <th>Password</th>                               
                                 <th>Jurusan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        
+                    <tbody>
                         <?php $j=1; ?>
                         <?php 
                   foreach($users->result_array() as $i):
@@ -43,7 +43,6 @@
                     $role=$i['role'];
                     $kd_himp=$i['kode_himp'];
                     ?>
-                    <tbody>
                         <tr>
                           <!-- <td><center><?php echo $no++ ?></center></td> -->
                           <td><?php echo $j++; ?></td>
@@ -60,15 +59,15 @@
                         </center>
                     </td>
                 </tr>
-            </tbody>
-        <?php endforeach;?>
+                <?php endforeach;?>
+            </tbody>        
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Tambah Fakultas -->
+    <!-- Modal Tambah User -->
     <div class="modal fade" id="modaltambahuser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

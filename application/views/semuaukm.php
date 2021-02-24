@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">SI<span class="logo-dec">MARWA</span></a>
+            <a class="navbar-brand">SI<span class="logo-dec">MARWAH</span></a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -44,8 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-                
-                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+               <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
@@ -56,8 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              
-              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -83,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
             <figure>
               <a href="<?php echo base_url().'c_home/ukmaja/'.$kode_ukmukk;?>">
-                <img src="<?php echo base_url('assets/img/jurusan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <img src="<?php echo base_url('assets/img/ukmukk/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
                 <figcaption>
                   <h2><?php echo $nama_ukmukk ?></h2>
                   <p><?php echo $desc_ukmukk ?></p>

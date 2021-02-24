@@ -45,7 +45,7 @@
                           <td><?php echo $desc_ukmukk ?></td>
                           <td><?php echo $user ?></td>        
                           <td>
-                            <img width="100" height="100" src="<?php echo base_url('assets/img/jurusan/').$image?>">
+                            <img width="100" height="100" src="<?php echo base_url('assets/img/ukmukk/').$image?>">
                           </td>
                           <td>
                             <center>
@@ -78,15 +78,15 @@
                 <div class="modal-body">
                    <form method="post" action="<?php echo base_url().'c_admin/tambahdata_ukmukk'?>" enctype="multipart/form-data">
                         <div class="form-group">
-                        <label>Kode UKM/UKK</t></label>
-                        </t><input type="text" name="kode_ukmukk" style="text-transform:uppercase" autocomplete="off" placeholder="" class="form-control" value="" required>
+                        <label>Kode (co: UKK_PRAMUKA)</label>
+                        </t><input type="text" onkeypress="return disablespace()" name="kode_ukmukk" autocomplete="off" placeholder="" class="form-control" style="text-transform:uppercase;" value="" required>
                          </div> 
-                            <div class="form-group " >
-                                <label>Nama UKM</label>
+                            <div class="form-group">
+                                <label>Nama (co: Pramuka)</label>
                                 <input type="text" name="nama_ukmukk" autocomplete="off" class="form-control" value="" required>
                             </div> 
-                            <div class="form-group " >
-                                <label>Deskr</label>
+                            <div class="form-group">
+                                <label>Deskripsi UKM/UKK</label>
                                 <input type="text" name="desc_ukmukk" autocomplete="off" class="form-control" value="">
                             </div> 
                             <div class="form-group">
@@ -107,7 +107,7 @@
                             </div> 
                             <div class="form-group " >
                                 <label>Image UKM/UKK</label>
-                                <input type="file" name="image" class="form-control" value="" required>
+                                <input type="file" name="image" class="form-control" value="">
                             </div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -141,7 +141,7 @@
                     <input type="hidden" name="imageold" value="<?php echo $image;?>">
                         <div class="form-group">
                             <label>Kode UKM/UKK</label>
-                            <input type="text" name="kode_ukmukk" class="form-control" value="<?php echo $kode_ukmukk;?>" required readonly>
+                            <input onkeypress="return disablespace()" type="text" name="kode_ukmukk" class="form-control" value="<?php echo $kode_ukmukk;?>" required readonly>
                         </div> 
                         <div class="form-group " >
                             <label>Nama UKM/UKK</label>
@@ -197,3 +197,11 @@
     <?php endforeach;?>
 <!-- Akhir Modal Delete -->
 
+<script>
+        function disablespace() {
+          if (event.keyCode == 32) {
+            alert('Tidak boleh menggunakan spasi');
+            return false;
+          }
+        }
+</script>

@@ -28,18 +28,19 @@
     							<th>Aksi</th>
     						</tr>
     					</thead>
-    					<?php $j=1; ?>
-    					<?php 
-                  foreach($userdanaukmukk->result_array() as $i):
-                    $kd_ukmukk=$i['kd_ukmukk'];
-                    $nama_ukmukk=$i['nama_ukmukk'];
-                    $tahunakademik=$i['tahunakademik'];
-                    $danaawal=$i['danaawal'];
-                    $danasisa=$i['danasisa'];
-                    $nPengajuan=$i['nPengajuan'];
-                    ?>
     					<tbody>
     						<tr>
+            					<?php $j=1; ?>
+            					<?php 
+									foreach($userdanaukmukk->result_array() as $i):
+									$id_dana=$i['id_dana'];
+                                    $kd_ukmukk=$i['kd_ukmukk'];
+                                    $nama_ukmukk=$i['nama_ukmukk'];
+                                    $tahunakademik=$i['tahunakademik'];
+                                    $danaawal=$i['danaawal'];
+                                    $danasisa=$i['danasisa'];
+                                    $nPengajuan=$i['nPengajuan'];
+                                    ?>
     							<td><?=$j++;?></td>
     							<!-- <td><center><?php echo $no++ ?></center></td> -->
     							<td><?php echo $kd_ukmukk ?></td>
@@ -51,15 +52,15 @@
     								<!-- Button trigger modal -->
                     <span data-toggle="tooltip" data-placement="bottom">
     								<a href="" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" data-toggle="modal"
-    									data-target="#modaleditanggaran<?php echo $kd_ukmukk;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
+    									data-target="#modaleditanggaran<?php echo $id_dana;?>" title="Edit Pagu Anggaran"><i class="fa fa-pen"></i>
     								</a>
                     <a href="" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-toggle="modal"
-    									data-target="#modalresetakun<?php echo $kd_ukmukk;?>" title="Reset Akun"><i class="fa fa-undo"></i>
+    									data-target="#modalresetakun<?php echo $id_dana;?>" title="Reset Akun"><i class="fa fa-undo"></i>
     								</a>
     							</td>
     						</tr>
-    					</tbody>
     					<?php endforeach;?>
+    					</tbody>
     				</table>
     			</div>
     		</div>
@@ -70,7 +71,8 @@
     <!-- Akhir Modal Tambah  -->
     <!-- Edit Modal Fakultas -->
     <?php 
-        foreach($userdanaukmukk->result_array() as $i):
+				foreach($userdanaukmukk->result_array() as $i):
+					$id_dana=$i['id_dana'];
           $kd_ukmukk=$i['kd_ukmukk'];
           $nama_ukmukk=$i['nama_ukmukk'];
           $tahunakademik=$i['tahunakademik'];
@@ -79,7 +81,7 @@
           $nPengajuan=$i['nPengajuan'];
           // $fakultas=$i['parent_fakultas'];
           ?>
-    <div class="modal fade" id="modaleditanggaran<?php echo $kd_ukmukk;?>" tabindex="-1" role="dialog"
+    <div class="modal fade" id="modaleditanggaran<?php echo $id_dana;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog">
     		<div class="modal-content">
@@ -91,7 +93,8 @@
     			</div>
     			<div class="modal-body">
     				<form method="post" action="<?php echo base_url().'c_admin/update_dana_awal_ormawa'?>"
-    					enctype="multipart/form-data">
+							enctype="multipart/form-data">
+							<input type="hidden" id="id_dana" name="id_dana" value="<?= $id_dana?>">
     					<div class="form-group">
     						<label>Tahun Akademik</t></label>
     						</t><input type="text" name="tahunakademik" class="form-control" value="<?php echo $tahunakademik;?>"
@@ -118,15 +121,16 @@
     		</div>
     	</div>
     </div>
-  </div>
     <?php endforeach;?>
+  </div>
     <!-- Akhir Modal Edit -->
     <!-- Reset akun -->
     <?php 
         foreach($userdanaukmukk->result_array() as $i):
-          $kd_ukmukk=$i['kd_ukmukk'];
+					$kd_ukmukk=$i['kd_ukmukk'];
+					$id_dana=$i['id_dana'];
           ?>
-  <div class="modal fade" id="modalresetakun<?php echo $kd_ukmukk;?>" tabindex="-1" role="dialog"
+  <div class="modal fade" id="modalresetakun<?php echo $id_dana;?>" tabindex="-1" role="dialog"
     	aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  >
     	<div class="modal-dialog modal-dialog-centered">
     		<div class="modal-content">

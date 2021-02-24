@@ -13,16 +13,13 @@ class M_ormawa extends CI_Model{
   function tampil_keluhan(){
     return $query=$this->db->query("SELECT * FROM tb_keluhan");
   }
-  function getDataByID($kd_ormawa){
-    return $this->db->get_where('tb_keluhan', array('kd_ormawa'=>$kd_ormawa));
+  function getDataByID($id_keluhan){
+    return $this->db->get_where('tb_keluhan', array('id_keluhan'=>id_keluhan));
   }
-  function hapuskeluhannya($kd_ormawa){
-    $this->db->delete('tb_keluhan', array('kd_ormawa' => $kd_ormawa));
+  function hapuskeluhannya($id){
+    $this->db->delete('tb_keluhan', array('id' => $id));
+    //  $this->db->delete('fakultas', array('kode_fakultas' => $kode_fakultas));
   }
-  // function tambah_fakultas($fakultasdata){
-  //   $this->db->insert('tb_sumtotalanggotafak',$fakultasdata);
-  //   return TRUE;
-  // }
 
   function update_fakultas($kode_fakultas,$nama_fakultas){
   	$query_update_fakultas =$this->db->query("UPDATE tb_sumtotalanggotafak SET nama_fakultas = '$nama_fakultas' WHERE kd_faklutas ='$kode_fakultas'");
@@ -63,7 +60,7 @@ class M_ormawa extends CI_Model{
   
   function getAnggotaAktifUKMUKK(){
     $this->db->select('*');
-    return $this->db->from('UKM_UKK')
+    return $this->db->from('ukm_ukk')
     ->get()
     ->result();
   }
@@ -76,6 +73,12 @@ class M_ormawa extends CI_Model{
     $this->db->insert('tb_sewaaula',$data);
     return TRUE;
   }
+  
+  function check_aula($jenisAula,$tanggalAwal,$tanggalAkhir){
+      $query = $this->db->query("SELECT * FROM tb_sewaaula WHERE jenisaula='$jenisAula' AND dari >= '$tanggalAwal' AND dari <='$tanggalAkhir' OR hingga >='$tanggalAwal' AND hingga <= '$tanggalAkhir' ");
+      return $query;
+  }
+  
   function update_status_sewa($statussewa,$id_user){
     return $query= $this->db->query("UPDATE user SET statussewa='$statussewa' WHERE id_user='$id_user'");
   }

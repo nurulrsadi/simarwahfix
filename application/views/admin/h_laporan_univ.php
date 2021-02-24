@@ -22,10 +22,9 @@
 						<tr>
 						<tr>
 							<th>Id</th>
-							<th>Nama Fakultas</th>
 							<th>Nama Ormawa</th>
 							<th>Tahun Akademik</th>
-              <th>Banyak pernah melakukan laporan</th>
+                            <th>Banyak pernah melakukan laporan</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -36,18 +35,16 @@
                   foreach($nlaporan->result_array()  as $i):
                     $kd_jrsn=$i['kd_jrsn'];
                     $tahunakademik=$i['tahunakademik'];
-                    $danasisa=$i['danasisa'];
-                    $danaawal=$i['danasisa'];
                     $nPengajuan=$i['nPengajuan'];
-										$nLakukanPengajuan=$i['n_pengajuan'];
+					$nLakukanPengajuan=$i['n_pengajuan'];
                     ?>
               
 							<td><?= $j++; ?></td>
-              <td><?= $kd_jrsn; ?></td>
+                            <td><?= $kd_jrsn; ?></td>
 							<td><?= $tahunakademik; ?></td>
 							<td class="text-center">
-                <?= $nLakukanPengajuan; ?>
-              </td>
+                                <?= $nLakukanPengajuan; ?>
+                            </td>
 							<td class="text-center">
 								<a href="<?= base_url('c_admin/Detail_History_Laporan_Kegiatan_Universitas/'.$kd_jrsn)?>"
 									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search"></i> Cek
@@ -55,8 +52,8 @@
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->
 							</td>
 						</tr>
-					</tbody>
 					<?php endforeach; ?>
+					</tbody>
 				</table>
 			</div>
 		</div>

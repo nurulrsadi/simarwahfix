@@ -43,15 +43,18 @@
 				<?php foreach($alasan_ditolak_ukmukk->result_array() as $i):
 						$alsan_ditolak=$i['alasan_gagal_pengajuan'];
 						$statususer=$i['statususer'];
-						$kd_ukmukk=$i['kd_ukmukk'];
+						$kd_ukmkk=$i['kd_ukmkk'];
+						$id_pengajuan_ukmukk=$i['id_pengajuan_ukmukk'];
 					?>
 						<form action="<?php echo base_url().'history/simpan_gagal_pengajuan_ukmukk' ?>" method="post">	
 							<div class="content">
 								<p class="customtextcheckdana">Pengajuan Anggaran yang anda ajukan tidak kami terima,
 									<br><?= $alsan_ditolak?> </p>
 								<br><br>
+								<input type="hidden" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
+								<!-- <input type="hidden" name="kd_ukmkk" value="<?= $kd_ukmkk?>"> -->
 							</div>
-								<button type="submit" class="button primary">
+								<button type="submit" class="button primary" style="background-color:royalblue;">
 									Ulangi Pengajuan Anggaran
 								</button>
 						</form>

@@ -74,7 +74,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
             <figure>
               <a href="<?php echo base_url().'c_home/ukmaja/'.$kode_ukmukk;?>">
-                <img src="<?php echo base_url('assets/img/jurusan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <img src="<?php echo base_url('assets/img/ukmukk/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
                 <figcaption>
                   <h2><?php echo $nama_ukmukk ?></h2>
                   <p><?php echo $desc_ukmukk ?></p>
@@ -91,47 +91,65 @@
     </section>
     <!---->
     <!---->
-    <!--     <section id="testimonial" class="wow fadeInUp delay-05s">
-      <div class="bg-testicolor">
-        <div class="container section-padding">
-          <div class="row">
-            <div class="testimonial-item">
-              <ul class="bxslider">
-                <li>
-                  <blockquote>
-                    <img src="img/thumb.png" class="img-responsive">
-                    <p>Come a day there won't be room for naughty men like us to slip about at all. This job goes south, there well may not be another. </p>
-                  </blockquote>
-                  <small>Shaun Paul, Client</small>
-                </li>
-                <li>
-                  <blockquote>
-                    <img src="img/thumb.png" class="img-responsive">
-                    <p>So here is us, on the raggedy edge. Don't push me, and I won't push you. </p>
-                  </blockquote>
-                  <small>Marry Smith, Client</small>
-                </li>
-                <li>
-                  <blockquote>
-                    <img src="img/thumb.png" class="img-responsive">
-                    <p>Come a day there won't be room for naughty men like us to slip about at all. This job goes south, there well may not be another.</p>
-                  </blockquote>
-                  <small>Vivek Singh, Client</small>
-                </li>
-                <li>
-                  <blockquote>
-                    <img src="img/thumb.png" class="img-responsive">
-                    <p>So here is us, on the raggedy edge. Don't push me, and I won't push you.</p>
-                  </blockquote>
-                  <small>John Doe, Client</small>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <section class="section-padding wow fadeInUp delay-05s" style="background-color: #f3f3f3">
+    <div class="row">
+      <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">Daftar Kegiatan</h2>
+            <p class="sub-title pad-bt15">Kegiatan Organisasi Mahasiswa</p>
+            <hr class="bottom-line">
       </div>
+      <?php 
+            foreach($kegiatan->result_array() as $i):
+            $Parent_himpunan=$i['Parent_himpunan'];
+            $start_date=$i['start_date'];
+            $end_date=$i['end_date'];
+            $nama_kegiatan=$i['nama_kegiatan'];
+            $image=$i['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+            <figure>              
+                <img src="<?php echo base_url('assets/img/kegiatan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <figcaption>
+                  <h2><?php echo $Parent_himpunan ?></h2>
+                  <h2><?php echo $nama_kegiatan ?></h2>
+                  <p><?php echo p_bulanindo($start_date) ?> s/d <?php echo p_bulanindo($end_date) ?></p>                  
+                </figcaption>
+            
+            </figure>
+          </div>
+          <?php endforeach ?>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">            
+            <p class="sub-title pad-bt15">Kegiatan UKM dan UKK</p>
+            <hr class="bottom-line">
+      </div>
+      <?php 
+            foreach($kegiatan_ukmukk->result_array() as $i):
+            $parent_ukmukk=$i['parent_ukmukk'];
+            $ustart_date=$i['ustart_date'];
+            $uend_date=$i['uend_date'];
+            $nama_ukegiatan=$i['nama_ukegiatan'];
+            $image=$i['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+            <figure>              
+                <img src="<?php echo base_url('assets/img/kegiatan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <figcaption>
+                  <h2><?php echo $parent_ukmukk ?></h2>
+                  <h2><?php echo $nama_ukegiatan ?></h2>
+                  <p><?php echo p_bulanindo($ustart_date) ?> s/d <?php echo p_bulanindo($uend_date) ?></p>                  
+                </figcaption>
+            
+            </figure>
+          </div>
+          <?php endforeach ?>
+
+    </div>
     </section>
- -->
+ 
+ 
     <!---->
     <section id="aulasc" class="section-padding wow fadeInUp delay-05s">
 			<div class="container">

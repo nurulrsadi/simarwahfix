@@ -45,12 +45,12 @@
               $tglmakslaporan=$i['tglmakslaporan'];
               $laporankegiatan=$i['laporankegiatan'];
 							$laporanrincianbiaya=$i['laporanrincianbiaya'];
-							// $id_pengajuan=$i['id_pengajuan'];
+							$id_pengajuan=$i['id_pengajuan'];
               ?>
 							<td><?= $j++; ?></td>
 							<td><?= $kd_jrsn; ?></td>
-							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
-							<td><?= date("d M Y",strtotime($tglmakslaporan)); ?></td>
+							<td><?= date_indo($akhirkegiatan); ?></td>
+							<td><?= date_indo($tglmakslaporan); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
 							<td><a href="<?=site_url().'assets/uploads/laporankegiatan/'.$laporankegiatan;'.pdf' ?>"
 									onclick="basicPopup(this.href); return false"><?=$laporankegiatan?> </a></td>
@@ -60,9 +60,9 @@
 							<span data-toggle="tooltip" data-placement="bottom">
 							<td class="text-center">
 							<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"
-									data-toggle="modal" data-target="#modalTolakLaporan<?= $kd_jrsn; ?>" title="Tolak Laporan"><i class="fa fa-times-circle"></i></button>
+									data-toggle="modal" data-target="#modalTolakLaporan<?= $id_pengajuan; ?>" title="Tolak Laporan"><i class="fa fa-times-circle"></i></button>
 								<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
-									data-toggle="modal" data-target="#modalACClaporan<?= $kd_jrsn; ?>" title="Terima Laporan"><i class="fa fa-check"></i></button>
+									data-toggle="modal" data-target="#modalACClaporan<?= $id_pengajuan; ?>" title="Terima Laporan"><i class="fa fa-check"></i></button>
 							</td>
 						</tr>
 					</tbody>
@@ -76,16 +76,10 @@
     foreach($lpjuniv->result_array() as $i):
       $kd_jrsn=$i['kd_jrsn'];
       $nPengajuan=$i['nPengajuan'];
-      $suratpengajuan=$i['suratpengajuan'];
-      $rinciankegiatan=$i['rinciankegiatan'];
-      $rkakl=$i['rkakl'];
-      $tor=$i['tor'];
-      $laporankegiatan=$i['laporankegiatan'];
-			$laporanrincianbiaya=$i['laporanrincianbiaya'];
-			$id_pengajuan=$i['id_pengajuan'];
+	  $id_pengajuan=$i['id_pengajuan'];
       // $fakultas=$i['parent_fakultas'];
       ?>
-<div class="modal fade" id="modalACClaporan<?= $kd_jrsn; ?>" tabindex="-1" role="dialog"
+<div class="modal fade" id="modalACClaporan<?= $id_pengajuan; ?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<form method="post" action="<?php echo base_url('dana/acc_laporan_univ/'.$id_pengajuan);?>" enctype="multipart/form-data">
@@ -100,7 +94,7 @@
 					Anda yakin akan terima laporan kegiatan dari ORMAWA <?= $kd_jrsn; ?> ?
         </div>
 				<input type="hidden" id="nPengajuan" name="nPengajuan" value="<?= $nPengajuan; ?>">
-				<input type="hidden" id="jurusan" name="jurusan" value="<?= $kd_jrsn; ?>">
+				<input type="hidden" id="kd_jrsn" name="kd_jrsn" value="<?= $kd_jrsn; ?>">
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 					<button type="submit" class="btn btn-primary">Terima Laporan</button>
@@ -123,13 +117,13 @@
 			$id_pengajuan=$i['id_pengajuan'];
       // $fakultas=$i['parent_fakultas'];
       ?>
-<div class="modal fade" id="modalTolakLaporan<?= $kd_jrsn; ?>" tabindex="-1" role="dialog"
+<div class="modal fade" id="modalTolakLaporan<?= $id_pengajuan; ?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<form method="post" action="<?php echo base_url('dana/tolak_laporan/'.$kd_jrsn.'/'.$id_pengajuan)?>" enctype="multipart/form-data">
+		<form method="post" action="<?php echo base_url('dana/tolak_laporan_univ/'.$kd_jrsn.'/'.$id_pengajuan)?>" enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Terima Laporan</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Alasan laporan kegiatan ditolak</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

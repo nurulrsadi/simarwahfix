@@ -13,7 +13,8 @@
         $kd_jrsn=$i['kd_jrsn'];
         $akhirkegiatan=$i['akhirkegiatan'];
         $nPengajuan=$i['nPengajuan'];
-        $statususer=$i['statususer'];
+		$statususer=$i['statususer'];
+		$id_pengajuan=$i['id_pengajuan'];
   ?>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">
@@ -23,9 +24,9 @@
 		</article>
 		<article>
 			<div class="content">
-				<p class="customtext">Pengajuan pencairan anda telah kami terima, anda dapat ke gedung al-jamiah untuk melakukan
-					pencairan<br><br>Silahkan melakukan laporan kegiatan maksimal h+7 dari waktu terlaksanakannya acara, agar
-					dapat mengajukan kembali pencairan dana
+				<p class="customtext">Pengajuan pencairan anda telah kami terima, anda dapat ke Gedung Al-Jamiah untuk melakukan
+					pencairan.<br><br>Silahkan melakukan laporan kegiatan maksimal h+7 dari waktu terlaksanakannya acara, agar
+					dapat mengajukan kembali pencairan dana.
 					<br>Laporan kegiatan paling lambat dikirim pada
 					</br>
 					<?php $tglmaks= date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
@@ -38,6 +39,7 @@
 	<form class="form-horizontal" action="<?php echo base_url().'dana/do_laporan';?>" enctype="multipart/form-data"
 		method="post">
 		<input type="hidden" name="kd_jrsn" value="<?= $kd_jrsn?>">
+		<input type="hidden" name="id_pengajuan" value="<?= $id_pengajuan?>">
 		<input type="hidden" name="akhirkegiatan" value="<?= date("d-m-Y",strtotime($akhirkegiatan)); ?>">
 		<input type="hidden" name="statususer" value="<?= $statususer?>">
 		<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
@@ -69,7 +71,7 @@
 					<td>
 						<div class="file-upload-custom">
 							<input class="file-upload__input-custom" type="file" name="laporanrincianbiaya" id="laporanrincianbiaya"
-								accept="application/pdf" required>
+							accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/pdf"required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
 							<span class="file-upload__label-custom"></span>
@@ -104,7 +106,9 @@
         $kd_ukmkk=$i['kd_ukmkk'];
         $akhirkegiatan=$i['akhirkegiatan'];
         $nPengajuan=$i['nPengajuan'];
-        $statususer=$i['statususer'];
+				$statususer=$i['statususer'];
+				$namaKegiatan=$i['namaKegiatan'];
+				$id_pengajuan_ukmukk=$i['id_pengajuan_ukmukk'];
   ?>
 			<?php ?>
 			<!-- <span class="icon fa-gem"></span> -->
@@ -120,7 +124,7 @@
 					dapat mengajukan kembali pencairan dana
 					<br>Laporan kegiatan paling lambat dikirim pada
 					<?php $tglmaks = date('d F Y',strtotime('+7 day',strtotime($akhirkegiatan))); ?>
-					<?=($tglmaks) ?>
+					<?= ($tglmaks) ?>
 					<!--  -->
 			</div>
 		</article>
@@ -133,6 +137,8 @@
 		<input type="hidden" name="akhirkegiatan" value="<?= date("d-m-Y",strtotime($akhirkegiatan)); ?>">
 		<input type="hidden" name="statususer" value="<?= $statususer?>">
 		<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
+		<input type="hidden" name="namaKegiatan" value="<?= $namaKegiatan?>">
+		<input type="hidden" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
 		<input type="hidden" name="tgluploadlpj" value="<?= date('d F Y');?>">
 		<table class="content-table">
 			<thead>
@@ -161,7 +167,7 @@
 					<td>
 						<div class="file-upload-custom">
 							<input class="file-upload__input-custom" type="file" name="laporanrincianbiaya" id="laporanrincianbiaya"
-								accept="application/pdf" required>
+							accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/pdf" required>
 							<button class="file-upload__button-custom" type="button">Choose A
 								File</button>
 							<span class="file-upload__label-custom"></span>

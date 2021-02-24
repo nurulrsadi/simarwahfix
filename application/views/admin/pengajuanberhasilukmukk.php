@@ -11,6 +11,9 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
+			<div class="flash-data-update" data-flashdata="<?= $this->session->flashdata('flashdana');  ?>"></div>
+    		<?php if($this->session->flashdata('flashdana')): ?>
+    		<?php endif; ?>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -44,7 +47,7 @@
 							<td><?= $j++; ?></td>
 							<td><?= $kd_ukmkk; ?></td>
 							<td>Rp. <?=  number_format($danasisa,0,',','.'); ?></td>
-							<td><?= date("d M Y",strtotime($akhirkegiatan)); ?></td>
+							<td><?= date_indo($akhirkegiatan); ?></td>
 							<td class="text-center"><?= $nPengajuan; ?></td>
 							<td>
 								<span class="btn btn-sm btn-danger">Laporan Belum Dikirim</span>
@@ -57,8 +60,8 @@
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->
 							</td>
 						</tr>
-					</tbody>
 					<?php endforeach; ?>
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -73,7 +76,8 @@
       $danasisa=$i['danasisa'];
       $danaacc=$i['danaacc'];
       $nPengajuan=$i['nPengajuan'];
-      $akhirkegiatan=$i['akhirkegiatan'];
+			$akhirkegiatan=$i['akhirkegiatan'];
+			$id_pengajuan_ukmukk=$i['id_pengajuan_ukmukk'];
       ?>
 <div class="modal fade" id="modaleditDanaAcc<?php echo $kd_ukmkk;?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,9 +102,9 @@
 					</div>
 					<div class="form-group ">
 						<label>Dana Sisa</t></label>
-						</t><input type="text" name="danaawal" class="form-control"
-							value="Rp <?php echo number_format($danaawal,0,',','.');?>" readonly>
-						<input type="hidden" name="danaawal" value="<?= $danaawal?>">
+						</t><input type="text" name="danasisa" class="form-control"
+							value="Rp <?php echo number_format($danasisa,0,',','.');?>" readonly>
+						<input type="hidden" name="danasisa" value="<?= $danasisa?>">
 					</div>
 					<div class="form-group ">
 						<label>Dana yang di ACC sebelumnya</t></label>
@@ -112,8 +116,9 @@
 						<label>Update Dana yang di ACC <small class="text-decoration" style="color:red">contoh : 2000000</small>
 							</t>
 						</label>
-						</t><input type="number" name="danasisa" min="1" value="" class="form-control" required>
+						</t><input type="number" name="danaupdate" min="1" value="" class="form-control" required>
 					</div>
+					<input type="hidden" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

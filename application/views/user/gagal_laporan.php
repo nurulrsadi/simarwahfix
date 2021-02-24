@@ -19,7 +19,7 @@
 		</article>
 		<article>
 			<!-- untuk jurusan -->
-			<?php if( $user['statususer'] ==7 && empty( $jrsn['kd_fakultas']) && $this->session->userdata('role') == 0):?>
+			<?php if( $this->session->userdata('user_login')!='DEMAU' && $this->session->userdata('user_login')!='SEMAU' && $user['statususer'] ==7 && $this->session->userdata('role') == 0):?>
 				<?php foreach($alasan_ditolak_fklts->result_array() as $i):
 						$alasan_ditolak=$i['alasan_gagal_laporan'];
 						$statususer=$i['statususer'];
@@ -71,7 +71,7 @@
 					</div>
 				<?php endforeach;?>
 			<!-- untuk univ -->
-			<?php elseif( $user['statususer'] ==7 && !empty( $jrsn['kd_fakultas']) && $this->session->userdata('role') == 0):?>
+			<?php elseif( ($this->session->userdata('user_login')=='DEMAU' || $this->session->userdata('user_login')=='SEMAU') && $user['statususer'] ==7 && $this->session->userdata('role') == 0):?>
 				<?php foreach($alasan_ditolak_fklts->result_array() as $i):
 						$alasan_ditolak=$i['alasan_gagal_laporan'];
 						$statususer=$i['statususer'];
@@ -92,7 +92,7 @@
 					?>
 						<form action="<?php echo base_url().'history/simpan_gagal_laporan_univ' ?>" method="post">
 							<div class="content">
-								<p class="customtextcheckdana">Laporan kegiatan yang anda kirimkan tidak kami terima,
+								<p class="customtextcheckdana">Laporan kegiatan yang anda kirimkan tidak kami terimaaa,
 									<br><?= $alasan_ditolak?></p>
 							</div>
 							<br><br>
@@ -108,7 +108,6 @@
 							<input type="hidden" name="rinciankegiatan" value="<?= $rinciankegiatan?>">
 							<input type="hidden" name="rkakl" value="<?= $rkakl?>">
 							<input type="hidden" name="tor" value="<?= $tor?>">
-							<input type="hidden" name="kd_fakultas" value="<?= $kd_fakultas?>">
 							<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
 							<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 								<button type="submit" class="button primary" style="background-color:royalblue;">
@@ -122,7 +121,7 @@
 				<?php foreach($alasan_ditolak_ukmukk->result_array() as $i):
 						$alasan_ditolak=$i['alasan_gagal_laporan'];
 						$statususer=$i['statususer'];
-						$kd_ukmukk=$i['kd_ukmukk'];
+						$kd_ukmkk=$i['kd_ukmkk'];
 						$id_pengajuan_ukmukk=$i['id_pengajuan_ukmukk'];
 						$akhirkegiatan=$i['akhirkegiatan'];
 						$tglmakslaporan=$i['tglmakslaporan'];
@@ -154,7 +153,6 @@
 							<input type="hidden" name="rinciankegiatan" value="<?= $rinciankegiatan?>">
 							<input type="hidden" name="rkakl" value="<?= $rkakl?>">
 							<input type="hidden" name="tor" value="<?= $tor?>">
-							<input type="hidden" name="kd_fakultas" value="<?= $kd_fakultas?>">
 							<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
 							<input type="hidden" name="tahunakademik" value="<?= $tahunakademik?>">
 							</div>

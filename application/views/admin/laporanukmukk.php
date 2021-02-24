@@ -121,13 +121,12 @@
       $laporanrincianbiaya=$i['laporanrincianbiaya'];
       $id_pengajuan_ukmukk=$i['id_pengajuan_ukmukk'];
 			?>
-<div class="modal fade" id="modalTolakLaporan<?= $id_pengajuan; ?>" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalTolakLaporan<?= $id_pengajuan_ukmukk; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<form method="post" action="<?php echo base_url('dana/tolak_laporan_ukmukk/')?>" enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Alasan tidak laporan kegiatan</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Alasan laporan kegiatan ditolak</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

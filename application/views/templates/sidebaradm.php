@@ -1,8 +1,8 @@
-<!-- Sidebar -->
+ <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 	<!-- Sidebar - Brand -->
-	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('c_admin/index') ?>">
 		<div class="sidebar-brand-icon rotate-n-15">
 			<i class="fas fa-home"></i>
 		</div>
@@ -106,13 +106,13 @@
 	<!-- Nav Item - Ormawa -->
   	<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="far fa-fw fa-address-book"></i>
+            <i class="fas fa-fw fa-address-book"></i>
             <span>Data SEMA/DEMA & HMJ</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu Ormawa :</h6>
-                <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data Universitas</a>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_universitas') ?>">Data DEMA-U/SEMA-U</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_fakultas') ?>">Data Fakultas</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_demasemaf') ?>">Data DEMA-F/SEMA-F</a>
                 <a class="collapse-item" href="<?php echo base_url('c_admin/data_himpunan') ?>">Data Himpunan</a>
@@ -124,15 +124,44 @@
     <!-- Collapse Menu UKM UKK -->
     <li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('c_admin/data_ukmukk') ?>">
-			<i class="far fa-fw fa-address-book"></i>
+			<i class="fas fa-fw fa-address-book"></i>
 			<span>Data UKM/UKK</span></a>
 	</li>
     
+    <!-- Collapse Menu Kegiatan -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProker" aria-expanded="true" aria-controls="collapseProker">
+            <i class="fas fa-fw fa-tasks"></i>
+            <span>Program Kerja</span>
+        </a>
+        <div id="collapseProker" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu Kegiatan :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_kegiatan_himpunan') ?>">Kegiatan ORMAWA</a>                
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_kegiatan_ukmukk') ?>">Kegiatan UKM/UKK</a>
+            </div>
+        </div>
+    </li>
 
+    <!-- Collapse Menu Prestasi -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrestasi" aria-expanded="true" aria-controls="collapsePrestasi">
+            <i class="fas fa-fw fa-trophy"></i>
+            <span>Data Prestasi</span>
+        </a>
+        <div id="collapsePrestasi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu Prestasi :</h6>
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_prestasi_himp') ?>">Prestasi ORMAWA</a>                
+                <a class="collapse-item" href="<?php echo base_url('c_admin/data_prestasi_ukmukk') ?>">Prestasi UKM/UKK</a>
+            </div>
+        </div>
+    </li>
+    
     <!-- Collapse Menu User -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
-            <i class="far fa-fw fa-address-book"></i>
+            <i class="fas fa-fw fa-address-book"></i>
             <span>Data User</span>
         </a>
         <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -185,8 +214,18 @@
 		</div>
 	</li>
 	<hr class="sidebar-divider">
-
-
+    
+    <div class="sidebar-heading">
+		Keluhan
+	</div>
+    <li class="nav-item">
+	        <a class="nav-link" href="<?php echo base_url('c_admin/keluhan') ?>">
+			<i class="fas fa-fw fa-file"></i>
+			<!--<i class="fas fa-file"></i>-->
+			<span>Keluhan</span></a>
+	</li>
+    
+    <hr class="sidebar-divider">
 	<!-- Heading -->
 	<div class="sidebar-heading">
 		Pengaturan

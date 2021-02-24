@@ -53,9 +53,16 @@
 <?php endforeach;?>
 <div class="row gtr-200">
   <div class="col-4 col-12-medium">
+    <?php 
+    $datenow = date('Y-m-d');
+    $attStat = $this->session->userdata("kode_himp_sess");
+    $query = "SELECT * FROM tb_sewaaula WHERE penyewa='$attStat' AND hingga >='$datenow' ";
+    $check = $this->db->query($query);
+    if($check->num_rows()==0){?>
     <button type="button" class="button primary" data-toggle="modal" data-target="#exampleModal">
         Sewa Aula SC
         </button>
+    <?php }?>
   </div>
   <div class="col-4 col-12-medium">
   </div>

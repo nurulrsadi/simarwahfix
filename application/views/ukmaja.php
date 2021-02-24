@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
                 <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
                 <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>                
-                <li class=""><a href="#">Peminjaman Aula SC</a></li>
+                <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <?php } else {?>
               <?php } ?>
 
@@ -55,8 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class="active"><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-              
-              <li class=""><a href="#">Peminjaman Aula SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -109,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php } ?> 
           </div>
 
-          <div>
+          
             <div class="row">
               <?php foreach($uketua as $u){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -124,14 +123,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php } ?> 
             </div>
 
+            <center>
             <div class="row">
               <?php $id=1; foreach($usekben as $u){ ?>
-               <?php if($u->u_jabatan == 'SEKRETARIS' || $u->u_jabatan == 'BENDAHARA')
+               <?php if($u->u_jabatan == 'SEKRETARIS')
                {?>
-                <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+                <div class="col-md-6 col-sm-12 col-xs-12 text-center">
                     <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
                       <div class="service-item">
-                      <h3><span style="font-size: 35px;"><?php echo $u->u_jabatan ?></span></h3>
+                      <h3><span style="font-size: 35px;"><?php echo $u->u_jabatan?> <?php echo $id++; ?></span></h3>
                       <p><?php echo $u->u_nim ?></p>
                       <p><?php echo $u->u_nama?></p>
                     </div>
@@ -142,13 +142,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php } ?>
             <?php } ?>          
           </div>
+          </center>
 
+          <center>
+          <div class="row">
+              <?php $id=1; foreach($usekben as $u){ ?>
+               <?php if($u->u_jabatan == 'BENDAHARA')
+               {?>
+                <div class="col-md-6 col-sm-12 col-xs-12 text-center">
+                    <div class="kotakb" style="border-color: white; margin: auto; margin-bottom: 20px">
+                      <div class="service-item">
+                      <h3><span style="font-size: 35px;"><?php echo $u->u_jabatan?> <?php echo $id++; ?></span></h3>
+                      <p><?php echo $u->u_nim ?></p>
+                      <p><?php echo $u->u_nama?></p>
+                    </div>
+                  </div>
+                </div>
+              <?php } else {?>
+                <p></p>
+              <?php } ?>
+            <?php } ?>          
           </div>
-           <center>
-           <div>
+          </center>
+
+          <center>
+            <div>
             <h3>Bidang - Bidang</h3>
             <hr>
-          </div>    
+            </div>    
           </center>
         
           <div class = "row" style="margin-bottom: 15px; margin-top: 15px;">
@@ -232,6 +253,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <br>
         </div>
       </div>
+
+      <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">Foto Kegiatan</h2>
+            <p class="sub-title pad-bt15"></p>
+            <hr class="bottom-line">
+          </div>
+          <?php 
+            foreach($kegiatan_ukmukk->result_array() as $i):
+            $ustart_date=$i['ustart_date'];
+            $uend_date=$i['uend_date'];
+            $nama_ukegiatan=$i['nama_ukegiatan'];
+            $image=$i['image'];
+          ?>
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+            <figure>              
+                <img src="<?php echo base_url('assets/img/kegiatan/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+                <figcaption>
+                  <h2><?php echo $nama_ukegiatan ?></h2>
+                  <p><?php echo p_bulanindo($ustart_date) ?> s/d <?php echo p_bulanindo($uend_date) ?></p>                  
+                </figcaption>
+            
+            </figure>
+          </div>
+          <?php endforeach ?>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="blog" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+        <div class="col-md-12 text-center">
+            <h2 class="service-title pad-bt15">PRESTASI ORGANISASI</h2>
+            <p class="sub-title pad-bt15"></p>
+            <hr class="bottom-line">
+          </div>
+        <div class="row"> 
+          <!-- <div class="col-md-6 col-sm-6 col-xs-6"> -->
+            <?php foreach ($uprestasi->result_array() as $i): 
+              $waktu=$i['waktu'];
+              $nama_uprestasi=$i['nama_uprestasi'];
+              $jenis_uprestasi=$i['jenis_uprestasi'];
+              $desc_uprestasi=$i['desc_uprestasi'];
+              $image=$i['image'];
+              $ulokasi=$i['ulokasi'];
+
+            ?>
+            <div class="col-md-4">
+              <div class="blog-img">
+                <img src="<?php echo base_url('assets/img/prestasi/'.$image.'')?>" style="width: 500px; height: 250px;" class="img-responsive">
+              </div>   
+              <div class="blog-info">
+                <h2><?php echo $nama_uprestasi ?></h2>
+                <p>Oleh : <?php echo $jenis_uprestasi ?></p>
+                <div class="blog-comment">
+                  <p><?php echo $waktu?></p>
+                  <p>
+                    <span><i class="fa fa-map-pin"></i>  <?php echo $ulokasi?></span>
+                    
+                  </p>
+                </div>
+                <p><?php echo $desc_uprestasi?></p>
+                <!-- <a href="" class="read-more">Read more →</a> -->
+              </div>
+            </div>
+            <?php endforeach ?>
+          <!-- </div> -->
+          
+        </div>
       </div>
     </section>
 

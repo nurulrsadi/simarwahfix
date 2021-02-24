@@ -11,8 +11,8 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">Tabel <?= $title; ?></h6>
-			<div class="flash-data-pengajuan" data-flashdata="<?= $this->session->flashdata('flashpengajuan');  ?>"></div>
-			<?php if($this->session->flashdata('flashpengajuan')): ?>
+			<div class="flash-data-pengajuan" data-flashdata="<?= $this->session->flashdata('flashormawahimp');  ?>"></div>
+			<?php if($this->session->flashdata('flashormawahimp')): ?>
 			<?php endif; ?>
 		</div>
 		<div class="card-body">
@@ -55,8 +55,8 @@
 								<!-- <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" onclick="return confirm('Yakin Ingin Menyetujui Surat Ini');"><i class="fa fa-check"></i> Setuju</a> -->
 							</td>
 						</tr>
-					</tbody>
 					<?php endforeach; ?>
+					</tbody>
 				</table>
 			</div>
 		</div>

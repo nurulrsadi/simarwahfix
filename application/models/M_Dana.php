@@ -40,6 +40,10 @@ class M_dana extends CI_Model{
       $query_update_himpunan = $this->db->query("UPDATE tb_detailuser SET kd_fklts = '$parent_fakultas' WHERE kd_jrsn = '$kode_himpunan'");
   	 return $query_update_himpunan;
     }
+    function edit_datauserukmukk($kode_ukmukk,$nama_ukmukk){
+      $query_update_himpunan = $this->db->query("UPDATE tb_detailuserukmukk SET nama_ukmukk = '$nama_ukmukk' WHERE kd_ukmukk = '$kode_ukmukk'");
+  	 return $query_update_himpunan;
+    }
     // untuk tabel nama fakultas
     // function edit_namafakultas($kode_fakultas, $nama_fakultas){
     //   return $query_update_fakultas = $this->db->query("UPDATE tb_namafakultas SET nama_fakultas = '$nama_fakultas' WHERE kode_namafakultas = '$kode_fakultas'");
@@ -86,7 +90,7 @@ class M_dana extends CI_Model{
       return $query=$this->db->query("SELECT * FROM tb_pengajuan_ukmukk WHERE statususer=3 ORDER BY kd_ukmkk");
     }
     function tampil_list_user_pengajuan_univ(){
-      $query =$this->db->query("SELECT * FROM tb_pengajuan WHERE statususer=3 AND kd_fakultas is NULL ORDER BY kd_jrsn");
+      $query =$this->db->query("SELECT * FROM tb_pengajuan WHERE statususer=3 AND kd_fakultas is null ORDER BY kd_jrsn");
       return $query;
     }
     // END CEK KALAU ADA YANG MAU NGAJUIN DANA
@@ -105,12 +109,12 @@ class M_dana extends CI_Model{
       return $query =$this->db->query("SELECT DISTINCT DATE_FORMAT(akhirkegiatan, '%d %M %Y') AS akhirkegiatan FROM $query ORDER BY akhirkegiatan ASC ");
     }
 
-    function update_danayangdiacc($kd_jrsn,$x,$danaacc){
-      $query_acc = $this->db->query("UPDATE tb_pengajuan SET danasisa = '$x', danaacc = '$danaacc' WHERE kd_jrsn = '$kd_jrsn'");
+    function update_danayangdiacc($id_pengajuan,$x,$danaacc){
+      $query_acc = $this->db->query("UPDATE tb_pengajuan SET danasisa = '$x', danaacc = '$danaacc' WHERE id_pengajuan = '$id_pengajuan'");
       return $query_acc;
     }
-    function update_danayangdiacc_ukmukk($kd_ukmukk,$x,$danaacc){
-      $query_acc = $this->db->query("UPDATE tb_pengajuan_ukmukk SET danasisa = '$x', danaacc = '$danaacc' WHERE kd_ukmkk = '$kd_ukmukk'");
+    function update_danayangdiacc_ukmukk($id_pengajuan_ukmukk,$x,$danaacc){
+      $query_acc = $this->db->query("UPDATE tb_pengajuan_ukmukk SET danasisa = '$x', danaacc = '$danaacc' WHERE id_pengajuan_ukmukk = '$id_pengajuan_ukmukk'");
       return $query_acc;
     }
     function update_danayangdiaccdetail($kd_jrsn,$x){
@@ -124,6 +128,10 @@ class M_dana extends CI_Model{
     // end acc belum ngirim laporan
 
     // ngambil data untuk pengajuan jurusan
+    function tampil_data_dana_univ($kd_jrsn){
+      $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$kd_jrsn.'"');
+		  return $query;
+    }
     function tampil_data_dana_login($jurusan){
       $query =  $this->db->query('SELECT * FROM tb_detailuser WHERE kd_jrsn = "'.$jurusan.'"');
 		  return $query;
@@ -191,15 +199,15 @@ class M_dana extends CI_Model{
         return $this->db->get()->result_array();
     }
 
-    function update_dana_awal($kd_jrsn,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
-      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_jrsn ='$kd_jrsn'");
+    function update_dana_awal($id_dana,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer){
+      $query_update_dana_awal =$this->db->query("UPDATE tb_detailuser SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE id_dana ='$id_dana'");
   	// var_dump($kode_bidang);
   	// exit();
     return $query_update_dana_awal;
     }
-    function update_dana_awal_ukmukk($kd_ukmukk,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer)
+    function update_dana_awal_ukmukk($id_dana,$tahunakademik,$danaawal,$danasisa,$nPengajuan,$statususer)
     {
-      return $query_update_dana_awal =$this->db->query("UPDATE tb_detailuserukmukk SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE kd_ukmukk ='$kd_ukmukk'");
+      return $query_update_dana_awal =$this->db->query("UPDATE tb_detailuserukmukk SET tahunakademik = '$tahunakademik', danaawal = '$danaawal', danasisa = '$danasisa', nPengajuan = '$nPengajuan', statususer = '$statususer' WHERE id_dana ='$id_dana'");
     }
 
     
@@ -265,6 +273,16 @@ class M_dana extends CI_Model{
       $query=$this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
       return $query;
     }
+    function send_alasan_p_ukmukk($id_pengajuan_ukmukk,$statususer,$alasan_tolak_pengajuan)
+    {
+      $query=$this->db->query("UPDATE tb_pengajuan_ukmukk SET statususer='$statususer', alasan_gagal_pengajuan='$alasan_tolak_pengajuan' WHERE id_pengajuan_ukmukk= '$id_pengajuan_ukmukk' ");
+      return $query;
+    }
+    function send_update_u_ukmukk($kd_ukmkk,$statususer)
+    {
+      $query=$this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp='$kd_ukmkk'");
+      return $query;
+    }
     function get_pengajuan_fklts($jurusan)
     {
       $query =  $this->db->query('SELECT * FROM tb_pengajuan WHERE statususer="6" AND kd_jrsn = "'.$jurusan.'"');
@@ -280,9 +298,9 @@ class M_dana extends CI_Model{
       $query =  $this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE statususer="6" AND kd_ukmkk = "'.$kd_ukmukk.'" ');
 		  return $query;
     }
-    function change_jadi_failed_ukmuk($kd_ukmukk)
+    function change_jadi_failed_ukmukk($id_pengajuan_ukmukk)
     {
-      $query=$this->db->query("UPDATE tb_pengajuan SET statususer='8' WHERE kd_ukmkk ='$kd_ukmukk' AND statususer='6' ");
+      $query=$this->db->query("UPDATE tb_pengajuan_ukmukk SET statususer='8' WHERE id_pengajuan_ukmukk ='$id_pengajuan_ukmukk' ");
 		  return $query;
     }
     // end pengajuan ditolak
@@ -318,6 +336,11 @@ class M_dana extends CI_Model{
       $this->db->insert('tb_pengajuan',$data);
       return TRUE;
     }
+    function new_pengajuan_univ($kd_jrsn,$akhirkegiatan,$tglmakslaporan,$namakegiatan,$danaawal,$danasisa,$danaacc,$suratpengajuan,$rinciankegiatan,$rkakl,$tor,$statususer_new,$nPengajuan,$tahunakademik)
+    {
+      $query_insert_surat_pengajuan_univ =$this->db->query("INSERT INTO tb_pengajuan SET kd_jrsn='$kd_jrsn', akhirkegiatan='$akhirkegiatan', tglmakslaporan='$tglmakslaporan',danaawal='$danaawal',danasisa='$danasisa', danaacc='$danaacc',suratpengajuan='$suratpengajuan',rinciankegiatan='$rinciankegiatan',rkakl='$rkakl',tor='$tor',statususer='$statususer_new',nPengajuan='$nPengajuan',tahunakademik='$tahunakademik' ");
+      return $query_insert_surat_pengajuan_univ;
+    }
     function new_pengajuan_ukmukk($data)
     {
       $this->db->insert('tb_pengajuan_ukmukk',$data);
@@ -327,6 +350,16 @@ class M_dana extends CI_Model{
     {
       $query =  $this->db->query('SELECT * FROM tb_pengajuan_ukmukk WHERE statususer="7" AND kd_ukmkk = "'.$kode_ukmukk.'"');
 		  return $query;
+    }
+    function send_alasan_l_ukmukk($id_pengajuan_ukmukk, $alasan_gagal_laporan, $statususer)
+    {
+      $query=$this->db->query("UPDATE tb_pengajuan_ukmukk SET statususer='$statususer', alasan_gagal_laporan='$alasan_gagal_laporan' WHERE id_pengajuan_ukmukk= '$id_pengajuan_ukmukk' ");
+      return $query;
+    }
+    function send_update_l_u_ukmukk($kd_ukmkk,$statususer)
+    {
+      $query=$this->db->query("UPDATE user SET statususer='$statususer' WHERE kode_himp='$kd_ukmkk'");
+      return $query;
     }
     // end laporan ditolak
     // untuk user
@@ -344,8 +377,12 @@ class M_dana extends CI_Model{
       $this->db->insert('tb_pengajuan',$datadana1);
       return TRUE;
     }
+    function tambah_pengajuan_univ($kd_jrsn,$namaKegiatan,$nPengajuan,$jurusan,$statususer,$danasisa,$danaawal,$tahunakademik,$akhirkegiatan,$suratpengajuannya,$rinciankegiatannya,$rkaklnya,$tornya){
+      $query_insert_surat_pengajuan_univ =$this->db->query("INSERT INTO tb_pengajuan SET suratpengajuan = '$suratpengajuannya', rinciankegiatan = '$rinciankegiatannya', rkakl = '$rkaklnya', tor = '$tornya', namaKegiatan='$namaKegiatan' , statususer='$statususer', nPengajuan='$nPengajuan', kd_jrsn ='$kd_jrsn', akhirkegiatan='$akhirkegiatan', danasisa='$danasisa', danaawal='$danaawal', tahunakademik='$tahunakademik', jurusan='$jurusan'");
+      return $query_insert_surat_pengajuan_univ;
+    }
     function tambah_pengajuan_ukmukk($datadana){
-      $this->db->insert('tb_pengajuan',$datadana);
+      $this->db->insert('tb_pengajuan_ukmukk',$datadana);
       return TRUE;
     }
     // function tambah_pengajuan_ukmukk($datadana1){
@@ -365,8 +402,8 @@ class M_dana extends CI_Model{
       return $query=$this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_ukmukk'");
     }
     // upload laporan
-    function update_laporan($kd_jrsn, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
-      $query = $this->db->query("UPDATE tb_pengajuan set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE  statususer='4' AND kd_jrsn='$kd_jrsn'");
+    function update_laporan($id_pengajuan, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
+      $query = $this->db->query("UPDATE tb_pengajuan set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE  id_pengajuan='$id_pengajuan'");
       return $query;
     }
     // function update_laporandetail($kd_jrsn, $statususer){
@@ -375,8 +412,8 @@ class M_dana extends CI_Model{
     function update_laporanuser($kd_jrsn, $statususer){
       return $query = $this->db->query("UPDATE user set statususer='$statususer' WHERE kode_himp='$kd_jrsn'");
     }
-    function update_laporan_ukmukk($kd_ukmkk, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
-      $query = $this->db->query("UPDATE tb_pengajuan_ukmukk set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE  statususer='4' AND kd_ukmkk='$kd_ukmkk'");
+    function update_laporan_ukmukk($id_pengajuan_ukmukk, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya){
+      $query = $this->db->query("UPDATE tb_pengajuan_ukmukk set statususer='$statususer', laporankegiatan='$laporankegiatannya', laporanrincianbiaya='$rincianbiayanya', tgluploadlpj='$tgluploadlpj', tglmakslaporan='$tglmakslaporan' WHERE id_pengajuan_ukmukk='$id_pengajuan_ukmukk'");
       return $query;
     }
     // function update_laporandetail_ukmukk($kd_ukmkk, $statususer){
@@ -408,6 +445,9 @@ class M_dana extends CI_Model{
     }
     function getDataByID_pengajuan($id_pengajuan){
       return $this->db->get_where('tb_pengajuan', array('id_pengajuan'=>$id_pengajuan));
+    }
+    function getDataByID_pengajuanUKMUKK($id_pengajuan_ukmukk){
+      return $this->db->get_where('tb_pengajuan_ukmukk', array('id_pengajuan_ukmukk'=>$id_pengajuan_ukmukk));
     }
     // update jumlah pengajuan saat laporan diterima
     function update_detailnpengajuan_fklts($kd_jrsn,$tambah_pengajuan)
@@ -518,11 +558,14 @@ class M_dana extends CI_Model{
       function hapus_proker_fakultas($id_sewa){
         $this->db->delete('daftar_kegiatan', array('parent_himpunan' => $id_sewa));
       }
+      function hapus_datapengajuan($id_reset){
+        $this->db->delete('tb_pengajuan', array('kd_jrsn' => $id_reset));
+      }
       function do_reset_akun_fakultas_user($id_reset,$statususer){
         $query_update_user_awal =$this->db->query("UPDATE user SET statususer = '$statususer' WHERE kode_himp ='$id_reset'");
       }
-      function do_reset_akun_fakultas_tbdetail($id_reset,$statususer,$tahunakademik,$dana_awal,$dana_sisa,$nPengajuan){
-        $query_update_user_awal =$this->db->query("UPDATE tb_detailuser SET statususer = '$statususer', tahunakademik='$tahunakademik', danaawal='$dana_awal', danasisa='$dana_sisa', nPengajuan='$nPengajuan' WHERE kd_jrsn ='$id_reset'");
+      function do_reset_akun_fakultas_tbdetail($id_detailuser,$statususer,$tahunakademik,$dana_awal,$dana_sisa,$nPengajuan){
+        $query_update_user_awal =$this->db->query("UPDATE tb_detailuser SET statususer = '$statususer', tahunakademik='$tahunakademik', danaawal='$dana_awal', danasisa='$dana_sisa', nPengajuan='$nPengajuan' WHERE id_dana ='$id_detailuser'");
       }
 
       function get_bidang_ukmukk($id_sewa){

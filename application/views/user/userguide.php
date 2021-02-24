@@ -21,10 +21,7 @@
 		<article>
 			<div class="content">
 				<h4>Apa itu SIMARWAH? </h4>
-				<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
-					iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor.
-					Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-					volutpat ac adipiscing accumsan eu faucibus.</blockquote>
+				<blockquote>SIMARWAH singkatan dari Sistem Informasi Tata Kelola Organisasi Mahasiswa. Dengan dibangunnya Sistem Informasi mengenai organisasi mahasiswa ini, dapat mempermudah mahasiswa dalam memperkenalkan organisasi mahasiswanya secara umum, seperti struktur organisasi, program kerja dan prestasi yang didapat. Selain itu, organisasi mahasiswa sekarang dapat dengan lebih mudah melakukan pengajuan pencairan dana pagu anggaran dan peminjaman Aula Student Center melalui website SIMARWAH ini.</blockquote>
 			</div>
 		</article>
 	</div>
@@ -39,12 +36,10 @@
 
 	<h4>Ingat !</h4>
 	<ol>
-		<li>Dolor etiam magna etiam.</li>
-		<li>Etiam vel lorem sed viverra.</li>
-		<li>Felis dolore viverra.</li>
-		<li>Dolor etiam magna etiam.</li>
-		<li>Etiam vel lorem sed viverra.</li>
-		<li>Felis dolore viverra.</li>
+	    <li>Silahkan pahami user guide melalui "link pdf user guide" atau anda dapat melihat video panduan melalui "link video"</li>
+		<li>Organisasi Mahasiswa haruslah telah melakukan update profile setiap pergantian kepengurusan organisasinya.</li>
+		<li>Pencairan Dana hanya dapat dilakukan sebanyak tiga kali.</li>
+		<li>Setiap dokumen yang dikirim haruslah dalam bentuk pdf, kecuali rincian anggaran biaya (dalam bentuk exel). Dengan ukuran maximal 2MB.</li>
 	</ol>
 
 </section>
@@ -57,12 +52,12 @@
 
 	<h4>Ingat !</h4>
 	<ol>
-		<li>Dolor etiam magna etiam.</li>
-		<li>Etiam vel lorem sed viverra.</li>
-		<li>Felis dolore viverra.</li>
-		<li>Dolor etiam magna etiam.</li>
-		<li>Etiam vel lorem sed viverra.</li>
-		<li>Felis dolore viverra.</li>
+		<li>Silahkan pahami user guide melalui "link pdf user guide" atau anda dapat melihat video panduan melalui "link video"</li>
+		<li>Organisasi Mahasiswa haruslah telah melakukan update profile setiap pergantian kepengurusan organisasinya.</li>
+		<li>Jika telah melakukan pendaftaran untuk peminjaman aula Student Center, silahkan meminta tanda tangan kepada pihak aljamiah.</li>
+		<!--<li>Dolor etiam magna etiam.</li>-->
+		<!--<li>Etiam vel lorem sed viverra.</li>-->
+		<!--<li>Felis dolore viverra.</li>-->
 	</ol>
 
 </section>

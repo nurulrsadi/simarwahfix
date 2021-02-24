@@ -1,4 +1,3 @@
-<!-- https://www.malasngoding.com/membuat-crud-dengan-codeigniter-update-data/ -->
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
@@ -13,23 +12,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 
 		<?php foreach($dataukmukk->result_array() as $u):
-					$id_pengajuan_ukmuk=$u['id_pengajuan_ukmukk'];
-					$kd_ukmkk=$u['kd_ukmkk'];
-          $nPengajuan=$u['nPengajuan'];
-          $tahunakademik=$u['tahunakademik'];
-          $namaKegiatan=$u['namaKegiatan'];
-          $suratpengajuan=$u['suratpengajuan'];
-          $rinciankegiatan=$u['rinciankegiatan'];
-          $rkakl=$u['rkakl'];
-          $tor=$u['tor'];
-          $danasisa=$u['danasisa'];
-          $statususer=$u['statususer'];
+            $id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
+            $kd_ukmkk=$u['kd_ukmkk'];
+            $nPengajuan=$u['nPengajuan'];
+            $tahunakademik=$u['tahunakademik'];
+            $namaKegiatan=$u['namaKegiatan'];
+            $suratpengajuan=$u['suratpengajuan'];
+            $rinciankegiatan=$u['rinciankegiatan'];
+            $rkakl=$u['rkakl'];
+            $tor=$u['tor'];
+            $danasisa=$u['danasisa'];
+            $statususer=$u['statususer'];
+            $akhirkegiatan=$u['akhirkegiatan'];
           // $nama_fakultas=$u['nama_fakultas'];
           ?>
     <?php foreach($user->result_array() as $j):
 		$nama=$j['nama_ukmukk'];
 			?>
-		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan_ukmukk/')?>" method="post" id="formpengajuan">
+		<form class="pengajuan" data-flag="0" action="<?php echo base_url('dana/admin_acc_pengajuan_ukmukk/')?>" method="post" id="formpengajuan"  onsubmit="javascript: return (confirm('Anda yakin ACC Pengajuan?') ? this.submit() : false);">
 			<input type="hidden" id="kd_ukmkk" name="kd_ukmkk" value="<?= $kd_ukmkk?>">
 			<input type="hidden" id="id_pengajuan_ukmukk" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
 			<input type="hidden" id="statususer" name="statususer" value="<?= $statususer?>">
@@ -69,6 +69,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control-plaintext" name="namaKegiatan" id="staticEmail"
 								value="<?= $namaKegiatan ?>">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">Tanggal akhir kegiatan</label>
+						<div class="col-sm-10">
+							<input type="text" readonly class="form-control-plaintext" name="akhirkegiatan" id="akhirkegiatan"
+								value="<?= date_indo($akhirkegiatan) ?>">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -134,12 +141,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <?php endforeach; ?>
 
 <!-- modal -->
-<?php foreach($dataukmukk->result_array() as $u):
-          $kd_ukmkk=$u['kd_ukmkk'];
-          $suratpengajuan=$u['suratpengajuan'];
-          $nPengajuan=$u['nPengajuan'];
-					$danasisa=$u['danasisa'];
-					$id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
+        	<?php foreach($dataukmukk->result_array() as $u):
+            $kd_ukmkk=$u['kd_ukmkk'];
+            $suratpengajuan=$u['suratpengajuan'];
+            $nPengajuan=$u['nPengajuan'];
+            $danasisa=$u['danasisa'];
+            $id_pengajuan_ukmukk=$u['id_pengajuan_ukmukk'];
           ?>
 <div class="modal fade" id="modalalasan<?php echo $kd_ukmkk;?>" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,20 +159,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="<?php echo base_url().'c_admin/tolak_pengajuan_ukmukk'?>" enctype="multipart/form-data">
-					<div class="form-group">
-						<label>Pengaju</t></label>
-						</t><input type="text" name="kd_ukmkk" class="form-control" value="<?php echo $kd_ukmkk;?>" required readonly>
-						<input type="hidden" name=danasisa value="<?= $danasisa?>">
-					</div>
-					<div class="form-group ">
-						<label>Alasan Menolak</t></label>
-						</t><input type="text" name="pesangagal" class="form-control"
-							placeholder="Data kurang lengkap, silahkan perbaiki dahulu!" required>
-					</div>
-					<input type="hidden" name="nPengajuan" value="<?= $nPengajuan?>">
+				<form method="post" action="<?php echo base_url().'dana/hapus_pengajuan_ukmukk'?>" enctype="multipart/form-data">
+					<!-- <input type="hidden"  name="kd_jrsn" value="<?php echo $kd_jrsn;?>"> -->
 					<input type="hidden" name="id_pengajuan_ukmukk" value="<?= $id_pengajuan_ukmukk?>">
-					<div class="modal-footer">
+					<div class="form-group">
+						<label for="pengaju">Pengaju</label>
+						<input type="text" class="form-control" id="pengaju" name="pengaju" value="<?= $kd_ukmkk;?>" readonly required>
+					</div>
+					<div class="form-group">
+						<label for="alasan_tolak_pengajuan">Alasan menolak pengajuan anggaran</label>
+						<textarea class="form-control" id="alasan_tolak_pengajuan" name="alasan_tolak_pengajuan" rows="5" required></textarea>
+					</div>
+						<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Update changes</button>
 					</div>
@@ -187,47 +192,3 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	}
 
 </script>
-<!-- spj -->
-<!-- 
-<script type="text/javascript">
-$('.tombol-yakin').on('click',function(e){
-  var kd_ukmkk = $('#kd_ukmkk').val()
-  var statususer = $('#statususer').val()
-  var kd_fakultas = $('#kd_fakultas').val()
-  var tahunakademik = $('#tahunakademik').val()
-  var jurusan = $('#jurusan').val()
-  var danaminus = $('#danaminus').val()
-  var danasisa = $('#danasisa').val()
-
-
-  e.preventDefault();
-  var form = "dana/admin_acc_pengajuan.php"
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then(cekdata => {
-    if (cekdata) {
-      // if CONFIRMED => go to delete url
-      $.ajax({
-        type: "POST",
-        url : "<?= base_url('dana/admin_acc_pengajuan'); ?>"
-        data :{
-          kd_ukmkk : kd_ukmkk,
-          statususer : statususer,
-          kd_fakultas : kd_fakultas,
-          tahunakademik : tahunakademik,
-          jurusan : jurusan,
-          danaminus : danaminus,
-          danasisa: danasisa
-        }
-      })
-    }
-  });
-});
-</script> -->
-                                      

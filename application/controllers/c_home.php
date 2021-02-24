@@ -16,14 +16,13 @@ class c_home extends CI_Controller
 		// $data['jurusan'] = $this->Model_View->tampil_list_jurusan()->result();
 		$data['himpunan'] = $this->Model_View->tampil_allhimpunan();	
 		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$data['kegiatan'] = $this->Model_View->tampil_kegiatan_allhimp();
+		$data['kegiatan_ukmukk'] = $this->Model_View->tampil_kegiatan_allukmukk();
 		$this->load->view('templates/navbarhome', $data);
 		$this->load->view('home',$data);
 		$this->load->view('templates/footerhome', $data);
 	}
-	public function demau()
-	{
-		$this->load->view('demau');
-	}
+
 	public function fakultas()
 	{
 		$kode_fakultas = $this->uri->segment(3);
@@ -42,10 +41,10 @@ class c_home extends CI_Controller
 		$data['anggota'] = $this->Model_View->tampil_anggota($kode_jurusan)->result();
 		$data['himpunan'] = $this->Model_View->tampil_himpunan($kode_jurusan)->result();
 		$data['bidang'] = $this->Model_View->tampil_bidang($kode_jurusan)->result();
-		$data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
+		$data['kegiatan'] = $this->Model_View->tampil_kegiatan_himp($kode_jurusan);
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
-
+        $data['prestasi'] = $this->Model_View->tampil_prestasi_himpunan($kode_jurusan);
 		$this->load->view('himpunan',$data);
 		$this->load->view('templates/footerhome', $data);
 	}
@@ -65,10 +64,7 @@ class c_home extends CI_Controller
 		$this->load->view('ormawa',$data);
 		$this->load->view('templates/footerhome', $data);
 	}
-	public function semau()
-	{
-		$this->load->view('semaun');
-	}
+
 	public function semuaukm()
 	{
 		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
@@ -89,13 +85,17 @@ class c_home extends CI_Controller
 		$data['kegiatan_ukmukk'] = $this->Model_View->tampil_ukegiatan($kode_ubidang);
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['uprestasi'] = $this->Model_View->tampil_prestasi_ukmukk($kode_ubidang);
 		$this->load->view('ukmaja',$data);
 		$this->load->view('templates/footerhome', $data);
+
 
 		// $data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
 	}
 	public function aulasc()
 	{
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		$this->load->view('aulasc');
+		$this->load->view('templates/footerhome', $data);
 	}
 }

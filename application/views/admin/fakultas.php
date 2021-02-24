@@ -73,30 +73,22 @@
     			<div class="modal-body">
     				<form method="post" action="<?php echo base_url().'c_admin/tambah_data_fakultas'?>">
     					<div class="form-group">
-    						<label>Kode Fakultas</t></label>
-    						</t><input type="text" name="kode_fakultas" class="form-control" value="" required>
+    						<label>Kode Fakultas (co: SAINTEK)</label>
+    						<input type="text" name="kode_fakultas" class="form-control" placeholder="" autocomplete="off" value="" required>
     					</div>
     					<div class="form-group ">
-    						<label>Nama Fakultas</t></label>
-    						</t><input type="text" name="nama_fakultas" class="form-control" value="" required>
+    						<label>Nama Fakultas (co: Sains dan Teknologi)</label>
+    						<input type="text" name="nama_fakultas" class="form-control" autocomplete="off" value="" required>
     					</div>
     					<div class="form-group ">
-    						<label>
-    							Deskripsi</t></label>
-    						</t><input type="text" name="deskripsi" class="form-control" value="">
+    						<label>Deskripsi (co: Tentang Fakultas)</label>
+    						<input type="text" name="deskripsi" class="form-control" autocomplete="off" value="">
     					</div>
-    					<div class="form-group ">
-    						<label>Visi</t></label>
-    						</t><input type="text" name="visi" class="form-control" value="">
-    					</div>
-    					<div class="form-group ">
-    						<label>Misi</t></label>
-    						</t><input type="text" name="misi" class="form-control" value="">
-    					</div>
+    					
     			</div>
     			<div class="modal-footer">
     				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    				<button type="submit" class="btn btn-primary">Save changes</button>
+    				<button type="submit" class="btn btn-primary">Save</button>
     			</div>
     			</form>
     		</div>
@@ -140,14 +132,7 @@
     							Deskripsi</t></label>
     						</t><input type="text" name="deskripsi" class="form-control" value="<?php echo $deskripsi;?>">
     					</div>
-    					<div class="form-group ">
-    						<label>Visi</t></label>
-    						</t><input type="text" name="visi" class="form-control" value="<?php echo $visi;?>">
-    					</div>
-    					<div class="form-group ">
-    						<label>Misi</t></label>
-    						</t><input type="text" name="misi" class="form-control" value="<?php echo $misi;?>">
-    					</div>
+    					
     					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     					<button type="submit" class="btn btn-primary">Update changes</button>
     				</form>

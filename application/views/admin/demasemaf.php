@@ -23,7 +23,7 @@
     						<tr>
     							<th>Fakultas</th>
     							<th>Organisasi</th>
-    							<th>Nama </th>
+    							<th>Kode Himpunan </th>
                                 <th>Deskripsi</th>
                                 <th>Username</th>                                    							
     							<th>Image</th>
@@ -98,15 +98,15 @@
                             </select>                            
                         </div>
     					<div class="form-group">
-    						<label>Nama Himpunan</label>
-    						<input type="text" name="kode_himpunan" class="form-control" value=""  style="text-transform:uppercase"  required autocomplete="off">
+    						<label>Kode Himpunan (co: DEMAFSAINTEK)</label>
+    						<input type="text" onkeypress="return disablespace()" name="kode_himpunan" class="form-control" value=""  style="text-transform:uppercase"  required autocomplete="off">
     					</div>
     					<div class="form-group">
-                            <label>Deskripsi Himpunan</label>
+                            <label>Deskripsi (co: Dewan Mahasiswa Fakultas)</label>
                             <input type="text" name="desc_himpunan" class="form-control" value="" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label>Nama User</label>
+                            <label>Nama Penanggung Jawab</label>
                             <input type="text" name="nama" class="form-control" autocomplete="off" value="" required>
                         </div> 
                         <div class="form-group " >
@@ -114,7 +114,7 @@
                             <input type="text" name="telp" class="form-control" autocomplete="off" value="" required>
                         </div> 
                         <div class="form-group " >
-                            <label>Username</label>
+                            <label>Username (co: demaf@uinsgd.ac.id)</label>
                             <input type="email" name="username" class="form-control" autocomplete="off" value="">
                         </div>  
                         <div class="form-group " >
@@ -132,10 +132,10 @@
     					</div>
     					<div class="form-group ">
     						<label>Logo Himpunan</label>
-    						<input type="file" name="image" class="form-control" value="" required>
+    						<input type="file" name="image" class="form-control" value="">
     					</div>
     					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    					<button type="submit" class="btn btn-primary">Save changes</button>
+    					<button type="submit" class="btn btn-primary">Save</button>
     				</form>
     			</div>
     		</div>
@@ -175,7 +175,7 @@
                         </div>
     					<div class="form-group">
     						<label>Nama Himpunan</label>
-    						<input type="text" name="kode_himpunan" class="form-control" value="<?php echo $kode_himpunan;?>"
+    						<input type="text" onkeypress="return disablespace()" name="kode_himpunan" class="form-control" value="<?php echo $kode_himpunan;?>"
     							required readonly>
     					</div>    					
     					<div class="form-group ">
@@ -240,3 +240,11 @@
     </div>
     <?php endforeach;?>   
     <!-- Akhir Modal Delete -->
+<script>
+        function disablespace() {
+          if (event.keyCode == 32) {
+            alert('Tidak boleh menggunakan spasi');
+            return false;
+          }
+        }
+      </script>
