@@ -189,9 +189,23 @@ function __construct(){
         $this->load->view('templates/sidebaruser', $data);
         $this->load->view('templates/footer');
       }
-
     }
-  
+  public function Data_Anggota()
+  {
+    if($this->session->userdata('status') != "login"){
+      redirect(base_url("c_home/login"));
+    }else{
+      $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+      $data['useruser']=$this->Model_View->tampil_statususer($kode_himp_sess);
+      $data['title'] = 'Data Anggota';
+      $data['list_anggota'] = $this->Model_View->tampil_list_anggota_himpunan($kode_himp_sess);
+      $data['ulist_anggota'] = $this->Model_View->tampil_list_anggota_ukmukk($kode_himp_sess);
+      $this->load->view('templates/header', $data);
+      $this->load->view('user/dataanggota', $data);
+      $this->load->view('templates/sidebaruser', $data);
+      $this->load->view('templates/footer');
+    }
+  }
   public function Riwayat_Pengajuan($kode_himp_sess)
   {
     if($this->session->userdata('status') != "login")
@@ -946,7 +960,197 @@ function __construct(){
       redirect('c_user');
    
   }
+  // tambah nurul
+  public function tambah_list_anggota_himp(){
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $tahun_akademik= $this->input->post('tahun_akademik');
+
+    $this->form_validation->set_rules('file_excel', 'tahun_akademik', 'required');
+      $config['upload_path'] = './assets/uploads/list_anggota/';//path folder
+      $config['allowed_types'] = 'xlsx'; //type yang dapat diakses bisa anda sesuaikan
+      $config['file_name'] = 'List Anggota_'.$kode_himp_sess.'_Tahun Akademik_'.$tahun_akademik;
+      $config['max_size'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload', $config, 'list_upload');
+      $this->list_upload->initialize($config);
+
+      if(!empty($_FILES['file_excel']['name']))
+        {
+            if(!$this->list_upload->do_upload('file_excel'))
+            {
+              echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+            }  
+            else
+            {
+                $upload_data = $this->list_upload->data();
+                $list_anggota = $upload_data['file_name'];
+            }
+        }
+
+      $list_anggotanya=$list_anggota;
+      $data =  array(
+        'parent_himpunan' => $kode_himp_sess,
+        'tahun_akademik'=> $tahun_akademik,
+        'file_excel'=> $list_anggotanya,
+      );
+
+      $this->Model_View->tambah_list_anggota_himp($data);
+  if($data){ // Jika sukses
+    echo "<script>alert('Data berhasil ditambah');window.location = '".base_url('c_user/Data_Anggota')."';</script>";
+    }else{ // Jika gagal
+      echo "<script>alert('Data gagal ditambahkan');window.location = '".base_url('c_user/Data_Anggota')."';</script>";
+    }
+  }    
   
+  public function tambah_list_anggota_ukmukk(){
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $tahun_akademik= $this->input->post('tahun_akademik');
+
+    $this->form_validation->set_rules('file_excel', 'tahun_akademik', 'required');
+      $config['upload_path'] = './assets/uploads/list_anggota/';//path folder
+      $config['allowed_types'] = 'xlsx'; //type yang dapat diakses bisa anda sesuaikan
+      $config['file_name'] = 'List Anggota_'.$kode_himp_sess.'_Tahun Akademik_'.$tahun_akademik;
+      $config['max_size'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload', $config, 'list_upload');
+      $this->list_upload->initialize($config);
+
+      if(!empty($_FILES['file_excel']['name']))
+        {
+            if(!$this->list_upload->do_upload('file_excel'))
+            {
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+            }  
+            else
+            {
+                $upload_data = $this->list_upload->data();
+                $list_anggota = $upload_data['file_name'];
+            }
+        }
+
+      $list_anggotanya=$list_anggota;
+      $data =  array(
+        'parent_ukmukk' => $kode_himp_sess,
+        'tahun_akademik'=> $tahun_akademik,
+        'file_excel'=> $list_anggotanya,
+      );
+
+      $this->Model_View->tambah_list_anggota_ukmukk($data);
+  if($data){ // Jika sukses
+    echo "<script>alert('Data berhasil ditambah');window.location = '".base_url('c_user/Data_Anggota')."';</script>";
+    }else{ // Jika gagal
+      echo "<script>alert('Data gagal ditambahkan');window.location = '".base_url('c_user/Data_Anggota')."';</script>";
+    }
+  }
+
+  public function update_list_anggota_himp()
+  {
+    $id_listanggota=$this->input->post('id_listanggota');
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $tahun_akademik=$this->input->post('tahun_akademik');
+    $list = $this->Model_View->getDataByIDList($id_listanggota)->row();
+    $old_excel = './assets/uploads/list_anggota/'.$list->file_excel;
+    // var_dump($old_excel);die();
+    if(is_readable($old_excel) && unlink($old_excel)){
+      $config['upload_path']='./assets/uploads/list_anggota';
+      $config['allowed_types']='xlsx';
+      $config['file_name'] = 'List Anggota_'.$kode_himp_sess.'_Tahun Akademik_'.$tahun_akademik;
+      $config['max_size'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload', $config);
+      if ( ! $this->upload->do_upload('file_new_excel'))
+			{
+				echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+			}
+      else
+        {
+          $upload_data = $this->upload->data();
+          $new_file = $upload_data['file_name'];
+          $new_data = array(
+            'tahun_akademik'	=> $this->input->post('tahun_akademik'),
+            'file_excel'	=> $new_file,
+            'parent_himpunan'=> $this->input->post('parent_himpunan')
+          );
+          // var_dump($data);die();
+          $update = $this->Model_View->updateListAnggota($id_listanggota, $new_data);
+          if($update){
+            echo "<script>alert('Data berhasil diupdate !');window.location = '".base_url('c_user/Data_Anggota')."'</script>";
+          }
+          else{
+            echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+          }
+        }
+      }
+      else{
+        echo "<script>alert('Silahkan upload file terbaru sebelum melakukan update !');window.location = '".base_url('c_user/Data_Anggota')."'</script>";
+      }
+  }
+
+  public function update_list_anggota_ukmukk(){
+    $id_ulistanggota=$this->input->post('id_ulistanggota');
+    $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+    $tahun_akademik=$this->input->post('tahun_akademik');
+    $list = $this->Model_View->getDataByIDuList($id_ulistanggota)->row();
+    $old_excel = './assets/uploads/list_anggota/'.$list->file_excel;
+    // var_dump($id_ulistanggota);die();
+    if(is_readable($old_excel) && unlink($old_excel)){
+      $config['upload_path']='./assets/uploads/list_anggota';
+      $config['allowed_types']='xlsx';
+      $config['file_name'] = 'List Anggota_'.$kode_himp_sess.'_Tahun Akademik_'.$tahun_akademik;
+      $config['max_size'] = '2048';
+      $config['remove_spaces'] = true;
+      $this->load->library('upload', $config);
+      if ( ! $this->upload->do_upload('file_new_excel'))
+			{
+				echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+			}
+      else
+        {
+          $upload_data = $this->upload->data();
+          $new_file = $upload_data['file_name'];
+          $new_data = array(
+            'tahun_akademik'	=> $this->input->post('tahun_akademik'),
+            'file_excel'	=> $new_file,
+            'parent_ukmukk'=> $this->input->post('parent_ukmukk'),
+          );
+          // var_dump($data);die();
+          $update = $this->Model_View->updateListUAnggota($id_ulistanggota, $new_data);
+          if($update){
+            echo "<script>alert('Data berhasil diupdate !');window.location = '".base_url('c_user/Data_Anggota')."'</script>";
+          }
+          else{
+            echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Data_Anggota')."'</script>";die();
+          }
+        }
+      }
+      else{
+        echo "<script>alert('Silahkan upload file terbaru sebelum melakukan update !');window.location = '".base_url('c_user/Data_Anggota')."'</script>";
+      }
+  }
+  public function delete_list_anggota()
+  {
+    $id_listanggota=$this->uri->segment(3);
+    $list = $this->Model_View->getDataByIDList($id_listanggota)->row();
+    $old_excel = './assets/uploads/list_anggota/'.$list->file_excel;
+    if(is_readable($old_excel) && unlink($old_excel)){
+      $this->Model_View->delete_list_anggota($id_listanggota);
+      redirect('c_user/Data_Anggota');
+    }
+  }
+  public function delete_list_uanggota()
+  {
+    $id_ulistanggota=$this->uri->segment(3);
+    $list = $this->Model_View->getDataByIDuList($id_ulistanggota)->row();
+    $old_excel = './assets/uploads/list_anggota/'.$list->file_excel;
+    if(is_readable($old_excel) && unlink($old_excel)){
+      $this->Model_View->delete_list_uanggota($id_ulistanggota);
+      echo "<script>alert('Data telah berhasil dihapus !');window.location = '".base_url('c_user/Data_Anggota')."'</script>";
+      redirect('c_user/Data_Anggota');
+    }
+  }
+  // end tambah nurul
+
+
   public function tambah_prestasi_himp(){
           $kode_himp_sess = $this->session->userdata('kode_himp_sess');
           $nama_prestasi = $this->input->post('nama_prestasi');

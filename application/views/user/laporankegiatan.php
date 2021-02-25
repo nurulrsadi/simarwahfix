@@ -13,8 +13,8 @@
         $kd_jrsn=$i['kd_jrsn'];
         $akhirkegiatan=$i['akhirkegiatan'];
         $nPengajuan=$i['nPengajuan'];
-		$statususer=$i['statususer'];
-		$id_pengajuan=$i['id_pengajuan'];
+				$statususer=$i['statususer'];
+				$id_pengajuan=$i['id_pengajuan'];
   ?>
 			<!-- <span class="icon fa-gem"></span> -->
 			<div class="content">

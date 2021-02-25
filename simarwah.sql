@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 07:15 AM
+-- Generation Time: Nov 15, 2020 at 02:10 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -38,6 +38,13 @@ CREATE TABLE `anggota_himpunan` (
   `parent_himpunan` varchar(255) NOT NULL,
   `parent_bidang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anggota_himpunan`
+--
+
+INSERT INTO `anggota_himpunan` (`nim`, `nama`, `alamat`, `jenis_kelamin`, `kontak`, `email`, `jabatan`, `parent_himpunan`, `parent_bidang`) VALUES
+('1177050083', 'qwerty', 'bandung', 'L', '24223', 'gg@gmail.com', 'KETUA BIDANG', 'HIMATIF', 'SOSROH_HIMATIF');
 
 -- --------------------------------------------------------
 
@@ -130,7 +137,7 @@ CREATE TABLE `jurusan` (
 
 INSERT INTO `jurusan` (`kode_himpunan`, `nama_himpunan`, `desc_himpunan`, `visi`, `misi`, `jml_mhsaktif`, `image`, `parent_fakultas`) VALUES
 ('DEMAU', 'DEMAU', 'Dema Mahasiswa Universitas', '', '', 0, '005ef1cbc869f611acf8cf13d160f959.jpg', NULL),
-('HIMATIF', 'Teknik Informatika', 'Himpunan Mahasiswa Teknik Informatika', '', '', 0, '5e98278f39217d06a205b042d090b5df.jpg', 'SAINTEK'),
+('HIMATIF', 'Teknik Informatika', 'Himpunan Mahasiswa Teknik Informatika', '<p>adad</p>', '<p>asasda da&nbsp;</p>', 0, '5e98278f39217d06a205b042d090b5df.jpg', 'SAINTEK'),
 ('saintek', 'DEMAF', 'Dewan Mahasiswa Fakultas SAINTEK', '', '', 0, 'a98f947c03e5f9b7c8f88e65bb497582.png', 'SAINTEK'),
 ('SEMAU', 'SEMAU', 'Senat Mahasiswa Universitas', 'xxxx', 'Test', 0, '5580f7bbef60dc1f86cd0e3ab7a9e372.PNG', NULL);
 
@@ -161,6 +168,13 @@ CREATE TABLE `nama_bidang` (
   `parent_himpunan` varchar(255) DEFAULT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nama_bidang`
+--
+
+INSERT INTO `nama_bidang` (`kode_bidang`, `label_bidang`, `desc_bidang`, `parent_himpunan`, `image`) VALUES
+('SOSROH_HIMATIF', 'SOSROH', 'Sosial dan Rohani', 'HIMATIF', '8d13bb9e6dbf8eaa18faa8e59ce1c228.png');
 
 -- --------------------------------------------------------
 
@@ -222,7 +236,7 @@ CREATE TABLE `tb_detailuser` (
 --
 
 INSERT INTO `tb_detailuser` (`id_dana`, `kd_jrsn`, `kd_fklts`, `jurusan`, `statususer`, `pesangagal`, `nPengajuan`, `danaawal`, `danasisa`, `tahunakademik`, `insertdata`) VALUES
-(48, 'HIMATIF', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 0, 0, 0, 0000, '2020-11-15 06:10:14');
+(48, 'HIMATIF', 'SAINTEK', NULL, 1, '\'Alasan tidak ACC\'', 1, 19000000, 19000000, 2021, '2020-11-15 10:49:40');
 
 -- --------------------------------------------------------
 
@@ -242,6 +256,14 @@ CREATE TABLE `tb_detailuserukmukk` (
   `tahunakademik` year(4) NOT NULL DEFAULT 0000,
   `insertdata` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_detailuserukmukk`
+--
+
+INSERT INTO `tb_detailuserukmukk` (`id_dana`, `kd_ukmukk`, `nama_ukmukk`, `statususer`, `pesangagal`, `nPengajuan`, `danaawal`, `danasisa`, `tahunakademik`, `insertdata`) VALUES
+(8, 'UKK MENHWA', 'MENHWA', 1, '', 0, 0, 0, 0000, '2020-11-15 12:00:07'),
+(9, 'UKK_PRAMUKA', 'Pramuka', 1, '', 0, 0, 0, 0000, '2020-11-15 12:04:34');
 
 -- --------------------------------------------------------
 
@@ -336,6 +358,13 @@ CREATE TABLE `tb_pengajuan` (
   `insertdata` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_pengajuan`
+--
+
+INSERT INTO `tb_pengajuan` (`id_pengajuan`, `kd_jrsn`, `kd_fakultas`, `jurusan`, `tahunakademik`, `nPengajuan`, `statususer`, `alasan_gagal_pengajuan`, `alasan_gagal_laporan`, `akhirkegiatan`, `tglmakslaporan`, `tgluploadlpj`, `namaKegiatan`, `danaawal`, `danasisa`, `danaacc`, `suratpengajuan`, `rinciankegiatan`, `rkakl`, `tor`, `laporankegiatan`, `laporanrincianbiaya`, `insertdata`) VALUES
+(47, 'HIMATIF', 'SAINTEK', '', 2021, 1, 8, 'karena file tidak kurang jelas\r\n', '', '2020-11-10', '0000-00-00', '0000-00-00', 'asasa', 19000000, 19000000, 0, 'SPJ-201115-06ed46e73f.pdf', 'RKG-201115-06ed46e73f.pdf', 'RKA_KL-201115-06ed46e73f.pdf', 'TOR-201115-06ed46e73f.pdf', '', '', '2020-11-15');
+
 -- --------------------------------------------------------
 
 --
@@ -385,8 +414,16 @@ CREATE TABLE `tb_sewaaula` (
   `mulaipukul` time NOT NULL,
   `akhirpukul` time NOT NULL,
   `nama_pj` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `no_pj` varchar(255) CHARACTER SET latin1 NOT NULL
+  `no_pj` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `statussewa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_sewaaula`
+--
+
+INSERT INTO `tb_sewaaula` (`id_sewa`, `penyewa`, `Keterangan`, `no_surat`, `surat_sewa`, `jenisaula`, `dari`, `hingga`, `mulaipukul`, `akhirpukul`, `nama_pj`, `no_pj`, `statussewa`) VALUES
+(6, 'HIMATIF', 'muskom', '128173/gfhjasg/127/s', 'SuratIzinSewaAula-201115-dbca65b909-HIMATIF-muskom.pdf', 'blue', '2020-11-15', '2020-11-18', '09:00:00', '16:00:00', 'saya', 'nurul', 1);
 
 -- --------------------------------------------------------
 
@@ -407,7 +444,7 @@ CREATE TABLE `tb_status` (
 INSERT INTO `tb_status` (`id_status`, `Nama_Status`, `button_color_history`) VALUES
 (1, 'Belum Update Informasi Ormawa', ''),
 (2, 'Selesai Update Informasi Ormawa', ''),
-(3, 'Proses Pengajuan Anggaran Dana', 'btn btn-sm btn-warning'),
+(3, 'Verifikasi Pengajuan Anggaran Dana', 'btn btn-sm btn-warning'),
 (4, 'Proses Laporan Kegiatan', 'btn btn-sm btn-warning'),
 (5, 'Verifikasi Laporan', 'btn btn-sm btn-warning'),
 (6, 'Proses Failed Pengajuan', 'btn btn-sm btn-danger'),
@@ -477,8 +514,7 @@ CREATE TABLE `ukm_ukk` (
 --
 
 INSERT INTO `ukm_ukk` (`kode_ukmukk`, `nama_ukmukk`, `desc_ukmukk`, `visi_ukmukk`, `misi_ukmukk`, `jml_umhsaktif`, `image`) VALUES
-('UKK Pramuka', 'PRAMUKA', 'PRAMUKA', '', '', 0, 'd0032888b458671ac647038abb320f30.jpg'),
-('Ukk_pramuka', 'Pramuka', 'ya pramuka', 'visi pramuka', 'misi pramuka', 1200, 'dbe6bea1849ac8b36a503c1536d29fdb.png');
+('UKK_PRAMUKA', 'Pramuka', 'pra mu ka', '', '', 0, '727e9cd026aefae384f01ec4039e8ba3.png');
 
 -- --------------------------------------------------------
 
@@ -497,6 +533,7 @@ CREATE TABLE `user` (
   `kode_himp` varchar(255) NOT NULL,
   `is_active` int(11) NOT NULL,
   `statususer` int(7) NOT NULL,
+  `statussewa` int(11) NOT NULL,
   `update_date` datetime NOT NULL,
   `insert_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -505,10 +542,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `telp`, `password`, `role`, `kode_himp`, `is_active`, `statususer`, `update_date`, `insert_date`) VALUES
-(17, 'admin aljamiahaaaa', 'admin@gmail.com', 'admin1', '', 'eed57216df3731106517ccaf5da2122d', 1, 'Contoh', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(42, 'Admin HIMATIF', '', 'himatif@uinsgd', '126486172', '23abc39caa54c738db2e54511dac4e96', 0, 'HIMATIF', 1, 1, '0000-00-00 00:00:00', '2020-11-15 14:10:14'),
-(43, 'Admin DEMA-F SAINTEK', '', 'admindemafsaintek@gmail.com', '8624716482', '7f07f384b9ca1f5c06f88b75b977caa9', 0, 'saintek', 1, 1, '0000-00-00 00:00:00', '2020-11-15 14:11:19');
+INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `telp`, `password`, `role`, `kode_himp`, `is_active`, `statususer`, `statussewa`, `update_date`, `insert_date`) VALUES
+(17, 'admin aljamiahaaaa', 'admin@gmail.com', 'admin1', '', 'eed57216df3731106517ccaf5da2122d', 1, 'Contoh', 1, 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(42, 'Admin HIMATIF', '', 'himatif@uinsgd', '126486172', '8bdffe50edbc2cf545b5cc4211d0046b', 0, 'HIMATIF', 1, 2, 0, '0000-00-00 00:00:00', '2020-11-15 14:10:14'),
+(43, 'Admin DEMA-F SAINTEK', '', 'admindemafsaintek@gmail.com', '8624716482', '7f07f384b9ca1f5c06f88b75b977caa9', 0, 'saintek', 1, 1, 0, '0000-00-00 00:00:00', '2020-11-15 14:11:19'),
+(45, 'Admin PRAMUKA', '', 'pramuka@gmail.com', '8487624814', 'a1ea26fb4e6ef771711b3e66eefb13d5', 2, 'UKK_PRAMUKA', 1, 1, 0, '0000-00-00 00:00:00', '2020-11-15 20:04:34');
 
 --
 -- Indexes for dumped tables
@@ -687,7 +725,7 @@ ALTER TABLE `tb_detailuser`
 -- AUTO_INCREMENT for table `tb_detailuserukmukk`
 --
 ALTER TABLE `tb_detailuserukmukk`
-  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_dana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_keluhan`
@@ -699,7 +737,7 @@ ALTER TABLE `tb_keluhan`
 -- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tb_pengajuan_ukmukk`
@@ -711,13 +749,13 @@ ALTER TABLE `tb_pengajuan_ukmukk`
 -- AUTO_INCREMENT for table `tb_sewaaula`
 --
 ALTER TABLE `tb_sewaaula`
-  MODIFY `id_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables

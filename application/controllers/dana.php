@@ -45,7 +45,7 @@ class dana extends CI_Controller{
         {
             if(!$this->spjupload->do_upload('suratpengajuan'))
             {
-                $this->spjupload->display_errors();
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
             }  
             else
             {
@@ -57,7 +57,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkgupload->do_upload('rinciankegiatan'))
           {
-              $this->rkgupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -69,7 +69,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkaklupload->do_upload('rkakl'))
           {
-              $this->rkaklupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -81,7 +81,7 @@ class dana extends CI_Controller{
       {
           if(!$this->torupload->do_upload('tor'))
           {
-              $this->torupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -126,7 +126,7 @@ class dana extends CI_Controller{
         $this->M_dana->pengajuanfileuser($kd_jrsn,$statususer);
         redirect('c_user/Verifikasi_Data');
         }else{ // Jika gagal
-              echo "<script>alert('Data gagal diupdate, File pdf min 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
         }
       }
       
@@ -175,7 +175,7 @@ class dana extends CI_Controller{
         {
             if(!$this->spjupload->do_upload('suratpengajuan'))
             {
-                $this->spjupload->display_errors();
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
             }  
             else
             {
@@ -187,7 +187,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkgupload->do_upload('rinciankegiatan'))
           {
-              $this->rkgupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -199,7 +199,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkaklupload->do_upload('rkakl'))
           {
-              $this->rkaklupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -211,7 +211,7 @@ class dana extends CI_Controller{
       {
           if(!$this->torupload->do_upload('tor'))
           {
-              $this->torupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -254,7 +254,7 @@ class dana extends CI_Controller{
         $this->M_dana->pengajuanfileuser($kd_jrsn,$statususer);
         redirect('c_user/Verifikasi_Data');
         }else{ // Jika gagal
-              echo "<script>alert('Data gagal diupdate, File pdf min 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
         }
       }
     //   end pengajuan univ
@@ -347,7 +347,8 @@ class dana extends CI_Controller{
         {
             if(!$this->lpjupload->do_upload('laporankegiatan'))
             {
-                $this->lpjupload->display_errors();
+                // $this->lpjupload->display_errors();
+                echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Laporan_Kegiatan')."'</script>";die();
             }  
             else
             {
@@ -359,7 +360,8 @@ class dana extends CI_Controller{
       {
           if(!$this->rbyupload->do_upload('laporanrincianbiaya'))
           {
-              $this->rbyupload->display_errors();
+              // $this->rbyupload->display_errors();
+              echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Laporan_Kegiatan')."'</script>";die();
           }  
           else
           {
@@ -375,8 +377,8 @@ class dana extends CI_Controller{
       $tgluploadlpj=date("Y-m-d",strtotime($this->input->post('tgluploadlpj')));
       $tglmakslaporan= date('Y-m-d',strtotime('+7 day',strtotime($akhirkegiatan))); 
       $statususer=5;
+
       $this->M_dana->update_laporan($id_pengajuan, $statususer, $tgluploadlpj, $tglmakslaporan, $laporankegiatannya, $rincianbiayanya);
-      // $this->M_dana->update_laporandetail($kd_jrsn, $statususer);
       $this->M_dana->update_laporanuser($kd_jrsn, $statususer);
       redirect('c_user/Verifikasi_Laporan');
     }
@@ -553,7 +555,7 @@ class dana extends CI_Controller{
         {
             if(!$this->spjupload->do_upload('suratpengajuan'))
             {
-                $this->spjupload->display_errors();
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
             }  
             else
             {
@@ -565,7 +567,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkgupload->do_upload('rinciankegiatan'))
           {
-              $this->rkgupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -577,7 +579,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rkaklupload->do_upload('rkakl'))
           {
-              $this->rkaklupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -589,7 +591,7 @@ class dana extends CI_Controller{
       {
           if(!$this->torupload->do_upload('tor'))
           {
-              $this->torupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."'</script>";die();
           }  
           else
           {
@@ -631,7 +633,7 @@ class dana extends CI_Controller{
         $this->M_dana->pengajuanfileuser_ukmukk($kd_ukmukk,$statususer);
         redirect('c_user/Verifikasi_Data');
         }else{ // Jika gagal
-              echo "<script>alert('Data gagal diupdate, File pdf min 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Pagu_Anggaran')."';</script>";
         }
     }
     function acc_laporan_ukmukk()
@@ -726,7 +728,7 @@ class dana extends CI_Controller{
         {
             if(!$this->lpjupload->do_upload('laporankegiatan'))
             {
-                $this->lpjupload->display_errors();
+              echo "<script>alert('Data gagal diupdate, File pdf maximal 2MB');window.location = '".base_url('c_user/Laporan_Kegiatan')."'</script>";die();
             }  
             else
             {
@@ -738,7 +740,7 @@ class dana extends CI_Controller{
       {
           if(!$this->rbyupload->do_upload('laporanrincianbiaya'))
           {
-              $this->rbyupload->display_errors();
+            echo "<script>alert('Data gagal diupdate, File excel maximal 2MB');window.location = '".base_url('c_user/Laporan_Kegiatan')."'</script>";die();
           }  
           else
           {
