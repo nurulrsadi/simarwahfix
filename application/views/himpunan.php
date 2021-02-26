@@ -327,8 +327,44 @@
               </div>
             </div>
           <?php endforeach ?>
-      
-          
         </div>
+      </div>
+    </section>
+
+    <section id="service" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+       <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="service-title pad-bt15">Data List Mahasiswa</h2>
+          <hr class="bottom-line">
+        </div>
+        <div class="col-md-12 text-center">
+          <table class="fixed-th" >
+            <thead>
+              <tr>
+                <th width="300">Tahun Akademik</th>
+                <th width="800">File Data List Angggota</th>  
+              </tr>
+            </thead>
+            <?php
+                  foreach($list_anggota->result_array() as $i):
+                    $id_listanggota = $i['id_listanggota'];
+                    $tahun_akademik=$i['tahun_akademik'];
+                    $file_excel=$i['file_excel'];
+                      ?>
+            <tbody>
+              <tr>
+                <td width="300"><?php echo $tahun_akademik ?> </td>
+                <td width="800"><a href="<?=site_url().'assets/uploads/list_anggota/'.$file_excel;'.pdf' ?>"
+								onclick="basicPopup(this.href); return false"><?=$file_excel?> </a></td>
+              </tr>   
+            </tbody>
+            <?php endforeach;?>
+          </table>
+          <br />
+          <br>
+          <br>
+        </div>
+      </div>
       </div>
     </section>

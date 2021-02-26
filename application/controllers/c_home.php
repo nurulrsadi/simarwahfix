@@ -44,7 +44,8 @@ class c_home extends CI_Controller
 		$data['kegiatan'] = $this->Model_View->tampil_kegiatan_himp($kode_jurusan);
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
-        $data['prestasi'] = $this->Model_View->tampil_prestasi_himpunan($kode_jurusan);
+    $data['prestasi'] = $this->Model_View->tampil_prestasi_himpunan($kode_jurusan);
+		$data['list_anggota'] = $this->Model_View->tampil_list_anggota_himpunan($kode_jurusan);
 		$this->load->view('himpunan',$data);
 		$this->load->view('templates/footerhome', $data);
 	}
@@ -86,6 +87,7 @@ class c_home extends CI_Controller
 		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
 		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
 		$data['uprestasi'] = $this->Model_View->tampil_prestasi_ukmukk($kode_ubidang);
+		$data['ulist_anggota'] = $this->Model_View->tampil_list_anggota_ukmukk($kode_ubidang);
 		$this->load->view('ukmaja',$data);
 		$this->load->view('templates/footerhome', $data);
 
