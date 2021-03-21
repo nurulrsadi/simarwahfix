@@ -56,6 +56,7 @@
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
               
               <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">DAFTAR UKM&UKK</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -298,7 +299,6 @@
             <hr class="bottom-line">
           </div>
         <div class="row"> 
-          <!-- <div class="col-md-6 col-sm-6 col-xs-6"> -->
             <?php foreach ($prestasi->result_array() as $i): 
               $waktu=$i['waktu'];
               $nama_prestasi=$i['nama_prestasi'];

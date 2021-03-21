@@ -19,17 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahbootstrap.min.css')?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahanimate.css')?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/simarwahstyle.css')?>">
-	<!-- =======================================================
-    Theme Name: Baker
-    Theme URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
-
 <body>
-	<div>
-		<nav class="navbar navbar-defaulta navbar-fixed-top" style="margin: 10px;">
+<footer>
+<nav class="navbar navbar-defaulta navbar-fixed-top" style="margin: 10px;">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -57,9 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<li class=""><a href="<?php echo base_url().'c_home/index';?>">Tentang Kami</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
 						<li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>
-						
-						<li class="active"><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
-            <li class=""><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">Daftar UKM&UKK</a></li> 
+						<li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">Peminjaman Aula SC</a></li>
+            <li class="active"><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">Daftar UKM&UKK</a></li> 
 						<li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>
 						<?php } ?>
 					</ul>
@@ -67,97 +59,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</nav>
 	</div>
-	<section id="aulasc" class="section-padding wow fadeInUp delay-05s">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center" style="margin-top: 50px;">
-					<h2 class="service-title pad-bt15">Peminjaman Aula Student Center</h2>
-					<p class="sub-title pad-bt15">Aula yang terletak di Lt.1 Student Center biasa digunakan untuk
-						kegiatan
-						mahasiswa.</p>
+  <section id="daftar_anggotaukmukk" class="section-padding wow fadeInUp delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center" style="margin-top: 50px;">
+					<h2 class="service-title pad-bt15">Pendaftaran Anggota UKM UKK UIN Sunan Gunung Djati Bandung</h2>
+					<p class="sub-title pad-bt15">Silahkan mendaftar UKM atau UKK yang ingin diinginkan</p>
 					<hr class="bottom-line">
 				</div>
-				<div id="calendar" style="max-width: 800px;margin: 2rem auto;padding: 0 5px">
-					<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js"></script>
-					<script type="text/javascript"
-						src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js">
-					</script>
-					<link href="<?= base_url().'assets/js/fullcalendarjs/main.min.css'?>" rel="stylesheet"
-						type="text/css">
-					<script src="<?= base_url().'assets/js/fullcalendarjs/main.js' ?>" type="text/javascript" />
-					</script>
-					<script src="<?= base_url().'assets/js/fullcalendarjs/locales-all.js' ?>" type="text/javascript">
-					</script>
-					<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
-						integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
-						crossorigin="anonymous"></script>
-
-					<script>
-						document.addEventListener('DOMContentLoaded', function () {
-							var initialLocaleCode = 'id';
-							var localeSelectorEl = document.getElementById('locale-selector');
-							var calendarEl = document.getElementById('calendar');
-							var calendar = new FullCalendar.Calendar(calendarEl, {
-								headerToolbar: {
-									left: 'prev,next today',
-									center: 'title',
-									right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-								},
-								// startEditable:true,
-								allDayDefault: true,
-								locale: initialLocaleCode,
-								buttonIcons: false, // show the prev/next text
-								weekNumbers: true,
-								navLinks: true, // can click day/week names to navigate views
-								editable: true,
-								dayMaxEvents: true, // allow "more" link when too many events
-								eventSources: [{
-									url: "<?php echo base_url('ormawa/getEvents');?>"
-								}]
-							});
-
-							calendar.getEventSources();
-							calendar.render();
-
-							// build the locale selector's options
-							calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
-								var optionEl = document.createElement('option');
-								optionEl.value = localeCode;
-								optionEl.selected = localeCode == initialLocaleCode;
-								optionEl.innerText = localeCode;
-								localeSelectorEl.appendChild(optionEl);
-							});
-
-							// when the selected option changes, dynamically change the calendar option
-							localeSelectorEl.addEventListener('change', function () {
-								if (this.value) {
-									calendar.setOption('locale', this.value);
-								}
-							});
-						});
-
-					</script>
-				</div>
-				<div class="col-4 col-12-medium">
-					<b>Keterangan</b>
-					<br><br>
-					<div class="ket" style="display:flex;">
-						<div class="boxaulaA"
-							style="padding-top:5px;width:20px;height:20px;background:#0000ff; display:flex; padding-right:5px;">
-						</div>
-						&nbsp;&nbsp;&nbsp;Aula A
-					</div>
-					<br>
-					<div class="ket" style="display:flex;">
-						<div class="boxaulaA" style="width:20px;height:20px;background:#800080; display:flex;"></div>
-						&nbsp;&nbsp;&nbsp;Aula B
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-	<footer>
+        <div class="col-md-2 text-center">
+          <div class="container">
+            <table class="fixed-th" >
+              <thead>
+                <tr>
+                  <th width="40%">UKM UKK</th>
+                  <th width="60%">Aksi</th>  
+                </tr>
+              </thead>
+                <?php foreach ($semua_ukmukk->result_array() as $u):
+                $kode_ukmukk = $u['kode_ukmukk'];
+                $nama_ukmukk = $u['nama_ukmukk'];
+                $desc_ukmukk = $u['desc_ukmukk'];
+                $image = $u['image'];
+              ?>
+              <?php  $j=1;
+              ?>
+              <tbody>
+                <tr>
+                <td width="40%"><?= $nama_ukmukk ?></td>
+                <td width="60%"><a href="<?php echo base_url().'c_home/daftar/'.$kode_ukmukk;?>"> Daftar</td>
+                </tr>   
+              </tbody>
+              <?php endforeach;?>
+            </table>
+          </div>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
 		<div class="footer" id="footer">
 			<div class="container">
 				<div class="row">

@@ -18,6 +18,31 @@ function __construct(){
     }
     $kode_himp_sess=$this->session->userdata('kode_himp_sess');
 }
+    public function Calon_Anggota()
+    {
+      if($this->session->userdata('status') != "login"){
+        redirect(base_url("c_home/login"));
+      }else{
+        $role_user = $this->session->userdata('role');
+        $kode_himp_sess = $this->session->userdata('kode_himp_sess');
+        if($role_user!=2){
+          redirect(base_url("c_user/login"));
+        }else{
+          $data=array(
+            'title' =>'List Calon Anggota',
+            'all_calon' => $this->Model_ukmukk->get_all($kode_himp_sess),
+            'msg' => $this->session->flashdata('msg'),
+            'total' => $this->Model_ukmukk->count_all($kode_himp_sess),
+            'diterima' => $this->Model_ukmukk->count_terima($kode_himp_sess),
+            'ditolak' => $this->Model_ukmukk->count_tolak($kode_himp_sess)
+          );
+          $this->load->view('templates/header', $data);
+          $this->load->view('user/calon_anggota', $data);
+          $this->load->view('templates/sidebaruser', $data);
+          $this->load->view('templates/footer', $data); 
+        }
+      }
+    }
     public function Cetak_Sewa_Aula($id_sewa){
       $penyewa=$this->uri->segment(5);
       

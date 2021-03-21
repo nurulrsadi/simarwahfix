@@ -14,7 +14,7 @@ class M_ormawa extends CI_Model{
     return $query=$this->db->query("SELECT * FROM tb_keluhan");
   }
   function getDataByID($id_keluhan){
-    return $this->db->get_where('tb_keluhan', array('id_keluhan'=>id_keluhan));
+    return $this->db->get_where('tb_keluhan', array('id_keluhan'=>$id_keluhan));
   }
   function hapuskeluhannya($id){
     $this->db->delete('tb_keluhan', array('id' => $id));

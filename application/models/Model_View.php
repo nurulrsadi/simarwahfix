@@ -2,6 +2,12 @@
 
  class Model_View extends CI_Model
  {
+  function tampil_list_jurusan(){
+		$query =  $this->db->query('SELECT * FROM tb_jurusan_calon');
+		return $query;
+	}
+
+
  	function cek_login($table,$where){
  		return $this->db->get_where($table,$where);
  	}
@@ -43,10 +49,6 @@
     $query = $this->db->get();
     return $query;
   }
-	function tampil_list_jurusan($fakultas){
-		$query =  $this->db->query('SELECT * FROM jurusan WHERE parent_fakultas = "'.$fakultas.'"');
-		return $query;
-	}
 	function tampil_detail_fakultas($fakultas){
 		$query =  $this->db->query('SELECT * FROM fakultas WHERE kode_fakultas = "'.$fakultas.'"');
 		return $query;

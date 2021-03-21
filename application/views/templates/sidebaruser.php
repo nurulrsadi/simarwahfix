@@ -35,6 +35,13 @@
         						Profil</a></li>
 									<li><a href="<?php echo base_url() . 'c_user/Program_Kerja'; ?>">&nbsp;<i class="fas fa-clipboard-list fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Program Kerja</a></li>
 									<li><a href="<?php echo base_url() . 'c_user/Data_Anggota'; ?>">&nbsp;<i class="fas fa-address-book fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Data Anggota</a></li>
+									<?php 
+										$role_user = $this->session->userdata('role'); ?>
+									<?php if($role_user==2): ?>
+											<li><a href="<?php echo base_url() . 'c_user/Calon_Anggota'; ?>">&nbsp;<i class="fas fa-address-book fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Data Calon Anggota</a></li>
+									<?php else:?>
+									<?php endif;?>
+
 									<li><a href="<?php echo base_url() . 'c_user/Prestasi_organisasi'; ?>"><i class="fas fa-trophy fa-2x "></i>&nbsp;&nbsp;&nbsp;Data Prestasi</a></li>
 									<li><a href="<?php echo base_url() . 'c_user/Riwayat_Pengajuan/'.$this->session->userdata("kode_himp_sess"); ?>"><i class="fas fa-tasks fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;Riwayat & Status <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengajuan Anggaran Dana</a></li>	
 								<?php foreach($usernya as $m) : ?>

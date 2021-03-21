@@ -16,6 +16,37 @@ class c_admin extends CI_Controller
         redirect(base_url("c_user/index"));
       }
 	}
+  public function Lihat_Pendaftar_UKMUKK()
+  {
+    $data=array(
+      'title' => 'List UKM UKK',
+      'all_ukmukk'=> $this->Model_ukmukk->get_all_ukmukk(),
+    );
+    $data['admin'] = $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array();
+      $this->load->view('templates/headeradm', $data);
+      $this->load->view('templates/sidebaradm', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/List_ukm_ukk', $data);
+      $this->load->view('templates/footeradm',$data);
+  }
+
+  public function detail_pendaftar($kode_ukmukk)
+  {
+    $data=array(
+      'title' => 'Detail Pendaftar '.$kode_ukmukk.'',
+      'admin' => $this->db->get_where('user', ['username'=>$this->session->userdata('username')])->row_array(),
+      'total' => $this->Model_ukmukk->count_all($kode_ukmukk),
+      'all_calon' => $this->Model_ukmukk->get_all($kode_ukmukk),
+      'diterima' => $this->Model_ukmukk->count_terima($kode_ukmukk),
+            'ditolak' => $this->Model_ukmukk->count_tolak($kode_ukmukk)
+    );
+    $this->load->view('templates/headeradm', $data);
+    $this->load->view('templates/sidebaradm', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/pendaftar', $data);
+    $this->load->view('templates/footeradm',$data);
+  }
+
 	public function Cetak_Keluhan(){
       $penyewa=$this->uri->segment(5);
       
@@ -1684,6 +1715,7 @@ public function edit_data_himpunan(){
     }
         $this->Model_View->tambah_ukmukk($data,$datadana);        
         $this->Model_View->tambah_userukmukk($datauser);
+        // $this->Model_ukmukk->tambah_userukmukk_ke_calon_anggota($data);
         $this->session->set_flashdata('flashormawahimp','Data UKM/UKK berhasil ditambahkan!');
         redirect('c_admin/data_ukmukk');
     }

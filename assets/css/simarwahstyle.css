@@ -4,7 +4,6 @@
     Author: BootstrapMade.com
     Author URL: https://bootstrapmade.com
 */
-
 body {
   line-height: 1.4;
   font-family: 'Roboto', sans-serif;
@@ -813,7 +812,7 @@ contact
   margin: auto;
   background-color: transparent;
   border-radius: 0px;
-  color: #62c462 !important;
+  color: black !important;
   border-color: #62c462;
 }
 
@@ -825,7 +824,7 @@ contact
 }
 
 .contact-form input.form-control {
-  color: #fff;
+  color: black import !important;
 }
 
 .validation {

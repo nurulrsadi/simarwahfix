@@ -64,6 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class=""><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>              
               <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li> 
+              <li class=""><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">DAFTAR UKM&UKK</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>
@@ -79,14 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <h2 class="bnr-sub-title">Sistem Informasi Tata Kelola Organisasi Mahasiswa</h2>
                 <p class="bnr-para">SIMARWAH (Sistem Informasi Organisasi Mahasiswa) merupakan sistem informasi pada
                   organisasi mahasiswa yang ada di kampus UIN Sunan Gunung Djati Bandung. Sistem ini mempermudah
-                  mahasiswa dalam keperluan di organisasi, seperti peminjaman Aula Student Center, pendaftaran UKM/UKK, mengajukan anggaran organisasi, serta informasi program kerja setiap organisasi. </p>
-                <!--  <div class="brn-btn">
-                  <a href="#" class="btn btn-download">Download now!</a>
-                  <a href="#" class="btn btn-more">Learn More</a>
-                </div> -->
-                <!-- <div class="overlay-detail">
-                  <a href="#feature"><i class="fa fa-angle-down"></i></a>
-                </div> -->
+                  mahasiswa dalam keperluan di organisasi, seperti peminjaman Aula Student Center, mengajukan anggaran organisasi, serta informasi-informasi terkait program kerja, prestasi dan data list setiap organisasi. </p>
               </div>
             </div>
           </div>

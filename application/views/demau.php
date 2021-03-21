@@ -57,6 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               
               <li class=""><a href="<?php echo base_url().'data/logout';?>">LOG OUT</a></li>
             <?php } else {?>  
+              <li class=""><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">Daftar UKM&UKK</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
             <?php } ?>
 

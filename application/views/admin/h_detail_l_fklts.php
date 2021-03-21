@@ -77,11 +77,11 @@
                     $nama_fakultas=$i['nama_fakultas'];
                     $color_button=$i['button_color_history'];
                     $nama_status=$i['Nama_Status'];
-					$tgl_pengajuan=$i['insertdata'];
-					$id_pengajuan=$i['id_pengajuan'];
-					$alasan_gagal_pengajuan=$i['alasan_gagal_pengajuan'];
-					$alasan_gagal_laporan=$i['alasan_gagal_laporan'];
-					$suratpengajuan=$i['suratpengajuan'];
+										$tgl_pengajuan=$i['insertdata'];
+										$id_pengajuan=$i['id_pengajuan'];
+										$alasan_gagal_pengajuan=$i['alasan_gagal_pengajuan'];
+										$alasan_gagal_laporan=$i['alasan_gagal_laporan'];
+										$suratpengajuan=$i['suratpengajuan'];
                     $rinciankegiatan=$i['rinciankegiatan'];
                     $rkakl=$i['rkakl'];
                     $tor=$i['tor'];

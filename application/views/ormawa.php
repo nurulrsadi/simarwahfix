@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class="active"><a href="<?php echo base_url().'c_home/ormawa';?>">ORMAWA</a></li>
               <li class=""><a href="<?php echo base_url().'c_home/semuaukm';?>">UKM&UKK</a></li>              
               <li class=""><a href="<?php echo base_url().'c_home/aulasc';?>">PEMINJAMAN AULA SC</a></li>
+              <li class=""><a href="<?php echo base_url().'c_home/daftar_ukm_ukk';?>">DAFTAR UKM&UKK</a></li> 
               <li class=""><a href="<?php echo base_url().'c_home/login';?>">LOGIN</a></li>       
               <?php } ?>              
                 </ul>

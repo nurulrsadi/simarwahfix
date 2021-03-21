@@ -127,6 +127,13 @@
 			<i class="fas fa-fw fa-address-book"></i>
 			<span>Data UKM/UKK</span></a>
 	</li>
+
+	<!-- Collapse Menu Pendaftar UKM UKK -->
+	<li class="nav-item">
+		<a class="nav-link" href="<?php echo base_url('c_admin/Lihat_Pendaftar_UKMUKK') ?>">
+			<i class="fas fa-fw fa-address-book"></i>
+			<span>Pendaftar UKM/UKK</span></a>
+	</li>
     
     <!-- Collapse Menu Kegiatan -->
     <li class="nav-item">

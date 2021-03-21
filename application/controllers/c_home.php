@@ -90,8 +90,6 @@ class c_home extends CI_Controller
 		$data['ulist_anggota'] = $this->Model_View->tampil_list_anggota_ukmukk($kode_ubidang);
 		$this->load->view('ukmaja',$data);
 		$this->load->view('templates/footerhome', $data);
-
-
 		// $data['kegiatan'] = $this->Model_View->tampil_kegiatan($kode_jurusan);
 	}
 	public function aulasc()
@@ -100,4 +98,28 @@ class c_home extends CI_Controller
 		$this->load->view('aulasc');
 		$this->load->view('templates/footerhome', $data);
 	}
+
+	// tambah nurul  
+	public function daftar_ukm_ukk()
+	{
+		$data['fak'] = $this->Model_View->tampil_list_fakultas();
+		$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$data['jrsn'] = $this->Model_View->tampil_list_jurusan();
+		$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+		$data['ukm_ukk'] = $this->Model_View->tampil_semua_ukmukk();
+		$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
+		$this->load->view('do_daftar',$data);
+		$this->load->view('templates/footerhome', $data);
+	}
+	// public function daftar($kode_ukmukk)
+	// {
+	// 	$data['semua_ukmukk'] = $this->Model_View->tampil_semua_ukmukk();
+	// 	$data['fak'] = $this->Model_View->tampil_list_fakultas();
+	// 	$data['jrsn'] = $this->Model_View->tampil_list_jurusan();
+	// 	$data['fakultas'] = $this->Model_View->tampil_list_fakultas()->result();
+	// 	$data['ukm_ukk'] = $this->Model_View->tampil_ukmukk($kode_ukmukk)->result();
+	// 	$data['fakultasfooter'] = $this->Model_View->tampil_list_fakultas()->result();
+	// 	$this->load->view('do_daftar',$data);
+	// 	$this->load->view('templates/footerhome', $data);
+	// }
 }
